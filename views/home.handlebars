@@ -149,7 +149,7 @@
 			<div class="right-side">
 
 				<div class="header-widget">
-					<a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 				</div>
 
 				<!-- Mobile Navigation Button -->
@@ -1143,7 +1143,7 @@
 
 		<ul class="popup-tabs-nav">
 			<li><a href="#login">Log In</a></li>
-			<li><a href="#register">Register</a></li>
+			<li><a href="#register" id="register-btn-2">Register</a></li>
 		</ul>
 
 		<div class="popup-tabs-container">
@@ -1191,7 +1191,7 @@
 					<h3>Let's create your account!</h3>
 				</div>
 
-				<!-- Account Type -->
+				{{!-- <!-- Account Type -->
 				<div class="account-type">
 					<div>
 						<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
@@ -1202,23 +1202,36 @@
 						<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
 						<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
 					</div>
-				</div>
+				</div> --}}
 					
 				<!-- Form -->
-				<form method="post" id="register-account-form">
+				<form action="/register" method="post" id="register-account-form">
+					<!-- Account Type -->
+					<div class="account-type">
+						<div>
+							<input type="radio" name="freelancer_type" id="freelancer-radio" class="account-type-radio" checked/>
+							<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+						</div>
+
+						<div>
+							<input type="radio" name="employer_type" id="employer-radio" class="account-type-radio"/>
+							<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+						</div>
+					</div>
+
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress-register" id="emailaddress-register" placeholder="Email Address" required/>
+						<input type="text" class="input-text with-border" name="email" id="emailaddress-register" placeholder="Email Address" required/>
 					</div>
 
 					<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password-register" id="password-register" placeholder="Password" required/>
+						<input type="password" class="input-text with-border" name="password" id="password-register" placeholder="Password" required/>
 					</div>
 
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repeat Password" required/>
+						<input type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="Repeat Password" required/>
 					</div>
 				</form>
 				
@@ -1297,6 +1310,15 @@ $('#snackbar-user-status label').click(function() {
 <!-- Google API & Maps -->
 <!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoOT9ioUE4SA8h-anaFyU4K63a7H-7bc&amp;libraries=places"></script>
+
+{{#equal errors 'register'}}
+<script>
+	$(document).ready(function(){
+		$('#register-btn').click();
+		$('#register-btn-2').click();
+	});
+</script>
+{{/equal}}
 
 </body>
 
