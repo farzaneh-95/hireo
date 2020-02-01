@@ -3,15 +3,21 @@ const fs = require ('fs');
 var validator = require('validator');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
 
+/*
+* ------------------------
+* routes
+* ------------------------
+*/
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
-const taskRouter = require('./routes/task');
+const taskRouter = require('./routes/tasks');
+
 const Category = require('./models/category');
 const Freelancer = require('./models/freelancer');
+const isLoggedIn = require('./helpers/isLoggedIn');
 
 const app = express();
 
@@ -25,17 +31,13 @@ mongoose.connect('mongodb://localhost:27017/hireo_db', { useNewUrlParser: true }
 
 app.use(expressSession({ secret: '12345', cookie: { maxAge: 9000000000000 } }));
 
-app.use(cookieParser());
-
 app.engine('handlebars', handlebars({ helpers: require('./helpers/handlebars') }));
 
 app.set('view engine', 'handlebars');
 
 app.use('/', authRouter);
-
-app.use('/', dashboardRouter);
-
-app.use('/', taskRouter);
+app.use('/', isLoggedIn, taskRouter);
+app.use('/', isLoggedIn, dashboardRouter);
 
 app.get('/', async (req, res) => {
     const categories = await Category.find({}).limit(8);

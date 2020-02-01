@@ -3,39 +3,38 @@ const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
 
 router.post('/register', async (req, res) => {
-    if (await Freelancer.findOne({ email: req.body.email }) || await Employer.findOne({ email: req.body.email })) {
-        return res.status(400).render('home', { errors: 'email exists', layout: false });
+    if (await Freelancer.findOne({ email: req.body.email }) || await Employer.findOne({ email: req.body.email })){
+        return res.status(400).send({ error: 'Email Already Taken' });
     }
-    if (req.body.password !== req.body.password_repeat) {
-        return res.status(400).render('home', { errors: 'password does not match', layout: false });
-    }
-    if (req.body.freelancer_type) {
-        const newFreelancer = new Freelancer({ email: req.body.email, password: req.body.password });
-        const temp = await newFreelancer.save();
-        req.session.role = 1;
-        req.session._id = temp._id;
+    if (req.body.isFreelancer) {
+        const freelancer = new Freelancer({ email: req.body.email, password: req.body.password });
+        req.session.role = 'freelancer';
+        req.session._id = await newFreelancer.save()._id;
         return res.render('dashboard', { layout: false });
     }
-    else if (req.body.employer_type) {
-        const newEmployer = new Employer({ email: req.body.email, password: req.body.password });
-        const temp = await newEmployer.save();
-        req.session.role = 2;
-        req.session._id = temp._id;
+    else if (req.body.isEmployer) {
+        const employer = new Employer({ email: req.body.email, password: req.body.password });
+        req.session.role = 'employer';
+        req.session._id = await employer.save()._id;
         return res.render('dashboard', { layout: false });
     }
-    return res.status(500).send({ errors: 'server error' });
 });
 
 router.post('/login', async (req, res) => {
-    const  freelancerEmail = await Freelancer.findOne({email: req.body.email});
-    const employerEmail = await Employer.findOne({ email: req.body.email});
-    if (freelancerEmail || employerEmail) {
-        return res.render('dashboard', { layout: false });
+    const  freelancer = await Freelancer.findOne({ email: req.body.email, password: req.body.password });
+    const employer = await Employer.findOne({ email: req.body.email, password: req.body.password });
+    if (freelancer) {
+        req.session.role = 'freelancer';
+        req.session._id = freelancer._id;
+        return res.send({message: 'ok'});
     }
-    else {
-        return res.render('home', { errors: 'email does not exist', layout: false });
+    else if (employer) {
+        req.session.role = 'employer';
+        req.session._id = employer._id;
+        return res.send({message: 'ok'});
+    } else {
+        return res.status(400).send({ error: 'Invalid Input' });
     }
-    return res.status(500).send({ errors: 'server error' });
 });
 
 module.exports = router;

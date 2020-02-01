@@ -1,33 +1,50 @@
 const mongoose = require('mongoose');
 
+const budgetType = {
+    fixed: 1,
+    hourly: 2,
+};
+
 const taskSchema = new mongoose.Schema({
-    project_name: {
+    name: {
         type: String,
         maxlength: 200,
         required: true,
     },
+
     category_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
         required: true,
     },
+
     location: {
         type: String,
     },
-    budget: {
+
+    min_budget: {
         type: Number,
-        min: 0,
+        min: 1,
     },
-    project_type: {
+
+    max_budget: {
         type: Number,
+        min:1,
     },
-    skills: [String],
-    project_disc: {
-        type: String,
-        maxlength: 1000,
+
+    budget_type: {
+        type: Number,
         required: true,
     },
-    project_file: {
+
+    skills: [String],
+
+    description: {
+        type: String,
+        maxlength: 1000,
+    },
+
+    file: {
         type: String,
     },
 });

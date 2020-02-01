@@ -4,7 +4,13 @@ const Employer = require('../models/employer');
 const countries = require('../helpers/countries');
 
 router.get('/dashboard', (req, res) => {
-    return res.render('dashboard', { role: req.session.role, layout: false });
+    console.log(req.session._id);
+    const data = req.app.get('freelancer') || req.app.get('employer');
+    data.first_name = data.first_name || 'New User';  
+    return res.render('dashboard', {
+        layout: false,
+        data,
+    });
 });
 
 router.get('/dashboard-settings', async (req, res) => {

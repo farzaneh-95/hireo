@@ -984,10 +984,10 @@
 				</div>
 					
 				<!-- Form -->
-				<form method="post" id="login-form">
+				<div id="login-form">
 					<div class="input-with-icon-left">
-						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+						<i class="icon-material-baseline-mail-outline" id="emailaddress-icon"></i>
+						<input type="email" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
 					</div>
 
 					<div class="input-with-icon-left">
@@ -995,10 +995,12 @@
 						<input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required/>
 					</div>
 					<a href="#" class="forgot-password">Forgot Password?</a>
-				</form>
+				</div>
 				
 				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="login-form">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button id="login-submit"class="button full-width button-sliding-icon ripple-effect" type="submit" form="login-form">Log In
+					<i class="icon-material-outline-arrow-right-alt"></i>
+				</button>
 				
 				<!-- Social Login -->
 				<div class="social-login-separator"><span>or</span></div>
@@ -1017,7 +1019,7 @@
 					<h3>Let's create your account!</h3>
 				</div>
 
-				{{!-- <!-- Account Type -->
+				<!-- Account Type -->
 				<div class="account-type">
 					<div>
 						<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
@@ -1028,46 +1030,28 @@
 						<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
 						<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
 					</div>
-				</div> --}}
+				</div>
 					
 				<!-- Form -->
-				<form action="/register" method="post" id="register-account-form">
-					{{#if errors}}
-					<span>
-						{{errors}}
-					</span>
-					{{/if}}
-					<!-- Account Type -->
-					<div class="account-type">
-						<div>
-							<input type="radio" name="freelancer_type" id="freelancer-radio" class="account-type-radio" checked/>
-							<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
-						</div>
-
-						<div>
-							<input type="radio" name="employer_type" id="employer-radio" class="account-type-radio"/>
-							<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
-						</div>
-					</div>
-
+				<div id="register-account-form">
 					<div class="input-with-icon-left">
-						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="email" id="emailaddress-register" placeholder="Email Address" required/>
+						<i class="icon-material-baseline-mail-outline" id="emailaddress-register-icon"></i>
+						<input type="email" class="input-text with-border" name="email" id="emailaddress-register" placeholder="Email Address" required/>
 					</div>
 
-					<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
-						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password" id="password-register" placeholder="Password" required/>
+					<div class="input-with-icon-left" id="password-register-div" title="Should be at least 8 characters long" data-tippy-placement="bottom">
+						<i class="icon-material-outline-lock" id="password-register-icon"></i>
+						<input type="password" class="input-text with-border" name="password" id="password-register" placeholder="Password" pattern=".{8,30}" required/>
 					</div>
 
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="Repeat Password" required/>
+						<input type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="Repeat Password" pattern=".{8,30}" required/>
 					</div>
-				</form>
+				</div>
 				
 				<!-- Button -->
-				<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form" id="register-submit">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
 				
 				<!-- Social Login -->
 				<div class="social-login-separator"><span>or</span></div>
@@ -1150,7 +1134,59 @@ $('#snackbar-user-status label').click(function() {
 	});
 </script>
 {{/equal}}
-
+<script>
+	$('#register-submit').on('click', () => {
+		const isFreelancer = $('#freelancer-radio').is(':checked');
+		const isEmployer = $('#employer-radio').is(':checked');
+		const email = $('#emailaddress-register').val();
+		const password = $('#password-register').val();
+		const passwordConfirm = $('#password-repeat-register').val();
+		if (password !== passwordConfirm) {
+			$('#password-register').val('');
+			$('#password-register').attr('placeholder', 'Passwords Do Not Match');
+			$('#password-register').css('border', 'solid 1px #dc3545');
+			$('#password-register-icon').css('border', 'solid 1px #dc3545');
+			$('#password-repeat-register').val('');
+		} else {
+			$.ajax({
+				url: '/register',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({ email, password, isFreelancer, isEmployer }),
+				success: (result, statusCode, xhr) => {
+					location.href = '/dashboard';
+				},
+				error: (xhr, statusCode, error) => {
+					$('#emailaddress-register').val('');
+					$('#password-register').val('');
+					$('#password-repeat-register').val('');
+					$('#emailaddress-register').attr('placeholder', 'Email Already Taken');
+					$('#password-register-icon').css('background-color', '#dc3545');
+				},
+			});
+		}
+	});
+	$('#login-submit').on('click', () => {
+		const email = $('#emailaddress').val();
+		const password = $('#password').val();
+		$.ajax({
+			url: '/login',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ email, password }),
+			success: (result, statusCode, xhr) => {
+				location.href = '/dashboard';
+			},
+			error: (xhr, statusCode, error) => {
+				$('#emailaddress').val('');
+				$('#password').val('');
+				$('#emailaddress').attr('placeholder', 'Invalid Email');
+				$('#emailaddress').css('border', 'solid 1px #dc3545');
+				$('#emailaddress-icon').css('border', 'solid 1px #dc3545');
+			}
+		});
+	});
+</script>
 </body>
 
 <!-- Mirrored from www.vasterad.com/themes/hireo_082019/index-logged-out.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:19:53 GMT -->

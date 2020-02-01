@@ -451,16 +451,16 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>Project Name</h5>
-										<input type="text" class="with-border" id="project_name" placeholder="e.g. build me a website">
+										<input type="text" class="with-border" id="project_name" placeholder="e.g. build me a website" required>
 									</div>
 								</div>
 
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>Category</h5>
-										<select class="selectpicker with-border" data-size="7" id="categories" title="Select Category">
+										<select required class="selectpicker with-border" data-size="7" id="categories" title="Select Category">
 											{{#each data}}
-											<option>{{this.title}}</option>
+											<option value="{{this._id}}">{{this.title}}</option>
 											{{/each}}
 										</select>
 									</div>
@@ -720,19 +720,28 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script>
-	$('#task-btn').on('click', function() {
-		let categories , skills = [];
-		const project_name = $('#project_name').val();
-		const categories = $('#categories option:selected').text();
-        const location = $('#location')
-        const budget = {
-            min: $('#min_budget').val(),
-            max: $('#max_budget').val(),
-        };
-        const project_type = $('#project_type').val();
-        //skills: 
-        //project_disc: 
-	})
+	$('#task_btn').on('click', () => {
+		const description = $('#project_disc').val();
+		const isFixed = $('#radio-1').is(':checked');
+		const isHourly = $('#radio-2').is(':checked');
+		const minBudget = $('#min_budget').val();
+		const maxBudget = $('#max_budget').val();
+		const location = $('#autocomplete-input').val();
+		const projectName = $('#project_name').val();
+		const categoryId = $('#categories option:selected').val();
+		const skills = [];
+		$('.keyword-text').each((index, element) => {
+			skills.push($(element).text());
+		});
+		if (!projectName) {
+			$('#project_name').css('border', 'solid 1px #dc3545');
+			$('#project_name').attr('placeholder', 'Please Fill This Field');
+		}
+		if (!description) {
+			$('#project_disc').css('border', 'solid 1px #dc3545');
+			$('#project_name').attr('value', 'Please Fill This Field');
+		}
+	});
 </script>
 
 <!-- Google API & Maps -->
