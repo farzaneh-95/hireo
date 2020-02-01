@@ -41,13 +41,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="#">Home</a>
-							<ul class="dropdown-nav">
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-							</ul>
-						</li>
+						<li><a href="#">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -88,7 +82,7 @@
 								</li>
 								<li><a href="single-freelancer-profile.html">Freelancer Profile</a></li>
 								<li><a href="dashboard-post-a-job.html">Post a Job</a></li>
-								<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
+								<li><a href="/dashboard-post-a-task">Post a Task</a></li>
 							</ul>
 						</li>
 
@@ -110,7 +104,7 @@
 										<li><a href="dashboard-manage-tasks.html">Manage Tasks</a></li>
 										<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
 										<li><a href="dashboard-my-active-bids.html">My Active Bids</a></li>
-										<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
+										<li><a href="/dashboard-post-a-task">Post a Task</a></li>
 									</ul>
 								</li>
 								<li><a href="dashboard-settings.html">Settings</a></li>
@@ -323,8 +317,8 @@
 						</div>
 						
 						<ul class="user-menu-small-nav">
-							<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -379,7 +373,7 @@
 					<div class="dashboard-nav-inner">
 
 						<ul data-submenu-title="Start">
-							<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
 							<li><a href="dashboard-messages.html"><i class="icon-material-outline-question-answer"></i> Messages <span class="nav-tag">2</span></a></li>
 							<li><a href="dashboard-bookmarks.html"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
 							<li><a href="dashboard-reviews.html"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
@@ -396,9 +390,11 @@
 							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
 									<li><a href="dashboard-manage-tasks.html">Manage Tasks <span class="nav-tag">2</span></a></li>
+									{{#equal role 2}}
 									<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
 									<li><a href="dashboard-my-active-bids.html">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
+									<li><a href="/dashboard-post-a-task">Post a Task</a></li>
+									{{/equal}}
 								</ul>	
 							</li>
 						</ul>
@@ -455,31 +451,24 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>Project Name</h5>
-										<input type="text" class="with-border" placeholder="e.g. build me a website">
+										<input type="text" class="with-border" id="project_name" placeholder="e.g. build me a website">
 									</div>
 								</div>
 
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>Category</h5>
-										<select class="selectpicker with-border" data-size="7" title="Select Category">
-											<option>Admin Support</option>
-											<option>Customer Service</option>
-											<option>Data Analytics</option>
-											<option>Design & Creative</option>
-											<option>Legal</option>
-											<option>Software Developing</option>
-											<option>IT & Networking</option>
-											<option>Writing</option>
-											<option>Translation</option>
-											<option>Sales & Marketing</option>
+										<select class="selectpicker with-border" data-size="7" id="categories" title="Select Category">
+											{{#each data}}
+											<option>{{this.title}}</option>
+											{{/each}}
 										</select>
 									</div>
 								</div>
 
 								<div class="col-xl-4">
 									<div class="submit-field">
-										<h5>Location  <i class="help-icon" data-tippy-placement="right" title="Leave blank if it's an online job"></i></h5>
+										<h5>Location  <i class="help-icon" id="location" data-tippy-placement="right" title="Leave blank if it's an online job"></i></h5>
 										<div class="input-with-icon">
 											<div id="autocomplete-container">
 												<input id="autocomplete-input" class="with-border" type="text" placeholder="Anywhere">
@@ -495,13 +484,13 @@
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Minimum">
+													<input class="with-border" type="text" id="min_budget" placeholder="Minimum">
 													<i class="currency">USD</i>
 												</div>
 											</div>
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input class="with-border" type="text" placeholder="Maximum">
+													<input class="with-border" type="text" id="max_budget" placeholder="Maximum">
 													<i class="currency">USD</i>
 												</div>
 											</div>
@@ -525,7 +514,7 @@
 										<h5>What skills are required? <i class="help-icon" data-tippy-placement="right" title="Up to 5 skills that best describe your project"></i></h5>
 										<div class="keywords-container">
 											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" placeholder="Add Skills"/>
+												<input type="text" class="keyword-input with-border" id="skills" placeholder="Add Skills"/>
 												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
 											</div>
 											<div class="keywords-list"><!-- keywords go here --></div>
@@ -538,7 +527,7 @@
 								<div class="col-xl-12">
 									<div class="submit-field">
 										<h5>Describe Your Project</h5>
-										<textarea cols="30" rows="5" class="with-border"></textarea>
+										<textarea cols="30" rows="5" id="project_disc" class="with-border"></textarea>
 										<div class="uploadButton margin-top-30">
 											<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
 											<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
@@ -553,7 +542,7 @@
 				</div>
 
 				<div class="col-xl-12">
-					<a href="#" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Task</a>
+					<a href="#" class="button ripple-effect big margin-top-30" id="task_btn"><i class="icon-feather-plus"></i> Post a Task</a>
 				</div>
 
 			</div>
@@ -728,6 +717,22 @@ $('#snackbar-user-status label').click(function() {
 		    }, 300);
 		}
 	}
+</script>
+
+<script>
+	$('#task-btn').on('click', function() {
+		let categories , skills = [];
+		const project_name = $('#project_name').val();
+		const categories = $('#categories option:selected').text();
+        const location = $('#location')
+        const budget = {
+            min: $('#min_budget').val(),
+            max: $('#max_budget').val(),
+        };
+        const project_type = $('#project_type').val();
+        //skills: 
+        //project_disc: 
+	})
 </script>
 
 <!-- Google API & Maps -->

@@ -9,6 +9,7 @@ const expressSession = require('express-session');
 
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
+const taskRouter = require('./routes/task');
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.set('view engine', 'handlebars');
 app.use('/', authRouter);
 
 app.use('/', dashboardRouter);
+
+app.use('/', taskRouter);
 
 app.get('/', (req, res) => {
     return res.render('home', { layout: false });
