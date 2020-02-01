@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/blue.css">
 
+<style>
+	.error-border {
+		border: solid 1px #dc3545 !important;
+	};
+</style>
+
 </head>
 <body>
 
@@ -1045,7 +1051,7 @@
 					</div>
 
 					<div class="input-with-icon-left">
-						<i class="icon-material-outline-lock"></i>
+						<i class="icon-material-outline-lock" id="password-repeat-register-icon"></i>
 						<input type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="Repeat Password" pattern=".{8,30}" required/>
 					</div>
 				</div>
@@ -1135,6 +1141,25 @@ $('#snackbar-user-status label').click(function() {
 </script>
 {{/equal}}
 <script>
+	$('#password-register').focus(() => {
+		$('#password-register-icon').removeClass('error-border');
+		$('#password-register').removeClass('error-border');
+		$('#password-repeat-register-icon').removeClass('error-border');
+		$('#password-repeat-register').removeClass('error-border');
+	});
+
+	$('#password-repeat-register').focus(() => {
+		$('#password-register-icon').removeClass('error-border');
+		$('#password-register').removeClass('error-border');
+		$('#password-repeat-register-icon').removeClass('error-border');
+		$('#password-repeat-register').removeClass('error-border');
+	});
+
+	$('#emailaddress-register').focus(() => {
+		$('#emailaddress-register').removeClass('error-border');
+		$('#emailaddress-register-icon').removeClass('error-border');
+	});
+
 	$('#register-submit').on('click', () => {
 		const isFreelancer = $('#freelancer-radio').is(':checked');
 		const isEmployer = $('#employer-radio').is(':checked');
@@ -1144,8 +1169,10 @@ $('#snackbar-user-status label').click(function() {
 		if (password !== passwordConfirm) {
 			$('#password-register').val('');
 			$('#password-register').attr('placeholder', 'Passwords Do Not Match');
-			$('#password-register').css('border', 'solid 1px #dc3545');
-			$('#password-register-icon').css('border', 'solid 1px #dc3545');
+			$('#password-register').addClass('error-border');
+			$('#password-register-icon').addClass('error-border');
+			$('#password-repeat-register').addClass('error-border');
+			$('#password-repeat-register-icon').addClass('error-border');
 			$('#password-repeat-register').val('');
 		} else {
 			$.ajax({
@@ -1154,14 +1181,15 @@ $('#snackbar-user-status label').click(function() {
 				contentType: 'application/json',
 				data: JSON.stringify({ email, password, isFreelancer, isEmployer }),
 				success: (result, statusCode, xhr) => {
-					location.href = '/dashboard';
+					window.location.replace('dashboard');
 				},
 				error: (xhr, statusCode, error) => {
 					$('#emailaddress-register').val('');
 					$('#password-register').val('');
 					$('#password-repeat-register').val('');
 					$('#emailaddress-register').attr('placeholder', 'Email Already Taken');
-					$('#password-register-icon').css('background-color', '#dc3545');
+					$('#emailaddress-register').addClass('error-border');
+					$('#emailaddress-register-icon').addClass('error-border');
 				},
 			});
 		}

@@ -43,10 +43,6 @@ const taskSchema = new mongoose.Schema({
         type: String,
         maxlength: 1000,
     },
-
-    file: {
-        type: String,
-    },
 });
 
 const Task = mongoose.model('Task', taskSchema);

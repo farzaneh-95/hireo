@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-post-a-task.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:49 GMT -->
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-manage-tasks.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:50 GMT -->
 <head>
 
 <!-- Basic Page Needs
@@ -14,12 +14,6 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/blue.css">
-
-<style>
-	.error-border {
-		border: 1px solid #dc3545 !important;
-	};
-</style>
 
 </head>
 <body class="gray">
@@ -47,7 +41,13 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="#">Home</a></li>
+						<li><a href="#">Home</a>
+							<ul class="dropdown-nav">
+								<li><a href="index.html">Home 1</a></li>
+								<li><a href="index-2.html">Home 2</a></li>
+								<li><a href="index-3.html">Home 3</a></li>
+							</ul>
+						</li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -88,7 +88,7 @@
 								</li>
 								<li><a href="single-freelancer-profile.html">Freelancer Profile</a></li>
 								<li><a href="dashboard-post-a-job.html">Post a Job</a></li>
-								<li><a href="/dashboard-post-a-task">Post a Task</a></li>
+								<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
 							</ul>
 						</li>
 
@@ -110,7 +110,7 @@
 										<li><a href="dashboard-manage-tasks.html">Manage Tasks</a></li>
 										<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
 										<li><a href="dashboard-my-active-bids.html">My Active Bids</a></li>
-										<li><a href="/dashboard-post-a-task">Post a Task</a></li>
+										<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
 									</ul>
 								</li>
 								<li><a href="dashboard-settings.html">Settings</a></li>
@@ -323,8 +323,8 @@
 						</div>
 						
 						<ul class="user-menu-small-nav">
-							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -379,7 +379,7 @@
 					<div class="dashboard-nav-inner">
 
 						<ul data-submenu-title="Start">
-							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
 							<li><a href="dashboard-messages.html"><i class="icon-material-outline-question-answer"></i> Messages <span class="nav-tag">2</span></a></li>
 							<li><a href="dashboard-bookmarks.html"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
 							<li><a href="dashboard-reviews.html"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
@@ -396,11 +396,9 @@
 							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
 									<li><a href="dashboard-manage-tasks.html">Manage Tasks <span class="nav-tag">2</span></a></li>
-									{{#equal role 2}}
 									<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
 									<li><a href="dashboard-my-active-bids.html">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="/dashboard-post-a-task">Post a Task</a></li>
-									{{/equal}}
+									<li><a href="dashboard-post-a-task.html">Post a Task</a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -427,14 +425,14 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>Post a Task</h3>
+				<h3>Manage Tasks</h3>
 
 				<!-- Breadcrumbs -->
 				<nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Dashboard</a></li>
-						<li>Post a Task</li>
+						<li>Manage Tasks</li>
 					</ul>
 				</nav>
 			</div>
@@ -448,102 +446,86 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3 id="success-message"><i class="icon-feather-folder-plus"></i> Task Submission Form</h3>
+							<h3><i class="icon-material-outline-assignment"></i> My Tasks</h3>
 						</div>
 
-						<div class="content with-padding padding-bottom-10">
-							<div class="row">
+						<div class="content">
+							<ul class="dashboard-box-list">
+								<li>
+									<!-- Job Listing -->
+									<div class="job-listing width-adjustment">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Project Name</h5>
-										<input type="text" class="with-border" id="project_name" placeholder="e.g. build me a website" required>
-									</div>
-								</div>
+										<!-- Job Listing Details -->
+										<div class="job-listing-details">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Category</h5>
-										<select required class="selectpicker with-border" data-size="7" id="categories" title="Select Category">
-											{{#each data}}
-											<option value="{{this._id}}">{{this.title}}</option>
-											{{/each}}
-										</select>
-									</div>
-								</div>
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">Design a Landing Page</a> <span class="dashboard-status-button yellow">Expiring</span></h3>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Location  <i class="help-icon" id="location" data-tippy-placement="right" title="Leave blank if it's an online job"></i></h5>
-										<div class="input-with-icon">
-											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text" placeholder="Anywhere">
-											</div>
-											<i class="icon-material-outline-location-on"></i>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-xl-6">
-									<div class="submit-field">
-										<h5>What is your estimated budget?</h5>
-										<div class="row">
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" id="min_budget" placeholder="Minimum">
-													<i class="currency">USD</i>
-												</div>
-											</div>
-											<div class="col-xl-6">
-												<div class="input-with-icon">
-													<input class="with-border" type="text" id="max_budget" placeholder="Maximum">
-													<i class="currency">USD</i>
+												<!-- Job Listing Footer -->
+												<div class="job-listing-footer">
+													<ul>
+														<li><i class="icon-material-outline-access-time"></i> 23 hours left</li>
+													</ul>
 												</div>
 											</div>
 										</div>
-										<div class="feedback-yes-no margin-top-0">
-											<div class="radio">
-												<input id="radio-1" name="radio" type="radio" checked>
-												<label for="radio-1"><span class="radio-label"></span> Fixed Price Project</label>
-											</div>
+									</div>
+									
+									<!-- Task Details -->
+									<ul class="dashboard-task-info">
+										<li><strong>3</strong><span>Bids</span></li>
+										<li><strong>$22</strong><span>Avg. Bid</span></li>
+										<li><strong>$15 - $30</strong><span>Hourly Rate</span></li>
+									</ul>
 
-											<div class="radio">
-												<input id="radio-2" name="radio" type="radio">
-												<label for="radio-2"><span class="radio-label"></span> Hourly Project</label>
+									<!-- Buttons -->
+									<div class="buttons-to-right always-visible">
+										<a href="dashboard-manage-bidders.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
+										<a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+										<a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+									</div>
+								</li>
+
+								<li>
+									<!-- Job Listing -->
+									<div class="job-listing width-adjustment">
+
+										<!-- Job Listing Details -->
+										<div class="job-listing-details">
+
+											<!-- Details -->
+											<div class="job-listing-description">
+												<h3 class="job-listing-title"><a href="#">Food Delivery Mobile Application</a></h3>
+
+												<!-- Job Listing Footer -->
+												<div class="job-listing-footer">
+													<ul>
+														<li><i class="icon-material-outline-access-time"></i> 6 days, 23 hours left</li>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<div class="col-xl-6">
-									<div class="submit-field">
-										<h5>What skills are required? <i class="help-icon" data-tippy-placement="right" title="Up to 5 skills that best describe your project"></i></h5>
-										<div class="keywords-container">
-											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" id="skills" placeholder="Add Skills"/>
-												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
-											</div>
-											<div class="keywords-list"><!-- keywords go here --></div>
-											<div class="clearfix"></div>
-										</div>
+									<!-- Task Details -->
+									<ul class="dashboard-task-info">
+										<li><strong>3</strong><span>Bids</span></li>
+										<li><strong>$3,200</strong><span>Avg. Bid</span></li>
+										<li><strong>$2,500 - $4,500</strong><span>Fixed Price</span></li>
+									</ul>
 
+									<!-- Buttons -->
+									<div class="buttons-to-right always-visible">
+										<a href="dashboard-manage-bidders.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
+										<a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+										<a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 									</div>
-								</div>
+								</li>
 
-								<div class="col-xl-12">
-									<div class="submit-field">
-										<h5>Describe Your Project</h5>
-										<textarea cols="30" rows="5" id="project_disc" class="with-border"></textarea>
-									</div>
-								</div>
-
-							</div>
+							</ul>
 						</div>
 					</div>
-				</div>
-
-				<div class="col-xl-12">
-					<a href="#" class="button ripple-effect big margin-top-30" id="task_btn"><i class="icon-feather-plus"></i> Post a Task</a>
 				</div>
 
 			</div>
@@ -624,185 +606,7 @@ $('#snackbar-user-status label').click(function() {
 }); 
 </script>
 
-<!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
-<script src="js/chart.min.js"></script>
-<script>
-	Chart.defaults.global.defaultFontFamily = "Nunito";
-	Chart.defaults.global.defaultFontColor = '#888';
-	Chart.defaults.global.defaultFontSize = '14';
-
-	var ctx = document.getElementById('chart').getContext('2d');
-
-	var chart = new Chart(ctx, {
-		type: 'line',
-
-		// The data for our dataset
-		data: {
-			labels: ["January", "February", "March", "April", "May", "June"],
-			// Information about the dataset
-	   		datasets: [{
-				label: "Views",
-				backgroundColor: 'rgba(42,65,232,0.08)',
-				borderColor: '#2a41e8',
-				borderWidth: "3",
-				data: [196,132,215,362,210,252],
-				pointRadius: 5,
-				pointHoverRadius:5,
-				pointHitRadius: 10,
-				pointBackgroundColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointBorderWidth: "2",
-			}]
-		},
-
-		// Configuration options
-		options: {
-
-		    layout: {
-		      padding: 10,
-		  	},
-
-			legend: { display: false },
-			title:  { display: false },
-
-			scales: {
-				yAxes: [{
-					scaleLabel: {
-						display: false
-					},
-					gridLines: {
-						 borderDash: [6, 10],
-						 color: "#d8d8d8",
-						 lineWidth: 1,
-	            	},
-				}],
-				xAxes: [{
-					scaleLabel: { display: false },  
-					gridLines:  { display: false },
-				}],
-			},
-
-		    tooltips: {
-		      backgroundColor: '#333',
-		      titleFontSize: 13,
-		      titleFontColor: '#fff',
-		      bodyFontColor: '#fff',
-		      bodyFontSize: 13,
-		      displayColors: false,
-		      xPadding: 10,
-		      yPadding: 10,
-		      intersect: false
-		    }
-		},
-
-
-});
-
-</script>
-
-
-<!-- Google Autocomplete -->
-<script>
-	function initAutocomplete() {
-		 var options = {
-		  types: ['(cities)'],
-		  // componentRestrictions: {country: "us"}
-		 };
-
-		 var input = document.getElementById('autocomplete-input');
-		 var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-		if ($('.submit-field')[0]) {
-		    setTimeout(function(){ 
-		        $(".pac-container").prependTo("#autocomplete-container");
-		    }, 300);
-		}
-	}
-</script>
-
-<script>
-	$('#project_name').focus(() => {
-		$('#project_name').removeClass('error-border');
-	});
-
-	$('#min_budget').focus(() => {
-		$('#min_budget').removeClass('error-border');
-	});
-
-	$('#max_budget').focus(() => {
-		$('#max_budget').removeClass('error-border');
-	});
-
-	$('#project_disc').focus(() => {
-		$('#project_disc').removeClass('error-border');
-	});	
-
-	$('#task_btn').on('click', () => {
-		const description = $('#project_disc').val();
-		const isFixed = $('#radio-1').is(':checked');
-		const isHourly = $('#radio-2').is(':checked');
-		const minBudget = $('#min_budget').val();
-		const maxBudget = $('#max_budget').val();
-		const location = $('#autocomplete-input').val();
-		const projectName = $('#project_name').val();
-		const categoryId = $('#categories option:selected').val();
-		const skills = [];
-		$('.keyword-text').each((index, element) => {
-			skills.push($(element).text());
-		});
-		console.log(skills);
-		if (!projectName) {
-			$('#project_name').addClass('error-border');
-			$('#project_name').attr('placeholder', 'Please Fill This Field');
-		}
-		if (!description) {
-			$('#project_disc').addClass('error-border');
-			$('#project_name').attr('value', 'Please Fill This Field');
-		}
-		if (minBudget && typeof parseInt(minBudget) !== 'Number') {
-			$('#min_budget').addClass('error-border');
-			$('#min_budget').val('');
-			$('#min_budget + i').text('');
-			$('#min_budget').attr('placeholder', 'Please Use Numbers');
-		}
-		if (maxBudget && typeof parseInt(maxBudget) !== 'Number') {
-			$('#max_budget').addClass('error-border');
-			$('#max_budget').val('');
-			$('#max_budget + i').text('');
-			$('#max_budget').attr('placeholder', 'Please Use Numbers');
-		}
-		const data = JSON.stringify({
-					description,
-					isFixed,
-					isHourly,
-					minBudget: minBudget || 0,
-					maxBudget: maxBudget || 0,
-					location,
-					projectName,
-					categoryId,
-					skills,
-		});
-		console.log(data);
-		if (projectName && description) {
-			$.ajax({
-				url: '/tasks',
-				method: 'POST',
-				contentType: 'application/json',
-				data,
-				success: (result, statudCode, xhr) => {
-					
-				},
-			});
-		}
-	});
-</script>
-
-<!-- Google API & Maps -->
-<!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoOT9ioUE4SA8h-anaFyU4K63a7H-7bc&amp;libraries=places"></script>
-
-
 </body>
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-post-a-task.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:49 GMT -->
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-manage-tasks.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:50 GMT -->
 </html>
