@@ -10,6 +10,8 @@ const expressSession = require('express-session');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 const taskRouter = require('./routes/task');
+const Category = require('./models/category');
+const Freelancer = require('./models/freelancer');
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/hireo', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/hireo_db', { useNewUrlParser: true });
 
 app.use(expressSession({ secret: '12345', cookie: { maxAge: 9000000000000 } }));
 
@@ -35,8 +37,10 @@ app.use('/', dashboardRouter);
 
 app.use('/', taskRouter);
 
-app.get('/', (req, res) => {
-    return res.render('home', { layout: false });
+app.get('/', async (req, res) => {
+    const categories = await Category.find({}).limit(8);
+    const freelancersCount = await Freelancer.find({}).count();
+    return res.render('home', { data: { categories, freelancersCount }, layout: false });
 });
 
 app.use((req, res) => {
