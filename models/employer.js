@@ -13,6 +13,16 @@ const employerSchema = new mongoose.Schema({
         required: true,
         maxlength: 200,
     },
+    first_name: {
+        type: String,
+        maxlength: 200,
+        trim: true,
+    },
+    last_name: {
+        type: String,
+        maxlength: 200,
+        trim: true,
+    },
 });
 
 const Employer = mongoose.model('Employer', employerSchema);

@@ -1206,6 +1206,11 @@
 					
 				<!-- Form -->
 				<form action="/register" method="post" id="register-account-form">
+					{{#if errors}}
+					<span>
+						{{errors}}
+					</span>
+					{{/if}}
 					<!-- Account Type -->
 					<div class="account-type">
 						<div>

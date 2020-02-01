@@ -13,6 +13,30 @@ const freelancerSchema = new mongoose.Schema({
         required: true,
         maxlength: 200,
     },
+    first_name: {
+        type: String,
+        maxlength: 200,
+        trim: true,
+    },
+    last_name: {
+        type: String,
+        maxlength: 200,
+        trim: true,
+    },
+    skills: [String],
+    minimal_hourly_rate: {
+        type: Number,
+    },
+    tag_line: {
+        type: String,
+    },
+    nationality: {
+        type: String,
+    },
+    bio: {
+        type: String,
+        maxlength: 1000,
+    }
 });
 
 const Freelancer = mongoose.model('Freelancer', freelancerSchema);
