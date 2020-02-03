@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/index-logged-out.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:19:53 GMT -->
 <head>
 
 <!-- Basic Page Needs
@@ -40,7 +38,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo.png" alt=""></a>
+					<a href="/"><img src="images/logo.png" alt=""></a>
 				</div>
 
 				<!-- Main Navigation -->
@@ -153,7 +151,52 @@
 
 			<!-- Right Side Content / End -->
 			<div class="right-side">
+				{{#if data.user}}
+				<!-- User Menu -->
+				<div class="header-widget">
 
+					<!-- Messages -->
+					<div class="header-notifications user-menu">
+						<div class="header-notifications-trigger">
+							<a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+						</div>
+
+						<!-- Dropdown -->
+						<div class="header-notifications-dropdown">
+
+							<!-- User Status -->
+							<div class="user-status">
+
+								<!-- User Name / Avatar -->
+								<div class="user-details">
+									<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+									<div class="user-name">
+										Tom Smith <span>Freelancer</span>
+									</div>
+								</div>
+								
+								<!-- User Status Switcher -->
+								<div class="status-switch" id="snackbar-user-status">
+									<label class="user-online current-status">Online</label>
+									<label class="user-invisible">Invisible</label>
+									<!-- Status Indicator -->
+									<span class="status-indicator" aria-hidden="true"></span>
+								</div>	
+						</div>
+						
+						<ul class="user-menu-small-nav">
+							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+						</ul>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- User Menu / End -->
+				{{/if}}
+			
 				<div class="header-widget">
 					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 				</div>
