@@ -8,15 +8,15 @@ router.post('/register', async (req, res) => {
     }
     if (req.body.isFreelancer) {
         const freelancer = new Freelancer({ email: req.body.email, password: req.body.password });
-        const created = await freelancer.save()
-        res.cookie('role', 'freelancer');
-        res.cookie('_id', created._id);
+        const created = await freelancer.save();
+        req.session.role = 'freelancer';
+        req.session._id = created._id;
         return res.render('dashboard', { layout: false });
     }
     else if (req.body.isEmployer) {
-        const employer = new Employer({ email: req.body.email, password: req.body.password });
+        const employer = new Employer({ email: req.body.email, password: req.body.password });       
+        const created = await employer.save();
         req.session.role = 'employer';
-        const created = await employer.save()
         req.session._id = created._id;
         return res.render('dashboard', { layout: false });
     }
