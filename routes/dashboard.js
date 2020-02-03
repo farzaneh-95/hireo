@@ -4,7 +4,6 @@ const Employer = require('../models/employer');
 const countries = require('../helpers/countries');
 
 router.get('/dashboard', (req, res) => {
-    console.log(req.cookies.role);
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
     return res.render('dashboard', {

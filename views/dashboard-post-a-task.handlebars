@@ -396,7 +396,7 @@
 							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
 									<li><a href="dashboard-manage-tasks.html">Manage Tasks <span class="nav-tag">2</span></a></li>
-									{{#equal role 2}}
+									{{#equal role 'employer'}}
 									<li><a href="dashboard-manage-bidders.html">Manage Bidders</a></li>
 									<li><a href="dashboard-my-active-bids.html">My Active Bids <span class="nav-tag">4</span></a></li>
 									<li><a href="/dashboard-post-a-task">Post a Task</a></li>
@@ -483,7 +483,7 @@
 										</div>
 									</div>
 								</div>
-
+	
 								<div class="col-xl-6">
 									<div class="submit-field">
 										<h5>What is your estimated budget?</h5>
@@ -746,6 +746,7 @@ $('#snackbar-user-status label').click(function() {
 		const location = $('#autocomplete-input').val();
 		const projectName = $('#project_name').val();
 		const categoryId = $('#categories option:selected').val();
+		const deadline = $('#project_deadline').val();
 		const skills = [];
 		$('.keyword-text').each((index, element) => {
 			skills.push($(element).text());
@@ -761,13 +762,13 @@ $('#snackbar-user-status label').click(function() {
 		if (minBudget && typeof parseInt(minBudget) !== 'number') {
 			$('#min_budget').addClass('error-border');
 			$('#min_budget').val('');
-			$('#min_budget + i').text('');
+			$('#min_budget').text('');
 			$('#min_budget').attr('placeholder', 'Please Use Numbers');
 		}
 		if (maxBudget && typeof parseInt(maxBudget) !== 'number') {
 			$('#max_budget').addClass('error-border');
 			$('#max_budget').val('');
-			$('#max_budget + i').text('');
+			$('#max_budget').text('');
 			$('#max_budget').attr('placeholder', 'Please Use Numbers');
 		}
 		const data = JSON.stringify({

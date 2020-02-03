@@ -461,12 +461,20 @@
 
 											<!-- Details -->
 											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">{{this.name}}</a> <span class="dashboard-status-button yellow">Expiring</span></h3>
-
+												<h3 class="job-listing-title"><a href="#">{{this.name}}</a>
+												{{#equal this.status 1}}
+												<span class="dashboard-status-button red">Expiring</span></h3>
+												{{/equal}}
+												{{#equal this.status 2}}
+												<span class="dashboard-status-button yellow">Working</span></h3>
+												{{/equal}}
+												{{#equal this.status 3}}
+												<span class="dashboard-status-button green">Done</span></h3>
+												{{/equal}}
 												<!-- Job Listing Footer -->
 												<div class="job-listing-footer">
 													<ul>
-														<li><i class="icon-material-outline-access-time"></i> 23 hours left</li>
+														<li><i class="icon-material-outline-access-time"></i> {{this.created_at_alt}}</li>
 													</ul>
 												</div>
 											</div>
@@ -475,18 +483,24 @@
 									
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
-										<li><strong>{{this.bids.length}}</strong><span>Bids</span></li>
+										<li><strong>3</strong><span>Bids</span></li>
 										<li><strong>$22</strong><span>Avg. Bid</span></li>
-										<li><strong>$15 - $30</strong><span>Hourly Rate</span></li>
+										<li><strong>${{this.min_budget}} - ${{this.max_budget}}</strong>
+										{{#equal this.budget_type 1}}
+										<span>Hourly Rate</span>
+										{{/equal}}
+										{{#equal this.budget_type 2}}
+										<span>Fixed Price</span>
+										{{/equal}}
+										</li>
 									</ul>
 
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible">
 										<a href="dashboard-manage-bidders.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
-										<a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-										<a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 									</div>
 								</li>
+								{{/each}}
 							</ul>
 						</div>
 					</div>
@@ -571,6 +585,4 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 </body>
-
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-manage-tasks.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:50 GMT -->
 </html>

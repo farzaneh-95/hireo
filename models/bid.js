@@ -1,15 +1,30 @@
 const mongoose = require('mongoose');
 
+const types = {
+    hours: 1,
+    days: 2,
+};
+
+const deliveryTimeSchema = new mongoose.Schema({
+    quantity: Number,
+    type: Number,
+});
+
 const bidSchema = new mongoose.Schema({
     freelancer_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Freelancer',
     },
-    minimal_rate: Number,
-    delivery_time: {
-        quantity: Number,
-        type: Number,
+
+    task_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',
     },
+
+    minimal_rate: Number,
+
+    delivery_time: deliveryTimeSchema,
+    
     created_at: Date,
 });
 

@@ -5,6 +5,12 @@ const budgetType = {
     hourly: 2,
 };
 
+const status = {
+    Expiring: 1,
+    Working: 2,
+    Done: 3,
+};
+
 const taskSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -44,7 +50,6 @@ const taskSchema = new mongoose.Schema({
 
     budget_type: {
         type: Number,
-        required: true,
     },
 
     skills: [String],
@@ -52,12 +57,17 @@ const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         maxlength: 1000,
+        required: true,
     },
 
     bids: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bid'
     }],
+
+    created_at: Date,
+
+    status: Number,
 });
 
 const Task = mongoose.model('Task', taskSchema);
