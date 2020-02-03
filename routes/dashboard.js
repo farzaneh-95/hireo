@@ -4,6 +4,7 @@ const Employer = require('../models/employer');
 const countries = require('../helpers/countries');
 
 router.get('/dashboard', (req, res) => {
+    console.log(req.cookies.role);
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
     return res.render('dashboard', {
@@ -13,7 +14,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/dashboard-settings', async (req, res) => {
-    if (req.session.role == 1) {
+    if (req.cookies.role == 'freelancer') {
         const freelancer = await Freelancer.findById(req.session._id);
         return res.render('dashboard-settings', { data: freelancer, countries: countries, role: req.session.role, layout: false });
     }

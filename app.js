@@ -35,8 +35,10 @@ app.engine('handlebars', handlebars({ helpers: require('./helpers/handlebars') }
 app.set('view engine', 'handlebars');
 
 app.use('/', authRouter);
-app.use('/', isLoggedIn, taskRouter);
-app.use('/', isLoggedIn, dashboardRouter);
+// app.use('/', isLoggedIn, taskRouter);
+// app.use('/', isLoggedIn, dashboardRouter);
+app.use('/', taskRouter);
+app.use('/', dashboardRouter);
 
 app.get('/', async (req, res) => {
     const categories = await Category.find({}).limit(8);

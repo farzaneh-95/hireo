@@ -750,7 +750,6 @@ $('#snackbar-user-status label').click(function() {
 		$('.keyword-text').each((index, element) => {
 			skills.push($(element).text());
 		});
-		console.log(skills);
 		if (!projectName) {
 			$('#project_name').addClass('error-border');
 			$('#project_name').attr('placeholder', 'Please Fill This Field');
@@ -759,13 +758,13 @@ $('#snackbar-user-status label').click(function() {
 			$('#project_disc').addClass('error-border');
 			$('#project_name').attr('value', 'Please Fill This Field');
 		}
-		if (minBudget && typeof parseInt(minBudget) !== 'Number') {
+		if (minBudget && typeof parseInt(minBudget) !== 'number') {
 			$('#min_budget').addClass('error-border');
 			$('#min_budget').val('');
 			$('#min_budget + i').text('');
 			$('#min_budget').attr('placeholder', 'Please Use Numbers');
 		}
-		if (maxBudget && typeof parseInt(maxBudget) !== 'Number') {
+		if (maxBudget && typeof parseInt(maxBudget) !== 'number') {
 			$('#max_budget').addClass('error-border');
 			$('#max_budget').val('');
 			$('#max_budget + i').text('');

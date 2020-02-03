@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Category = require('../models/category');
 const Task = require('../models/task');
+const Freelancer = require('../models/freelancer');
 
 router.get('/tasks', async (req, res) => {
     const categories = await Category.find({});
@@ -28,8 +29,27 @@ router.post('/tasks', async (req, res) => {
     return res.send({ message: 'ok' });
 });
 
-router.get('/manage_tasks', (req, res) => {
-    res.render('dashboard-manage-tasks', { layout: false });
+router.get('/manage_tasks', async (req, res) => {
+    // const tasks = await Task.find({ employer_id: req.cookies._id }, { name: 1, 
+    //     min_budget: 1, 
+    //     max_budget: 1, 
+    //     budget_type: 1,
+    //     bids: 1, 
+    //     _id: 0 });
+        // tasks.forEach( async task => {
+        //     const bidsAvg = await task.populate('bids').exec();
+        //     console.log(bidsAvg);
+        // });
+        // console.log(tasks);
+    
+    // return res.render('dashboard-manage-tasks', { data: tasks, layout: false });
+    Task.findOne({ _id: "5e35d90b70f9da4f104a05c6" }).populate('bids').exec((err, task) => {
+        console.log(task);
+    });
+
+    router.get('/browse_task', async (req, res) => {
+        return res.render('task-list-layout-1', { layout: false });
+    })
 });
 
 module.exports = router;

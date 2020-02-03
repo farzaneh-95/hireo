@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
     if (req.body.isFreelancer) {
         const freelancer = new Freelancer({ email: req.body.email, password: req.body.password });
         const created = await freelancer.save()
-        res.cookie('role', 'freelancer');
+        res.cookie('role', 'freelancer', {expires: new Date(Date.now() + 900000)});
         res.cookie('_id', created._id);
         return res.render('dashboard', { layout: false });
     }

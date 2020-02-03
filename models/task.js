@@ -12,6 +12,16 @@ const taskSchema = new mongoose.Schema({
         required: true,
     },
 
+    freelancer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Freelancer',
+    },
+
+    employer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employer',
+    },
+
     category_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
@@ -43,6 +53,11 @@ const taskSchema = new mongoose.Schema({
         type: String,
         maxlength: 1000,
     },
+
+    bids: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bid'
+    }],
 });
 
 const Task = mongoose.model('Task', taskSchema);
