@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
+const Review = require('../models/review');
 const countries = require('../helpers/countries');
 
 router.get('/dashboard', (req, res) => {
@@ -15,7 +16,12 @@ router.get('/dashboard', (req, res) => {
 router.get('/dashboard-settings', async (req, res) => {
     if (req.cookies.role == 'freelancer') {
         const freelancer = await Freelancer.findById(req.session._id);
-        return res.render('dashboard-settings', { data: freelancer, countries: countries, role: req.session.role, layout: false });
+        return res.render('dashboard-settings', { 
+            data: freelancer, 
+            countries: countries, 
+            role: req.session.role, 
+            layout: false 
+        });
     }
 });
 
@@ -46,6 +52,14 @@ router.post('/dashboard-settings', async (req, res) => {
             return res.render('dashboard', { layout: false });
         }
     }
+});
+
+router.get('/reviews', async (req, res) => {
+    const reviews = await Review.find({ freelancer_id: req.session._id, employer_id: req.session._id  });
+    return res.render('dashboard-reviews', { 
+        data: reviews,
+        layout: false,
+    });
 });
 
 module.exports = router;

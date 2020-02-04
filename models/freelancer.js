@@ -45,6 +45,12 @@ const freelancerSchema = new mongoose.Schema({
         type: String,
         maxlength: 1000,
     },
+
+    rate: {
+        type: Number,
+        min: 0,
+        max: 5,
+    },
 });
 
 const Freelancer = mongoose.model('Freelancer', freelancerSchema);

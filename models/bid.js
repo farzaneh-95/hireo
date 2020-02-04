@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const types = {
-    hours: 1,
-    days: 2,
+    Hours: 1,
+    Days: 2,
 };
 
 const deliveryTimeSchema = new mongoose.Schema({
@@ -24,6 +24,8 @@ const bidSchema = new mongoose.Schema({
     minimal_rate: Number,
 
     delivery_time: deliveryTimeSchema,
+
+    is_active: Boolean,
     
     created_at: Date,
 });

@@ -6,7 +6,7 @@ const budgetType = {
 };
 
 const status = {
-    Expiring: 1,
+    Expired: 1,
     Working: 2,
     Done: 3,
 };
