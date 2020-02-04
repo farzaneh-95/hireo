@@ -37,6 +37,10 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         maxlength: 100,
     },
+
+    created_at: {
+        type: Date,
+    },
 });
 
 const Review = mongoose.model('Review', reviewSchema);

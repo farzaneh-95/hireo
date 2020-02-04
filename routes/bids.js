@@ -37,7 +37,7 @@ router.get('/task/bids', async (req, res) => {
     });
 });
 
-router.post('/edit-bids', async (req, res) => {
+router.post('/edit_bids', async (req, res) => {
     const delivery_time = {
         quantity: parseInt(req.body.delivery_time),
         type: req.body.type === 'Hours' ? 1 : 2,

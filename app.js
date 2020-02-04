@@ -9,6 +9,7 @@ const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 const taskRouter = require('./routes/tasks');
 const bidRouter = require('./routes/bids');
+const jobRouter = require('./routes/jobs');
 
 const Category = require('./models/category');
 const Freelancer = require('./models/freelancer');
@@ -36,8 +37,9 @@ app.set('view engine', 'handlebars');
 
 app.use('/', authRouter);
 app.use(taskRouter);
-app.use('/', dashboardRouter);
+app.use('/', isLoggedIn, dashboardRouter);
 app.use('/', bidRouter);
+app.use('/', jobRouter);
 // app.use('/', taskRouter);
 // app.use('/', dashboardRouter);
 

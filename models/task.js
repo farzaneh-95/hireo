@@ -11,6 +11,49 @@ const status = {
     Done: 3,
 };
 
+const reviewSchema = new mongoose.Schema({
+    freelancer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Freelancer',
+    },
+
+    employer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employer',
+    },
+
+    task_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',
+    },
+
+    delivered_on_budget: {
+        type: Boolean,
+        required: true,
+    },
+
+    delivered_on_time: {
+        type: Boolean,
+        required: true,
+    },
+
+    rate: {
+        type: Number,
+        min: 0,
+        max: 5,
+        required: true,
+    },
+
+    comment: {
+        type: String,
+        maxlength: 100,
+    },
+
+    created_at: {
+        type: Date,
+    },
+});
+
 const taskSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -68,6 +111,8 @@ const taskSchema = new mongoose.Schema({
     created_at: Date,
 
     status: Number,
+
+    reviews: [reviewSchema],
 });
 
 const Task = mongoose.model('Task', taskSchema);

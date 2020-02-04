@@ -12,8 +12,8 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/colors/blue.css">
 
 </head>
 <body class="gray">
@@ -441,28 +441,33 @@
 			<div class="row">
 
 				<!-- Dashboard Box -->
-				<div class="col-xl-6">
+				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0">
 
 						<!-- Headline -->
+						{{#equal role 'employer'}}
 						<div class="headline">
-							<h3><i class="icon-material-outline-business"></i> Rate Employers</h3>
+							<h3><i class="icon-material-outline-business"></i> Rate Freelancers</h3>
 						</div>
+						{{/equal}}
+						
 
 						<div class="content">
 							<ul class="dashboard-box-list">
+								{{#each data}}
 								<li>
 									<div class="boxed-list-item">
 										<!-- Content -->
 										<div class="item-content">
-											<h4>Simple Chrome Extension</h4>
+											<h4>{{this.name}}</h4>
 											<span class="company-not-rated margin-bottom-5">Not Rated</span>
 										</div>
 									</div>
-
 									<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
 								</li>
-								<li>
+								{{/each}}
+								
+								{{!-- <li>
 									<div class="boxed-list-item">
 										<!-- Content -->
 										<div class="item-content">
@@ -504,7 +509,7 @@
 										</div>
 									</div>
 									<a href="#small-dialog-1" class="popup-with-zoom-anim button gray ripple-effect margin-top-5 margin-bottom-10"><i class="icon-feather-edit"></i> Edit Review</a>
-								</li>
+								</li> --}}
 
 							</ul>
 						</div>
@@ -526,51 +531,6 @@
 					<!-- Pagination / End -->
 
 				</div>
-
-				<!-- Dashboard Box -->
-				<div class="col-xl-6">
-					<div class="dashboard-box margin-top-0">
-
-						<!-- Headline -->
-						<div class="headline">
-							<h3><i class="icon-material-outline-face"></i> Rate Freelancers</h3>
-						</div>
-
-						<div class="content">
-							<ul class="dashboard-box-list">
-								<li>
-									<div class="boxed-list-item">
-										<!-- Content -->
-										<div class="item-content">
-											<h4>Simple Chrome Extension</h4>
-											<span class="company-not-rated margin-bottom-5">Not Rated</span>
-										</div>
-									</div>
-
-									<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
-								</li>
-								<li>
-									<div class="boxed-list-item">
-										<!-- Content -->
-										<div class="item-content">
-											<h4>Help Fix Laravel PHP issue</h4>
-											<div class="item-details margin-top-10">
-												<div class="star-rating" data-rating="5.0"></div>
-												<div class="detail-item"><i class="icon-material-outline-date-range"></i> August 2019</div>
-											</div>
-											<div class="item-description">
-												<p>Excellent programmer - helped me fixing small issue.</p>
-											</div>
-										</div>
-									</div>
-									<a href="#small-dialog-1" class="popup-with-zoom-anim button gray ripple-effect margin-top-5 margin-bottom-10"><i class="icon-feather-edit"></i> Edit Review</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-
 			</div>
 			<!-- Row / End -->
 
