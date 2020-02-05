@@ -481,8 +481,11 @@
 		<div class="col-xl-4 col-lg-4">
 			<div class="sidebar-container">
 
-				<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></a>
-					
+				{{#equal role 'freelancer'}}
+					{{#equal hasApplied 0}}
+					<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></a>
+					{{/equal}}
+				{{/equal}}
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
 					<div class="job-overview">
@@ -687,7 +690,7 @@
 					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
 					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" value="" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -729,7 +732,7 @@
 		<div class="popup-tabs-container">
 
 			<!-- Tab -->
-			<div class="popup-tab-content" id="tab">
+			<form action="/jobs/apply" method="POST" class="popup-tab-content" id="apply-now-form">
 				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
@@ -737,30 +740,31 @@
 				</div>
 					
 				<!-- Form -->
-				<form method="post" id="apply-now-form">
-
+				<div >
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-account-circle"></i>
-						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" required/>
+						{{#equal hasApplied 0}}
+						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/>
+						{{/equal}}
 					</div>
-
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+						{{#equal hasApplied 0}}
+						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" disabled value="{{freelancer.email}}"/>
+						{{/equal}}
 					</div>
-
 					<div class="uploadButton">
-						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" />
+						<input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
 						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
 						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span>
 					</div>
-
-				</form>
+					<!-- Button -->
+					
+				</div>
 				
-				<!-- Button -->
-				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button id="submit-apply" class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
 
-			</div>
+			</form>
 
 		</div>
 	</div>
@@ -807,7 +811,20 @@ $('.copy-url-button').click(function() {
 }); 
 </script>
 
-</body>
+<script>
+	$('#submit-apply').on('click', () => {
+		const data = new FormData($('#apply-now-form')[0]);
+		console.log($('#upload-cv')[0].files[0]);
+		data.append('file', $('#upload-cv')[0].files[0]);
+		$.ajax({
+			url: '/jobs/apply',
+			data,
+			cache: false,
+			processData: false,
+			contentType: false,
+		});
+	});
+</script>
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/single-job-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:23 GMT -->
+</body>
 </html>

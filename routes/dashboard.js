@@ -17,13 +17,14 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
 });
 
 router.get('/dashboard-settings', async (req, res) => {
+    let data;
     if (req.session.role === 'freelancer') {
-        const freelancer = await Freelancer.findById(req.session._id);
+        data = await Freelancer.findById(req.session._id);
     } else if (req.session.role === 'employer') {
-        const employer = await Employer.findById(req.session._id);
+        data = await Employer.findById(req.session._id);
     }
-    return res.render('dashboard-settings', { 
-        data: freelancer, 
+    res.render('dashboard-settings', { 
+        data, 
         countries: countries, 
         role: req.session.role, 
         layout: false 

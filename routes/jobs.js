@@ -1,10 +1,14 @@
 const router = require('express').Router();
+const multer  = require('multer');
 
 const Category = require('../models/category');
 const Job = require('../models/job');
 const Employer = require('../models/employer');
+const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 const isUserVerified = require('../helpers/isUserVerified');
+
+const upload = multer({ dest: 'public/' })
 
 const type_array = [
     'Full Time',
@@ -14,7 +18,7 @@ const type_array = [
     'Temporary',
 ];
 
-router.get('/post_job', isEmployer, async (req, res) => {
+router.get('/jobs/create', isEmployer, async (req, res) => {
     const categories = await Category.find({});
     return res.render('dashboard-post-a-job', {
         categories,
@@ -44,12 +48,23 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
         .send({ Message: 'Ok' });
 });
 
-router.get('/:id', async (req, res) => {
-    const job = await Job.findById(req.params.id);
+router.get('/jobs/:id', async (req, res) => {
+    const job = await Job.findOne({ status: 1, _id: req.params.id });
     if (!job) {
         return res.render('404', { layout: false });
     }
     const employer = await Employer.findById(job.posted_by);
+    let hasApplied = 0;
+    let freelancer;
+    if (req.session.role === 'freelancer') {
+        freelancer = await Freelancer.findById(req.session._id);
+        job.applies.forEach(apply => {
+            if (apply.freelancer_id === freelancer._id) {
+                hasApplied = 1;
+                return;
+            }
+        });
+    }
     const similarJobs = await Job
         .where('category')
         .equals(job.category)
@@ -58,7 +73,6 @@ router.get('/:id', async (req, res) => {
         .limit(4)
         .populate('posted_by')
         .exec();
-    console.log(similarJobs);
     res.render('single-job-page', {
         job,
         employer_name: employer.name || 'No Name',
@@ -70,8 +84,15 @@ router.get('/:id', async (req, res) => {
         max: job.max_salary >= 1000 ? (job.max_salary / 1000).toString() + 'k' : job.max_salary,
         date: (job.created_at).toDateString(),
         similarJobs,
+        role: req.session.role || 'unknown',
+        hasApplied,
+        freelancer,
         layout: false,
     });
+});
+
+router.post('/jobs/apply', upload.single('file'), (req, res) => {
+    console.log(req.file);
 });
 
 module.exports = router;

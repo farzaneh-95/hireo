@@ -15,6 +15,24 @@ const status = {
     Expired: 4,
 };
 
+const applySchema = new mongoose.Schema({
+    freelancer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Freelancer',
+    },
+
+    cv_path: {
+        type: String,
+        required: true,
+    },
+
+    created_at: {
+        type: Date,
+        requried: true,
+    },
+});
+
 const jobSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -74,6 +92,8 @@ const jobSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+
+    applies: [applySchema],
 });
 
 const Job = mongoose.model('Job', jobSchema);
