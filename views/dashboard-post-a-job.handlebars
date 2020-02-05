@@ -802,6 +802,9 @@ $('#snackbar-user-status label').click(function() {
 					$('#job-desc').val('');
 					$('.keyword').remove();
 				},
+				error: (xhr, status, err) => {
+					console.log(err);
+				},
 			});
 		}
 	});

@@ -3,8 +3,6 @@ const router = require('express').Router();
 const Category = require('../models/category');
 const Task = require('../models/task');
 const Freelancer = require('../models/freelancer');
-const isLoggedIn = require('../helpers/isLoggedIn');
-
 
 router.get('/tasks/:id', async (req, res) => {
     let task = await Task.findById(req.params.id);

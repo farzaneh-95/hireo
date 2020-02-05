@@ -6,9 +6,10 @@ const budgetType = {
 };
 
 const status = {
-    Expired: 1,
+    Expiring: 1,
     Working: 2,
     Done: 3,
+    Expired: 4,
 };
 
 const reviewSchema = new mongoose.Schema({

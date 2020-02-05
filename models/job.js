@@ -8,6 +8,13 @@ const types = {
     temporary: 5,
 };
 
+const status = {
+    Expiring: 1,
+    Working: 2,
+    Done: 3,
+    Expired: 4,
+};
+
 const jobSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -54,11 +61,17 @@ const jobSchema = new mongoose.Schema({
 
     posted_by: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Employer',
         required: true,
     },
 
     created_at: {
         type: Date,
+        required: true,
+    },
+
+    status: {
+        type: Number,
         required: true,
     },
 });

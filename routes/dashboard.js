@@ -5,8 +5,9 @@ const Employer = require('../models/employer');
 const Task = require('../models/task');
 const Review = require('../models/review');
 const countries = require('../helpers/countries');
+const isLoggedIn = require('../helpers/isLoggedIn');
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', isLoggedIn, (req, res) => {
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
     return res.render('dashboard', {
@@ -16,15 +17,17 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/dashboard-settings', async (req, res) => {
-    if (req.cookies.role == 'freelancer') {
+    if (req.session.role === 'freelancer') {
         const freelancer = await Freelancer.findById(req.session._id);
-        return res.render('dashboard-settings', { 
-            data: freelancer, 
-            countries: countries, 
-            role: req.session.role, 
-            layout: false 
-        });
+    } else if (req.session.role === 'employer') {
+        const employer = await Employer.findById(req.session._id);
     }
+    return res.render('dashboard-settings', { 
+        data: freelancer, 
+        countries: countries, 
+        role: req.session.role, 
+        layout: false 
+    });
 });
 
 router.post('/dashboard-settings', async (req, res) => {

@@ -36,10 +36,11 @@ app.engine('handlebars', handlebars({ helpers: require('./helpers/handlebars') }
 app.set('view engine', 'handlebars');
 
 app.use('/', authRouter);
-app.use(taskRouter);
-app.use('/', isLoggedIn, dashboardRouter);
-app.use('/', bidRouter);
+app.use('/', taskRouter);
+app.use('/', dashboardRouter);
 app.use('/', jobRouter);
+app.use('/', bidRouter);
+
 // app.use('/', taskRouter);
 // app.use('/', dashboardRouter);
 
