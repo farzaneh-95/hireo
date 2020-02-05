@@ -1,45 +1,36 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-    freelancer_id: {
+    reviewer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Freelancer',
-    },
-
-    employer_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employer',
-    },
-
-    task_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Task',
-    },
-
-    delivered_on_budget: {
-        type: Boolean,
         required: true,
     },
 
-    delivered_on_time: {
-        type: Boolean,
+    reviewee: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
 
-    rate: {
+    task: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+
+    score: {
         type: Number,
+        required: true,
         min: 0,
         max: 5,
-        required: true,
     },
 
     comment: {
         type: String,
-        maxlength: 100,
+        maxlength: 200,
     },
 
     created_at: {
         type: Date,
+        required: true,
     },
 });
 

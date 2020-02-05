@@ -10,6 +10,7 @@ const dashboardRouter = require('./routes/dashboard');
 const taskRouter = require('./routes/tasks');
 const bidRouter = require('./routes/bids');
 const jobRouter = require('./routes/jobs');
+const reviewRouter = require('./routes/reviews');
 
 const Category = require('./models/category');
 const Freelancer = require('./models/freelancer');
@@ -40,7 +41,7 @@ app.use('/', taskRouter);
 app.use('/', dashboardRouter);
 app.use('/', jobRouter);
 app.use('/', bidRouter);
-
+app.use('/', reviewRouter);
 // app.use('/', taskRouter);
 // app.use('/', dashboardRouter);
 

@@ -34,7 +34,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo.png" alt=""></a>
+					<a href="index.html"><img src="/images/logo.png" alt=""></a>
 				</div>
 
 				<!-- Main Navigation -->
@@ -247,7 +247,7 @@
 										<!-- Notification -->
 										<li class="notifications-not-read">
 											<a href="dashboard-messages.html">
-												<span class="notification-avatar status-online"><img src="images/user-avatar-small-03.jpg" alt=""></span>
+												<span class="notification-avatar status-online"><img src="/images/user-avatar-small-03.jpg" alt=""></span>
 												<div class="notification-text">
 													<strong>David Peterson</strong>
 													<p class="notification-msg-text">Thanks for reaching out. I'm quite busy right now on many...</p>
@@ -259,7 +259,7 @@
 										<!-- Notification -->
 										<li class="notifications-not-read">
 											<a href="dashboard-messages.html">
-												<span class="notification-avatar status-offline"><img src="images/user-avatar-small-02.jpg" alt=""></span>
+												<span class="notification-avatar status-offline"><img src="/images/user-avatar-small-02.jpg" alt=""></span>
 												<div class="notification-text">
 													<strong>Sindy Forest</strong>
 													<p class="notification-msg-text">Hi Tom! Hate to break it to you, but I'm actually on vacation until...</p>
@@ -271,7 +271,7 @@
 										<!-- Notification -->
 										<li class="notifications-not-read">
 											<a href="dashboard-messages.html">
-												<span class="notification-avatar status-online"><img src="images/user-avatar-placeholder.png" alt=""></span>
+												<span class="notification-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></span>
 												<div class="notification-text">
 													<strong>Marcin Kowalski</strong>
 													<p class="notification-msg-text">I received payment. Thanks for cooperation!</p>
@@ -296,7 +296,7 @@
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							<a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div></a>
 						</div>
 
 						<!-- Dropdown -->
@@ -307,7 +307,7 @@
 
 								<!-- User Name / Avatar -->
 								<div class="user-details">
-									<div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+									<div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div>
 									<div class="user-name">
 										Tom Smith <span>Freelancer</span>
 									</div>
@@ -454,16 +454,31 @@
 
 						<div class="content">
 							<ul class="dashboard-box-list">
-								{{#each data}}
+								{{#each data.tasks}}
 								<li>
 									<div class="boxed-list-item">
 										<!-- Content -->
 										<div class="item-content">
-											<h4>{{this.name}}</h4>
+											<h4 class="task-name">{{this.task.name}}</h4>
+											{{#equal this.review null}}
 											<span class="company-not-rated margin-bottom-5">Not Rated</span>
+											
 										</div>
 									</div>
-									<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
+									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this.task._id}}"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
+									<h4 class="task-name" style="display: none;">{{this.task.name}}</h4>
+									<h4 class="task-name" style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}</h4>
+									{{/equal}}
+									{{#if this.review}}
+									<div class="item-details margin-top-10">
+										<div class="star-rating" data-rating="{{this.review.score}}"></div>
+										<div class="detail-item"><i class="icon-material-outline-date-range"></i> 
+										{{this.review_created_at}}</div>
+										</div>
+										<div class="item-description">
+											<p>{{this.review.comment}}</p>
+									</div>
+									{{/if}}
 								</li>
 								{{/each}}
 								
@@ -677,7 +692,7 @@
 				<!-- Welcome Text -->
 				<div class="welcome-text">
 					<h3>Leave a Review</h3>
-					<span>Rate <a href="#">Peter Valentín</a> for the project <a href="#">Simple Chrome Extension</a> </span>
+					<span>Rate <a href="#" id="freelancer-name">Peter Valentín</a> for the project <a href="#" id="task-name">Simple Chrome Extension</a> </span>
 				</div>
 					
 				<!-- Form -->
@@ -743,19 +758,19 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/jquery-migrate-3.1.0.min.html"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-migrate-3.1.0.min.html"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
@@ -774,7 +789,7 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
-<script src="js/chart.min.js"></script>
+<script src="/js/chart.min.js"></script>
 <script>
 	Chart.defaults.global.defaultFontFamily = "Nunito";
 	Chart.defaults.global.defaultFontColor = '#888';
@@ -849,7 +864,15 @@ $('#snackbar-user-status label').click(function() {
 
 </script>
 
+<script>
+	$('.review-btn').on('click', (event) => {
+		$('#freelancer-name').text($(event.target).next().next().text());
+		$('#task-name').text($(event.target).next().text());
+		console.log($(event.target).next().text());
+		console.log($(event.target).next().next().text());
+	});
+</script>
+
 </body>
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-reviews.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:49 GMT -->
 </html>
