@@ -441,12 +441,17 @@
 					<div class="dashboard-box margin-top-0">
 
 						<!-- Headline -->
-						{{#equal role 'employer'}}
+						{{#equal data.role 'employer'}}
 						<div class="headline">
 							<h3><i class="icon-material-outline-business"></i> Rate Freelancers</h3>
 						</div>
 						{{/equal}}
-						
+
+						{{#equal data.role 'freelancer'}}
+						<div class="headline">
+							<h3><i class="icon-material-outline-business"></i> Rate Employers</h3>
+						</div>
+						{{/equal}}
 
 						<div class="content">
 							<ul class="dashboard-box-list">
@@ -463,9 +468,14 @@
 									</div>
 									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this.task._id}}"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
 									<h4 class="task-name" style="display: none;">{{this.task.name}}</h4>
-									<h4 class="task-name" style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}
-									</h4>
+									{{#equal this.role 'employer'}}
+									<h4 style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}</h4>
 									<h4 style="display: none;">{{this.task.freelancer_id._id}}</h4>
+									{{/equal}}
+									{{#equal this.role 'freelancer'}}
+									<h4 style="display: none;">{{this.task.employer_id.name}}</h4>
+									<h4 style="display: none;">{{this.task.employer_id._id}}</h4>
+									{{/equal}}
 									<h4 style="display: none;">{{this.task._id}}</h4>
 									{{/equal}}
 									{{#if this.review}}
@@ -480,51 +490,6 @@
 									{{/if}}
 								</li>
 								{{/each}}
-								
-								{{!-- <li>
-									<div class="boxed-list-item">
-										<!-- Content -->
-										<div class="item-content">
-											<h4>Adsense Expert</h4>
-											<span class="company-not-rated margin-bottom-5">Not Rated</span>
-										</div>
-									</div>
-
-									<a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
-								</li>
-								<li>
-									<div class="boxed-list-item">
-										<!-- Content -->
-										<div class="item-content">
-											<h4>Fix Python Selenium Code</h4>
-											<div class="item-details margin-top-10">
-												<div class="star-rating" data-rating="5.0"></div>
-												<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
-											</div>
-											<div class="item-description">
-												<p>Great clarity in specification and communication. I got payment really fast. Really recommend this employer for his professionalism. I will work for him again with pleasure.</p>
-											</div>
-										</div>
-									</div>
-									<a href="#small-dialog-1" class="popup-with-zoom-anim button gray ripple-effect margin-top-5 margin-bottom-10"><i class="icon-feather-edit"></i> Edit Review</a>
-								</li>
-								<li>
-									<div class="boxed-list-item">
-										<!-- Content -->
-										<div class="item-content">
-											<h4>PHP Core Website Fixes</h4>
-											<div class="item-details margin-top-10">
-												<div class="star-rating" data-rating="5.0"></div>
-												<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019</div>
-											</div>
-											<div class="item-description">
-												<p>Great clarity in specification and communication. I got payment really fast. Really recommend this employer for his professionalism. I will work for him again with pleasure.</p>
-											</div>
-										</div>
-									</div>
-									<a href="#small-dialog-1" class="popup-with-zoom-anim button gray ripple-effect margin-top-5 margin-bottom-10"><i class="icon-feather-edit"></i> Edit Review</a>
-								</li> --}}
-
 							</ul>
 						</div>
 					</div>
@@ -867,13 +832,15 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script>
-	const temp = window.location.href.split('?')[1] || 1;
+	const temp = window.location.href.split('?')[1] || 'page=1';
 	$('#next-page').attr('href', '/reviews/my_reviews?page=' + (parseInt(temp.split('page=')[1]) + 1).toString());
 	$('.review-btn').on('click', (event) => {
 		$('#freelancer-name').text($(event.target).next().next().text());
 		$('#task-name').text($(event.target).next().text());
 		$('#reviewee').val($(event.target).next().next().next().text());
 		$('#task-id').val($(event.target).next().next().next().next().text());
+		console.log($(event.target).next().next().next().next().text(),$(event.target).next().next().next().text());
+	
 	});
 </script>
 

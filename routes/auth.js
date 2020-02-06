@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session);
+
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
 
@@ -28,7 +31,7 @@ router.post('/login', async (req, res) => {
     if (freelancer) {
         req.session.role = 'freelancer';
         req.session._id = freelancer._id;
-        return res.send({message: 'ok'});
+        return res.send({ message: 'ok' });
     }
     else if (employer) {
         req.session.role = 'employer';
@@ -37,6 +40,12 @@ router.post('/login', async (req, res) => {
     } else {
         return res.status(400).send({ error: 'Invalid Input' });
     }
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        res.send();
+    });
 });
 
 module.exports = router;

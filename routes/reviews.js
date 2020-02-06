@@ -9,7 +9,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
     if (req.session.role === 'employer') {
         const tasks = await Task
         .where('status')
-        .equals(2)
+        .equals(3)
         .where('employer_id')
         .equals(req.session._id)
         .sort({ created_at: 'desc' })
@@ -34,6 +34,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
                         task: tasks[i],
                         review: reviews[j],
                         review_created_at: reviews[j].created_at.toDateString(),
+                        role: req.session.role,
                     });
                     break;
                 }
@@ -41,6 +42,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
             if (!sw) {
                 tempTasks.push({
                     task: tasks[i],
+                    role: req.session.role,
                 });
             }
         }   
@@ -48,7 +50,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
     } else if (req.session.role === 'freelancer') {
         const tasks = await Task
         .where('status')
-        .equals(2)
+        .equals(3)
         .where('freelancer_id')
         .equals(req.session._id)
         .sort({ created_at: 'desc' })
@@ -58,7 +60,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
         .exec();
 
         const reviews = await Review    
-        .where('reviewee')
+        .where('reviewer')
         .equals(req.session._id)
         .where('task')
         .in(tasks.map(task => task._id));
@@ -73,6 +75,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
                         task: tasks[i],
                         review: reviews[j],
                         review_created_at: reviews[j].created_at.toDateString(),
+                        role: req.session.role,
                     });
                     break;
                 }
@@ -80,9 +83,11 @@ router.get('/reviews/my_reviews', async (req, res) => {
             if (!sw) {
                 tempTasks.push({
                     task: tasks[i],
+                    role: req.session.role,
                 });
             }
-            res.render('dashboard-reviews', { data: { tasks: tempTasks }, layout: false });
+            console.log(tempTasks);
+            res.render('dashboard-reviews', { data: { tasks: tempTasks, currPage: req.query.page || 1 }, layout: false });
         }  
     } else {
         return res.redirect('/');
@@ -90,18 +95,16 @@ router.get('/reviews/my_reviews', async (req, res) => {
 });
 
 router.post('/reviews', async (req, res) => {
-    if (req.session.role === 'employer') {
-        const rev = new Review({
-            reviewer: req.session._id,
-            reviewee: req.body.reviewee_id,
-            task: req.body.task_id,
-            score: req.body.rating,
-            comment: req.body.comment,
-            created_at: new Date(), 
-        });
-        await rev.save();
-        res.redirect('/reviews/my_reviews');
-    }
+    const rev = new Review ({
+        reviewer: req.session._id,
+        reviewee: req.body.reviewee_id,
+        task: req.body.task_id,
+        score: req.body.rating,
+        comment: req.body.comment,
+        created_at: new Date(), 
+    });
+    await rev.save();
+    res.redirect('/reviews/my_reviews');
 });
 
 module.exports = router;
