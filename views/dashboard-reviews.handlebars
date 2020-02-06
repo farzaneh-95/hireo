@@ -1,21 +1,17 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-reviews.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:49 GMT -->
-<head>
+	<head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>Hireo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Hireo</title>
 
-<!-- CSS
-================================================== -->
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/colors/blue.css">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-</head>
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/colors/blue.css">
+
+	</head>
 <body class="gray">
 
 <!-- Wrapper -->
@@ -467,7 +463,10 @@
 									</div>
 									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this.task._id}}"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
 									<h4 class="task-name" style="display: none;">{{this.task.name}}</h4>
-									<h4 class="task-name" style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}</h4>
+									<h4 class="task-name" style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}
+									</h4>
+									<h4 style="display: none;">{{this.task.freelancer_id._id}}</h4>
+									<h4 style="display: none;">{{this.task._id}}</h4>
 									{{/equal}}
 									{{#if this.review}}
 									<div class="item-details margin-top-10">
@@ -535,10 +534,10 @@
 					<div class="pagination-container margin-top-40 margin-bottom-0">
 						<nav class="pagination">
 							<ul>
-								<li><a href="#" class="ripple-effect current-page">1</a></li>
-								<li><a href="#" class="ripple-effect">2</a></li>
-								<li><a href="#" class="ripple-effect">3</a></li>
-								<li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+								<li><a href="/reviews/my_reviews?page=1" class="ripple-effect {{#equal data.currPage 1}}current-page{{/equal}}">1</a></li>
+								<li><a href="/reviews/my_reviews?page=2" class="ripple-effect {{#equal data.currPage 2}}current-page{{/equal}}">2</a></li>
+								<li><a href="/reviews/my_reviews?page=3" class="ripple-effect {{#equal data.currPage 3}}current-page{{/equal}}">3</a></li>
+								<li class="pagination-arrow"><a id="next-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -696,17 +695,17 @@
 				</div>
 					
 				<!-- Form -->
-				<form method="post" id="leave-review-form">
+				<form method="POST" id="leave-review-form" action="/reviews">
 
 					<div class="feedback-yes-no">
 						<strong>Was this delivered on budget?</strong>
 						<div class="radio">
-							<input id="radio-1" name="radio" type="radio" required>
+							<input id="radio-1" name="radio" type="radio">
 							<label for="radio-1"><span class="radio-label"></span> Yes</label>
 						</div>
 
 						<div class="radio">
-							<input id="radio-2" name="radio" type="radio" required>
+							<input id="radio-2" name="radio" type="radio">
 							<label for="radio-2"><span class="radio-label"></span> No</label>
 						</div>
 					</div>
@@ -714,12 +713,12 @@
 					<div class="feedback-yes-no">
 						<strong>Was this delivered on time?</strong>
 						<div class="radio">
-							<input id="radio-3" name="radio2" type="radio" required>
+							<input id="radio-3" name="radio2" type="radio">
 							<label for="radio-3"><span class="radio-label"></span> Yes</label>
 						</div>
 
 						<div class="radio">
-							<input id="radio-4" name="radio2" type="radio" required>
+							<input id="radio-4" name="radio2" type="radio">
 							<label for="radio-4"><span class="radio-label"></span> No</label>
 						</div>
 					</div>
@@ -740,8 +739,11 @@
 						</div><div class="clearfix"></div>
 					</div>
 
-					<textarea class="with-border" placeholder="Comment" name="message2" id="message2" cols="7" required></textarea>
+					<textarea class="with-border" placeholder="Comment" name="comment" id="message2" cols="7" required></textarea>
 
+					<input type="hidden" name="reviewee_id" id="reviewee">
+
+					<input type="hidden" name="task_id" id="task-id">
 				</form>
 				
 				<!-- Button -->
@@ -865,11 +867,13 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script>
+	const temp = window.location.href.split('?')[1] || 1;
+	$('#next-page').attr('href', '/reviews/my_reviews?page=' + (parseInt(temp.split('page=')[1]) + 1).toString());
 	$('.review-btn').on('click', (event) => {
 		$('#freelancer-name').text($(event.target).next().next().text());
 		$('#task-name').text($(event.target).next().text());
-		console.log($(event.target).next().text());
-		console.log($(event.target).next().next().text());
+		$('#reviewee').val($(event.target).next().next().next().text());
+		$('#task-id').val($(event.target).next().next().next().next().text());
 	});
 </script>
 
