@@ -19,6 +19,7 @@ const type_array = [
 ];
 
 router.get('/jobs/my_jobs', async (req, res) => {
+    const user = req.app.get('user');
     if (req.session.role === 'employer') {
         const myJobs = await Job
             .where('posted_by')
@@ -29,13 +30,17 @@ router.get('/jobs/my_jobs', async (req, res) => {
         myJobs.forEach(job => {
             tempJobs.push({ job: job, created_at: job.created_at.toDateString(), applyCount: job.applies.length })
         });
-        res.render('dashboard-manage-jobs', { data: { jobs: tempJobs }, layout: false, });
+        res.render('dashboard-manage-jobs', { data: { jobs: tempJobs, user }, layout: false, });
     }
 });
 
 router.get('/jobs/create', isEmployer, async (req, res) => {
+    const user = req.app.get('user');
     const categories = await Category.find({});
     return res.render('dashboard-post-a-job', {
+        data: {
+            user
+        },
         categories,
         layout: false,
     });
@@ -64,10 +69,12 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
 });
 
 router.get('/jobs', (req, res) => {
-    res.render('jobs-list-layout-1', { layout: false });
+    const user = req.app.get('user');
+    res.render('jobs-list-layout-1', { data: { user }, layout: false });
 });
 
 router.get('/jobs/:id', async (req, res) => {
+    const user = req.app.get('user');
     const job = await Job.findOne({ status: 1, _id: req.params.id });
     if (!job) {
         return res.render('404', { layout: false });
@@ -93,6 +100,7 @@ router.get('/jobs/:id', async (req, res) => {
         .populate('posted_by')
         .exec();
     res.render('single-job-page', {
+        data: user,
         job,
         employer_name: employer.name || 'No Name',
         employer_link: '/employers/' + employer._id,

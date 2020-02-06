@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session);
 
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');

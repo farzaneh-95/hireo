@@ -7,6 +7,7 @@ const Job = require('../models/job');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
+    const user = req.app.get('user');
     const categories = await Category.find({}).limit(8);
     const data = [];
     categories.map(async cat => {
@@ -23,14 +24,6 @@ router.get('/', async (req, res) => {
     const freelancersCount = await Freelancer.find({}).countDocuments();
     const tasksCount = await Task.find({ status: 1 }).countDocuments();
     const jobsCount = await Job.find({ status: 1 }).countDocuments();
-    let user;
-    if (req.session.role === 'freelancer') {
-        user = await Freelancer.findById(req.session._id); 
-    } else if (req.session.role === 'employer') {
-        user = await Employer.findById(req.session._id);
-    } else {
-        user = null;
-    }
     const jobs = await Job
         .find({})
         .sort({ created_at: -1 })

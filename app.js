@@ -13,7 +13,7 @@ const bidRouter = require('./routes/bids');
 const jobRouter = require('./routes/jobs');
 const reviewRouter = require('./routes/reviews');
 
-const isLoggedIn = require('./helpers/isLoggedIn');
+const isUser = require('./helpers/isUser');
 
 const app = express();
 
@@ -33,18 +33,17 @@ app.use(bodyParser.json());
 app.engine('handlebars', handlebars({ helpers: require('./helpers/handlebars') }));
 app.set('view engine', 'handlebars');
 
-app.use('/', homeRouter)
-app.use('/', authRouter);
-app.use('/', taskRouter);
-app.use('/', dashboardRouter);
-app.use('/', jobRouter);
-app.use('/', bidRouter);
-app.use('/', reviewRouter);
-// app.use('/', taskRouter);
-// app.use('/', dashboardRouter);
+app.use('/', isUser, homeRouter)
+app.use('/', isUser, authRouter);
+app.use('/', isUser, taskRouter);
+app.use('/', isUser, dashboardRouter);
+app.use('/', isUser, jobRouter);
+app.use('/', isUser, bidRouter);
+app.use('/', isUser, reviewRouter);
 
-app.use((req, res) => {
-    res.status(404).render('404', { layout: false });
+app.use(isUser, (req, res) => {
+    const user = req.app.get('user');
+    res.status(404).render('404', {data: { user }, layout: false });
 });
 
 app.listen(3000);

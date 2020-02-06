@@ -38,14 +38,14 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/"><img src="images/logo.png" alt=""></a>
+					<a href="/"><img src="/images/logo.png" alt=""></a>
 				</div>
 
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="#" class="current">Home</a></li>
+						<li><a href="/" class="current">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -71,7 +71,6 @@
 
 			<!-- Right Side Content / End -->
 			<div class="right-side">
-
 				{{#if data.user}}
 				<!-- User Menu -->
 				<div class="header-widget">
@@ -91,9 +90,16 @@
 								<!-- User Name / Avatar -->
 								<div class="user-details">
 									<div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div>
+									{{#equal data.user.role 'freelancer'}}
 									<div class="user-name">
-										Tom Smith <span>Freelancer</span>
+										{{data.user.first_name}} {{data.user.last_name}} <span>Freelancer</span>
 									</div>
+									{{/equal}}
+									{{#equal data.user.role 'employer'}}
+									<div class="user-name">
+										{{data.user.name}}<span>Employer</span>
+									</div>
+									{{/equal}}
 								</div>
 								
 								<!-- User Status Switcher -->
@@ -122,13 +128,6 @@
 					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 				</div>
 				{{/if}}
-				</div>
-				<!--  User Notifications / End -->
-
-				
-				
-				<!-- User Menu / End -->
-
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
 					<button class="hamburger hamburger--collapse" type="button">
@@ -300,14 +299,14 @@
 			<div class="listings-container compact-list-layout margin-top-35">
 				
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-01.png" alt="">
+							<img src="/images/company-logo-01.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -332,14 +331,14 @@
 
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-05.png" alt="">
+							<img src="/images/company-logo-05.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -362,14 +361,14 @@
 					</div>
 				</a>
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-02.png" alt="">
+							<img src="/images/company-logo-02.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -394,14 +393,14 @@
 				
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-03.png" alt="">
+							<img src="/images/company-logo-03.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -425,14 +424,14 @@
 				</a>
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-05.png" alt="">
+							<img src="/images/company-logo-05.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -456,14 +455,14 @@
 				</a>
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-04.png" alt="">
+							<img src="/images/company-logo-04.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -488,14 +487,14 @@
 
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-05.png" alt="">
+							<img src="/images/company-logo-05.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -519,14 +518,14 @@
 				</a>
 
 				<!-- Job Listing -->
-				<a href="single-job-page.html" class="job-listing">
+				<a href="/single-job-page.html" class="job-listing">
 
 					<!-- Job Listing Details -->
 					<div class="job-listing-details">
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="images/company-logo-06.png" alt="">
+							<img src="/images/company-logo-06.png" alt="">
 						</div>
 
 						<!-- Details -->
@@ -594,7 +593,7 @@
 						<div class="footer-rows-left">
 							<div class="footer-row">
 								<div class="footer-row-inner footer-logo">
-									<img src="images/logo2.png" alt="">
+									<img src="/images/logo2.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -740,19 +739,19 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/jquery-migrate-3.1.0.min.html"></script>
-<script src="js/mmenu.min.js"></script>
-<script src="js/tippy.all.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-<script src="js/snackbar.js"></script>
-<script src="js/clipboard.min.js"></script>
-<script src="js/counterup.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-migrate-3.1.0.min.html"></script>
+<script src="/js/mmenu.min.js"></script>
+<script src="/js/tippy.all.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/bootstrap-slider.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/snackbar.js"></script>
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/counterup.min.js"></script>
+<script src="/js/magnific-popup.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/custom.js"></script>
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
@@ -783,9 +782,21 @@ $('#snackbar-user-status label').click(function() {
 	}
 </script>
 
+<script>
+	$('#logOut').on('click', () => {
+		$.ajax({
+			url: '/logout',
+			method: 'GET',
+			success: (data, status, xhr) => {
+				window.location.href = '/';
+			}
+		});
+	});
+</script>
+
 <!-- Google API & Maps -->
 <!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoOT9ioUE4SA8h-anaFyU4K63a7H-7bc&amp;libraries=places"></script>
+<script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoOT9ioUE4SA8h-anaFyU4K63a7H-7bc&amp;libraries=places"></script>
 
 </body>
 
