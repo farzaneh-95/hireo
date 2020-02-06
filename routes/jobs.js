@@ -18,6 +18,21 @@ const type_array = [
     'Temporary',
 ];
 
+router.get('/jobs/my_jobs', async (req, res) => {
+    if (req.session.role === 'employer') {
+        const myJobs = await Job
+            .where('posted_by')
+            .equals(req.session._id)
+            .sort({ created_at: 'desc' });
+        
+        const tempJobs = [];
+        myJobs.forEach(job => {
+            tempJobs.push({ job: job, created_at: job.created_at.toDateString(), applyCount: job.applies.length })
+        });
+        res.render('dashboard-manage-jobs', { data: { jobs: tempJobs }, layout: false, });
+    }
+});
+
 router.get('/jobs/create', isEmployer, async (req, res) => {
     const categories = await Category.find({});
     return res.render('dashboard-post-a-job', {

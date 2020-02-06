@@ -11,8 +11,8 @@ const types = {
 const status = {
     Expiring: 1,
     Working: 2,
-    Done: 3,
-    Expired: 4,
+    Expired: 3,
+    WaitingForApproval: 4,
 };
 
 const applySchema = new mongoose.Schema({
@@ -49,6 +49,7 @@ const jobSchema = new mongoose.Schema({
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        href: 'Category',
     },
 
     location: {
@@ -94,6 +95,11 @@ const jobSchema = new mongoose.Schema({
     },
 
     applies: [applySchema],
+
+    freelancer_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Freelancer',
+    },
 });
 
 const Job = mongoose.model('Job', jobSchema);
