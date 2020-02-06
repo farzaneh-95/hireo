@@ -3,12 +3,16 @@ const faker = require('faker');
 
 const Category = require('./models/category');
 const Freelancer = require('./models/freelancer');
+const Job = require('./models/job');
+const Employer = require('./models/employer');
 
 mongoose.connect('mongodb://127.0.0.1:27017/' + 'hireo_db', {
     useCreateIndex: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
+const locations = ['USA', 'UK', 'France', 'Spain'];
 const categories = [
     {
         title: 'Web & Software Dev',
@@ -43,16 +47,64 @@ const categories = [
         description: 'Advisor, Coach, Education Coordinator & More',
     },
 ];
-
-for (let i = 0; i < categories.length; i++) {
-    const cat = new Category(categories[i]);
-    cat.save();
-}
-
-for (let i = 0; i < 10; i++) {
-    const freelancer = new Freelancer({
-        email: faker.internet.email(),
-        password: faker.lorem.word(),
+const logos = ['images/company-logo-01.png', 'images/company-logo-02.png', 'images/company-logo-03.png'];
+Category.insertMany(categories)
+    .then(cats => {
+        console.log('Categories Done');
+        const employers = [];
+        for (let i = 0; i < 10; i++) {
+            employers.push({
+                email: faker.internet.email(),
+                password: '12345678',
+                name: faker.company.companyName(),
+                location: locations[faker.random.number(3)],
+                bio: faker.lorem.paragraphs(3),
+                logo: logos[faker.random.number()],
+            });
+        }
+        Employer.insertMany(employers)
+            .then(emps => {
+                console.log('Employers Done');
+                const jobs = [];
+                for (let i = 0; i < 30; i++) {
+                    jobs.push({
+                        title: faker.lorem.word(),
+                        type: faker.random.number(4),
+                        category: cats[Math.floor(Math.random() * cats.length)]._id,
+                        location: locations[faker.random.number(3)],
+                        min_salary: 40000,
+                        max_salary: 120000,
+                        tags: ['Laravel', 'Css', 'Javascript', 'Mongodb'],
+                        description: faker.lorem.paragraphs(3),
+                        posted_by: emps[Math.floor(Math.random() * emps.length)]._id,
+                        created_at: new Date(),
+                        status: faker.random.number(3),
+                    });
+                }
+                Job.insertMany(jobs)
+                    .then(jbs => {
+                        console.log('Jobs Done');
+                    });
+            });
     });
-    freelancer.save();
+
+const freelancers = [];
+for (let i = 0; i < 50; i++) {
+    freelancers.push({
+        email: faker.internet.email(),
+        password: '12345678',
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        skills: ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML5'],
+        minimal_hourly_rate: 100,
+        nationality: 'USA',
+        bio: faker.lorem.paragraph(),
+    });
 }
+Freelancer.insertMany(freelancers)
+    .then(docs => {
+        console.log('Freelancers Done');
+    });
+
+
+

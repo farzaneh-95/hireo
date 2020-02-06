@@ -63,8 +63,34 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
         .send({ Message: 'Ok' });
 });
 
-router.get('/jobs', (req, res) => {
-    res.render('jobs-list-layout-1', { layout: false });
+router.get('/jobs', async (req, res) => {
+    const query = Job
+        .where('status')
+        .equals(1);
+    if (req.query.location) {
+        query
+            .where('location')
+            .equals(req.query.location);
+    }
+    if (req.query.category) {
+        query
+            .where('category')
+            .equals(req.query.category);
+    }
+    if (req.query.title) {
+        query
+            .where('title')
+            .equals(new RegExp(req.query.title), 'i');
+    }
+    const jobs = await Job.paginate(query, { limit: 8, page: parseInt(req.query.page), populate: 'posted_by' });
+    const categories = await Category.find();
+    res.render('jobs-list-layout-1', {
+        data: {
+            jobs: jobs.docs,
+            categories,
+        },
+        layout: false
+    });
 });
 
 router.get('/jobs/:id', async (req, res) => {

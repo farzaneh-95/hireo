@@ -21,10 +21,6 @@ const employerSchema = new mongoose.Schema({
         trim: true,
     },
  
-    nationality: {
-        type: String,
-    },
-
     bio: {
         type: String,
         maxlength: 1000,

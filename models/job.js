@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
-const types = {
-    fullTime: 1,
-    freelance: 2,
-    partTime: 3,
-    internship: 4,
-    temporary: 5,
-};
+const types = ['Full Time', 'Freelance', 'Part Time', 'Internship', 'Temporary'];
 
 const status = {
     Expiring: 1,
@@ -44,6 +39,7 @@ const jobSchema = new mongoose.Schema({
     type: {
         type: Number,
         required: true,
+        get: type => types[type],
     },
 
     category: {
@@ -87,6 +83,7 @@ const jobSchema = new mongoose.Schema({
     created_at: {
         type: Date,
         required: true,
+        get: created_at => created_at.toDateString(),
     },
 
     status: {
@@ -101,6 +98,8 @@ const jobSchema = new mongoose.Schema({
         ref: 'Freelancer',
     },
 });
+
+jobSchema.plugin(mongoosePaginate);
 
 const Job = mongoose.model('Job', jobSchema);
 
