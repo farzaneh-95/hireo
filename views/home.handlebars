@@ -49,29 +49,17 @@
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
-								<li><a href="#">Browse Jobs</a>
-									<ul class="dropdown-nav">
-										<li><a href="/jobs">List Layout</a></li>
-									</ul>
+								<li><a href="/jobs">Browse Jobs</a>
 								</li>
-								<li><a href="#">Browse Tasks</a>
-									<ul class="dropdown-nav">
-										<li><a href="/tasks">List Layout</a></li>
-									</ul>
+								<li><a href="/tasks">Browse Tasks</a>
+									
 								</li>
-								<li><a href="/companies">Browse Companies</a></li>
 							</ul>
 						</li>
 
-						<li><a href="#">For Employers</a>
-							<ul class="dropdown-nav">
-								<li><a href="#">Find a Freelancer</a>
-									<ul class="dropdown-nav">
-										<li><a href="/freelancers">List Layout</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
+						<li><a href="/companies">Companies</a></li>
+
+						<li><a href="/freelancers">Freelancers</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -179,7 +167,7 @@
 			<div class="col-md-12">
 				<ul class="intro-stats margin-top-45 hide-under-992px">
 					<li>
-						<strong class="counter">{{data.quantity.jobCount}}</strong>
+						<strong class="counter">{{data.quantity.jobsCount}}</strong>
 						<span>Jobs Posted</span>
 					</li>
 					<li>
@@ -213,14 +201,14 @@
 				<!-- Category Boxes Container -->
 				<div class="categories-container">
 					{{#each data.categories}}
-					<a href="/jobs-grid-layout-full-page.html" class="category-box">
+					<a href="/jobs" class="category-box">
 						<div class="category-box-icon">
 							<i class="icon-line-awesome-file-code-o"></i>
 						</div>
-						<div class="category-box-counter">612</div>
+						<div class="category-box-counter">{{this.count}}</div>
 						<div class="category-box-content">
-							<h3>{{this.title}}</h3>
-							<p>{{this.description}}</p>
+							<h3>{{this.category.title}}</h3>
+							<p>{{this.category.description}}</p>
 						</div>
 					</a>
 					{{/each}}
@@ -242,34 +230,39 @@
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
 					<h3>Featured Jobs</h3>
-					<a href="/jobs-list-layout-full-page-map.html" class="headline-link">Browse All Jobs</a>
+					<a href="/jobs" class="headline-link">Browse All Jobs</a>
 				</div>
 				
 				<!-- Jobs Container -->
 				<div class="listings-container compact-list-layout margin-top-35">
 					
 					<!-- Job Listing -->
-					<a href="/single-job-page.html" class="job-listing with-apply-button">
+					{{#each data.jobs}}
+					<a href="/jobs/{{this.job._id}}" class="job-listing with-apply-button">
 
 						<!-- Job Listing Details -->
 						<div class="job-listing-details">
 
 							<!-- Logo -->
 							<div class="job-listing-company-logo">
-								<img src="/images/company-logo-01.png" alt="">
+								{{#if this.job.posted_by.logo}}
+								<img src="{{this.job.posted_by.logo}}" alt="">
+								{{else}}
+								<img src="/images/company-logo-05.png" alt="">
+								{{/if}}
 							</div>
 
 							<!-- Details -->
 							<div class="job-listing-description">
-								<h3 class="job-listing-title">Bilingual Event Support Specialist</h3>
+								<h3 class="job-listing-title">{{this.job.title}}</h3>
 
 								<!-- Job Listing Footer -->
 								<div class="job-listing-footer">
 									<ul>
-										<li><i class="icon-material-outline-business"></i> Hexagon <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-										<li><i class="icon-material-outline-location-on"></i> San Francissco</li>
-										<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-										<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
+										<li><i class="icon-material-outline-business"></i> {{this.job.posted_by.name}} <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
+										<li><i class="icon-material-outline-location-on"></i> {{this.job.posted_by.location}}</li>
+										<li><i class="icon-material-outline-business-center"></i> {{#equal this.job.type 1}}Full Time{{/equal}}{{#equal this.job.type 2}}Freelance{{/equal}}{{#equal this.job.type 3}}Part Time{{/equal}}{{#equal this.job.type 4}}Internship{{/equal}}{{#equal this.job.type 5}}Temporary{{/equal}}</li>
+										<li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
 									</ul>
 								</div>
 							</div>
@@ -278,132 +271,7 @@
 							<span class="list-apply-button ripple-effect">Apply Now</span>
 						</div>
 					</a>	
-
-
-					<!-- Job Listing -->
-					<a href="/single-job-page.html" class="job-listing with-apply-button">
-
-						<!-- Job Listing Details -->
-						<div class="job-listing-details">
-
-							<!-- Logo -->
-							<div class="job-listing-company-logo">
-								<img src="/images/company-logo-05.png" alt="">
-							</div>
-
-							<!-- Details -->
-							<div class="job-listing-description">
-								<h3 class="job-listing-title">Competition Law Officer</h3>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="icon-material-outline-business"></i> Laxo</li>
-										<li><i class="icon-material-outline-location-on"></i> San Francissco</li>
-										<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-										<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">Apply Now</span>
-						</div>
-					</a>
-					<!-- Job Listing -->
-					<a href="/single-job-page.html" class="job-listing with-apply-button">
-
-						<!-- Job Listing Details -->
-						<div class="job-listing-details">
-
-							<!-- Logo -->
-							<div class="job-listing-company-logo">
-								<img src="/images/company-logo-02.png" alt="">
-							</div>
-
-							<!-- Details -->
-							<div class="job-listing-description">
-								<h3 class="job-listing-title">Barista and Cashier</h3>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="icon-material-outline-business"></i> Coffee</li>
-										<li><i class="icon-material-outline-location-on"></i> San Francissco</li>
-										<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-										<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">Apply Now</span>
-						</div>
-					</a>
-					
-
-					<!-- Job Listing -->
-					<a href="/single-job-page.html" class="job-listing with-apply-button">
-
-						<!-- Job Listing Details -->
-						<div class="job-listing-details">
-
-							<!-- Logo -->
-							<div class="job-listing-company-logo">
-								<img src="/images/company-logo-03.png" alt="">
-							</div>
-
-							<!-- Details -->
-							<div class="job-listing-description">
-								<h3 class="job-listing-title">Restaurant General Manager</h3>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="icon-material-outline-business"></i> King <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-										<li><i class="icon-material-outline-location-on"></i> San Francissco</li>
-										<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-										<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">Apply Now</span>
-						</div>
-					</a>
-
-					<!-- Job Listing -->
-					<a href="/single-job-page.html" class="job-listing with-apply-button">
-
-						<!-- Job Listing Details -->
-						<div class="job-listing-details">
-
-							<!-- Logo -->
-							<div class="job-listing-company-logo">
-								<img src="/images/company-logo-05.png" alt="">
-							</div>
-
-							<!-- Details -->
-							<div class="job-listing-description">
-								<h3 class="job-listing-title">International Marketing Coordinator</h3>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="icon-material-outline-business"></i> Skyist</li>
-										<li><i class="icon-material-outline-location-on"></i> San Francissco</li>
-										<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-										<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">Apply Now</span>
-						</div>
-					</a>
-
+					{{/each}}
 				</div>
 				<!-- Jobs Container / End -->
 
@@ -420,52 +288,23 @@
 		<div class="row">
 
 			<!-- Section Headline -->
+			
 			<div class="col-xl-12">
 				<div class="section-headline centered margin-top-0 margin-bottom-45">
 					<h3>Featured Cities</h3>
 				</div>
 			</div>
-
+			{{#each data.cities}}
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="/jobs-list-layout-1.html" class="photo-box" data-background-image="images/featured-city-01.jpg">
+				<a href="/jobs" class="photo-box" data-background-image="{{#equal this._id 'San Fransisco'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'New York'}}images/featured-city-02.jpg{{/equal}}{{#equal this._id 'Los Angeles'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'Miami'}}images/featured-city-04.jpg{{/equal}}">
 					<div class="photo-box-content">
-						<h3>San Francisco</h3>
-						<span>376 Jobs</span>
+						<h3>{{this._id}}</h3>
+						<span>{{this.count}} Jobs</span>
 					</div>
 				</a>
 			</div>
-			
-			<div class="col-xl-3 col-md-6">
-				<!-- Photo Box -->
-				<a href="/jobs-list-layout-full-page-map.html" class="photo-box" data-background-image="images/featured-city-02.jpg">
-					<div class="photo-box-content">
-						<h3>New York</h3>
-						<span>645 Jobs</span>
-					</div>
-				</a>
-			</div>
-			
-			<div class="col-xl-3 col-md-6">
-				<!-- Photo Box -->
-				<a href="/jobs-grid-layout-full-page.html" class="photo-box" data-background-image="images/featured-city-03.jpg">
-					<div class="photo-box-content">
-						<h3>Los Angeles</h3>
-						<span>832 Jobs</span>
-					</div>
-				</a>
-			</div>
-
-			<div class="col-xl-3 col-md-6">
-				<!-- Photo Box -->
-				<a href="/jobs-list-layout-2.html" class="photo-box" data-background-image="images/featured-city-04.jpg">
-					<div class="photo-box-content">
-						<h3>Miami</h3>
-						<span>513 Jobs</span>
-					</div>
-				</a>
-			</div>
-
+			{{/each}}
 		</div>
 	</div>
 </div>

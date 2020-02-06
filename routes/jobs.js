@@ -63,6 +63,10 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
         .send({ Message: 'Ok' });
 });
 
+router.get('/jobs', (req, res) => {
+    res.render('jobs-list-layout-1', { layout: false });
+});
+
 router.get('/jobs/:id', async (req, res) => {
     const job = await Job.findOne({ status: 1, _id: req.params.id });
     if (!job) {

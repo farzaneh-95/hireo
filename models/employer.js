@@ -30,10 +30,14 @@ const employerSchema = new mongoose.Schema({
         maxlength: 1000,
     },
 
-    rate: {
-        type: Number,
-        min: 0,
-        max: 5,
+    logo: {
+        type: String,
+    },
+
+    location: {
+        type: String,
+        maxlength: 100,
+        trim: true,
     },
 });
 
