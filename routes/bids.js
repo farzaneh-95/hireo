@@ -27,17 +27,19 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
     return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/task/bids', async (req, res) => {
+router.get('/tasks/my_bids', async (req, res) => {
+    const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id, is_active: true }).populate('task_id').exec();
     return res.render('dashboard-my-active-bids', {
         data: {
-            bids
+            bids,
+            user,
         },
         layout: false,
     });
 });
 
-router.post('/edit_bids', async (req, res) => {
+router.post('tasks/edit_bids', async (req, res) => {
     const delivery_time = {
         quantity: parseInt(req.body.delivery_time),
         type: req.body.type === 'Hours' ? 1 : 2,

@@ -8,15 +8,19 @@ const countries = require('../helpers/countries');
 const isLoggedIn = require('../helpers/isLoggedIn');
 
 router.get('/dashboard', isLoggedIn, (req, res) => {
+    const user = req.app.get('user');
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
     return res.render('dashboard', {
-        layout: false,
         data,
+        user,
+        layout: false,
+
     });
 });
 
-router.get('/dashboard-settings', async (req, res) => {
+router.get('/dashboard_settings', async (req, res) => {
+    const user = req.app.get('user');
     let data;
     if (req.session.role === 'freelancer') {
         data = await Freelancer.findById(req.session._id);
@@ -24,14 +28,15 @@ router.get('/dashboard-settings', async (req, res) => {
         data = await Employer.findById(req.session._id);
     }
     res.render('dashboard-settings', { 
-        data, 
+        data,
+        user,
         countries: countries, 
         role: req.session.role, 
         layout: false 
     });
 });
 
-router.post('/dashboard-settings', async (req, res) => {
+router.post('/dashboard_settings', async (req, res) => {
     if (req.session.role == 1) {
         const freelancer = await Freelancer.findOne({ _id: req.session._id });
         if (freelancer) {
@@ -61,6 +66,7 @@ router.post('/dashboard-settings', async (req, res) => {
 });
 
 router.get('/reviews', async (req, res) => {
+    const user = req.app.get('user');
     if (req.session.role === 'employer') {
         let tasks = await Task
             .where('status')
@@ -70,9 +76,11 @@ router.get('/reviews', async (req, res) => {
             .skip((parseInt(req.query.page) - 1) * 4 || 0)
             .limit(4);
         
-        console.log(tasks);
         return res.render('dashboard-reviews', { 
-            data: tasks,
+            data: {
+                tasks,
+                user,
+            },
             role: req.session.role,
             layout: false,
         });

@@ -5,13 +5,17 @@ const Task = require('../models/task');
 const Freelancer = require('../models/freelancer');
 
 router.get('/tasks/:id', async (req, res) => {
+    const user = req.app.get('user');
     let task = await Task.findById(req.params.id);
     if (!task) {
         return res.render('404', { layout: false });
     }
     task = await task.populate('employer_id').execPopulate();
     return res.render('single-task-page', {
-        data: task,
+        data: {
+            task,
+            user,
+        },
         link: '/employers/' + task.employer_id, 
         created_at: task.created_at.toDateString(),
         layout: false 
@@ -19,9 +23,13 @@ router.get('/tasks/:id', async (req, res) => {
 });
 
 router.get('/tasks', async (req, res) => {
+    const user = req.app.get('user');
     const categories = await Category.find({});
     res.render('dashboard-post-a-task', {
-        data: categories,
+        data: {
+            categories,
+            user,
+        },
         role: req.session.role,
         layout: false 
     });
@@ -50,7 +58,8 @@ router.post('/tasks', async (req, res) => {
     return res.send({ message: 'ok' });
 });
 
-router.get('/manage_tasks', async (req, res) => {
+router.get('/tasks/my_tasks', async (req, res) => {
+    const user = req.app.get('user');
     const tasks = await Task.find({ employer_id: req.session._id }, {
         name: 1, 
         min_budget: 1, 
@@ -65,7 +74,11 @@ router.get('/manage_tasks', async (req, res) => {
         task.created_at_alt = (new Date(task.created_at)).toDateString();
     });
     return res.render('dashboard-manage-tasks', {
-        data: { tasks }, layout: false 
+        data: { 
+            user,
+            tasks, 
+        }, 
+        layout: false,
     });
 });
 

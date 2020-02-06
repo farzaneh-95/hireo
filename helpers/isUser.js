@@ -1,18 +1,24 @@
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
 
+let user = {};
+
 const isUser = async (req, res, next) => {
     if (req.session.role === 'freelancer') {
         const freelancer = await Freelancer.findById(req.session._id);
-        req.app.set('user', freelancer);
+        user = freelancer;
+        user.role = req.session.role;
+        req.app.set('user', user);
         next();
     } else if (req.session.role === 'employer') {
-        console.log('isEmployer');
         const employer = await Employer.findById(req.session._id);
-        req.app.set('user', employer);
+        user = employer;
+        user.role = req.session.role;
+        req.app.set('user', user);
         next();
     } else {
-        res.redirect('/');
+        req.app.set('user', null);
+        next();
     }
 };
 

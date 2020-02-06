@@ -45,7 +45,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="#" class="current">Home</a></li>
+						<li><a href="/" class="current">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -90,9 +90,16 @@
 								<!-- User Name / Avatar -->
 								<div class="user-details">
 									<div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div>
+									{{#equal data.user.role 'freelancer'}}
 									<div class="user-name">
-										Tom Smith <span>Freelancer</span>
+										{{data.user.first_name}} {{data.user.last_name}} <span>Freelancer</span>
 									</div>
+									{{/equal}}
+									{{#equal data.user.role 'employer'}}
+									<div class="user-name">
+										{{data.user.name}}<span>Employer</span>
+									</div>
+									{{/equal}}
 								</div>
 								
 								<!-- User Status Switcher -->

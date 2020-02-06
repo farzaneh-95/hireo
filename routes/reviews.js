@@ -6,6 +6,7 @@ const Task = require('../models/task');
 const Review = require('../models/review');
 
 router.get('/reviews/my_reviews', async (req, res) => {
+    const user = req.app.get('user');
     if (req.session.role === 'employer') {
         const tasks = await Task
         .where('status')
@@ -46,7 +47,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
                 });
             }
         }   
-        res.render('dashboard-reviews', { data: { tasks: tempTasks, currPage: req.query.page || 1 }, layout: false }); 
+        res.render('dashboard-reviews', { data: { user, tasks: tempTasks, currPage: req.query.page || 1 }, layout: false }); 
     } else if (req.session.role === 'freelancer') {
         const tasks = await Task
         .where('status')
@@ -86,8 +87,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
                     role: req.session.role,
                 });
             }
-            console.log(tempTasks);
-            res.render('dashboard-reviews', { data: { tasks: tempTasks, currPage: req.query.page || 1 }, layout: false });
+            res.render('dashboard-reviews', { data: { user, tasks: tempTasks, currPage: req.query.page || 1 }, layout: false });
         }  
     } else {
         return res.redirect('/');
