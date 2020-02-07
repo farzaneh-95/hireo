@@ -6,6 +6,7 @@ const Freelancer = require('./models/freelancer');
 const Job = require('./models/job');
 const Employer = require('./models/employer');
 const Task = require('./models/task');
+const Bid = require('./models/bid');
 
 mongoose.connect('mongodb://127.0.0.1:27017/' + 'hireo_db', {
     useCreateIndex: true,
@@ -106,31 +107,49 @@ Category.insertMany(categories)
                     });
                 }
                 Task.insertMany(tasks)
-                    .then(tsks => {
+                    .then(tasks => {
                         console.log('Tasks Done');
+                        const freelancers = [];
+                        for (let i = 0; i < 50; i++) {
+                            freelancers.push({
+                                email: faker.internet.email(),
+                                password: '12345678',
+                                first_name: faker.name.firstName(),
+                                last_name: faker.name.lastName(),
+                                skills: ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML5'],
+                                minimal_hourly_rate: 100,
+                                nationality: 'USA',
+                                bio: faker.lorem.paragraph(),
+                                rate: faker.random.number(5),
+                                tag_line: faker.lorem.words(2),
+                                profile_picture: profilePictures[faker.random.number(2)],
+                            });
+                        }
+                        Freelancer.insertMany(freelancers)
+                            .then(docs => {
+                                console.log('Freelancers Done');
+                                const bids = [];
+                                tasks.forEach(task => {
+                                    for (let i = 0; i < 5; i++) {
+                                        bids.push({
+                                            freelancer_id: docs[Math.floor(Math.random() * docs.length)]._id,
+                                            task_id: task._id,
+                                            minimal_rate: faker.random.number({ min: task.min_budget, max: task.max_budget }),
+                                            delivery_time: {
+                                                quantity: faker.random.number({ min: 1, max: 60 }),
+                                                type: faker.random.number(1),
+                                            },
+                                            created_at: new Date(),
+                                        });
+                                    }
+                                });
+                                Bid.insertMany(bids)
+                                    .then(docs => {
+                                        console.log('Bids Done');
+                                    });
+                            });
                     });
             });
-    });
-
-const freelancers = [];
-for (let i = 0; i < 50; i++) {
-    freelancers.push({
-        email: faker.internet.email(),
-        password: '12345678',
-        first_name: faker.name.firstName(),
-        last_name: faker.name.lastName(),
-        skills: ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML5'],
-        minimal_hourly_rate: 100,
-        nationality: 'USA',
-        bio: faker.lorem.paragraph(),
-        rate: faker.random.number(5),
-        tag_line: faker.lorem.words(2),
-        profile_picture: profilePictures[faker.random.number(2)],
-    });
-}
-Freelancer.insertMany(freelancers)
-    .then(docs => {
-        console.log('Freelancers Done');
     });
 
 

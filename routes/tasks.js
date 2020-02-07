@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Category = require('../models/category');
 const Task = require('../models/task');
+const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 
 router.get('/tasks/:id', async (req, res) => {
@@ -10,11 +11,18 @@ router.get('/tasks/:id', async (req, res) => {
     if (!task) {
         return res.render('404', { layout: false });
     }
-    task = await task.populate('employer_id').execPopulate();
-    console.log(task);
+    task = await task
+        .populate('employer_id')
+        .execPopulate();
+    const bids = await Bid
+        .where('task_id')
+        .equals(task._id)
+        .populate('freelancer_id')
+        .exec();
     return res.render('single-task-page', {
         data: {
             task,
+            bids,
             user,
         },
         layout: false 

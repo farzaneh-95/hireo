@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/tasks-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:21 GMT -->
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/freelancers-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:40 GMT -->
 <head>
 
 <!-- Basic Page Needs
@@ -118,11 +118,6 @@
 
 				</div>
 				<!-- User Menu / End -->
-				{{else}}
-			
-				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-				</div>
 				{{/if}}
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -168,9 +163,9 @@
 
 				<!-- Category -->
 				<div class="sidebar-widget">
-					<h3>Category</h3>
+					<h3>Skills</h3>
 					<select id="categories" class="selectpicker default" data-selected-text-format="count" data-size="7" title="All Categories" >
-						{{#each data.categories}}
+						{{#each data.freelancers.skills}}
 						<option value="{{this._id}}">{{this.title}}</option>
 						{{/each}}
 					</select>
@@ -204,61 +199,65 @@
 			</div>
 		</div>
 		<div class="col-xl-9 col-lg-8 content-left-offset">
-
-			<!-- Tasks Container -->
-			<div class="tasks-list-container compact-list margin-top-35">
+			
+			<!-- Freelancers List Container -->
+			<div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
 				
-				<!-- Task -->
-				{{#each data.tasks}}
-				<a href="/tasks/{{this._id}}" class="task-listing">
+				{{#each data.freelancers}}
+				<!--Freelancer -->
+				<div class="freelancer">
 
-					<!-- Job Listing Details -->
-					<div class="task-listing-details">
+					<!-- Overview -->
+					<div class="freelancer-overview">
+						<div class="freelancer-overview-inner">
+							
+							<!-- Bookmark Icon -->
+							<span class="bookmark-icon"></span>
+							
+							<!-- Avatar -->
+							<div class="freelancer-avatar">
+								<a href="/freelancers/{{this._id}}"><img src="{{this.profile_picture}}" alt=""></a>
+							</div>
 
-						<!-- Details -->
-						<div class="task-listing-description">
-							<h3 class="task-listing-title">{{this.name}}</h3>
-							<ul class="task-icons">
-								<li><i class="icon-material-outline-location-on"></i> {{this.location}}</li>
-								<li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
+							<!-- Name -->
+							<div class="freelancer-name">
+								<h4><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
+								<span>{{this.tag_line}}</span>
+								<!-- Rating -->
+								<div class="freelancer-rating">
+									<div class="star-rating" data-rating="{{this.rate}}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Details -->
+					<div class="freelancer-details">
+						<div class="freelancer-details-list">
+							<ul>
+								<li>Location <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}
+								</strong></li>
+								<li>Rate <strong>${{this.minimal_hourly_rate}} / hr</strong></li>
 							</ul>
-							<p class="task-listing-text">{{this.description}}</p>
-							<div class="task-tags">
-								{{#each this.skills}}
-								<span>{{this}}</span>
-								{{/each}}
-							</div>
 						</div>
-
+						<a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
 					</div>
-
-					<div class="task-listing-bid">
-						<div class="task-listing-bid-inner">
-							<div class="task-offers">
-								<strong>${{this.min_budget}} - ${{this.max_budget}}</strong>
-								<span>{{this.budget_type}} Price</span>
-							</div>
-							<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
-						</div>
-					</div>
-				</a>
+				</div>
 				{{/each}}
-				
+				<!-- Freelancer / End -->
 			</div>
-			<!-- Tasks Container / End -->
-
 
 			<!-- Pagination -->
 			<div class="clearfix"></div>
 			<div class="row">
 				<div class="col-md-12">
 					<!-- Pagination -->
-					<div class="pagination-container margin-top-60 margin-bottom-60">
+					<div class="pagination-container margin-top-40 margin-bottom-60">
 						<nav class="pagination">
-							<ul class="page-no">	
-								<li><a href="/tasks?page=1" class="ripple-effect">1</a></li>
-								<li><a href="/tasks?page=2" class="ripple-effect">2</a></li>
-								<li><a href="/tasks?page=3" class="ripple-effect">3</a></li>
+							<ul class="page-no">
+								<li><a href="/freelancers?page=1" class="ripple-effect">1</a></li>
+								<li><a href="/freelancers?page=2" class="ripple-effect">2</a></li>
+								<li><a href="/freelancers?page=3" class="ripple-effect">3</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -288,7 +287,7 @@
 						<div class="footer-rows-left">
 							<div class="footer-row">
 								<div class="footer-row-inner footer-logo">
-									<img src="/images/logo2.png" alt="">
+									<img src="images/logo2.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -489,12 +488,6 @@ $('#snackbar-user-status label').click(function() {
 			});
 		});
 
-		$('.task-listing-text').each((index, element) => {
-			if ($(element).text().length > 200) {
-				$(element).text($(element).text().slice(0, 200) + '...');
-			}
-		});
-
 		$('.page-no li a').each((index, element) => {
 			if ($(element).text() == location.href.split('page=')[1]) {
 				$(element).addClass('current-page');
@@ -502,59 +495,11 @@ $('#snackbar-user-status label').click(function() {
 				$(element).addClass('current-page');
 			}
 		});
-
-		$('#submit-filter').on('click', () => {
-			const location = $('#autocomplete-input').val();
-			const category = $('#categories option:selected').attr('value');
-			const title = $('#search-title').val();
-			let url = '/tasks?req=1';
-			location ? url = url + '&location=' + location : '';
-			category ? url = url + '&category=' + category : '';
-			title ? url = url + '&title=' + title : '';
-			window.location.href = url;
-		});
-
-		$('#clear').on('click', () => {
-			window.location.href = '/tasks';
-		});
-
-		if (location.href.split('location=').length > 1) {
-			let lc;
-			if (location.href.split('location=')[1].split('&').length > 1) {
-				lc = location.href.split('location=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('location=')[1];
-			}
-			$('#autocomplete-input').val(lc);
-		}
-
-		if (location.href.split('title=').length > 1) {
-			let lc;
-			if (location.href.split('title=')[1].split('&').length > 1) {
-				lc = location.href.split('title=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('title=')[1];
-			}
-			$('#search-title').val(lc);
-		}
-
-		if (location.href.split('category=').length > 1) {
-			let lc;
-			if (location.href.split('category=')[1].split('&').length > 1) {
-				lc = location.href.split('category=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('category=')[1];
-			}
-			$('#categories option').each((index, element) => {
-				if ($(element).attr('value') == lc) {
-					$(element).attr('selected', 'selected');
-				}
-			});
-		}
 	});
 	
 </script>
 
 </body>
 
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/freelancers-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:40 GMT -->
 </html>

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const types = {
-    Hours: 1,
-    Days: 2,
-};
+const types = ['Days', 'Hours'];
 
 const deliveryTimeSchema = new mongoose.Schema({
     quantity: Number,
-    type: Number,
+    type: {
+        type: Number,
+        get: type => types[type],
+    }
 });
 
 const bidSchema = new mongoose.Schema({
@@ -24,8 +24,6 @@ const bidSchema = new mongoose.Schema({
     minimal_rate: Number,
 
     delivery_time: deliveryTimeSchema,
-
-    is_active: Boolean,
     
     created_at: Date,
 });
