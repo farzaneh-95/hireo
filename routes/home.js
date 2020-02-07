@@ -16,33 +16,30 @@ router.get('/', async (req, res) => {
             count: await Job
                 .where('category')
                 .equals(cat._id)
-                .where('status')
-                .equals(1)
                 .countDocuments(),
         });
     });
     const freelancersCount = await Freelancer.find({}).countDocuments();
-    const tasksCount = await Task.find({ status: 1 }).countDocuments();
-    const jobsCount = await Job.find({ status: 1 }).countDocuments();
+    const tasksCount = await Task.find({}).countDocuments();
+    const jobsCount = await Job.find({}).countDocuments();
     const jobs = await Job
         .find({})
         .sort({ created_at: -1 })
         .limit(5)
         .populate('posted_by')
-        .exec();
-    const tempJobs = [];
-    jobs.map(job => {
-        tempJobs.push({
-            job,
-            created_at: job.created_at.toDateString(),
-        });
-    });
+        .exec();    
     const cities = await Job
         .aggregate()
         .group({ _id: '$location', count: { $sum: 1 } })
         .sort({ 'count': -1 })
         .limit(4)
         .exec();
+    
+    const freelancers = await Freelancer
+        .find({})
+        .sort({ rate: -1 })
+        .limit(6);
+
     res.render('home', {
         data: {
             categories: data,
@@ -51,8 +48,9 @@ router.get('/', async (req, res) => {
                 tasksCount,
                 jobsCount,
             },
+            freelancers,
             user,
-            jobs: tempJobs,
+            jobs,
             cities,
         },
         layout: false

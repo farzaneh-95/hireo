@@ -51,6 +51,8 @@ const freelancerSchema = new mongoose.Schema({
         min: 0,
         max: 5,
     },
+
+    profile_picture: String,
 });
 
 const Freelancer = mongoose.model('Freelancer', freelancerSchema);

@@ -146,30 +146,30 @@
 
 <!-- Titlebar
 ================================================== -->
-<div class="single-page-header" data-background-image="images/single-task.jpg">
+<div class="single-page-header" data-background-image="/images/single-task.jpg">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="single-page-header-inner">
 					<div class="left-side">
+						<div class="header-image"><a href="/companies/{{data.task.employer_id._id}}"><img src="{{data.task.employer_id.logo}}"></a></div>
 						<div class="header-details">
-							<h3>{{data..task.name}}</h3>
+							<h3>{{data.task.name}}</h3>
 							<h5>About the Employer</h5>
 							<ul>
-								<li><a href="/{{link}}"><i class="icon-material-outline-business"></i> Acue</a></li>
-								<li><div class="star-rating" data-rating="5.0"></div></li>
-								<li>{{data.task.employer_id.nationality}}</li>
+								<li>
+									<a href="/companies/{{data.task.employer_id._id}}">
+										<i class="icon-material-outline-business"></i>{{data.task.employer_id.name}}
+									</a>
+								</li>
+								<li><div class="star-rating" data-rating="{{data.task.employer_id.rate}}"></div></li>
+								<li>{{data.task.employer_id.location}}</li>
 							</ul>
 						</div>
 					</div>
 					<div class="right-side">
 						<div class="salary-box">
-							{{#equal data.task.budget_type 1}}
-							<div class="salary-type">Fixed Price</div>
-							{{/equal}}
-							{{#equal data.task.budget_type 2}}
-							<div class="salary-type">Hourly Rate</div>
-							{{/equal}}
+							<div class="salary-type">{{data.task.budget_type}} Price</div>
 							<div class="salary-amount">${{data.task.min_budget}} - ${{data.task.max_budget}}</div>
 						</div>
 					</div>
@@ -198,7 +198,7 @@
 			<div class="single-page-section">
 				<h3>Skills Required</h3>
 				<div class="task-tags">
-					{{#each data.tasks.skills}}
+					{{#each data.task.skills}}
 					<span>{{this}}</span>
 					{{/each}}
 				</div>
@@ -332,7 +332,7 @@
 		<div class="col-xl-4 col-lg-4">
 			<div class="sidebar-container">
 
-				<div class="countdown green margin-bottom-35">Created : {{created_at}}</div>
+				<div class="countdown green margin-bottom-35">Created : {{data.task.created_at}}</div>
 
 				<div class="sidebar-widget">
 					<div class="bidding-widget">
@@ -371,21 +371,13 @@
 							<button id="snackbar-place-bid" class="button ripple-effect move-on-hover full-width margin-top-30"><span>Place a Bid</span></button>
 
 						</div>
-						<div class="bidding-signup">Don't have an account? <a href="#sign-in-dialog" class="register-tab sign-in popup-with-zoom-anim">Sign Up</a></div>
+						<div class="bidding-signup">Don't have an account? <a href="/" class="register-tab sign-in popup-with-zoom-anim">Sign Up</a></div>
 					</div>
 				</div>
 
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
-					<h3>Bookmark or Share</h3>
-
-					<!-- Bookmark Button -->
-					<button class="bookmark-button margin-bottom-25">
-						<span class="bookmark-icon"></span>
-						<span class="bookmark-text">Bookmark</span>
-						<span class="bookmarked-text">Bookmarked</span>
-					</button>
-
+					
 					<!-- Copy URL -->
 					<div class="copy-url">
 						<input id="copy-url" type="text" value="" class="with-border">
@@ -682,14 +674,14 @@
 
 		</div>
 	</div>
-</div>
+{{!-- </div> --}}
 <!-- Sign In Popup / End -->
 
 
 <!-- Scripts
 ================================================== -->
 <script src="/js/jquery-3.4.1.min.js"></script>
-<script src="/js/jquery-migrate-3.1.0.min.html"></script>
+<script src="/js/jquery-migrate-3.1.0.min.js"></script>
 <script src="/js/mmenu.min.js"></script>
 <script src="/js/tippy.all.min.js"></script>
 <script src="/js/simplebar.min.js"></script>
@@ -716,10 +708,6 @@ $('#snackbar-user-status label').click(function() {
 		backgroundColor: '#383838'
 	}); 
 }); 
-
-// Snackbar for "place a bid" button
-
-
 
 // Snackbar for copy to clipboard button
 $('.copy-url-button').click(function() { 

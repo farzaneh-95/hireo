@@ -11,24 +11,43 @@ router.get('/tasks/:id', async (req, res) => {
         return res.render('404', { layout: false });
     }
     task = await task.populate('employer_id').execPopulate();
+    console.log(task);
     return res.render('single-task-page', {
         data: {
             task,
             user,
         },
-        link: '/employers/' + task.employer_id, 
-        created_at: task.created_at.toDateString(),
         layout: false 
     });
 });
 
 router.get('/tasks', async (req, res) => {
     const user = req.app.get('user');
-    const categories = await Category.find({});
-    res.render('dashboard-post-a-task', {
+    const categories = await Category.find();
+    const query = Task
+        .where('status')
+        .equals(0);
+    if (req.query.location) {
+        query
+            .where('location')
+            .equals(req.query.location);
+    }
+    if (req.query.category) {
+        query
+            .where('category_id')
+            .equals(req.query.category);
+    }
+    if (req.query.title) {
+        query
+            .where('name')
+            .equals(new RegExp(req.query.title, 'i'));
+    }
+    const tasks = await Task.paginate(query, { limit: 5, page: req.query.page });
+    res.render('tasks-list-layout-1', {
         data: {
-            categories,
             user,
+            tasks: tasks.docs,
+            categories,
         },
         role: req.session.role,
         layout: false 

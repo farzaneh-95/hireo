@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
-const budgetType = {
-    fixed: 1,
-    hourly: 2,
-};
+const budgetType = ['Fixed', 'Hourly'];
 
 const status = {
     Expiring: 1,
@@ -27,6 +25,7 @@ const taskSchema = new mongoose.Schema({
     employer_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employer',
+        required: true,
     },
 
     category_id: {
@@ -51,6 +50,7 @@ const taskSchema = new mongoose.Schema({
 
     budget_type: {
         type: Number,
+        get: type => budgetType[type],
     },
 
     skills: [String],
@@ -66,10 +66,16 @@ const taskSchema = new mongoose.Schema({
         ref: 'Bid'
     }],
 
-    created_at: Date,
+    created_at: {
+        type: Date,
+        get: created_at => created_at.toDateString(),
+        required: true,
+    },
 
     status: Number,
 });
+
+taskSchema.plugin(mongoosePaginate);
 
 const Task = mongoose.model('Task', taskSchema);
 

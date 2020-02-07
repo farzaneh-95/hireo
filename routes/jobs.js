@@ -68,8 +68,8 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
         .send({ Message: 'Ok' });
 });
 
-<<<<<<< HEAD
 router.get('/jobs', async (req, res) => {
+    const user = req.app.get('user');
     const query = Job
         .where('status')
         .equals(1);
@@ -94,14 +94,10 @@ router.get('/jobs', async (req, res) => {
         data: {
             jobs: jobs.docs,
             categories,
+            user,
         },
         layout: false
     });
-=======
-router.get('/jobs', (req, res) => {
-    const user = req.app.get('user');
-    res.render('jobs-list-layout-1', { data: { user }, layout: false });
->>>>>>> 6964b8ec33c9a684f3735432e95459c85162c1fc
 });
 
 router.get('/jobs/:id', async (req, res) => {

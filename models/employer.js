@@ -35,6 +35,12 @@ const employerSchema = new mongoose.Schema({
         maxlength: 100,
         trim: true,
     },
+
+    rate: {
+        type: Number,
+        min: 0,
+        max: 5,
+    },
 });
 
 const Employer = mongoose.model('Employer', employerSchema);
