@@ -13,6 +13,7 @@ const bidRouter = require('./routes/bids');
 const jobRouter = require('./routes/jobs');
 const reviewRouter = require('./routes/reviews');
 const freelancerRouter = require('./routes/freelancers');
+const companyRouter = require('./routes/companies');
 
 const isUser = require('./helpers/isUser');
 
@@ -42,6 +43,7 @@ app.use('/', isUser, jobRouter);
 app.use('/', isUser, bidRouter);
 app.use('/', isUser, reviewRouter);
 app.use('/', isUser, freelancerRouter);
+app.use('/', isUser, companyRouter);
 
 app.use(isUser, (req, res) => {
     const user = req.app.get('user');

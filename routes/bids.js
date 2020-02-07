@@ -4,6 +4,8 @@ const Task = require('../models/task');
 const Bid = require('../models/bid');
 const isFreelancer = require('../helpers/isFreelancer');
 
+
+
 router.post('/tasks/bids', isFreelancer, async (req, res) => {
     const exists = await Bid.exists({ task_id: req.body.task_id, freelancer_id: req.session._id });
     if (exists) {
@@ -27,17 +29,7 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
     return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/tasks/my_bids', async (req, res) => {
-    const user = req.app.get('user');
-    const bids = await Bid.find({ freelancer_id: req.session._id, is_active: true }).populate('task_id').exec();
-    return res.render('dashboard-my-active-bids', {
-        data: {
-            bids,
-            user,
-        },
-        layout: false,
-    });
-});
+
 
 router.post('tasks/edit_bids', async (req, res) => {
     const delivery_time = {

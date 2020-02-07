@@ -6,17 +6,25 @@ const Task = require('../models/task');
 const Review = require('../models/review');
 const countries = require('../helpers/countries');
 const isLoggedIn = require('../helpers/isLoggedIn');
+const Job = require('../models/job');
 
-router.get('/dashboard', isLoggedIn, (req, res) => {
+router.get('/dashboard', isLoggedIn, async (req, res) => {
     const user = req.app.get('user');
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
-    return res.render('dashboard', {
-        data,
-        user,
-        layout: false,
-
-    });
+    if (req.session.role === 'freelancer') {
+        const wonTasks = await Task.find({ freelancer_id: req.session._id }).countDocuments();
+        const appliedJobs = await Job.find({ 'applies.freelancer_id': req.session._id }).countDocuments();
+        const reviewCount = await Review.find({ reviewer: req.session._Id }).countDocuments();
+        return res.render('dashboard', {
+            data,
+            user,
+            wonTasks,
+            appliedJobs,
+            reviewCount,
+            layout: false,
+        });
+    }
 });
 
 router.get('/dashboard_settings', async (req, res) => {

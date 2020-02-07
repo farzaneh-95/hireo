@@ -7,6 +7,7 @@ const Job = require('./models/job');
 const Employer = require('./models/employer');
 const Task = require('./models/task');
 const Bid = require('./models/bid');
+const Review = require('./models/review');
 
 mongoose.connect('mongodb://127.0.0.1:27017/' + 'hireo_db', {
     useCreateIndex: true,
@@ -123,6 +124,10 @@ Category.insertMany(categories)
                                 rate: faker.random.number(5),
                                 tag_line: faker.lorem.words(2),
                                 profile_picture: profilePictures[faker.random.number(2)],
+                                success: faker.random.number({ min: 20, max: 100 }),
+                                rec: faker.random.number({ min: 50, max: 100 }),
+                                onTime: faker.random.number({ min: 50, max: 100 }),
+                                onBudget: faker.random.number({ min: 50, max: 100 }),
                             });
                         }
                         Freelancer.insertMany(freelancers)
@@ -143,6 +148,23 @@ Category.insertMany(categories)
                                         });
                                     }
                                 });
+                                const reviews = [];
+                                docs.forEach(fl => {
+                                    for (let i = 0; i < 10; i++) {
+                                        reviews.push({
+                                            reviewer: emps[Math.floor(Math.random() * emps.length)]._id,
+                                            reviewee: fl._id,
+                                            score: faker.random.number({ min: 3, max: 5 }),
+                                            task: tasks[Math.floor(Math.random() * tasks.length)]._id,
+                                            comment: faker.lorem.sentences(2),
+                                            created_at: new Date(),
+                                        });
+                                    }
+                                });
+                                Review.insertMany(reviews)
+                                    .then(reviews => {
+                                        console.log('Reviews Done');
+                                    });
                                 Bid.insertMany(bids)
                                     .then(docs => {
                                         console.log('Bids Done');

@@ -5,6 +5,42 @@ const Task = require('../models/task');
 const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 
+router.get('/tasks/my_bids', async (req, res) => {
+    const user = req.app.get('user');
+    const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();
+    return res.render('dashboard-my-active-bids', {
+        data: {
+            bids,
+            user,
+        },
+        layout: false,
+    });
+});
+
+router.get('/tasks/my_tasks', async (req, res) => {
+    const user = req.app.get('user');
+    const tasks = await Task.find({ employer_id: req.session._id }, {
+        name: 1, 
+        min_budget: 1, 
+        max_budget: 1, 
+        budget_type: 1,
+        bids: 1,
+        created_at: 1, 
+        status: 1,
+        _id: 0 
+    });
+    tasks.forEach(task => {
+        task.created_at_alt = (new Date(task.created_at)).toDateString();
+    });
+    return res.render('dashboard-manage-tasks', {
+        data: { 
+            user,
+            tasks, 
+        }, 
+        layout: false,
+    });
+});
+
 router.get('/tasks/:id', async (req, res) => {
     const user = req.app.get('user');
     let task = await Task.findById(req.params.id);
@@ -85,28 +121,6 @@ router.post('/tasks', async (req, res) => {
     return res.send({ message: 'ok' });
 });
 
-router.get('/tasks/my_tasks', async (req, res) => {
-    const user = req.app.get('user');
-    const tasks = await Task.find({ employer_id: req.session._id }, {
-        name: 1, 
-        min_budget: 1, 
-        max_budget: 1, 
-        budget_type: 1,
-        bids: 1,
-        created_at: 1, 
-        status: 1,
-        _id: 0 
-    });
-    tasks.forEach(task => {
-        task.created_at_alt = (new Date(task.created_at)).toDateString();
-    });
-    return res.render('dashboard-manage-tasks', {
-        data: { 
-            user,
-            tasks, 
-        }, 
-        layout: false,
-    });
-});
+
 
 module.exports = router;

@@ -169,7 +169,6 @@
 
 						<ul data-submenu-title="Start">
 							<li class="active"><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/bookmarks"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
 							<li><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
 						</ul>
 						
@@ -206,7 +205,7 @@
 
 						<ul data-submenu-title="Account">
 							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 						
 					</div>
@@ -243,21 +242,21 @@
 				<div class="fun-fact" data-fun-fact-color="#36bd78">
 					<div class="fun-fact-text">
 						<span>Task Bids Won</span>
-						<h4>22</h4>
+						<h4>{{wonTasks}}</h4>
 					</div>
 					<div class="fun-fact-icon"><i class="icon-material-outline-gavel"></i></div>
 				</div>
 				<div class="fun-fact" data-fun-fact-color="#b81b7f">
 					<div class="fun-fact-text">
 						<span>Jobs Applied</span>
-						<h4>4</h4>
+						<h4>{{appliedJobs}}</h4>
 					</div>
 					<div class="fun-fact-icon"><i class="icon-material-outline-business-center"></i></div>
 				</div>
 				<div class="fun-fact" data-fun-fact-color="#efa80f">
 					<div class="fun-fact-text">
 						<span>Reviews</span>
-						<h4>28</h4>
+						<h4>{{reviewCount}}</h4>
 					</div>
 					<div class="fun-fact-icon"><i class="icon-material-outline-rate-review"></i></div>
 				</div>

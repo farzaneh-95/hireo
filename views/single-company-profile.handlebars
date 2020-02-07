@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/freelancers-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:40 GMT -->
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/single-company-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:25 GMT -->
 <head>
 
 <!-- Basic Page Needs
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/css/colors/blue.css">
 
 </head>
-<body class="gray">
+<body>
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -41,7 +41,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -139,126 +139,164 @@
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
-<!-- Spacer -->
-<div class="margin-top-90"></div>
-<!-- Spacer / End-->
+
+
+<!-- Titlebar
+================================================== -->
+<div class="single-page-header" data-background-image="images/single-company.jpg">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="single-page-header-inner">
+					<div class="left-side">
+						<div class="header-image"><img src="{{data.company.logo}}" alt=""></div>
+						<div class="header-details">
+							<h3>{{data.company.name}}</h3>
+							<ul>
+								<li><div class="star-rating" data-rating="{{data.company.rate}}"></div></li>
+								<li>{{data.company.location}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <!-- Page Content
 ================================================== -->
 <div class="container">
 	<div class="row">
-		<div class="col-xl-3 col-lg-4">
-			<div class="sidebar-container">
-				
-				<!-- Location -->
-				<div class="sidebar-widget">
-					<h3>Location</h3>
-					<div class="input-with-icon">
-						<div id="autocomplete-container">
-							<input id="autocomplete-input" type="text" placeholder="Location">
-						</div>
-						<i class="icon-material-outline-location-on"></i>
-					</div>
+		
+		<!-- Content -->
+		<div class="col-xl-8 col-lg-8 content-right-offset">
+
+			<div class="single-page-section">
+				<h3 class="margin-bottom-25">About Company</h3>
+				<p>{{data.company.bio}}</p>
+			</div>
+			
+			<!-- Boxed List -->
+			<div class="boxed-list margin-bottom-60">
+				<div class="boxed-list-headline">
+					<h3><i class="icon-material-outline-business-center"></i> Open Positions</h3>
 				</div>
 
-				<!-- Keywords -->
-				<div class="sidebar-widget">
-					<h3>Title</h3>
-					<div class="keywords-container">
-						<div class="keyword-input-container">
-							<input id="tagline" type="text" class="keyword-input" placeholder="e.g. Web Developer"/>
-						</div>
-						<div class="keywords-list"><!-- keywords go here --></div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-
-				<div class="sidebar-widget">
-
-					<button class="button ripple-effect full-width" id="submit">Submit</button>
-
-				</div>
-
-				<div class="sidebar-widget">
+				<div class="listings-container compact-list-layout">
 					
-					<button class="button ripple-effect full-width" style="background-color: #303030;" id="clear">Clear Filters</button>
-					<div class="clearfix"></div>
+					<!-- Job Listing -->
+					{{#each data.jobs}}
+					<a href="/jobs/{{this._id}}" class="job-listing">
 
+						<!-- Job Listing Details -->
+						<div class="job-listing-details">
+
+							<!-- Details -->
+							<div class="job-listing-description">
+								<h3 class="job-listing-title">{{this.title}}</h3>
+
+								<!-- Job Listing Footer -->
+								<div class="job-listing-footer">
+									<ul>
+										<li><i class="icon-material-outline-location-on"></i>{{this.location}}</li>
+										<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
+										<li><i class="icon-material-outline-access-time"></i>{{this.created_at}}</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</a>
+					{{/each}}	
 				</div>
 
 			</div>
-		</div>
-		<div class="col-xl-9 col-lg-8 content-left-offset">
-			
-			<!-- Freelancers List Container -->
-			<div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
-				
-				{{#each data.freelancers}}
-				<!--Freelancer -->
-				<div class="freelancer">
+			<!-- Boxed List / End -->
 
-					<!-- Overview -->
-					<div class="freelancer-overview">
-						<div class="freelancer-overview-inner">
-							
-							<!-- Bookmark Icon -->
-							<span class="bookmark-icon"></span>
-							
-							<!-- Avatar -->
-							<div class="freelancer-avatar">
-								<a href="/freelancers/{{this._id}}"><img src="{{this.profile_picture}}" alt=""></a>
-							</div>
-
-							<!-- Name -->
-							<div class="freelancer-name">
-								<h4><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
-								<span>{{this.tag_line}}</span>
-								<!-- Rating -->
-								<div class="freelancer-rating">
-									<div class="star-rating" data-rating="{{this.rate}}"></div>
+			<!-- Boxed List -->
+			<div class="boxed-list margin-bottom-60">
+				<div class="boxed-list-headline">
+					<h3><i class="icon-material-outline-thumb-up"></i> Reviews</h3>
+				</div>
+				<ul class="boxed-list-ul">
+					{{#each data.reviews}}
+					<li>
+						<div class="boxed-list-item">
+							<!-- Content -->
+							<div class="item-content">
+								<h4>{{this.task.name}}</h4>
+								<div class="item-details margin-top-10">
+									<div class="star-rating" data-rating="{{this.score}}"></div>
+									<div class="detail-item"><i class="icon-material-outline-date-range"></i>{{this.created_at}}</div>
+								</div>
+								<div class="item-description">
+									<p>{{this.comment}}</p>
 								</div>
 							</div>
 						</div>
-					</div>
-					
-					<!-- Details -->
-					<div class="freelancer-details">
-						<div class="freelancer-details-list">
-							<ul>
-								<li>Location <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}
-								</strong></li>
-								<li>Rate <strong>${{this.minimal_hourly_rate}} / hr</strong></li>
-							</ul>
-						</div>
-						<a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
-					</div>
-				</div>
-				{{/each}}
-				<!-- Freelancer / End -->
+					</li>
+					{{/each}}
+				</ul>
 			</div>
-
-			<!-- Pagination -->
-			<div class="clearfix"></div>
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Pagination -->
-					<div class="pagination-container margin-top-40 margin-bottom-60">
-						<nav class="pagination">
-							<ul class="page-no">
-								<li><a href="/freelancers?page=1" class="ripple-effect">1</a></li>
-								<li><a href="/freelancers?page=2" class="ripple-effect">2</a></li>
-								<li><a href="/freelancers?page=3" class="ripple-effect">3</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-			<!-- Pagination / End -->
+			<!-- Boxed List / End -->
 
 		</div>
+		
+
+		<!-- Sidebar -->
+		<div class="col-xl-4 col-lg-4">
+			<div class="sidebar-container">					
+				<!-- Widget -->
+				<div class="sidebar-widget">
+					<h3>Social Profiles</h3>
+					<div class="freelancer-socials margin-top-25">
+						<ul>
+							<li><a href="#" title="Dribbble" data-tippy-placement="top"><i class="icon-brand-dribbble"></i></a></li>
+							<li><a href="#" title="Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
+							<li><a href="#" title="Behance" data-tippy-placement="top"><i class="icon-brand-behance"></i></a></li>
+							<li><a href="#" title="GitHub" data-tippy-placement="top"><i class="icon-brand-github"></i></a></li>
+						
+						</ul>
+					</div>
+				</div>
+
+				<!-- Sidebar Widget -->
+				<div class="sidebar-widget">
+					<h3>Share</h3>
+
+					<!-- Copy URL -->
+					<div class="copy-url">
+						<input id="copy-url" type="text" value="" class="with-border">
+						<button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i class="icon-material-outline-file-copy"></i></button>
+					</div>
+
+					<!-- Share Buttons -->
+					<div class="share-buttons margin-top-25">
+						<div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
+						<div class="share-buttons-content">
+							<span>Interesting? <strong>Share It!</strong></span>
+							<ul class="share-buttons-icons">
+								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
+								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
+								<li><a href="#" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i class="icon-brand-google-plus-g"></i></a></li>
+								<li><a href="#" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i class="icon-brand-linkedin-in"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 </div>
 
+
+<!-- Spacer -->
+<div class="margin-top-15"></div>
+<!-- Spacer / End-->
 
 <!-- Footer
 ================================================== -->
@@ -277,7 +315,7 @@
 						<div class="footer-rows-left">
 							<div class="footer-row">
 								<div class="footer-row-inner footer-logo">
-									<img src="images/logo2.png" alt="">
+									<img src="/images/logo2.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -421,6 +459,83 @@
 </div>
 <!-- Wrapper / End -->
 
+
+<!-- Leave a Review Popup
+================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+	<!--Tabs -->
+	<div class="sign-in-form">
+
+		<ul class="popup-tabs-nav">
+			<li><a href="#tab">Leave a Review</a></li>
+		</ul>
+
+		<div class="popup-tabs-container">
+
+			<!-- Tab -->
+			<div class="popup-tab-content" id="tab">
+				
+				<!-- Welcome Text -->
+				<div class="welcome-text">
+					<h3>What is it like to work at Acodia?</h3>
+					
+				<!-- Form -->
+				<form method="post" id="leave-company-review-form">
+
+					<!-- Leave Rating -->
+					<div class="clearfix"></div>
+					<div class="leave-rating-container">
+						<div class="leave-rating margin-bottom-5">
+							<input type="radio" name="rating" id="rating-1" value="1" required>
+							<label for="rating-1" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-2" value="2" required>
+							<label for="rating-2" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-3" value="3" required>
+							<label for="rating-3" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-4" value="4" required>
+							<label for="rating-4" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-5" value="5" required>
+							<label for="rating-5" class="icon-material-outline-star"></label>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<!-- Leave Rating / End-->
+
+				</div>
+
+
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="input-with-icon-left" title="Leave blank to add review anonymously" data-tippy-placement="bottom">
+								<i class="icon-material-outline-account-circle"></i>
+								<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name"/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="input-with-icon-left">
+								<i class="icon-material-outline-rate-review"></i>
+								<input type="text" class="input-text with-border" name="reviewtitle" id="reviewtitle" placeholder="Review Title"  required/>
+							</div>
+						</div>
+					</div>
+
+					<textarea class="with-border" placeholder="Review" name="message" id="message" cols="7"  required></textarea>
+
+				</form>
+				
+				<!-- Button -->
+				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="leave-company-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Leave a Review Popup / End -->
+
+
 <!-- Scripts
 ================================================== -->
 <script src="/js/jquery-3.4.1.min.js"></script>
@@ -451,77 +566,31 @@ $('#snackbar-user-status label').click(function() {
 		backgroundColor: '#383838'
 	}); 
 }); 
+
+// Snackbar for "place a bid" button
+$('#snackbar-place-bid').click(function() { 
+	Snackbar.show({
+		text: 'Your bid has been placed!',
+	}); 
+}); 
+
+
+// Snackbar for copy to clipboard button
+$('.copy-url-button').click(function() { 
+	Snackbar.show({
+		text: 'Copied to clipboard!',
+	}); 
+}); 
 </script>
 
-<!-- Google Autocomplete -->
-<script>
-	function initAutocomplete() {
-		 var options = {
-		  types: ['(cities)'],
-		  // componentRestrictions: {country: "us"}
-		 };
-
-		 var input = document.getElementById('autocomplete-input');
-		 var autocomplete = new google.maps.places.Autocomplete(input, options);
-	}
-</script>
-
-<script>
-	$(document).ready(() => {
-		$('#logOut').on('click', () => {
-			$.ajax({
-				url: '/logout',
-				method: 'GET',
-				success: (data, status, xhr) => {
-					window.location.href = '/';
-				}
-			});
-		});
-
-		$('.page-no li a').each((index, element) => {
-			if ($(element).text() == location.href.split('page=')[1]) {
-				$(element).addClass('current-page');
-			} else if (index == 0 && location.href.split('page=').length <= 1) {
-				$(element).addClass('current-page');
-			}
-		});
-
-		$('#submit').on('click', () => {
-		const location = $('#autocomplete-input').val();
-		const title = $('#tagline').val();
-		let url = '/freelancers?req=1';
-		location ? url = url + '&location=' + location : '';
-		title ? url = url + '&title=' + title : '';
-		window.location.href = url;
-		});
-
-		$('#clear').on('click', () => {
-			window.location.href = '/freelancers';
-		});
-
-		if (location.href.split('location=').length > 1) {
-			let lc;
-			if (location.href.split('location=')[1].split('&').length > 1) {
-				lc = location.href.split('location=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('location=')[1];
-			}
-			$('#autocomplete-input').val(lc);
-		}
-
-		if (location.href.split('title=').length > 1) {
-			let lc;
-			if (location.href.split('title=')[1].split('&').length > 1) {
-				lc = location.href.split('title=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('title=')[1];
-			}
-			$('#tagline').val(lc);
-		}
-	});	
-</script>
+<!-- Google API & Maps -->
+<!-- Geting an API Key: https://developers.google.com/maps/documentation/javascript/get-api-key -->
+<script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoOT9ioUE4SA8h-anaFyU4K63a7H-7bc&amp;libraries=places"></script>
+<script src="/js/infobox.min.js"></script>
+<script src="/js/markerclusterer.js"></script>
+<script src="/js/maps.js"></script>
 
 </body>
 
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/freelancers-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:40 GMT -->
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/single-company-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:39 GMT -->
 </html>

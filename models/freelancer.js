@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const mongoosePaginate = require('mongoose-paginate');
+
 const freelancerSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -53,7 +55,17 @@ const freelancerSchema = new mongoose.Schema({
     },
 
     profile_picture: String,
+
+    success: Number,
+
+    rec: Number,
+
+    onTime: Number,
+
+    onBudget: Number,
 });
+
+freelancerSchema.plugin(mongoosePaginate);
 
 const Freelancer = mongoose.model('Freelancer', freelancerSchema);
 

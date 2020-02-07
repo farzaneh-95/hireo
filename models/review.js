@@ -14,6 +14,7 @@ const reviewSchema = new mongoose.Schema({
     task: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Task',
     },
 
     score: {
@@ -31,6 +32,7 @@ const reviewSchema = new mongoose.Schema({
     created_at: {
         type: Date,
         required: true,
+        get: created_at => created_at.toDateString(),
     },
 });
 

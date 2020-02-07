@@ -270,18 +270,8 @@
 									
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
-										{{#equal this.task_id.budget_type 1}}
-										<li><strong>${{this.minimal_rate}}</strong><span>Fixed Preice</span></li>
-										{{/equal}}
-										{{#equal this.task_id.budget_type 2}}
-										<li><strong>${{this.minimal_rate}}</strong><span>Hourly Rate</span></li>
-										{{/equal}}
-										{{#equal this.delivery_time.type 1}}
-										<li><strong>{{this.delivery_time.quntity}} Hours</strong><span>Delivery Time</span></li>
-										{{/equal}}
-										{{#equal this.delivery_time.type 2}}
-										<li><strong>{{this.delivery_time.quantity}} Days</strong><span>Delivery Time</span></li>
-										{{/equal}}
+										<li><strong>${{this.minimal_rate}}</strong><span>{{this.task_id.budget_type}} Price</span></li>
+										<li><strong>{{this.delivery_time.quantity}} {{this.delivery_time.type}}</strong><span>Delivery Time</span></li>
 									</ul>
 
 									<!-- Buttons -->
@@ -331,11 +321,11 @@
 														</div>
 														<div class="bidding-field">
 															<select id="type" class="selectpicker default with-border">
-																{{#equal this.delivery_time.type 1}}
+																{{#equal this.delivery_time.type 'Days'}}
 																<option>Days</option>
 																<option selected>Hours</option>
 																{{/equal}}
-																{{#equal this.delivery_time.type 2}}
+																{{#equal this.delivery_time.type 'Hours'}}
 																<option selected>Days</option>
 																<option>Hours</option>
 																{{/equal}}
