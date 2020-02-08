@@ -37,7 +37,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -105,7 +105,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -166,7 +166,6 @@
 
 						<ul data-submenu-title="Start">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/bookmarks"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
 							<li class="active"><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
 						</ul>
 						
@@ -174,17 +173,16 @@
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-business-center"></i> Jobs</a>
 								<ul>
-									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">3</span></a></li>
+									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">{{data.user.jobs.length}}</span></a></li>
 									<li><a href="/jobs/candidates">Manage Candidates</a></li>
 									<li><a href="/jobs/create">Post a Job</a></li>
 								</ul>	
 							</li>
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
 									<li><a href="/tasks/bidders">Manage Bidders</a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="/tasks">Post a Task</a></li>
+									<li><a href="/tasks/create">Post a Task</a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -194,8 +192,8 @@
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
+									<li><a href="/tasks/my_bids">My Active Bids </a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -243,13 +241,13 @@
 					<div class="dashboard-box margin-top-0">
 
 						<!-- Headline -->
-						{{#equal data.role 'employer'}}
+						{{#equal data.user.role 'employer'}}
 						<div class="headline">
 							<h3><i class="icon-material-outline-business"></i> Rate Freelancers</h3>
 						</div>
 						{{/equal}}
 
-						{{#equal data.role 'freelancer'}}
+						{{#equal data.user.role 'freelancer'}}
 						<div class="headline">
 							<h3><i class="icon-material-outline-business"></i> Rate Employers</h3>
 						</div>
@@ -284,7 +282,7 @@
 									<div class="item-details margin-top-10">
 										<div class="star-rating" data-rating="{{this.review.score}}"></div>
 										<div class="detail-item"><i class="icon-material-outline-date-range"></i> 
-										{{this.review_created_at}}</div>
+										{{this.task.created_at}}</div>
 										</div>
 										<div class="item-description">
 											<p>{{this.review.comment}}</p>

@@ -113,7 +113,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -266,7 +266,7 @@
 								<!-- Job Listing Footer -->
 								<div class="job-listing-footer">
 									<ul>
-										<li><i class="icon-material-outline-business"></i> {{this.posted_by.name}} <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
+										<li><i class="icon-material-outline-business"></i> {{this.posted_by.name}} </li>
 										<li><i class="icon-material-outline-location-on"></i> {{this.posted_by.location}}</li>
 										<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
 										<li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
@@ -344,14 +344,13 @@
 								
 								<!-- Avatar -->
 								<div class="freelancer-avatar">
-									<div class="verified-badge"></div>
 									<a href="/freelancers/{{this._id}}"><img src="{{this.profile_picture}}" alt=""></a>
 								</div>
 
 								<!-- Name -->
 								<div class="freelancer-name">
 									<h4><a href="/freelancers/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></h4>
-									<span>{{this.tag_line}}r</span>
+									<span>{{this.tag_line}}</span>
 								</div>
 
 								<!-- Rating -->
@@ -367,6 +366,7 @@
 								<ul>
 									<li>Location <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}</strong></li>
 									<li>Rate <strong>{{this.minimal_hourly_rate}} / hr</strong></li>
+									<li>Job Success <strong>{{this.success}}%</strong></li>
 								</ul>
 							</div>
 							<a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>

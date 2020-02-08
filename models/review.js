@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const reviewSchema = new mongoose.Schema({
     reviewer: {
@@ -35,6 +36,8 @@ const reviewSchema = new mongoose.Schema({
         get: created_at => created_at.toDateString(),
     },
 });
+
+reviewSchema.plugin(mongoosePaginate);
 
 const Review = mongoose.model('Review', reviewSchema);
 

@@ -58,11 +58,13 @@ const jobSchema = new mongoose.Schema({
     min_salary: {
         type: Number,
         required: true,
+        get: min_salary => min_salary >= 1000 ? (min_salary / 1000).toString() + 'k' : min_salary,
     },
 
     max_salary: {
         type: Number,
         required: true,
+        get: max_salary => max_salary >= 1000 ? (max_salary / 1000).toString() + 'k' : max_salary,
     },
 
     tags: [String],

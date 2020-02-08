@@ -4,6 +4,7 @@ const Category = require('../models/category');
 const Task = require('../models/task');
 const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
+const isEmployer = require('../helpers/isEmployer');
 
 router.get('/tasks/my_bids', async (req, res) => {
     const user = req.app.get('user');
@@ -28,15 +29,25 @@ router.get('/tasks/my_tasks', async (req, res) => {
         created_at: 1, 
         status: 1,
         _id: 0 
-    });
-    tasks.forEach(task => {
-        task.created_at_alt = (new Date(task.created_at)).toDateString();
-    });
+    }).populate('bids').exec();
     return res.render('dashboard-manage-tasks', {
         data: { 
             user,
             tasks, 
         }, 
+        layout: false,
+    });
+});
+
+router.get('/tasks/create', isEmployer, async (req, res) => {
+    const user = req.app.get('user');
+    const categories = await Category.find({});
+    return res.render('dashboard-post-a-task', {
+        data: {
+            user,
+            categories,
+        },
+        
         layout: false,
     });
 });

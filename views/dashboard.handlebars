@@ -40,7 +40,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -108,7 +108,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -175,18 +175,17 @@
 						{{#equal user.role 'employer'}}
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-business-center"></i> Jobs</a>
-								<ul>
-									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">3</span></a></li>
+								<ul class="dropdown-nav">
+									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">{{user.jobs.length}}</span></a></li>
 									<li><a href="/jobs/candidates">Manage Candidates</a></li>
 									<li><a href="/jobs/create">Post a Job</a></li>
 								</ul>	
 							</li>
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
-								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
+								<ul class="dropdown-nav">
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{user.tasks.length}}</span></a></li>
 									<li><a href="/tasks/bidders">Manage Bidders</a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="/tasks">Post a Task</a></li>
+									<li><a href="/tasks/create">Post a Task</a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -195,9 +194,9 @@
 						{{#equal user.role 'freelancer'}}
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
-								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
+								<ul class="dropdown-nav">
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{user.tasks.length}}</span></a></li>
+									<li><a href="/tasks/my_bids">My Active Bids </a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -205,7 +204,7 @@
 
 						<ul data-submenu-title="Account">
 							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 						
 					</div>
@@ -225,7 +224,12 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>Howdy, {{data.first_name}}!</h3>
+				{{#equal user.role 'freelancer'}}
+				<h3>Howdy, {{user.first_name}}!</h3>
+				{{/equal}}
+				{{#equal user.role 'employer'}}
+				<h3>Howdy, {{data.name}}!</h3>
+				{{/equal}}
 				<span>We are glad to see you again!</span>
 
 				<!-- Breadcrumbs -->

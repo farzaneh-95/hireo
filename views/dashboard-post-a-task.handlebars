@@ -47,7 +47,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -115,7 +115,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -176,7 +176,6 @@
 
 						<ul data-submenu-title="Start">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/bookmarks"><i class="icon-material-outline-star-border"></i> Bookmarks</a></li>
 							<li><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
 						</ul>
 						
@@ -184,17 +183,16 @@
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-business-center"></i> Jobs</a>
 								<ul>
-									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">3</span></a></li>
+									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">{{data.user.jobs.length}}</span></a></li>
 									<li><a href="/jobs/candidates">Manage Candidates</a></li>
 									<li><a href="/jobs/create">Post a Job</a></li>
 								</ul>	
 							</li>
 							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
 									<li><a href="/tasks/bidders">Manage Bidders</a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
-									<li><a href="/tasks">Post a Task</a></li>
+									<li><a href="/tasks/create">Post a Task</a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -204,8 +202,8 @@
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul>
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">2</span></a></li>
-									<li><a href="/tasks/my_bids">My Active Bids <span class="nav-tag">4</span></a></li>
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
+									<li><a href="/tasks/my_bids">My Active Bids </a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -595,7 +593,17 @@ $('#snackbar-user-status label').click(function() {
 				contentType: 'application/json',
 				data,
 				success: (result, statudCode, xhr) => {
-					
+					$('success-message').text('Your Job Posted');
+					$('#project_name').val('');
+					$('#autocomplete-input').val('');
+					$('#min_budget').val('');
+					$('#max_budget').val('');
+					$('#project_disc').val('');
+					$('.keyword-text').remove();
+
+				},
+				error: (xhr, status, err) => {
+					window.location = '/dashboard_settings';
 				},
 			});
 		}

@@ -45,9 +45,9 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#" class="current">Find Work</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">Browse Jobs</a>
 								</li>
@@ -113,7 +113,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -122,11 +122,6 @@
 
 				</div>
 				<!-- User Menu / End -->
-				{{else}}
-			
-				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-				</div>
 				{{/if}}
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -254,7 +249,7 @@
 					<!-- Pagination -->
 					<div class="pagination-container margin-top-60 margin-bottom-60">
 						<nav class="pagination">
-							<ul>
+							<ul class="page-no">
 								<li ><a href="/jobs?page=1">1</a></li>
 								<li ><a href="/jobs?page=2">2</a></li>
 								<li ><a href="/jobs?page=3">3</a></li>
@@ -477,23 +472,40 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script>
-	$('#submit').on('click', () => {
-		const location = $('#autocomplete-input').val();
-		const category = $('#category option:selected').attr('value');
-		const title = $('#title-search').val();
-		console.log(location);
-		let url = '/jobs?req=1';
-		location ? url = url + '&location=' + location : '';
-		category ? url = url + '&category=' + category : '';
-		title ? url = url + '&title=' + title : '';
-		window.location.href = url;
-	});
-
-	$('#clear').on('click', () => {
-		window.location.href = '/jobs';
-	});
-
 	$(document).ready(() => {
+		$('#logOut').on('click', () => {
+			$.ajax({
+				url: '/logout',
+				method: 'GET',
+				success: (data, status, xhr) => {
+					window.location.href = '/';
+				}
+			});
+		});
+	
+		$('#submit').on('click', () => {
+			const location = $('#autocomplete-input').val();
+			const category = $('#category option:selected').attr('value');
+			const title = $('#title-search').val();
+			let url = '/jobs?req=1';
+			location ? url = url + '&location=' + location : '';
+			category ? url = url + '&category=' + category : '';
+			title ? url = url + '&title=' + title : '';
+			window.location.href = url;
+		});
+
+		$('#clear').on('click', () => {
+			window.location.href = '/jobs';
+		});
+
+		$('.page-no li a').each((index, element) => {
+			if ($(element).text() == location.href.split('page=')[1]) {
+				$(element).addClass('current-page');
+			} else if (index == 0 && location.href.split('page=').length <= 1) {
+				$(element).addClass('current-page');
+			}
+		});
+		
 		if (location.href.split('location=').length > 1) {
 			let lc;
 			if (location.href.split('location=')[1].split('&').length > 1) {

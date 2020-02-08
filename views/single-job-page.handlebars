@@ -32,7 +32,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -100,7 +100,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -109,11 +109,6 @@
 
 				</div>
 				<!-- User Menu / End -->
-				{{else}}
-			
-				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-				</div>
 				{{/if}}
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -145,7 +140,7 @@
 			<div class="col-md-12">
 				<div class="single-page-header-inner">
 					<div class="left-side">
-						<div class="header-image"><a href="/single-company-profile.html"><img src="/{{employer_img}}" alt=""></a></div>
+						<div class="header-image"><a href="/single-company-profile.html"><img src="{{employer_img}}" alt=""></a></div>
 						<div class="header-details">
 							<h3>{{job.title}}</h3>
 							<h5>About the Employer</h5>
@@ -159,7 +154,7 @@
 					<div class="right-side">
 						<div class="salary-box">
 							<div class="salary-type">Annual Salary</div>
-							<div class="salary-amount">${{min}} - ${{max}}</div>
+							<div class="salary-amount">${{job.min_salary}} - ${{job.max_salary}}</div>
 						</div>
 					</div>
 				</div>
@@ -187,71 +182,44 @@
 				<!-- Listings Container -->
 				<div class="listings-container grid-layout">
 
-						<!-- Job Listing -->
-						<a href="#" class="job-listing">
+					{{#each similarJobs}}
+					<!-- Job Listing -->
+					<a href="/jobs/{{this._id}}" class="job-listing">
 
-							<!-- Job Listing Details -->
-							{{#each similarJobs}}
-							<div class="job-listing-details">
-								<!-- Logo -->
-								<div class="job-listing-company-logo">
-									{{#if this.posted_by.logo}}
-									<img src="/this.posted_by.logo" alt="">
-									{{else}}
-									<img src="/images/company-logo-05.png" alt="">
-									{{/if}}
-								</div>
-
-								<!-- Details -->
-								<div class="job-listing-description">
-									{{#if this.posted_by.name}}
-									<h4 class="job-listing-company">{{this.posted_by.name}}</h4>
-									{{else}}
-									<h4 class="job-listing-company">No Name</h4>
-									{{/if}}
-									<h3 class="job-listing-title">{{this.title}}</h3>
-								</div>
-							</div>
-							{{/each}}
-							<!-- Job Listing Footer -->
-							<div class="job-listing-footer">
-								<ul>
-									<li><i class="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-									<li><i class="icon-material-outline-account-balance-wallet"></i> $35000-$38000</li>
-									<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-								</ul>
-							</div>
-						</a>
-
-						<!-- Job Listing -->
-						<a href="#" class="job-listing">
-
-							<!-- Job Listing Details -->
-							<div class="job-listing-details">
-								<!-- Logo -->
-								<div class="job-listing-company-logo">
-									<img src="/images/company-logo-03.png" alt="">
-								</div>
-
-								<!-- Details -->
-								<div class="job-listing-description">
-									<h4 class="job-listing-company">King <span class="verified-badge" title="Verified Employer" data-tippy-placement="top"></span></h4>
-									<h3 class="job-listing-title">Restaurant Manager</h3>
-								</div>
+						<!-- Job Listing Details -->
+						<div class="job-listing-details">
+							<!-- Logo -->
+							<div class="job-listing-company-logo">
+								{{#if this.posted_by.logo}}
+								<img src="{{this.posted_by.logo}}" alt="">
+								{{else}}
+								<img src="/images/company-logo-05.png" alt="">
+								{{/if}}
 							</div>
 
-							<!-- Job Listing Footer -->
-							<div class="job-listing-footer">
-								<ul>
-									<li><i class="icon-material-outline-location-on"></i> San Francisco</li>
-									<li><i class="icon-material-outline-business-center"></i> Full Time</li>
-									<li><i class="icon-material-outline-account-balance-wallet"></i> $35000-$38000</li>
-									<li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
-								</ul>
+							<!-- Details -->
+							<div class="job-listing-description">
+								{{#if this.posted_by.name}}
+								<h4 class="job-listing-company">{{this.posted_by.name}}</h4>
+								{{else}}
+								<h4 class="job-listing-company">No Name</h4>
+								{{/if}}
+								<h3 class="job-listing-title">{{this.title}}</h3>
 							</div>
-						</a>
-					</div>
+						</div>
+						<!-- Job Listing Footer -->
+						<div class="job-listing-footer">
+							<ul>
+								<li><i class="icon-material-outline-location-on"></i> {{this.location}}</li>
+								<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
+								<li><i class="icon-material-outline-account-balance-wallet"></i> ${{this.min_salary}}
+								-${{this.max_salary}}</li>
+								<li><i class="icon-material-outline-access-time"></i>{{this.created_at}}</li>
+							</ul>
+						</div>
+					</a>
+					{{/each}}
+				</div>
 					<!-- Listings Container / End -->
 
 				</div>
@@ -281,17 +249,17 @@
 								<li>
 									<i class="icon-material-outline-business-center"></i>
 									<span>Job Type</span>
-									<h5>{{job_type}}</h5>
+									<h5>{{job.type}}</h5>
 								</li>
 								<li>
 									<i class="icon-material-outline-local-atm"></i>
 									<span>Salary</span>
-									<h5>${{min}} - ${{max}}</h5>
+									<h5>${{job.min_salary}} - ${{job.max_salary}}</h5>
 								</li>
 								<li>
 									<i class="icon-material-outline-access-time"></i>
 									<span>Date Posted</span>
-									<h5>{{date}}</h5>
+									<h5>{{job.created_at}}</h5>
 								</li>
 							</ul>
 						</div>
@@ -300,14 +268,7 @@
 
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
-					<h3>Bookmark or Share</h3>
-
-					<!-- Bookmark Button -->
-					<button class="bookmark-button margin-bottom-25">
-						<span class="bookmark-icon"></span>
-						<span class="bookmark-text">Bookmark</span>
-						<span class="bookmarked-text">Bookmarked</span>
-					</button>
+					<h3>Share</h3>
 
 					<!-- Copy URL -->
 					<div class="copy-url">

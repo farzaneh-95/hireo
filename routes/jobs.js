@@ -10,14 +10,6 @@ const isUserVerified = require('../helpers/isUserVerified');
 
 const upload = multer({ dest: 'public/' })
 
-const type_array = [
-    'Full Time',
-    'Freelance',
-    'Part Time',
-    'Internship',
-    'Temporary',
-];
-
 router.get('/jobs/my_jobs', async (req, res) => {
     const user = req.app.get('user');
     if (req.session.role === 'employer') {
@@ -28,7 +20,7 @@ router.get('/jobs/my_jobs', async (req, res) => {
         
         const tempJobs = [];
         myJobs.forEach(job => {
-            tempJobs.push({ job: job, created_at: job.created_at.toDateString(), applyCount: job.applies.length })
+            tempJobs.push({ job: job, applyCount: job.applies.length })
         });
         res.render('dashboard-manage-jobs', { data: { jobs: tempJobs, user }, layout: false, });
     }
@@ -52,7 +44,7 @@ router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
     }
     const job = await new Job({
         title: req.body.title,
-        type: type_array.indexOf(req.body.type) + 1,
+        type: req.body.type,
         category: req.body.category,
         location: req.body.location,
         min_salary: req.body.min,
@@ -121,6 +113,8 @@ router.get('/jobs/:id', async (req, res) => {
     const similarJobs = await Job
         .where('category')
         .equals(job.category)
+        .where('status')
+        .equals(1)
         .where('_id')
         .ne(job._id)
         .limit(4)
@@ -133,10 +127,6 @@ router.get('/jobs/:id', async (req, res) => {
         employer_link: '/employers/' + employer._id,
         employer_img: employer.logo || '/images/company-logo-05.png',
         employer_location: employer.location || 'Somewhere',
-        job_type: type_array[job.type - 1],
-        min: job.min_salary >= 1000 ? (job.min_salary / 1000).toString() + 'k' : job.min_salary,
-        max: job.max_salary >= 1000 ? (job.max_salary / 1000).toString() + 'k' : job.max_salary,
-        date: (job.created_at).toDateString(),
         similarJobs,
         role: req.session.role || 'unknown',
         hasApplied,

@@ -83,7 +83,7 @@ Category.insertMany(categories)
                         description: faker.lorem.paragraphs(3),
                         posted_by: emps[Math.floor(Math.random() * emps.length)]._id,
                         created_at: new Date(),
-                        status: faker.random.number(3),
+                        status: faker.random.number({ min: 1, max: 4 }),
                     });
                 }
                 Job.insertMany(jobs)
@@ -104,7 +104,7 @@ Category.insertMany(categories)
                         skills: ['Laravel', 'Node.js', 'Express', 'Mysql'],
                         description: faker.lorem.paragraphs(8),
                         created_at: new Date(),
-                        status: faker.random.number(3),
+                        status: faker.random.number({ min: 1, max: 4 }),
                     });
                 }
                 Task.insertMany(tasks)
@@ -165,10 +165,27 @@ Category.insertMany(categories)
                                     .then(reviews => {
                                         console.log('Reviews Done');
                                     });
+                                    Review.insertMany(empReviews)
+                                    .then(reviews => {
+                                        console.log('Reviews Done');
+                                    });
                                 Bid.insertMany(bids)
                                     .then(docs => {
                                         console.log('Bids Done');
                                     });
+                                const empReviews = [];
+                                empReviews.forEach(fl => {
+                                    for (let i = 0; i < 10; i++) {
+                                        empReviews.push({
+                                            reviewer: docs[Math.floor(Math.random() * docs.length)]._id,
+                                            reviewee: fl._id,
+                                            score: faker.random.number({ min: 3, max: 5 }),
+                                            task: tasks[Math.floor(Math.random() * tasks.length)]._id,
+                                            comment: faker.lorem.sentences(2),
+                                            created_at: new Date(),
+                                        });
+                                    }
+                                });
                             });
                     });
             });

@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
     const tasksCount = await Task.find({}).countDocuments();
     const jobsCount = await Job.find({}).countDocuments();
     const jobs = await Job
-        .find({})
+        .where('status')
+        .equals(1)
         .sort({ created_at: -1 })
         .limit(5)
         .populate('posted_by')

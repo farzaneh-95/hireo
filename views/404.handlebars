@@ -41,7 +41,7 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/">Home</a></li>
 
 						<li><a href="#">Find Work</a>
 							<ul class="dropdown-nav">
@@ -109,7 +109,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -118,11 +118,6 @@
 
 				</div>
 				<!-- User Menu / End -->
-				{{else}}
-			
-				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-				</div>
 				{{/if}}
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -397,6 +392,15 @@ $('#snackbar-user-status label').click(function() {
 		backgroundColor: '#383838'
 	}); 
 }); 
+
+$.ajax({
+		url: '/logout',
+		method: 'GET',
+		success: (data, status, xhr) => {
+			window.location.href = '/';
+		}
+	});
+});
 </script>
 
 </body>

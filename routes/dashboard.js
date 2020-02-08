@@ -15,7 +15,7 @@ router.get('/dashboard', isLoggedIn, async (req, res) => {
     if (req.session.role === 'freelancer') {
         const wonTasks = await Task.find({ freelancer_id: req.session._id }).countDocuments();
         const appliedJobs = await Job.find({ 'applies.freelancer_id': req.session._id }).countDocuments();
-        const reviewCount = await Review.find({ reviewer: req.session._Id }).countDocuments();
+        const reviewCount = await Review.find({ reviewee: req.session._id }).countDocuments();
         return res.render('dashboard', {
             data,
             user,
@@ -25,6 +25,19 @@ router.get('/dashboard', isLoggedIn, async (req, res) => {
             layout: false,
         });
     }
+    if (req.session.role === 'employer') {
+        const reviewCount = await Review.find({ reviewer: req.session._id }).countDocuments();
+        return res.render('dashboard', {
+            data,
+            user,
+            reviewCount,
+            layout: false
+        });
+    }
+    return res.render('home', { 
+        error: 'unauthorized user',
+        layout: false,        
+    });
 });
 
 router.get('/dashboard_settings', async (req, res) => {
@@ -70,28 +83,6 @@ router.post('/dashboard_settings', async (req, res) => {
             await employer.updateOne(new_info);
             return res.render('dashboard', { layout: false });
         }
-    }
-});
-
-router.get('/reviews', async (req, res) => {
-    const user = req.app.get('user');
-    if (req.session.role === 'employer') {
-        let tasks = await Task
-            .where('status')
-            .ne(1)
-            .where('employer_id')
-            .equals(req.session._id)
-            .skip((parseInt(req.query.page) - 1) * 4 || 0)
-            .limit(4);
-        
-        return res.render('dashboard-reviews', { 
-            data: {
-                tasks,
-                user,
-            },
-            role: req.session.role,
-            layout: false,
-        });
     }
 });
 

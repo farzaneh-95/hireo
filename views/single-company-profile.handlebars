@@ -109,7 +109,7 @@
 						
 						<ul class="user-menu-small-nav">
 							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard-settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
 							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 
@@ -580,7 +580,17 @@ $('.copy-url-button').click(function() {
 	Snackbar.show({
 		text: 'Copied to clipboard!',
 	}); 
-}); 
+});
+
+$('#logOut').on('click', () => {
+	$.ajax({
+		url: '/logout',
+		method: 'GET',
+		success: (data, status, xhr) => {
+			window.location.href = '/';
+		}
+	});
+});
 </script>
 
 <!-- Google API & Maps -->

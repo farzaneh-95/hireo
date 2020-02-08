@@ -41,7 +41,7 @@ router.post('tasks/edit_bids', async (req, res) => {
         delivery_time,
         created_at: new Date(),
     });
-    return res.status(200).send({ Message: 'Ok' });
+    return res.redirect('/tasks/my_bids');
 });
 
 module.exports = router;

@@ -61,11 +61,6 @@ const taskSchema = new mongoose.Schema({
         required: true,
     },
 
-    bids: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bid'
-    }],
-
     created_at: {
         type: Date,
         get: created_at => created_at.toDateString(),
