@@ -520,7 +520,7 @@ $('#snackbar-user-status label').click(function() {
 			} else {
 				lc = location.href.split('location=')[1];
 			}
-			$('#autocomplete-input').val(lc);
+			$('#autocomplete-input').val(lc.replace('%20', ' '));
 		}
 
 		if (location.href.split('title=').length > 1) {

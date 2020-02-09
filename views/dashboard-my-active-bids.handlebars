@@ -432,9 +432,9 @@ $('#snackbar-user-status label').click(function() {
 		const delivery_time = $('#delivery-time').val();
 		const type = $('#type option:selected').text();
 		const task_id = $('#task-id').text();
-		console.log(minimal_rate, delivery_time, type, task_id)
+		console.log(minimal_rate, delivery_time, type, task_id);
 		$.ajax({
-			url: '/edit-bids',
+			url: '/tasks/edit_bids',
 			method: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify({
@@ -445,8 +445,8 @@ $('#snackbar-user-status label').click(function() {
 			}),
 
 			success: (data, status, xhr) => {
-				$('#small-dialog').
-			}
+				window.location.href = '/tasks/my_bids';
+			},
 		});
 	});
 

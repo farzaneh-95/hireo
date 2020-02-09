@@ -184,7 +184,7 @@
 							</li>
 							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul class="dropdown-nav">
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.tasks.length}}</span></a></li>
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
 									<li><a href="/tasks/bidders">Manage Bidders</a></li>
 									<li><a href="/tasks/create">Post a Task</a></li>
 								</ul>	
@@ -196,7 +196,7 @@
 						<ul data-submenu-title="Organize and Manage">
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
 								<ul class="dropdown-nav">
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.tasks.length}}
+									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}
 									</span></a></li>
 									<li><a href="/tasks/my_bids">My Active Bids </a></li>
 								</ul>	
@@ -252,7 +252,7 @@
 
 						<div class="content">
 							<ul class="dashboard-box-list">
-								{{#each data.tasks}}
+								{{#each data.user.tasks}}
 								<li>
 									<!-- Job Listing -->
 									<div class="job-listing width-adjustment">
@@ -285,15 +285,16 @@
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
 										<li><strong>{{this.bids.length}}</strong><span>Bids</span></li>
-										<li><strong>$22</strong><span>Avg. Bid</span></li>
+										<li><strong>${{this.bid_avg}}</strong><span>Avg. Bid</span></li>
 										<li><strong>${{this.min_budget}} - ${{this.max_budget}}</strong>
 										<span>{{this.budget_type}} Price</span>
 										</li>
+										
 									</ul>
 
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible">
-										<a href="/tasks/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
+										<a href="/tasks/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">{{this.bids.length}}</span></a>
 									</div>
 								</li>
 								{{/each}}

@@ -23,7 +23,7 @@ const employerSchema = new mongoose.Schema({
  
     bio: {
         type: String,
-        maxlength: 1000,
+        maxlength: 10000,
     },
 
     logo: {

@@ -46,7 +46,6 @@ router.get('/reviews/my_reviews', async (req, res) => {
                 });
             }
         }
-        console.log(tempTasks);
         res.render('dashboard-reviews', { data: { user, tasks: tempTasks, currPage: req.query.page || 1 }, layout: false }); 
     } else if (req.session.role === 'freelancer') {
         const tasks = await Task
@@ -61,34 +60,13 @@ router.get('/reviews/my_reviews', async (req, res) => {
         .exec();
 
         const reviews = await Review    
-        .where('reviewer')
-        .equals(req.session._id)
-        .where('task')
-        .in(tasks.map(task => task._id));
+            .where('reviewer')
+            .equals(req.session._id)
+            .where('task')
+            .in(tasks.map(task => task._id));
 
-        let tempTasks = [];
-        for (let i = 0; i < tasks.length; i++) {
-            let sw = false;
-            for (let j = 0; j < reviews.length; j++) {
-                if ((tasks[i]._id).toString() === (reviews[j].task).toString()) {
-                    sw = true;
-                    tempTasks.push({
-                        task: tasks[i],
-                        review: reviews[j],
-                        review_created_at: reviews[j].created_at.toDateString(),
-                        role: req.session.role,
-                    });
-                    break;
-                }
-            }
-            if (!sw) {
-                tempTasks.push({
-                    task: tasks[i],
-                    role: req.session.role,
-                });
-            }
-            res.render('dashboard-reviews', { data: { user, tasks: tempTasks, currPage: req.query.page || 1 }, layout: false });
-        }  
+        console.log(tasks, reviews);
+        res.render('dashboard-reviews', { data: { user, tasks: tasks, currPage: req.query.page || 1 }, layout: false });  
     } else {
         return res.redirect('/');
     }

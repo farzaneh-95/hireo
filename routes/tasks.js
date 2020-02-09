@@ -20,20 +20,27 @@ router.get('/tasks/my_bids', async (req, res) => {
 
 router.get('/tasks/my_tasks', async (req, res) => {
     const user = req.app.get('user');
-    const tasks = await Task.find({ employer_id: req.session._id }, {
-        name: 1, 
-        min_budget: 1, 
-        max_budget: 1, 
-        budget_type: 1,
-        bids: 1,
-        created_at: 1, 
-        status: 1,
-        _id: 0 
-    }).populate('bids').exec();
+    let bids;
+    if (req.session.role === 'freelancer') {
+        bids = await Bid.find({ freelancer_id: req.session._id }).lean(true);
+        user.tasks.forEach(task => {
+            task.created_at = task.created_at.toDateString();
+            task.budget_type = task.budget_type === 0  ? 'Fixed' : 'Hourly'; 
+            let count = 0;
+            const temp = [];
+            bids.forEach(bid => {
+                if (bid.task_id.toString() === task._id.toString()) {
+                    temp.push(bid);
+                    count += bid.minimal_rate;
+                }
+            });
+            task.bids = temp;
+            task.bid_avg = Math.floor(count / temp.length);
+        });
+    }
     return res.render('dashboard-manage-tasks', {
         data: { 
             user,
-            tasks, 
         }, 
         layout: false,
     });
@@ -81,7 +88,7 @@ router.get('/tasks', async (req, res) => {
     const categories = await Category.find();
     const query = Task
         .where('status')
-        .equals(0);
+        .equals(1);
     if (req.query.location) {
         query
             .where('location')

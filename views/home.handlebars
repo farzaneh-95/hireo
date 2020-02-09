@@ -208,7 +208,7 @@
 				<!-- Category Boxes Container -->
 				<div class="categories-container">
 					{{#each data.categories}}
-					<a href="/jobs" class="category-box">
+					<a href="/jobs?category={{this.category._id}}" class="category-box">
 						<div class="category-box-icon">
 							<i class="icon-line-awesome-file-code-o"></i>
 						</div>
@@ -304,7 +304,7 @@
 			{{#each data.cities}}
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="/jobs" class="photo-box" data-background-image="{{#equal this._id 'San Fransisco'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'New York'}}images/featured-city-02.jpg{{/equal}}{{#equal this._id 'Los Angeles'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'Seattle'}}images/featured-city-04.jpg{{/equal}}">
+				<a href="/jobs?location={{this._id}}" class="photo-box" data-background-image="{{#equal this._id 'San Fransisco'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'New York'}}images/featured-city-02.jpg{{/equal}}{{#equal this._id 'Los Angeles'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'Seattle'}}images/featured-city-04.jpg{{/equal}}">
 					<div class="photo-box-content">
 						<h3>{{this._id}}</h3>
 						<span>{{this.count}} Jobs</span>
