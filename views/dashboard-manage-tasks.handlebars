@@ -68,13 +68,18 @@
 			<!-- Right Side Content / End -->
 			<div class="right-side">
 				{{#if data.user}}
+				{{#equal data.user.role 'freelancer'}}
 				<!-- User Menu -->
 				<div class="header-widget">
 
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div></a>
+							{{#if data.user.profile_picture}}
+							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div></a>
+							{{else}}
+							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
+							{{/if}}
 						</div>
 
 						<!-- Dropdown -->
@@ -85,17 +90,14 @@
 
 								<!-- User Name / Avatar -->
 								<div class="user-details">
-									<div class="user-avatar status-online"><img src="/images/user-avatar-small-01.jpg" alt=""></div>
-									{{#equal data.user.role 'freelancer'}}
+									{{#if data.user.profile_picture}}
+									<div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div>
+									{{else}}
+									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
+									{{/if}}
 									<div class="user-name">
 										{{data.user.first_name}} {{data.user.last_name}} <span>Freelancer</span>
 									</div>
-									{{/equal}}
-									{{#equal data.user.role 'employer'}}
-									<div class="user-name">
-										{{data.user.name}}<span>Employer</span>
-									</div>
-									{{/equal}}
 								</div>
 								
 								<!-- User Status Switcher -->
@@ -105,24 +107,69 @@
 									<!-- Status Indicator -->
 									<span class="status-indicator" aria-hidden="true"></span>
 								</div>	
-						</div>
-						
-						<ul class="user-menu-small-nav">
-							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
-						</ul>
-
+							</div>
+							
+							<ul class="user-menu-small-nav">
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							</ul>
 						</div>
 					</div>
-
 				</div>
 				<!-- User Menu / End -->
-				{{else}}
-			
+				{{/equal}}
+				{{#equal data.user.role 'employer'}}
+				<!-- User Menu -->
 				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+
+					<!-- Messages -->
+					<div class="header-notifications user-menu">
+						<div class="header-notifications-trigger">
+							{{#if data.user.logo}}
+							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div></a>
+							{{else}}
+							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
+							{{/if}}
+						</div>
+
+						<!-- Dropdown -->
+						<div class="header-notifications-dropdown">
+
+							<!-- User Status -->
+							<div class="user-status">
+
+								<!-- User Name / Avatar -->
+								<div class="user-details">
+									{{#if data.user.logo}}
+									<div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div>
+									{{else}}
+									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
+									{{/if}}
+									<div class="user-name">
+										{{data.user.name}} <span>Employer</span>
+									</div>
+								</div>
+								
+								<!-- User Status Switcher -->
+								<div class="status-switch" id="snackbar-user-status">
+									<label class="user-online current-status">Online</label>
+									<label class="user-invisible">Invisible</label>
+									<!-- Status Indicator -->
+									<span class="status-indicator" aria-hidden="true"></span>
+								</div>	
+							</div>
+							
+							<ul class="user-menu-small-nav">
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
+				<!-- User Menu / End -->
+				{{/equal}}
 				{{/if}}
 				<!-- Mobile Navigation Button -->
 				<span class="mmenu-trigger">
@@ -169,7 +216,7 @@
 					<div class="dashboard-nav-inner">
 
 						<ul data-submenu-title="Start">
-							<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+							<li><a href="/dashboard" class="current"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
 							<li><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
 						</ul>
 						
@@ -206,7 +253,7 @@
 
 						<ul data-submenu-title="Account">
 							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="/" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+							<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
 						</ul>
 						
 					</div>

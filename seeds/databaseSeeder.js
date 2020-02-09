@@ -23,7 +23,7 @@ const seed = async () => {
     const tasks = await taskSeeder(categories, employers, freelancers);
     const bids = await bidSeeder(freelancers, tasks);
     const reviews = await reviewSeeder(freelancers, employers, tasks);
-    const jobs = await jobSeeder(categories, employers);
+    const jobs = await jobSeeder(categories, employers, freelancers);
     console.log('Seeds Done');
     process.exit(0);
 };
