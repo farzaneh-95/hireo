@@ -307,29 +307,29 @@
 									<div class="boxed-list-item">
 										<!-- Content -->
 										<div class="item-content">
-											<h4 class="task-name">{{this.task.name}}</h4>
+											<h4 class="task-name">{{this.name}}</h4>
 											{{#equal this.review null}}
 											<span class="company-not-rated margin-bottom-5">Not Rated</span>
 											
 										</div>
 									</div>
-									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this.task._id}}"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
-									<h4 class="task-name" style="display: none;">{{this.task.name}}</h4>
-									{{#equal this.role 'employer'}}
-									<h4 style="display: none;">{{this.task.freelancer_id.first_name}} {{this.task.freelancer_id.last_name}}</h4>
-									<h4 style="display: none;">{{this.task.freelancer_id._id}}</h4>
+									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this._id}}"><i class="icon-material-outline-thumb-up"></i> Leave a Review</a>
+									<h4 class="task-name" style="display: none;">{{this.name}}</h4>
+									{{#equal this.user 'employer'}}
+									<h4 style="display: none;">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}}</h4>
+									<h4 style="display: none;">{{this.freelancer_id._id}}</h4>
 									{{/equal}}
-									{{#equal this.role 'freelancer'}}
-									<h4 style="display: none;">{{this.task.employer_id.name}}</h4>
-									<h4 style="display: none;">{{this.task.employer_id._id}}</h4>
+									{{#equal this.user 'freelancer'}}
+									<h4 style="display: none;">{{this.employer_id.name}}</h4>
+									<h4 style="display: none;">{{this.employer_id._id}}</h4>
 									{{/equal}}
-									<h4 style="display: none;">{{this.task._id}}</h4>
+									<h4 style="display: none;">{{this._id}}</h4>
 									{{/equal}}
 									{{#if this.review}}
 									<div class="item-details margin-top-10">
 										<div class="star-rating" data-rating="{{this.review.score}}"></div>
 										<div class="detail-item"><i class="icon-material-outline-date-range"></i> 
-										{{this.task.created_at}}</div>
+										{{this.created_at}}</div>
 										</div>
 										<div class="item-description">
 											<p>{{this.review.comment}}</p>
@@ -686,7 +686,7 @@ $('#snackbar-user-status label').click(function() {
 		$('#task-name').text($(event.target).next().text());
 		$('#reviewee').val($(event.target).next().next().next().text());
 		$('#task-id').val($(event.target).next().next().next().next().text());
-		console.log($(event.target).next().next().next().next().text(),$(event.target).next().next().next().text());
+		console.log($(event.target).next().next().next().text());
 	
 	});
 
@@ -699,6 +699,7 @@ $('#snackbar-user-status label').click(function() {
 			}
 		});
 	});
+
 </script>
 
 </body>

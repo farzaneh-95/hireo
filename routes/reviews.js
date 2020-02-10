@@ -16,56 +16,54 @@ router.get('/reviews/my_reviews', async (req, res) => {
         .sort({ created_at: 'desc' })
         .skip(req.query.page ? (parseInt(req.query.page) - 1) * 4 : 0)
         .limit(4)
+        .lean(true)
         .populate('freelancer_id')
         .exec();
         
-        const reviews = await Review    
-        .where('reviewer')
-        .equals(req.session._id)
-        .where('task')
-        .in(tasks.map(task => task._id));
-
-        let tempTasks = [];
-        for (let i = 0; i < tasks.length; i++) {
-            let sw = false;
-            for (let j = 0; j < reviews.length; j++) {
-                if ((tasks[i]._id).toString() === (reviews[j].task).toString()) {
-                    sw = true;
-                    tempTasks.push({
-                        task: tasks[i],
-                        review: reviews[j],
-                        role: req.session.role,
-                    });
-                    break;
-                }
-            }
-            if (!sw) {
-                tempTasks.push({
-                    task: tasks[i],
-                    role: req.session.role,
-                });
-            }
-        }
-        res.render('dashboard-reviews', { data: { user, tasks: tempTasks, currPage: req.query.page || 1 }, layout: false }); 
-    } else if (req.session.role === 'freelancer') {
-        const tasks = await Task
-        .where('status')
-        .equals(3)
-        .where('freelancer_id')
-        .equals(req.session._id)
-        .sort({ created_at: 'desc' })
-        .skip(req.query.page ? (parseInt(req.query.page) - 1) * 4 : 0)
-        .limit(4)
-        .populate('employer_id')
-        .exec();
-
         const reviews = await Review    
             .where('reviewer')
             .equals(req.session._id)
             .where('task')
             .in(tasks.map(task => task._id));
 
-        console.log(tasks, reviews);
+        tasks.forEach(task => {
+            task.created_at = task.created_at.toDateString();
+            task.user = req.session.role;
+            reviews.forEach(rev => {
+                if (task._id.toString() === rev.task.toString()) {
+                    task.review = rev;
+                }
+            });
+        });
+        res.render('dashboard-reviews', { data: { user, tasks, currPage: req.query.page || 1 }, layout: false }); 
+    } else if (req.session.role === 'freelancer') {
+        const tasks = await Task
+            .where('status')
+            .equals(3)
+            .where('freelancer_id')
+            .equals(req.session._id)
+            .sort({ created_at: 'desc' })
+            .skip(req.query.page ? (parseInt(req.query.page) - 1) * 4 : 0)
+            .limit(4)
+            .lean(true)
+            .populate('employer_id')
+            .exec();
+
+        const reviews = await Review    
+            .where('reviewer')
+            .equals(req.session._id)
+            .where('task')
+            .in(tasks.map(task => task._id));
+        
+        tasks.forEach(task => {
+            task.created_at = task.created_at.toDateString();
+            task.user = req.session.role;
+            reviews.forEach(rev => {
+                if (task._id.toString() === rev.task.toString()) {
+                    task.review = rev;
+                }
+            });
+        });
         res.render('dashboard-reviews', { data: { user, tasks: tasks, currPage: req.query.page || 1 }, layout: false });  
     } else {
         return res.redirect('/');

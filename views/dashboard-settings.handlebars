@@ -264,7 +264,7 @@
 	</div>
 	<!-- Dashboard Sidebar / End -->
 
-
+	{{#equal user.role 'freelancer'}}
 	<!-- Dashboard Content
 	================================================== -->
 	<div class="dashboard-content-container" data-simplebar>
@@ -337,12 +337,12 @@
 												<h5>Account Type</h5>
 												<div class="account-type">
 													<div>
-														<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
-														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+														<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked disabled/>
+														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle dis"></i> Freelancer</label>
 													</div>
 
 													<div>
-														<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
+														<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" disabled/>
 														<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
 													</div>
 												</div>
@@ -352,7 +352,7 @@
 										<div class="col-xl-6">
 											<div class="submit-field">
 												<h5>Email</h5>
-												<input type="text" class="with-border" value="{{data.email}}">
+												<input type="text" class="with-border" value="{{data.email}}" disabled>
 											</div>
 										</div>
 
@@ -390,7 +390,7 @@
 										</div>
 									</div>
 
-									<div class="col-xl-4">
+									<div class="col-xl-8">
 										<div class="submit-field">
 											<h5>Skills <i class="help-icon" data-tippy-placement="right" title="Add up to 10 skills"></i></h5>
 
@@ -410,34 +410,6 @@
 										</div>
 									</div>
 
-									<div class="col-xl-4">
-										<div class="submit-field">
-											<h5>Attachments</h5>
-											
-											<!-- Attachments -->
-											<div class="attachments-container margin-top-0 margin-bottom-0">
-												<div class="attachment-box ripple-effect">
-													<span>Cover Letter</span>
-													<i>PDF</i>
-													<button class="remove-attachment" data-tippy-placement="top" title="Remove"></button>
-												</div>
-												<div class="attachment-box ripple-effect">
-													<span>Contract</span>
-													<i>DOCX</i>
-													<button class="remove-attachment" data-tippy-placement="top" title="Remove"></button>
-												</div>
-											</div>
-											<div class="clearfix"></div>
-											
-											<!-- Upload Button -->
-											<div class="uploadButton margin-top-0">
-												<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
-												<label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
-												<span class="uploadButton-file-name">Maximum file size: 10 MB</span>
-											</div>
-
-										</div>
-									</div>
 								</div>
 							</li>
 							<li>
@@ -477,49 +449,184 @@
 					</div>
 				</div>
 
+				<!-- Button -->
+				<div class="col-xl-12">
+					<a href="#" class="button ripple-effect big margin-top-30" id="save_changes">Save Changes</a>
+				</div>
+
+			</div>
+			<!-- Row / End -->
+
+			<!-- Footer -->
+			<div class="dashboard-footer-spacer"></div>
+			<div class="small-footer margin-top-15">
+				<div class="small-footer-copyrights">
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
+				</div>
+				<ul class="footer-social-links">
+					<li>
+						<a href="#" title="Facebook" data-tippy-placement="top">
+							<i class="icon-brand-facebook-f"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="Twitter" data-tippy-placement="top">
+							<i class="icon-brand-twitter"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="Google Plus" data-tippy-placement="top">
+							<i class="icon-brand-google-plus-g"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="LinkedIn" data-tippy-placement="top">
+							<i class="icon-brand-linkedin-in"></i>
+						</a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<!-- Footer / End -->
+
+		</div>
+	</div>
+	<h5 id="lc" style="display: none;">{{user.nationality}}</h5>
+	<!-- Dashboard Content / End -->
+	{{/equal}}
+
+	{{#equal user.role 'employer'}}
+	<!-- Dashboard Content
+	================================================== -->
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+			
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<h3>Settings</h3>
+
+				<!-- Breadcrumbs -->
+				<nav id="breadcrumbs" class="dark">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Dashboard</a></li>
+						<li>Settings</li>
+					</ul>
+				</nav>
+			</div>
+	
+			<!-- Row -->
+			<div class="row">
+
 				<!-- Dashboard Box -->
 				<div class="col-xl-12">
-					<div id="test1" class="dashboard-box">
+					<div class="dashboard-box margin-top-0">
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-lock"></i> Password & Security</h3>
+							<h3><i class="icon-material-outline-account-circle"></i> My Account</h3>
 						</div>
 
-						<div class="content with-padding">
+						<div class="content with-padding padding-bottom-0">
+
 							<div class="row">
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Current Password</h5>
-										<input type="password" class="with-border">
+
+								<div class="col-auto">
+									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
+										{{#if user.logo}}
+										<img class="profile-pic" src="{{user.logo}}" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{else}}
+										<img class="profile-pic" src="/images/user-avatar-placeholder.png" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{/if}}
 									</div>
 								</div>
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>New Password</h5>
-										<input type="password" class="with-border">
-									</div>
-								</div>
+								<div class="col">
+									<div class="row">
 
-								<div class="col-xl-4">
-									<div class="submit-field">
-										<h5>Repeat New Password</h5>
-										<input type="password" class="with-border">
-									</div>
-								</div>
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>First Name</h5>
+												<input type="text" class="with-border" id="first_name" value="{{user.name}}">
+											</div>
+										</div>
 
-								<div class="col-xl-12">
-									<div class="checkbox">
-										<input type="checkbox" id="two-step" checked>
-										<label for="two-step"><span class="checkbox-icon"></span> Enable Two-Step Verification via Email</label>
+										<div class="col-xl-6">
+											<!-- Account Type -->
+											<div class="submit-field">
+												<h5>Account Type</h5>
+												<div class="account-type">
+													<div>
+														<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" disabled/>
+														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+													</div>
+
+													<div>
+														<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" checked disabled/>
+														<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>Email</h5>
+												<input type="text" class="with-border" value="{{data.email}}">
+											</div>
+										</div>
+
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
-				
+
+				<!-- Dashboard Box -->
+				<div class="col-xl-12">
+					<div class="dashboard-box">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3><i class="icon-material-outline-face"></i> My Profile</h3>
+						</div>
+
+						 <div class="content">
+							<ul class="fields-ul">
+							<li>
+								<div class="row">
+									
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Location</h5>
+											<select class="selectpicker with-border" data-size="7" id="location" title="Select Location" data-live-search="true">
+												{{#each locations}}
+												<option>{{this}}</option>
+												{{/each}}
+											</select>
+										</div>
+									</div>
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Introduce Yourself</h5>
+											<textarea cols="30" rows="5" id="bio" class="with-border">{{data.bio}}</textarea>
+										</div>
+									</div>
+
+								</div>
+							</li>
+						</ul>
+						</div>
+					</div>
+				</div>
+
 				<!-- Button -->
 				<div class="col-xl-12">
 					<a href="#" class="button ripple-effect big margin-top-30" id="save_changes">Save Changes</a>
@@ -562,7 +669,9 @@
 
 		</div>
 	</div>
+	<h5 id="lc" style="display: none;">{{user.location}}</h5>
 	<!-- Dashboard Content / End -->
+	{{/equal}}
 
 </div>
 <!-- Dashboard Container / End -->
@@ -700,18 +809,21 @@ $('#snackbar-user-status label').click(function() {
 </script>
 
 <script>
-	//$('#nationality').children().each(function() {
-		
-	//	if ($(this).text())
-	//});
-	$('#save_changes').on('click', function() {
+	$(document).ready(() => {
+		$('#nationality option').each((index, element) => {
+			if ($('#lc').text() === $(element).val()) {
+				$(element).attr('selected', 'selected');
+			}
+		});
+
+		$('#save_changes').on('click', function() {
 		const first_name = $('#first_name').val();
 		const last_name = $('#last_name').val();
 		let skills = [];
 		$('.keywords-list').children().each(function() {
 			skills.push(this.childNodes[1].textContent);
 		});
-		const rate = $('rate').val();
+		const rate = $('#rate').val();
 		const tag_line = $('#tag_line').val();
 		const nationality = $('#nationality option:selected').text();
 		const bio = $('#bio').val();
@@ -728,7 +840,13 @@ $('#snackbar-user-status label').click(function() {
 				nationality, 
 				bio 
 			}),
+			success: (data, status, xhr) => {
+				window.location.href = '/dashboard_settings';
+			},
 		});
+	});
+	
+		
 	});
 
 	$('#logOut').on('click', () => {
@@ -739,6 +857,12 @@ $('#snackbar-user-status label').click(function() {
 				window.location.href = '/';
 			}
 		});
+	});
+
+	$('#location option').each((index, element) => {
+		if ($('#lc').text() === $(element).text()) {
+			$(element).attr('selected', 'selected');
+		}
 	});
 </script>
 

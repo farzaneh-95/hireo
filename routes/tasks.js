@@ -37,6 +37,22 @@ router.get('/tasks/my_tasks', async (req, res) => {
             task.bids = temp;
             task.bid_avg = Math.floor(count / temp.length);
         });
+    } else if (req.session.role === 'employer') {
+        bids = await Bid.find({ task_id: { $in: user.tasks.map(task => task._id) } }).lean(true);
+        user.tasks.forEach(task => {
+            task.created_at = task.created_at.toDateString();
+            task.budget_type = task.budget_type === 0  ? 'Fixed' : 'Hourly'; 
+            let count = 0;
+            const temp = [];
+            bids.forEach(bid => {
+                if (bid.task_id.toString() === task._id.toString()) {
+                    temp.push(bid);
+                    count += bid.minimal_rate;
+                }
+            });
+            task.bids = temp;
+            task.bid_avg = Math.floor(count / temp.length);
+        });
     }
     return res.render('dashboard-manage-tasks', {
         data: { 

@@ -1,5 +1,7 @@
 module.exports = [
-    'unites-state',
-    'zambia',
-    'yemen',
+    'United States',
+    'United Kingdom',
+    'Spain',
+    'France',
+    'Sweden',
 ];

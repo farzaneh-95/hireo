@@ -63,6 +63,8 @@ const freelancerSchema = new mongoose.Schema({
     onTime: Number,
 
     onBudget: Number,
+
+    view_count: Number,
 });
 
 freelancerSchema.plugin(mongoosePaginate);

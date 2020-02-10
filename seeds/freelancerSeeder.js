@@ -24,6 +24,7 @@ module.exports = async () => {
             rec: faker.random.number({ min: 50, max: 100 }),
             onTime: faker.random.number({ min: 50, max: 100 }),
             onBudget: faker.random.number({ min: 50, max: 100 }),
+            view_count: faker.random.number({ min: 100, max: 250 }),
         });
     }
     return await Freelancer.insertMany(freelancers)

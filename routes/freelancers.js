@@ -32,6 +32,8 @@ router.get('/freelancers', async (req, res) => {
 router.get('/freelancers/:id', async (req, res) => {
     const user = req.app.get('user');
     const freelancer = await Freelancer.findById(req.params.id);
+    freelancer.view_count++;
+    await freelancer.save();
     const tasksDone = await Task.find({ freelancer_id: freelancer._id, status: 3 }).countDocuments();
     const tasks = await Task.find({ freelancer_id: freelancer._id }).sort({ created_at: 'desc' }).limit(5);
     const reviews = await Review.find({ reviewee: freelancer._id }).sort({ created_at: 'desc' }).limit(5).populate('task').exec();

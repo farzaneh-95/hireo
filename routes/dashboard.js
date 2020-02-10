@@ -7,6 +7,7 @@ const Review = require('../models/review');
 const countries = require('../helpers/countries');
 const isLoggedIn = require('../helpers/isLoggedIn');
 const Job = require('../models/job');
+let locations = require('../helpers/locations');
 
 router.get('/dashboard', isLoggedIn, async (req, res) => {
     const user = req.app.get('user');
@@ -52,38 +53,36 @@ router.get('/dashboard_settings', async (req, res) => {
         data,
         user,
         countries: countries, 
+        locations,
         role: req.session.role, 
         layout: false 
     });
 });
 
 router.post('/dashboard_settings', async (req, res) => {
-    if (req.session.role == 1) {
-        const freelancer = await Freelancer.findOne({ _id: req.session._id });
-        if (freelancer) {
-            new_info = {
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                skills: req.body.skills,
-                minimal_hourly_rate: req.body.rate,
-                tag_line: req.body.tag_line,
-                nationality: req.body.nationality,
-                bio: req.body.bio,
-            }
-            await freelancer.updateOne(new_info);
-            return res.render('dashboard', { layout: false });
-        }
-    } else {
-        const employer = await Employer.findOne({ _id: req.session._id });
-        if (employer) {
-            new_info = {
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-            }
-            await employer.updateOne(new_info);
-            return res.render('dashboard', { layout: false });
-        }
+    const user = req.app.get('user');
+    if (req.session.role == 'freelancer') {
+        user.first_name = req.body.first_name;
+        user.last_name = req.body.last_name;
+        user.skills = req.body.skills;
+        user.minimal_hourly_rate = req.body.rate;
+        user.tag_line = req.body.tag_line;
+        user.nationality = req.body.nationality;
+        user.bio = req.body.bio;
+        await user.save();
+        res.send({ Message: 'Ok' });
     }
+    // } else {
+    //     const employer = await Employer.findOne({ _id: req.session._id });
+    //     if (employer) {
+    //         new_info = {
+    //             first_name: req.body.first_name,
+    //             last_name: req.body.last_name,
+    //         }
+    //         await employer.updateOne(new_info);
+    //         return res.render('dashboard', { layout: false });
+    //     }
+    // }
 });
 
 module.exports = router;
