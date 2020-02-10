@@ -6,6 +6,16 @@ const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 
+router.get('/tasks/bidders', (req, res) => {
+    const user = req.app.get('user');
+    res.render('dashboard-manage-bidders', { 
+        data: {
+            user,
+        }, 
+        layout: false 
+    });
+});
+
 router.get('/tasks/my_bids', async (req, res) => {
     const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();

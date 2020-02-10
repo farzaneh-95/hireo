@@ -8,7 +8,15 @@ const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 const isUserVerified = require('../helpers/isUserVerified');
 
-const upload = multer({ dest: 'public/' })
+router.get('/jobs/candidates', (req, res) => { 
+    const user = req.app.get('user');
+    return res.render('dashboard-manage-candidates', {
+        data: {
+            user,
+        },
+        layout: false,
+    });
+});
 
 router.get('/jobs/my_jobs', async (req, res) => {
     const user = req.app.get('user');
@@ -133,10 +141,6 @@ router.get('/jobs/:id', async (req, res) => {
         freelancer,
         layout: false,
     });
-});
-
-router.post('/jobs/apply', upload.single('file'), (req, res) => {
-    console.log(req.file);
 });
 
 module.exports = router;

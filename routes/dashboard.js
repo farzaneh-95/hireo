@@ -71,18 +71,13 @@ router.post('/dashboard_settings', async (req, res) => {
         user.bio = req.body.bio;
         await user.save();
         res.send({ Message: 'Ok' });
-    }
-    // } else {
-    //     const employer = await Employer.findOne({ _id: req.session._id });
-    //     if (employer) {
-    //         new_info = {
-    //             first_name: req.body.first_name,
-    //             last_name: req.body.last_name,
-    //         }
-    //         await employer.updateOne(new_info);
-    //         return res.render('dashboard', { layout: false });
-    //     }
-    // }
+    } else {
+            user.name = req.body.name;
+            user.location = req.body.location;
+            user.bio = req.body.bio;
+            await user.save();
+            res.send({ Message: 'Ok' });
+        }
 });
 
 module.exports = router;

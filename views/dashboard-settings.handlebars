@@ -550,8 +550,8 @@
 
 										<div class="col-xl-6">
 											<div class="submit-field">
-												<h5>First Name</h5>
-												<input type="text" class="with-border" id="first_name" value="{{user.name}}">
+												<h5>Name</h5>
+												<input type="text" class="with-border" id="emp_name" value="{{user.name}}">
 											</div>
 										</div>
 
@@ -576,7 +576,7 @@
 										<div class="col-xl-6">
 											<div class="submit-field">
 												<h5>Email</h5>
-												<input type="text" class="with-border" value="{{data.email}}">
+												<input type="text" class="with-border" value="{{data.email}}" disabled>
 											</div>
 										</div>
 
@@ -629,7 +629,7 @@
 
 				<!-- Button -->
 				<div class="col-xl-12">
-					<a href="#" class="button ripple-effect big margin-top-30" id="save_changes">Save Changes</a>
+					<a href="#" class="button ripple-effect big margin-top-30" id="save_employer">Save Changes</a>
 				</div>
 
 			</div>
@@ -709,7 +709,7 @@ $('#snackbar-user-status label').click(function() {
 		textColor: '#fff',
 		backgroundColor: '#383838'
 	}); 
-}); 
+});
 </script>
 
 <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
@@ -817,36 +817,69 @@ $('#snackbar-user-status label').click(function() {
 		});
 
 		$('#save_changes').on('click', function() {
-		const first_name = $('#first_name').val();
-		const last_name = $('#last_name').val();
-		let skills = [];
-		$('.keywords-list').children().each(function() {
-			skills.push(this.childNodes[1].textContent);
+			const first_name = $('#first_name').val();
+			const last_name = $('#last_name').val();
+			let skills = [];
+			$('.keywords-list').children().each(function() {
+				skills.push(this.childNodes[1].textContent);
+			});
+			const rate = $('#rate').val();
+			const tag_line = $('#tag_line').val();
+			const nationality = $('#nationality option:selected').text();
+			const bio = $('#bio').val();
+			$.ajax({
+				url: '/dashboard_settings',
+				method: 'POST',
+				contentType: 'application/json', 
+				data: JSON.stringify({ 
+					first_name, 
+					last_name, 
+					skills, 
+					rate, 
+					tag_line, 
+					nationality, 
+					bio 
+				}),
+				success: (data, status, xhr) => {
+					Snackbar.show({
+						text: 'Your profile has been changed!',
+						pos: 'bottom-center',
+						showAction: false,
+						actionText: "Dismiss",
+						duration: 3000,
+						textColor: '#fff',
+						backgroundColor: '#383838'
+					});
+				},
+			});
 		});
-		const rate = $('#rate').val();
-		const tag_line = $('#tag_line').val();
-		const nationality = $('#nationality option:selected').text();
-		const bio = $('#bio').val();
-		$.ajax({
-			url: '/dashboard_settings',
-			method: 'POST',
-			contentType: 'application/json', 
-			data: JSON.stringify({ 
-				first_name, 
-				last_name, 
-				skills, 
-				rate, 
-				tag_line, 
-				nationality, 
-				bio 
-			}),
-			success: (data, status, xhr) => {
-				window.location.href = '/dashboard_settings';
-			},
+
+		$('#save_employer').on('click', function() {
+			const name = $('#emp_name').val();
+			const location = $('#location option:selected').text();
+			const bio = $('#bio').val();
+			$.ajax({
+				url: '/dashboard_settings',
+				method: 'POST',
+				contentType: 'application/json', 
+				data: JSON.stringify({ 
+					name,
+					location,
+					bio,
+				}),
+				success: (data, status, xhr) => {
+					Snackbar.show({
+						text: 'Your profile has been changed!',
+						pos: 'bottom-center',
+						showAction: false,
+						actionText: "Dismiss",
+						duration: 3000,
+						textColor: '#fff',
+						backgroundColor: '#383838'
+					});
+				},
+			});
 		});
-	});
-	
-		
 	});
 
 	$('#logOut').on('click', () => {
