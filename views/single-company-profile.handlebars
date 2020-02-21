@@ -41,21 +41,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">خانه</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#">فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل‌ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژه‌ها</a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت‌ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -110,9 +110,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -161,9 +161,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -226,14 +226,14 @@
 		<div class="col-xl-8 col-lg-8 content-right-offset">
 
 			<div class="single-page-section">
-				<h3 class="margin-bottom-25">About Company</h3>
+				<h3 class="margin-bottom-25">معرفی شرکت</h3>
 				<p>{{data.company.bio}}</p>
 			</div>
 			
 			<!-- Boxed List -->
 			<div class="boxed-list margin-bottom-60">
 				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-business-center"></i> Open Positions</h3>
+					<h3><i class="icon-material-outline-business-center"></i> موقعیت‌های دیگر</h3>
 				</div>
 
 				<div class="listings-container compact-list-layout">
@@ -270,7 +270,7 @@
 			<!-- Boxed List -->
 			<div class="boxed-list margin-bottom-60">
 				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-thumb-up"></i> Reviews</h3>
+					<h3><i class="icon-material-outline-thumb-up"></i> نظرات</h3>
 				</div>
 				<ul class="boxed-list-ul">
 					{{#each data.reviews}}
@@ -302,7 +302,7 @@
 			<div class="sidebar-container">					
 				<!-- Widget -->
 				<div class="sidebar-widget">
-					<h3>Social Profiles</h3>
+					<h3>شبکه‌های اجتماعی</h3>
 					<div class="freelancer-socials margin-top-25">
 						<ul>
 							<li><a href="#" title="Dribbble" data-tippy-placement="top"><i class="icon-brand-dribbble"></i></a></li>
@@ -316,7 +316,7 @@
 
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
-					<h3>Share</h3>
+					<h3>اشتراک</h3>
 
 					<!-- Copy URL -->
 					<div class="copy-url">
@@ -328,7 +328,7 @@
 					<div class="share-buttons margin-top-25">
 						<div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
 						<div class="share-buttons-content">
-							<span>Interesting? <strong>Share It!</strong></span>
+							{{!-- <span>Interesting? <strong>Share It!</strong></span> --}}
 							<ul class="share-buttons-icons">
 								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
 								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
@@ -433,12 +433,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Candidates</h3>
+						<h3>برای داوطلبان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><a href="#"><span>شغل‌ها</span></a></li>
+							<li><a href="#"><span>ساخت رزومه</span></a></li>
+							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -446,12 +445,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Employers</h3>
+						<h3>برای کارفرمایان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><a href="#"><span>کاندیدها</span></a></li>
+							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
+							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -459,11 +457,10 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Helpful Links</h3>
+						<h3>لینک‌های مفید</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><a href="#"><span>تماس با ما</span></a></li>
+							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -471,18 +468,18 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Account</h3>
+						<h3>اکانت</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><a href="#"><span>ورود به سایت</span></a></li>
+							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
-					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
+					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
 						<input type="text" name="fname" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>

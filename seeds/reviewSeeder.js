@@ -1,4 +1,5 @@
 const faker = require('faker');
+faker.locale = 'fa';
 
 const Review = require('../models/review');
 

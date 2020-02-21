@@ -2,36 +2,36 @@ const Category = require('../models/category');
 
 const categories = [
     {
-        title: 'Web & Software Dev',
-        description: 'Software Engineer, Web / Mobile Developer & More',
+        title: 'توسعه وب و نرم‌افزار',
+        description: 'مهندسی نرم‌افزار و توسعه موبایل',
     },
     {
-        title: 'Data Science & Analitycs',
-        description: 'Data Specialist / Scientist, Data Analyst & More',
+        title: 'علم داده و آنالیز',
+        description: 'متخصص، تحلیلگر داده',
     },
     {
-        title: 'Accounting & Consulting',
-        description: 'Auditor, Accountant, Fnancial Analyst & More',
+        title: 'حساب‌داری و مشاوره',
+        description: 'تحلیلگر مالی، حسابدار، بازرسی',
     },
     {
-        title: 'Writing & Translations',
-        description: 'Copywriter, Creative Writer, Translator & More',
+        title: 'نویسندگی و ترجمه',
+        description: 'مترجم',
     },
     {
-        title: 'Sales & Marketing',
-        description: 'Brand Manager, Marketing Coordinator & More',
+        title: 'مارکتینگ و فروش',
+        description: 'مدیر برند، هماهنگی مارکت',
     },
     {
-        title: 'Graphics & Design',
-        description: 'Creative Director, Web Designer & More',
+        title: 'طراحی و گرافیک',
+        description: 'طراحی وب',
     },
     {
-        title: 'Digital Marketing',
-        description: 'Darketing Analyst, Social Profile Admin & More',
+        title: 'دیجیتال مارکتینگ',
+        description: 'تحلیلگر مارکت، مدیر مارکت',
     },
     {
-        title: 'Education & Training',
-        description: 'Advisor, Coach, Education Coordinator & More',
+        title: 'آموزش',
+        description: 'مربی',
     },
 ];
 

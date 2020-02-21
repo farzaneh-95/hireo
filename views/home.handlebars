@@ -45,21 +45,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/" class="current">Home</a></li>
+						<li><a href="/" class="current">خانه</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#">فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -114,9 +114,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -165,9 +165,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -177,7 +177,7 @@
 				{{else}}
 			
 				<div class="header-widget">
-					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+					<a href="#sign-in-dialog" id="register-btn" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>ورود / ثبت نام</span></a>
 				</div>
 				{{/if}}
 				<!-- Mobile Navigation Button -->
@@ -213,9 +213,9 @@
 			<div class="col-md-12">
 				<div class="banner-headline">
 					<h3>
-						<strong>Hire experts or be hired for any job, any time.</strong>
+						<strong>افراد متخصص استخدام کنید و یا در جایی که میخواهید استخدام شوید</strong>
 						<br>
-						<span>Thousands of small businesses use <strong class="color">Hireo</strong> to turn their ideas into reality.</span>
+						<span>شرکت ‌های بسیار زیادی از این سایت برای تبدیل ایده‌هاشان به واقعیت استفاده میکنند</span>
 					</h3>
 				</div>
 			</div>
@@ -227,15 +227,15 @@
 				<ul class="intro-stats margin-top-45 hide-under-992px">
 					<li>
 						<strong class="counter">{{data.quantity.jobsCount}}</strong>
-						<span>Jobs Posted</span>
+						<span>شغل پست شده</span>
 					</li>
 					<li>
 						<strong class="counter">{{data.quantity.tasksCount}}</strong>
-						<span>Tasks Posted</span>
+						<span>پروژه پست شده</span>
 					</li>
 					<li>
 						<strong class="counter">{{data.quantity.freelancersCount}}</strong>
-						<span>Freelancers</span>
+						<span>فریلنسر</span>
 					</li>
 				</ul>
 			</div>
@@ -254,7 +254,7 @@
 			<div class="col-xl-12">
 
 				<div class="section-headline centered margin-bottom-15">
-					<h3>Popular Job Categories</h3>
+					<h3>دسته بندی‌های شغلی</h3>
 				</div>
 
 				<!-- Category Boxes Container -->
@@ -288,8 +288,8 @@
 				
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>Featured Jobs</h3>
-					<a href="/jobs" class="headline-link">Browse All Jobs</a>
+					<h3>فرصت‌های شغلی</h3>
+					<a href="/jobs" class="headline-link">مشاهده همه</a>
 				</div>
 				
 				<!-- Jobs Container -->
@@ -327,7 +327,7 @@
 							</div>
 
 							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">Apply Now</span>
+							<span class="list-apply-button ripple-effect">درخواست دادن</span>
 						</div>
 					</a>	
 					{{/each}}
@@ -350,7 +350,7 @@
 			
 			<div class="col-xl-12">
 				<div class="section-headline centered margin-top-0 margin-bottom-45">
-					<h3>Featured Cities</h3>
+					<h3>شهرهای پرطرفدار</h3>
 				</div>
 			</div>
 			{{#each data.cities}}
@@ -359,7 +359,7 @@
 				<a href="/jobs?location={{this._id}}" class="photo-box" data-background-image="{{#equal this._id 'San Fransisco'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'New York'}}images/featured-city-02.jpg{{/equal}}{{#equal this._id 'Los Angeles'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'Seattle'}}images/featured-city-04.jpg{{/equal}}">
 					<div class="photo-box-content">
 						<h3>{{this._id}}</h3>
-						<span>{{this.count}} Jobs</span>
+						<span>{{this.count}} شغل</span>
 					</div>
 				</a>
 			</div>
@@ -378,8 +378,8 @@
 			<div class="col-xl-12">
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-25">
-					<h3>Highest Rated Freelancers</h3>
-					<a href="/freelancers" class="headline-link">Browse All Freelancers</a>
+					<h3>بهترین فریلنسرها</h3>
+					<a href="/freelancers" class="headline-link">مشاهده همه</a>
 				</div>
 			</div>
 
@@ -416,9 +416,9 @@
 						<div class="freelancer-details">
 							<div class="freelancer-details-list">
 								<ul>
-									<li>Location <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}</strong></li>
-									<li>Rate <strong>{{this.minimal_hourly_rate}} / hr</strong></li>
-									<li>Job Success <strong>{{this.success}}%</strong></li>
+									<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}</strong></li>
+									<li>امتیاز <strong>{{this.minimal_hourly_rate}} / hr</strong></li>
+									<li>درصد موفقیت <strong>{{this.success}}%</strong></li>
 								</ul>
 							</div>
 							<a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
@@ -521,12 +521,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Candidates</h3>
+						<h3>برای داوطلبان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><a href="#"><span>شغل‌ها</span></a></li>
+							<li><a href="#"><span>ساخت رزومه</span></a></li>
+							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -534,12 +533,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Employers</h3>
+						<h3>برای کارفرمایان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><a href="#"><span>کاندیدها</span></a></li>
+							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
+							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -547,11 +545,10 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Helpful Links</h3>
+						<h3>لینک‌های مفید</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><a href="#"><span>تماس با ما</span></a></li>
+							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -559,18 +556,18 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Account</h3>
+						<h3>اکانت</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><a href="#"><span>ورود به سایت</span></a></li>
+							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
-					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
+					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
 						<input type="text" name="fname" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>

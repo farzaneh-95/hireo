@@ -41,21 +41,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">خانه</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#">فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل‌ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژه‌ها</a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت‌ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -110,9 +110,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -161,9 +161,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -227,14 +227,14 @@
 			
 			<!-- Page Content -->
 			<div class="single-page-section">
-				<h3 class="margin-bottom-25">About Me</h3>
+				<h3 class="margin-bottom-25">درباره من</h3>
 				<p>{{data.freelancer.bio}}</p>
 			</div>
 
 			<!-- Boxed List -->
 			<div class="boxed-list margin-bottom-60">
 				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-thumb-up"></i> Work History and Feedback</h3>
+					<h3><i class="icon-material-outline-thumb-up"></i> سوابق کاری و فیدبک‌ها</h3>
 				</div>
 				<ul class="boxed-list-ul">
 					{{#each data.reviews}}
@@ -264,7 +264,7 @@
 			<!-- Boxed List -->
 			<div class="boxed-list margin-bottom-60">
 				<div class="boxed-list-headline">
-					<h3><i class="icon-material-outline-business"></i> Employment History</h3>
+					<h3><i class="icon-material-outline-business"></i> سوابق شغلی</h3>
 				</div>
 				<ul class="boxed-list-ul">
 					{{#each data.jobs}}
@@ -272,7 +272,7 @@
 						<div class="boxed-list-item">
 							<!-- Avatar -->
 							<div class="item-image">
-								<img src="{{this.employer_id.logo}}" alt="">
+								<img src="{{this.posted_by.logo}}" alt="">
 							</div>
 							
 							<!-- Content -->
@@ -303,12 +303,12 @@
 				
 				<!-- Profile Overview -->
 				<div class="profile-overview">
-					<div class="overview-item"><strong>${{data.freelancer.minimal_hourly_rate}}</strong><span>Hourly Rate</span></div>
-					<div class="overview-item"><strong>{{data.tasksDone}}</strong><span>Tasks Done</span></div>
+					<div class="overview-item"><strong>{{data.freelancer.minimal_hourly_rate}}</strong><span>حداقل نرخ</span></div>
+					<div class="overview-item"><strong>{{data.tasksDone}}</strong><span>پروژه‌های انجام‌شده</span></div>
 				</div>
 
 				<!-- Button -->
-				<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Make an Offer <i class="icon-material-outline-arrow-right-alt"></i></a>
+				<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">انتقاد یا پیشنهاد <i class="icon-material-outline-arrow-right-alt"></i></a>
 
 				<!-- Freelancer Indicators -->
 				<div class="sidebar-widget">
@@ -318,35 +318,35 @@
 						<div class="indicator">
 							<strong>{{data.freelancer.success}}%</strong>
 							<div class="indicator-bar" data-indicator-percentage="{{data.freelancer.success}}"><span></span></div>
-							<span>Job Success</span>
+							<span>درصد موفقیت</span>
 						</div>
 
 						<!-- Indicator -->
 						<div class="indicator">
 							<strong>{{data.freelancer.rec}}%</strong>
 							<div class="indicator-bar" data-indicator-percentage="{{data.freelancer.rec}}"><span></span></div>
-							<span>Recommendation</span>
+							<span>توصیه‌نامه‌ها</span>
 						</div>
 						
 						<!-- Indicator -->
 						<div class="indicator">
 							<strong>{{data.freelancer.onTime}}%</strong>
 							<div class="indicator-bar" data-indicator-percentage="{{data.freelancer.onTime}}"><span></span></div>
-							<span>On Time</span>
+							<span>انجام به‌موقع</span>
 						</div>	
 											
 						<!-- Indicator -->
-						<div class="indicator">
+						{{!-- <div class="indicator">
 							<strong>{{data.freelancer.onBudget}}%</strong>
 							<div class="indicator-bar" data-indicator-percentage="{{data.freelancer.onBudget}}"><span></span></div>
 							<span>On Budget</span>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 				
 				<!-- Widget -->
 				<div class="sidebar-widget">
-					<h3>Social Profiles</h3>
+					<h3>شبکه‌های اجتماعی</h3>
 					<div class="freelancer-socials margin-top-25">
 						<ul>
 							<li><a href="#" title="Dribbble" data-tippy-placement="top"><i class="icon-brand-dribbble"></i></a></li>
@@ -360,7 +360,7 @@
 
 				<!-- Widget -->
 				<div class="sidebar-widget">
-					<h3>Skills</h3>
+					<h3>مهارت‌ها</h3>
 					<div class="task-tags">
 						{{#each data.freelancer.skills}}
 						<span>{{this}}</span>
@@ -370,7 +370,7 @@
 
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
-					<h3>Share</h3>
+					<h3>اشتراک</h3>
 
 					<!-- Copy URL -->
 					<div class="copy-url">
@@ -382,7 +382,7 @@
 					<div class="share-buttons margin-top-25">
 						<div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
 						<div class="share-buttons-content">
-							<span>Interesting? <strong>Share It!</strong></span>
+							{{!-- <span>Interesting? <strong>Share It!</strong></span> --}}
 							<ul class="share-buttons-icons">
 								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
 								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
@@ -487,12 +487,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Candidates</h3>
+						<h3>برای داوطلبان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><a href="#"><span>شغل‌ها</span></a></li>
+							<li><a href="#"><span>ساخت رزومه</span></a></li>
+							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -500,12 +499,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Employers</h3>
+						<h3>برای کارفرمایان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><a href="#"><span>کاندیدها</span></a></li>
+							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
+							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -513,11 +511,10 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Helpful Links</h3>
+						<h3>لینک‌های مفید</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><a href="#"><span>تماس با ما</span></a></li>
+							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -525,18 +522,18 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Account</h3>
+						<h3>اکانت</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><a href="#"><span>ورود به سایت</span></a></li>
+							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
-					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
+					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
 						<input type="text" name="fname" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>

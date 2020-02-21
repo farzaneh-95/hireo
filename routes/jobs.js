@@ -8,6 +8,12 @@ const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 const isUserVerified = require('../helpers/isUserVerified');
 
+const upload = multer ({ dest: 'uploads/' })
+
+router.post('/jobs/apply', async (req, res) => {
+    res.redirect('/jobs')
+});
+
 router.get('/jobs/candidates', (req, res) => { 
     const user = req.app.get('user');
     return res.render('dashboard-manage-candidates', {

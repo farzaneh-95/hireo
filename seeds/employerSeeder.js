@@ -3,7 +3,7 @@ const faker = require('faker');
 const Employer = require('../models/employer');
 
 module.exports = async () => {
-    const locations = ['Los Angeles', 'San Fransisco', 'New York', 'Seattle'];
+    const locations = ['تهران', 'مشهد', 'اصفهان', 'کرمان'];
     const logos = ['/images/company-logo-01.png', '/images/company-logo-02.png', '/images/company-logo-03.png'];
     const employers = [];    
     for (let i = 0; i < 50; i++) {

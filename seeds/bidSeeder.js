@@ -1,4 +1,5 @@
 const faker = require('faker');
+faker.locale = 'fa';
 
 const Bid = require('../models/bid');
 

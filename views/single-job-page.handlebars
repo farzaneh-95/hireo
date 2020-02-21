@@ -32,21 +32,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">خانه</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#">فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل‌ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژه‌ها</a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت‌ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -101,9 +101,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -152,9 +152,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات/a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -195,7 +195,7 @@
 						<div class="header-image"><a href="/single-company-profile.html"><img src="{{employer_img}}" alt=""></a></div>
 						<div class="header-details">
 							<h3>{{job.title}}</h3>
-							<h5>About the Employer</h5>
+							<h5>درباره کارفرما</h5>
 							<ul>
 								<li><a href="/{{employer_link}}"><i class="icon-material-outline-business"></i> {{employer_name}}</a></li>
 								<li><div class="star-rating" data-rating="4.9"></div></li>
@@ -205,8 +205,8 @@
 					</div>
 					<div class="right-side">
 						<div class="salary-box">
-							<div class="salary-type">Annual Salary</div>
-							<div class="salary-amount">${{job.min_salary}} - ${{job.max_salary}}</div>
+							<div class="salary-type">حقوق سالیانه</div>
+							<div class="salary-amount">{{job.min_salary}} - {{job.max_salary}}</div>
 						</div>
 					</div>
 				</div>
@@ -225,11 +225,11 @@
 		<div class="col-xl-8 col-lg-8 content-right-offset">
 
 			<div class="single-page-section">
-				<h3 class="margin-bottom-25">Job Description</h3>
+				<h3 class="margin-bottom-25">شرح موقعیت شغلی</h3>
 				<p>{{job.description}}</p>
 			</div>
 			<div class="single-page-section">
-				<h3 class="margin-bottom-25">Similar Jobs</h3>
+				<h3 class="margin-bottom-25">موقعیت‌های شغلی مشابه</h3>
 
 				<!-- Listings Container -->
 				<div class="listings-container grid-layout">
@@ -264,7 +264,7 @@
 							<ul>
 								<li><i class="icon-material-outline-location-on"></i> {{this.location}}</li>
 								<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
-								<li><i class="icon-material-outline-account-balance-wallet"></i> ${{this.min_salary}}
+								<li><i class="icon-material-outline-account-balance-wallet"></i> {{this.min_salary}}
 								-${{this.max_salary}}</li>
 								<li><i class="icon-material-outline-access-time"></i>{{this.created_at}}</li>
 							</ul>
@@ -284,33 +284,33 @@
 
 				{{#equal role 'freelancer'}}
 					{{#equal hasApplied 0}}
-					<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></a>
+					<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></a>
 					{{/equal}}
 				{{/equal}}
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
 					<div class="job-overview">
-						<div class="job-overview-headline">Job Summary</div>
+						<div class="job-overview-headline">خلاصه موقعیت شغلی</div>
 						<div class="job-overview-inner">
 							<ul>
 								<li>
 									<i class="icon-material-outline-location-on"></i>
-									<span>Location</span>
+									<span>موقعیت</span>
 									<h5>{{job.location}}</h5>
 								</li>
 								<li>
 									<i class="icon-material-outline-business-center"></i>
-									<span>Job Type</span>
+									<span>نوع همکاری</span>
 									<h5>{{job.type}}</h5>
 								</li>
 								<li>
 									<i class="icon-material-outline-local-atm"></i>
-									<span>Salary</span>
-									<h5>${{job.min_salary}} - ${{job.max_salary}}</h5>
+									<span>حقوق</span>
+									<h5>{{job.min_salary}} - {{job.max_salary}}</h5>
 								</li>
 								<li>
 									<i class="icon-material-outline-access-time"></i>
-									<span>Date Posted</span>
+									<span>تاریخ پست موقعیت </span>
 									<h5>{{job.created_at}}</h5>
 								</li>
 							</ul>
@@ -320,7 +320,7 @@
 
 				<!-- Sidebar Widget -->
 				<div class="sidebar-widget">
-					<h3>Share</h3>
+					<h3>اشتراک</h3>
 
 					<!-- Copy URL -->
 					<div class="copy-url">
@@ -332,7 +332,7 @@
 					<div class="share-buttons margin-top-25">
 						<div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
 						<div class="share-buttons-content">
-							<span>Interesting? <strong>Share It!</strong></span>
+							{{!-- <span>Interesting? <strong>Share It!</strong></span> --}}
 							<ul class="share-buttons-icons">
 								<li><a href="#" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
 								<li><a href="#" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
@@ -433,12 +433,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Candidates</h3>
+						<h3>برای داوطلبان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><a href="#"><span>شغل‌ها</span></a></li>
+							<li><a href="#"><span>ساخت رزومه</span></a></li>
+							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -446,12 +445,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Employers</h3>
+						<h3>برای کارفرمایان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><a href="#"><span>کاندیدها</span></a></li>
+							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
+							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -459,11 +457,10 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Helpful Links</h3>
+						<h3>لینک‌های مفید</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><a href="#"><span>تماس با ما</span></a></li>
+							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -471,20 +468,20 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Account</h3>
+						<h3>اکانت</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><a href="#"><span>ورود به سایت</span></a></li>
+							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
-					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
+					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" value="" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -526,11 +523,11 @@
 		<div class="popup-tabs-container">
 
 			<!-- Tab -->
-			<form action="/jobs/apply" method="POST" class="popup-tab-content" id="apply-now-form">
+			<form action="/jobs/apply" method="POST" enctype="multipart/form-data" class="popup-tab-content" id="apply-now-form">
 				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>Attach File With CV</h3>
+					<h3>ضمیمه کردن فایل رزومه</h3>
 				</div>
 					
 				<!-- Form -->
@@ -550,13 +547,13 @@
 					<div class="uploadButton">
 						<input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
 						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
-						<span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span>
+						{{!-- <span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span> --}}
 					</div>
 					<!-- Button -->
 					
 				</div>
 				
-				<button id="submit-apply" class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">Apply Now <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button id="submit-apply" class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></button>
 
 			</form>
 
@@ -606,19 +603,6 @@ $('.copy-url-button').click(function() {
 </script>
 
 <script>
-	$('#submit-apply').on('click', () => {
-		const data = new FormData($('#apply-now-form')[0]);
-		console.log($('#upload-cv')[0].files[0]);
-		data.append('file', $('#upload-cv')[0].files[0]);
-		$.ajax({
-			url: '/jobs/apply',
-			data,
-			cache: false,
-			processData: false,
-			contentType: false,
-		});
-	});
-
 	$('#logOut').on('click', () => {
 		$.ajax({
 			url: '/logout',

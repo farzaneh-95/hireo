@@ -41,21 +41,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">خانه</a></li>
 
-						<li><a href="#">Find Work</a>
+						<li><a href="#">فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل‌ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژه‌ها</a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت‌ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -110,9 +110,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -161,9 +161,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -215,45 +215,45 @@
 				<div class="dashboard-nav">
 					<div class="dashboard-nav-inner">
 
-						<ul data-submenu-title="Start">
-							<li><a href="/dashboard" class="current"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-							<li><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> Reviews</a></li>
+						<ul data-submenu-title="شروع">
+							<li><a href="/dashboard" class="current"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+							<li><a href="/reviews/my_reviews"><i class="icon-material-outline-rate-review"></i> نظرات</a></li>
 						</ul>
 						
 						{{#equal data.user.role 'employer'}}
-						<ul data-submenu-title="Organize and Manage">
-							<li><a href="#"><i class="icon-material-outline-business-center"></i> Jobs</a>
+						<ul data-submenu-title="سازمان دادن و اداره کردن">
+							<li><a href="#"><i class="icon-material-outline-business-center"></i> شغل‌ها</a>
 								<ul class="dropdown-nav">
-									<li><a href="/jobs/my_jobs">Manage Jobs <span class="nav-tag">{{data.user.jobs.length}}</span></a></li>
-									<li><a href="/jobs/candidates">Manage Candidates</a></li>
-									<li><a href="/jobs/create">Post a Job</a></li>
+									<li><a href="/jobs/my_jobs">مدیریت شغل‌ها <span class="nav-tag">{{data.user.jobs.length}}</span></a></li>
+									<li><a href="/jobs/candidates">مدیریت کاندیدها</a></li>
+									<li><a href="/jobs/create">پست موقعیت شغلی</a></li>
 								</ul>	
 							</li>
-							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
+							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> پروژه‌ها</a>
 								<ul class="dropdown-nav">
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
-									<li><a href="/tasks/bidders">Manage Bidders</a></li>
-									<li><a href="/tasks/create">Post a Task</a></li>
+									<li><a href="/tasks/my_tasks">مدیریت پروژه‌ها <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
+									<li><a href="/tasks/bidders">مدیریت پروژه‌ها</a></li>
+									<li><a href="/tasks/create">پست پروژه‌</a></li>
 								</ul>	
 							</li>
 						</ul>
 						{{/equal}}
 
 						{{#equal data.user.role 'freelancer'}}
-						<ul data-submenu-title="Organize and Manage">
-							<li><a href="#"><i class="icon-material-outline-assignment"></i> Tasks</a>
+						<ul data-submenu-title="سازمان دادن و اداره کردن">
+							<li class="active-submenu"><a href="#"><i class="icon-material-outline-assignment"></i> پروژه‌ها</a>
 								<ul class="dropdown-nav">
-									<li><a href="/tasks/my_tasks">Manage Tasks <span class="nav-tag">{{data.user.tasks.length}}
+									<li><a href="/tasks/my_tasks">مدیریت پروژه‌ها <span class="nav-tag">{{data.user.tasks.length}}
 									</span></a></li>
-									<li><a href="/tasks/my_bids">My Active Bids </a></li>
+									<li><a href="/tasks/my_bids">پیشنهادهای من </a></li>
 								</ul>	
 							</li>
 						</ul>
 						{{/equal}}
 
-						<ul data-submenu-title="Account">
-							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-							<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+						<ul data-submenu-title="اکانت">
+							<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+							<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 						</ul>
 						
 					</div>
@@ -273,16 +273,16 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>Manage Tasks</h3>
+				<h3>مدیریت پروژه‌ها</h3>
 
 				<!-- Breadcrumbs -->
-				<nav id="breadcrumbs" class="dark">
+				{{!-- <nav id="breadcrumbs" class="dark">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Dashboard</a></li>
 						<li>Manage Tasks</li>
 					</ul>
-				</nav>
+				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -294,7 +294,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-assignment"></i> My Tasks</h3>
+							<h3><i class="icon-material-outline-assignment"></i> پروژه‌های من</h3>
 						</div>
 
 						<div class="content">
@@ -311,13 +311,13 @@
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><a href="#">{{this.name}}</a>
 												{{#equal this.status 1}}
-												<span class="dashboard-status-button red">Expired</span></h3>
+												<span class="dashboard-status-button red">منقضی شده</span></h3>
 												{{/equal}}
 												{{#equal this.status 2}}
-												<span class="dashboard-status-button yellow">Working</span></h3>
+												<span class="dashboard-status-button yellow">درحال انجام</span></h3>
 												{{/equal}}
 												{{#equal this.status 3}}
-												<span class="dashboard-status-button green">Done</span></h3>
+												<span class="dashboard-status-button green">تمام شده</span></h3>
 												{{/equal}}
 												<!-- Job Listing Footer -->
 												<div class="job-listing-footer">
@@ -331,17 +331,17 @@
 									
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
-										<li><strong>{{this.bids.length}}</strong><span>Bids</span></li>
-										<li><strong>${{this.bid_avg}}</strong><span>Avg. Bid</span></li>
-										<li><strong>${{this.min_budget}} - ${{this.max_budget}}</strong>
-										<span>{{this.budget_type}} Price</span>
+										<li><strong>{{this.bids.length}}</strong><span>پیشنهاد</span></li>
+										<li><strong>{{this.bid_avg}}</strong><span>میانگین قیمت‌های پیشنهادی</span></li>
+										<li><strong>{{this.min_budget}} - {{this.max_budget}}</strong>
+										<span>{{this.budget_type}} </span>
 										</li>
 										
 									</ul>
 
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible">
-										<a href="/tasks/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">{{this.bids.length}}</span></a>
+										<a href="/tasks/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> مدیریت پیشنهادها <span class="button-info">{{this.bids.length}}</span></a>
 									</div>
 								</li>
 								{{/each}}

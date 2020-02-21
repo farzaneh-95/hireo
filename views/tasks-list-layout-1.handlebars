@@ -41,21 +41,21 @@
 				<nav id="navigation">
 					<ul id="responsive">
 
-						<li><a href="/">Home</a></li>
+						<li><a href="/">خانه</a></li>
 
-						<li><a href="#" class="current">Find Work</a>
+						<li><a href="#" class="current">فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">Browse Jobs</a>
+								<li><a href="/jobs">شغل‌ها</a>
 								</li>
-								<li><a href="/tasks">Browse Tasks</a>
+								<li><a href="/tasks">پروژها</a>
 									
 								</li>
 							</ul>
 						</li>
 
-						<li><a href="/companies">Companies</a></li>
+						<li><a href="/companies">شرکت‌ها</a></li>
 
-						<li><a href="/freelancers">Freelancers</a></li>
+						<li><a href="/freelancers">فریلنسرها</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -110,9 +110,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -161,9 +161,9 @@
 							</div>
 							
 							<ul class="user-menu-small-nav">
-								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> Settings</a></li>
-								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
 					</div>
@@ -204,10 +204,10 @@
 				
 				<!-- Location -->
 				<div class="sidebar-widget">
-					<h3>Location</h3>
+					<h3>موقعیت</h3>
 					<div class="input-with-icon">
 						<div id="autocomplete-container">
-							<input id="autocomplete-input" type="text" placeholder="Location">
+							<input id="autocomplete-input" type="text" placeholder="موقعیت">
 						</div>
 						<i class="icon-material-outline-location-on"></i>
 					</div>
@@ -215,8 +215,8 @@
 
 				<!-- Category -->
 				<div class="sidebar-widget">
-					<h3>Category</h3>
-					<select id="categories" class="selectpicker default" data-selected-text-format="count" data-size="7" title="All Categories" >
+					<h3>دسته‌بندی‌ها</h3>
+					<select id="categories" class="selectpicker default" data-selected-text-format="count" data-size="7" title="همه دسته‌بندی‌ها" >
 						{{#each data.categories}}
 						<option value="{{this._id}}">{{this.title}}</option>
 						{{/each}}
@@ -225,10 +225,10 @@
 
 				<!-- Keywords -->
 				<div class="sidebar-widget">
-					<h3>Title</h3>
+					<h3>عنوان</h3>
 					<div class="keywords-container">
 						<div class="keyword-input-container">
-							<input id="search-title" type="text" class="keyword-input" placeholder="e.g. task title"/>
+							<input id="search-title" type="text" class="keyword-input" placeholder="عنوان شغلی"/>
 						</div>
 						<div class="keywords-list"><!-- keywords go here --></div>
 						<div class="clearfix"></div>
@@ -237,13 +237,13 @@
 
 				<div class="sidebar-widget">
 
-					<button class="button ripple-effect full-width" id="submit-filter">Submit</button>
+					<button class="button ripple-effect full-width" id="submit-filter">فیلتر کن</button>
 
 				</div>
 
 				<div class="sidebar-widget">
 					
-					<button class="button ripple-effect full-width" style="background-color: #303030;" id="clear">Clear Filters</button>
+					<button class="button ripple-effect full-width" style="background-color: #303030;" id="clear">پاک کن</button>
 					<div class="clearfix"></div>
 
 				</div>
@@ -282,10 +282,10 @@
 					<div class="task-listing-bid">
 						<div class="task-listing-bid-inner">
 							<div class="task-offers">
-								<strong>${{this.min_budget}} - ${{this.max_budget}}</strong>
-								<span>{{this.budget_type}} Price</span>
+								<strong>{{this.min_budget}} - {{this.max_budget}}</strong>
+								<span>{{this.budget_type}} </span>
 							</div>
-							<span class="button button-sliding-icon ripple-effect">Bid Now <i class="icon-material-outline-arrow-right-alt"></i></span>
+							<span class="button button-sliding-icon ripple-effect">ارسال پیشنهاد <i class="icon-material-outline-arrow-right-alt"></i></span>
 						</div>
 					</div>
 				</a>
@@ -401,12 +401,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Candidates</h3>
+						<h3>برای داوطلبان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Jobs</span></a></li>
-							<li><a href="#"><span>Add Resume</span></a></li>
-							<li><a href="#"><span>Job Alerts</span></a></li>
-							<li><a href="#"><span>My Bookmarks</span></a></li>
+							<li><a href="#"><span>شغل‌ها</span></a></li>
+							<li><a href="#"><span>ساخت رزومه</span></a></li>
+							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -414,12 +413,11 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>For Employers</h3>
+						<h3>برای کارفرمایان</h3>
 						<ul>
-							<li><a href="#"><span>Browse Candidates</span></a></li>
-							<li><a href="#"><span>Post a Job</span></a></li>
-							<li><a href="#"><span>Post a Task</span></a></li>
-							<li><a href="#"><span>Plans & Pricing</span></a></li>
+							<li><a href="#"><span>کاندیدها</span></a></li>
+							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
+							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -427,11 +425,10 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Helpful Links</h3>
+						<h3>لینک‌های مفید</h3>
 						<ul>
-							<li><a href="#"><span>Contact</span></a></li>
-							<li><a href="#"><span>Privacy Policy</span></a></li>
-							<li><a href="#"><span>Terms of Use</span></a></li>
+							<li><a href="#"><span>تماس با ما</span></a></li>
+							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -439,18 +436,18 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>Account</h3>
+						<h3>اکانت</h3>
 						<ul>
-							<li><a href="#"><span>Log In</span></a></li>
-							<li><a href="#"><span>My Account</span></a></li>
+							<li><a href="#"><span>ورود به سایت</span></a></li>
+							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i> Sign Up For a Newsletter</h3>
-					<p>Weekly breaking news, analysis and cutting edge advices on job searching.</p>
+					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
 						<input type="text" name="fname" placeholder="Enter your email address">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
