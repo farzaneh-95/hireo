@@ -1,15 +1,15 @@
 const faker = require('faker');
-faker.locale = 'fa';
 
 const Job = require('../models/job');
 
 module.exports = async (categories, employers, freelancers) => {
-    const locations = ['Los Angeles', 'San Fransisco', 'New York', 'Seattle'];
+    const locations = ['تهران', 'مشهد', 'اصفهان', 'کرمان'];
     const skills = ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML5', 'Mongodb', 'React', 'Vuejs', 'Photoshop', 'Redis'];
     const jobs = [];
+    const titles = ['پشتیبان نرم افزار', 'مهندس نرم افزار', 'برنامه نویس react', 'برنامه نویس بک اند', 'گرافیست', 'مترجم'];
     for (let i = 0; i < 219; i++) {
         jobs.push({
-            title: faker.lorem.word(),
+            title: faker.random.arrayElement(titles),
             type: faker.random.number(4),
             category: categories[Math.floor(Math.random() * categories.length)]._id,
             location: locations[faker.random.number(3)],
