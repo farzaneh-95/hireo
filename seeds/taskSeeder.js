@@ -1,5 +1,5 @@
 const faker = require('faker');
-faker.locale = 'fa';
+// faker.locale = 'fa';
 
 const Task = require('../models/task');
 
