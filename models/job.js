@@ -100,10 +100,10 @@ const jobSchema = new mongoose.Schema({
 
     applies: [applySchema],
 
-    freelancer_id: {
+    freelancer_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Freelancer',
-    },
+    }],
 });
 
 jobSchema.plugin(mongoosePaginate);

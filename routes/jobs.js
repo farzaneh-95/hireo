@@ -19,13 +19,12 @@ router.post('/jobs/apply', async (req, res) => {
         return res.status(400).send( 'قبلا درخواست داده‌اید' );
     }
     const job = await Job.findById(req.body.job_id);
-    console.log(job);
     const candidate = {
         freelancer_id: req.session._id,
         phone: req.body.phone_number,
         created_at: new Date(), 
     };
-    job.freelancer_id = req.session._id;
+    job.freelancer_id.push(req.session._id);
     job.applies.push(candidate);
     await job.save();
     return res.status(201).send({ Message: 'Ok' });
