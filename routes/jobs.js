@@ -51,8 +51,12 @@ router.get('/jobs/my_jobs', async (req, res) => {
             .sort({ created_at: 'desc' });
         
         const tempJobs = [];
-        myJobs.forEach(job => {
+        myJobs.forEach(async job => {
             tempJobs.push({ job: job, applyCount: job.applies.length })
+            if (Date.parse(job.created_at) < Date.now()) {
+                job.status = 2;
+                await job.save();
+            }
         });
         res.render('dashboard-manage-jobs', { data: { jobs: tempJobs, user }, layout: false, });
     }

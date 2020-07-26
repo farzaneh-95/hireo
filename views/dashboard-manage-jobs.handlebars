@@ -313,12 +313,9 @@
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><a href="#">{{this.job.title}}</a>
 												{{#equal this.job.status 1}}
-													<span class="dashboard-status-button yellow">در حال منقضی شدن</span>
+													<span class="dashboard-status-button green">در حال انجام</span>
 												{{/equal}}
 												{{#equal this.job.status 2}}
-													<span class="dashboard-status-button yellow">در حال انجام</span>
-												{{/equal}}
-												{{#equal this.job.status 3}}
 													<span class="dashboard-status-button red">منقضی شده</span>
 												{{/equal}}
 												

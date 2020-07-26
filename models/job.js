@@ -4,10 +4,8 @@ const mongoosePaginate = require('mongoose-paginate');
 const types = ['Full Time', 'Freelance', 'Part Time', 'Internship', 'Temporary'];
 
 const status = {
-    Expiring: 1,
-    Working: 2,
-    Expired: 3,
-    WaitingForApproval: 4,
+    Working: 1,
+    Expired: 2,
 };
 
 const applySchema = new mongoose.Schema({
