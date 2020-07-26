@@ -30,11 +30,13 @@ router.post('/jobs/apply', async (req, res) => {
     return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/jobs/:id/candidates', (req, res) => { 
+router.get('/jobs/:id/candidates', async (req, res) => { 
     const user = req.app.get('user');
+    const candidates = (await Job.find({_id: req.params.id}).populate('applies.freelancer_id').exec())[0].applies;
     return res.render('dashboard-manage-candidates', {
         data: {
             user,
+            candidates,
         },
         layout: false,
     });
