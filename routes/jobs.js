@@ -11,10 +11,27 @@ const isUserVerified = require('../helpers/isUserVerified');
 const upload = multer ({ dest: 'uploads/' })
 
 router.post('/jobs/apply', async (req, res) => {
-    res.redirect('/jobs')
+    if (req.body.phone_number === '') {
+        return res.status(400).send('شماره تلفن را وارد کنید');
+    }
+    const exists = await Job.exists({ _id: req.body.job_id, freelancer_id: req.session._id });
+    if (exists) {
+        return res.status(400).send( 'قبلا درخواست داده‌اید' );
+    }
+    const job = await Job.findById(req.body.job_id);
+    console.log(job);
+    const candidate = {
+        freelancer_id: req.session._id,
+        phone: req.body.phone_number,
+        created_at: new Date(), 
+    };
+    job.freelancer_id = req.session._id;
+    job.applies.push(candidate);
+    await job.save();
+    return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/jobs/candidates', (req, res) => { 
+router.get('/jobs/:id/candidates', (req, res) => { 
     const user = req.app.get('user');
     return res.render('dashboard-manage-candidates', {
         data: {
@@ -52,9 +69,9 @@ router.get('/jobs/create', isEmployer, async (req, res) => {
     });
 });
 
-router.post('/jobs', isEmployer, isUserVerified, async (req, res) => {
-    if (!req.app.get('employer').name || !req.app.get('employer').location) {
-        return res.status(400).send({ Error: 'Please Complete Your ' });
+router.post('/jobs', async (req, res) => {
+    if (!req.app.get('user').name || !req.app.get('user').location) {
+        return res.status(400).send({ Error: 'Please Complete Your Profile' });
     }
     const job = await new Job({
         title: req.body.title,

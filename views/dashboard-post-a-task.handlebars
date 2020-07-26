@@ -635,7 +635,7 @@ $('#snackbar-user-status label').click(function() {
 				method: 'POST',
 				contentType: 'application/json',
 				data,
-				success: (result, statudCode, xhr) => {
+				success: (result, statusCode, xhr) => {
 					$('success-message').text('Your Job Posted');
 					$('#project_name').val('');
 					$('#autocomplete-input').val('');

@@ -313,11 +313,11 @@
 									<div class="submit-field">
 										<h5>نوع قرارداد</h5>
 										<select id="job-type"class="selectpicker with-border" data-size="7" title="انتخاب کنید ...">
-											<option>تمام وقت</option>
-											<option>فریلنس</option>
-											<option>پاره‌وقت</option>
-											<option>کارآموزی</option>
-											<option>موقت</option>
+											<option value="0">تمام وقت</option>
+											<option value="1">فریلنس</option>
+											<option value="2">پاره‌وقت</option>
+											<option value="3">کارآموزی</option>
+											<option value="4">موقت</option>
 										</select>
 									</div>
 								</div>
@@ -591,7 +591,7 @@ $('#snackbar-user-status label').click(function() {
 
 	$('#job-submit').on('click', () => {
 		const title = $('#job-title').val();
-		const type = $('#job-type option:selected').text();
+		const type = $('#job-type option:selected').val();
 		const category = $('#job-category option:selected').val();
 		const location = $('#autocomplete-input').val();
 		const min = $('#job-min').val();

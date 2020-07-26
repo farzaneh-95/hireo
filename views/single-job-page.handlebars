@@ -535,7 +535,8 @@
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-account-circle"></i>
 						{{#equal hasApplied 0}}
-						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/>
+						{{!-- <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/> --}}
+						<input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="Phone Number" required/>
 						{{/equal}}
 					</div>
 					<div class="input-with-icon-left">
@@ -611,6 +612,35 @@ $('.copy-url-button').click(function() {
 				window.location.href = '/';
 			}
 		});
+	});
+
+	$('#submit-apply').on('click', () => {
+		const phone_number = $('#phone').val();
+		const email = $('#emailaddress').val();
+		$('#small-dialog').remove();
+		$.ajax({
+			'url': '/jobs/apply',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				phone_number,
+				email,
+				job_id: window.location.href.split('jobs/')[1],
+			}),
+			error: (xhr, status, err) => {
+				Snackbar.show({
+					text: xhr.responseText,
+				});
+			},
+			success: (data, statusCode, xhr) => {
+				Snackbar.show({
+					text: 'درخواست شما فرستاده شد',
+				});
+			},
+		});
+		setTimeout(function(){
+			location.reload(true);
+		}, 1000);
 	});
 </script>
 
