@@ -37,7 +37,7 @@ app.set('view engine', 'handlebars');
 
 app.use('/', isUser, homeRouter)
 app.use('/', isUser, authRouter);
-app.use('/', isUser, taskRouter);
+app.use('/tasks', isUser, taskRouter);
 app.use('/', isUser, dashboardRouter);
 app.use('/', isUser, jobRouter);
 app.use('/', isUser, bidRouter);

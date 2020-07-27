@@ -329,7 +329,12 @@
 									
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
-										<li><strong>{{this.bids.length}}</strong><span>پیشنهاد</span></li>
+                                        {{#unless this.bids.length}}
+                                            <li><strong>0</strong><span>پیشنهاد</span></li>
+                                        {{/unless}}
+                                        {{#if this.bids.length}}
+										    <li><strong>{{ this.bids.length }}</strong><span>پیشنهاد</span></li>
+                                        {{/if}}
 										<li><strong>{{this.bid_avg}}</strong><span>میانگین قیمت‌های پیشنهادی</span></li>
 										<li><strong>{{this.min_budget}} - {{this.max_budget}}</strong>
 										<span>{{this.budget_type}} </span>
@@ -339,7 +344,14 @@
 
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible">
-										<a href="/tasks/{{this._id}}/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> مدیریت پیشنهادها <span class="button-info">{{this.bids.length}}</span></a>
+										<a href="/tasks/{{this._id}}/bidders" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> مدیریت پیشنهادها
+                                            {{#unless this.bids.length}}
+                                                <span class="button-info">0</span>
+                                            {{/unless}}
+                                            {{#if this.bids.length}}
+                                                <span class="button-info">{{ this.bids.length }}</span>
+                                            {{/if}}
+                                        </a>
 									</div>
 								</li>
 								{{/each}}

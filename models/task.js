@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
-const budgetType = ['Fixed', 'Hourly'];
+const budgetType = ['ثابت', 'ساعتی'];
 
 const status = {
     Expiring: 1,

@@ -6,7 +6,7 @@ const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 
-router.get('/tasks/:id/bidders', async (req, res) => {
+router.get('/:id/bidders', async (req, res) => {
     const user = req.app.get('user');
     const task = await Task.findById(req.params.id);
     const bids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
@@ -20,7 +20,7 @@ router.get('/tasks/:id/bidders', async (req, res) => {
     });
 });
 
-router.get('/tasks/my_bids', async (req, res) => {
+router.get('/my_bids', async (req, res) => {
     const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();
     return res.render('dashboard-my-active-bids', {
@@ -32,51 +32,25 @@ router.get('/tasks/my_bids', async (req, res) => {
     });
 });
 
-router.get('/tasks/my_tasks', async (req, res) => {
-    const user = req.app.get('user');
-    let bids;
-    if (req.session.role === 'freelancer') {
-        bids = await Bid.find({ freelancer_id: req.session._id }).lean(true);
+router.get('/my_tasks', async (req, res) => {
+    const user = { ...req.app.get('user') };
+    if (req.session.role === 'employer') {
         user.tasks.forEach(task => {
-            task.created_at = task.created_at.toDateString();
-            task.budget_type = task.budget_type === 0  ? 'Fixed' : 'Hourly'; 
-            let count = 0;
-            const temp = [];
-            bids.forEach(bid => {
-                if (bid.task_id.toString() === task._id.toString()) {
-                    temp.push(bid);
-                    count += bid.minimal_rate;
-                }
-            });
-            task.bids = temp;
-            task.bid_avg = Math.floor(count / temp.length);
-        });
-    } else if (req.session.role === 'employer') {
-        bids = await Bid.find({ task_id: { $in: user.tasks.map(task => task._id) } }).lean(true);
-        user.tasks.forEach(task => {
-            task.created_at = task.created_at.toDateString();
-            task.budget_type = task.budget_type === 0  ? 'Fixed' : 'Hourly'; 
-            let count = 0;
-            const temp = [];
-            bids.forEach(bid => {
-                if (bid.task_id.toString() === task._id.toString()) {
-                    temp.push(bid);
-                    count += bid.minimal_rate;
-                }
-            });
-            task.bids = temp;
-            task.bid_avg = Math.floor(count / temp.length);
+            const bids = Bid.find({ task_id: task._id });
+            let minimalRatesSum = 0;
+            bids.map(bid => { minimalRatesSum += bid.minimal_rate });
+             
+            task.bids = bids;
+            task.bid_avg = Math.floor(minimalRatesSum / bids.length) || 0;
         });
     }
     return res.render('dashboard-manage-tasks', {
-        data: { 
-            user,
-        }, 
+        data: { user }, 
         layout: false,
     });
 });
 
-router.get('/tasks/create', isEmployer, async (req, res) => {
+router.get('/create', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const categories = await Category.find({});
     return res.render('dashboard-post-a-task', {
@@ -89,7 +63,7 @@ router.get('/tasks/create', isEmployer, async (req, res) => {
     });
 });
 
-router.get('/tasks/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     let task = await Task.findById(req.params.id);
     if (!task) {
@@ -113,7 +87,7 @@ router.get('/tasks/:id', async (req, res) => {
     });
 });
 
-router.get('/tasks', async (req, res) => {
+router.get('/', async (req, res) => {
     const user = req.app.get('user');
     const categories = await Category.find();
     const query = Task
@@ -146,7 +120,7 @@ router.get('/tasks', async (req, res) => {
     });
 });
 
-router.post('/tasks', async (req, res) => {
+router.post('/', async (req, res) => {
     const data = {
         name: req.body.projectName,
         category_id: req.body.categoryId,
