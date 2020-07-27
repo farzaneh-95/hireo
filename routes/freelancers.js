@@ -6,7 +6,7 @@ const Task = require('../models/task');
 const Review = require('../models/review');
 const Job = require('../models/job');
 
-router.get('/freelancers', async (req, res) => {
+router.get('/', async (req, res) => {
     const user = req.app.get('user');
     const query = Freelancer.find();
     if (req.query.location) {
@@ -29,7 +29,7 @@ router.get('/freelancers', async (req, res) => {
     });
 });
 
-router.get('/freelancers/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     const freelancer = await Freelancer.findById(req.params.id);
     freelancer.view_count++;

@@ -37,13 +37,13 @@ app.set('view engine', 'handlebars');
 
 app.use('/', isUser, homeRouter)
 app.use('/', isUser, authRouter);
-app.use('/', isUser, taskRouter);
+app.use('/tasks', isUser, taskRouter);
 app.use('/', isUser, dashboardRouter);
-app.use('/', isUser, jobRouter);
+app.use('/jobs', isUser, jobRouter);
 app.use('/', isUser, bidRouter);
-app.use('/', isUser, reviewRouter);
-app.use('/', isUser, freelancerRouter);
-app.use('/', isUser, companyRouter);
+app.use('/reviews', isUser, reviewRouter);
+app.use('/freelancers', isUser, freelancerRouter);
+app.use('/companies', isUser, companyRouter);
 
 app.use(isUser, (req, res) => {
     const user = req.app.get('user');

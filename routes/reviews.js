@@ -5,7 +5,7 @@ const router = require('express').Router();
 const Task = require('../models/task');
 const Review = require('../models/review');
 
-router.get('/reviews/my_reviews', async (req, res) => {
+router.get('/my_reviews', async (req, res) => {
     const user = req.app.get('user');
     if (req.session.role === 'employer') {
         const tasks = await Task
@@ -70,7 +70,7 @@ router.get('/reviews/my_reviews', async (req, res) => {
     }
 });
 
-router.post('/reviews', async (req, res) => {
+router.post('/', async (req, res) => {
     const rev = new Review ({
         reviewer: req.session._id,
         reviewee: req.body.reviewee_id,

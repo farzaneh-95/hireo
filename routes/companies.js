@@ -4,7 +4,7 @@ const Employer = require('../models/employer');
 const Job = require('../models/job');
 const Review = require('../models/review');
 
-router.get('/companies', async (req, res) => {
+router.get('/', async (req, res) => {
     const companies = await Employer.find().sort({ rate: 'desc' }).limit(9);
     const user = req.app.get('user');
     res.render('browse-companies', {
@@ -16,7 +16,7 @@ router.get('/companies', async (req, res) => {
     });
 });
 
-router.get('/companies/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     const company = await Employer.findById(req.params.id);
     const jobs = await Job.find({ posted_by: company._id, status: 1 }).limit(3);

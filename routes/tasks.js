@@ -20,7 +20,7 @@ router.get('/tasks/:id/bidders', async (req, res) => {
     });
 });
 
-router.get('/tasks/my_bids', async (req, res) => {
+router.get('/my_bids', async (req, res) => {
     const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();
     return res.render('dashboard-my-active-bids', {
@@ -32,7 +32,7 @@ router.get('/tasks/my_bids', async (req, res) => {
     });
 });
 
-router.get('/tasks/my_tasks', async (req, res) => {
+router.get('/my_tasks', async (req, res) => {
     const user = req.app.get('user');
     let bids;
     if (req.session.role === 'freelancer') {
@@ -76,7 +76,7 @@ router.get('/tasks/my_tasks', async (req, res) => {
     });
 });
 
-router.get('/tasks/create', isEmployer, async (req, res) => {
+router.get('/create', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const categories = await Category.find({});
     return res.render('dashboard-post-a-task', {
@@ -89,7 +89,7 @@ router.get('/tasks/create', isEmployer, async (req, res) => {
     });
 });
 
-router.get('/tasks/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     let task = await Task.findById(req.params.id);
     if (!task) {
@@ -113,7 +113,7 @@ router.get('/tasks/:id', async (req, res) => {
     });
 });
 
-router.get('/tasks', async (req, res) => {
+router.get('/', async (req, res) => {
     const user = req.app.get('user');
     const categories = await Category.find();
     const query = Task
@@ -146,7 +146,7 @@ router.get('/tasks', async (req, res) => {
     });
 });
 
-router.post('/tasks', async (req, res) => {
+router.post('/', async (req, res) => {
     const data = {
         name: req.body.projectName,
         category_id: req.body.categoryId,
