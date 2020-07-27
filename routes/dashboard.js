@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
 const Task = require('../models/task');
+const Bid  = require('../models/bid');
 const Review = require('../models/review');
 const countries = require('../helpers/countries');
 const isLoggedIn = require('../helpers/isLoggedIn');
@@ -14,8 +15,8 @@ router.get('/dashboard', isLoggedIn, async (req, res) => {
     const data = req.app.get('freelancer') || req.app.get('employer');
     data.first_name = data.first_name || 'New User';  
     if (req.session.role === 'freelancer') {
-        const wonTasks = await Task.find({ freelancer_id: req.session._id }).countDocuments();
-        const appliedJobs = await Job.find({ freelancer_id: req.session._id, status: 4 }).countDocuments();
+        const wonTasks = await Bid.find({ freelancer_id: req.session._id, accepted: true }).countDocuments();
+        const appliedJobs = await Job.find({ freelancer_id: req.session._id }).countDocuments();
         const reviewCount = await Review.find({ reviewee: req.session._id }).countDocuments();
         return res.render('dashboard', {
             data,

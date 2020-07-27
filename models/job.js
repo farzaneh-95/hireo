@@ -24,6 +24,11 @@ const applySchema = new mongoose.Schema({
         type: String,
     },
 
+    accepted: {
+        type: Boolean,
+        default: false,
+    },
+
     created_at: {
         type: Date,
         requried: true,
@@ -92,8 +97,7 @@ const jobSchema = new mongoose.Schema({
 
     status: {
         type: Number,
-        default: 1,
-        required: true,
+        // default: status => Date.parse(this.created_at) + 12096e5 > Date.now() ? status = 1 : status = 2 ,
     },
 
     applies: [applySchema],

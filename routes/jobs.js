@@ -10,7 +10,7 @@ const isUserVerified = require('../helpers/isUserVerified');
 
 const upload = multer ({ dest: 'uploads/' })
 
-router.post('/jobs/apply', async (req, res) => {
+router.post('/apply', async (req, res) => {
     if (req.body.phone_number === '') {
         return res.status(400).send('شماره تلفن را وارد کنید');
     }
@@ -30,7 +30,7 @@ router.post('/jobs/apply', async (req, res) => {
     return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/jobs/:id/candidates', async (req, res) => { 
+router.get('/:id/candidates', async (req, res) => { 
     const user = req.app.get('user');
     const candidates = (await Job.find({_id: req.params.id}).populate('applies.freelancer_id').exec())[0].applies;
     return res.render('dashboard-manage-candidates', {
@@ -42,7 +42,7 @@ router.get('/jobs/:id/candidates', async (req, res) => {
     });
 });
 
-router.get('/jobs/my_jobs', async (req, res) => {
+router.get('/my_jobs', async (req, res) => {
     const user = req.app.get('user');
     if (req.session.role === 'employer') {
         const myJobs = await Job
@@ -53,7 +53,7 @@ router.get('/jobs/my_jobs', async (req, res) => {
         const tempJobs = [];
         myJobs.forEach(async job => {
             tempJobs.push({ job: job, applyCount: job.applies.length })
-            if (Date.parse(job.created_at) < Date.now()) {
+            if (Date.parse(job.created_at) + 12096e5 < Date.now()) {
                 job.status = 2;
                 await job.save();
             }
@@ -62,7 +62,7 @@ router.get('/jobs/my_jobs', async (req, res) => {
     }
 });
 
-router.get('/jobs/create', isEmployer, async (req, res) => {
+router.get('/create', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const categories = await Category.find({});
     return res.render('dashboard-post-a-job', {
@@ -74,7 +74,7 @@ router.get('/jobs/create', isEmployer, async (req, res) => {
     });
 });
 
-router.post('/jobs', async (req, res) => {
+router.post('/', async (req, res) => {
     if (!req.app.get('user').name || !req.app.get('user').location) {
         return res.status(400).send({ Error: 'Please Complete Your Profile' });
     }
@@ -96,7 +96,7 @@ router.post('/jobs', async (req, res) => {
         .send({ Message: 'Ok' });
 });
 
-router.get('/jobs', async (req, res) => {
+router.get('/', async (req, res) => {
     const user = req.app.get('user');
     const query = Job
         .where('status')
@@ -128,7 +128,7 @@ router.get('/jobs', async (req, res) => {
     });
 });
 
-router.get('/jobs/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     const job = await Job.findOne({ status: 1, _id: req.params.id });
     if (!job) {

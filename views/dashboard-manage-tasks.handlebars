@@ -309,13 +309,10 @@
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><a href="#">{{this.name}}</a>
 												{{#equal this.status 1}}
-												<span class="dashboard-status-button green">مشاهده نشده</span></h3>
+												<span class="dashboard-status-button green">درحال انجام</span></h3>
 												{{/equal}}
 												{{#equal this.status 2}}
-												<span class="dashboard-status-button yellow">درحال انجام</span></h3>
-												{{/equal}}
-												{{#equal this.status 3}}
-												<span class="dashboard-status-button red">تمام شده</span></h3>
+												<span class="dashboard-status-button red">منقضی شده</span></h3>
 												{{/equal}}
 												<!-- Job Listing Footer -->
 												<div class="job-listing-footer">

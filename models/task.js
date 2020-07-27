@@ -4,10 +4,8 @@ const mongoosePaginate = require('mongoose-paginate');
 const budgetType = ['ثابت', 'ساعتی'];
 
 const status = {
-    Expiring: 1,
-    Working: 2,
-    Done: 3,
-    Expired: 4,
+    Working: 1,
+    Expired: 2,
 };
 
 const taskSchema = new mongoose.Schema({
