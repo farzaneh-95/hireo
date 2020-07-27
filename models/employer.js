@@ -6,7 +6,6 @@ const employerSchema = new mongoose.Schema({
         required: true,
         unique: true,
         maxlength: 200,
-        trim: true,
     },
 
     password: {

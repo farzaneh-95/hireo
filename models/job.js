@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
-const types = ['Full Time', 'Freelance', 'Part Time', 'Internship', 'Temporary'];
+const types = ['تمام وقت', 'فریلنسر', 'پاره وقت', 'کارآموز', 'موقت'];
 
 const status = {
     Working: 1,

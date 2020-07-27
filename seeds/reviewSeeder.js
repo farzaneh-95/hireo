@@ -12,7 +12,7 @@ module.exports = async (freelancers, employers, tasks) => {
                 reviewee: task.employer_id,
                 task: task._id,
                 score: faker.random.number({ min: 2, max: 5 }),
-                comment: faker.lorem.sentences(2),
+                comment: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ',
                 created_at: new Date(),
             });
             revs.push({
@@ -20,7 +20,7 @@ module.exports = async (freelancers, employers, tasks) => {
                 reviewee: task.freelancer_id,
                 task: task._id,
                 score: faker.random.number({ min: 2, max: 5 }),
-                comment: faker.lorem.sentences(2),
+                comment: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ',
                 created_at: new Date(),
             });
         }
