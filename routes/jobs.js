@@ -53,7 +53,7 @@ router.get('/my_jobs', async (req, res) => {
         const tempJobs = [];
         myJobs.forEach(async job => {
             tempJobs.push({ job: job, applyCount: job.applies.length })
-            if (Date.parse(job.created_at) < Date.now()) {
+            if (Date.parse(job.created_at) + 12096e5 < Date.now()) {
                 job.status = 2;
                 await job.save();
             }

@@ -24,6 +24,11 @@ const bidSchema = new mongoose.Schema({
     minimal_rate: Number,
 
     delivery_time: deliveryTimeSchema,
+
+    accepted: {
+        type: Boolean,
+        default: false,
+    },
     
     created_at: Date,
 });
