@@ -21,7 +21,6 @@ module.exports = async (categories, employers, freelancers) => {
             posted_by: employers[Math.floor(Math.random() * employers.length)]._id,
             created_at: new Date(),
             status: faker.random.number({ min: 1, max: 2 }),
-            freelancer_id: faker.random.number(100) > 30 ? freelancers[Math.floor(Math.random() * freelancers.length)]._id : null,
         });
     }
     return await Job.insertMany(jobs)
