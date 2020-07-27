@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
+const persianDate = require('persian-date');
 
 const budgetType = ['ثابت', 'ساعتی'];
 
@@ -61,11 +62,9 @@ const taskSchema = new mongoose.Schema({
 
     created_at: {
         type: Date,
-        get: created_at => created_at.toDateString(),
+        get: created_at => new persianDate(created_at.getTime()).format('LL'),
         required: true,
     },
-
-    status: Number,
 });
 
 taskSchema.plugin(mongoosePaginate);
