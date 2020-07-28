@@ -15,9 +15,9 @@ const isUser = async (req, res, next) => {
         next();
     } else if (req.session.role === 'employer') {
         const employer = await Employer.findById(req.session._id);
-        const tasks = await Task.find({ employer_id: req.session._id });
+        const tasks = await Task.find({ employer_id: req.session._id }).sort({ status: 1 });
         const jobs = await Job.find({ posted_by: req.session._id });
-        user = employer;
+        user = { ...employer._doc };
         user.tasks = tasks;
         user.jobs = jobs;
         user.role = req.session.role;

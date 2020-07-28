@@ -153,9 +153,9 @@
 								<!-- User Name / Avatar -->
 								<div class="user-details">
 									{{#if data.user.logo}}
-									<div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div>
+									    <div class="user-avatar status-online"><img src="{{ data.user.logo }}" alt=""></div>
 									{{else}}
-									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
+									    <div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
 									{{/if}}
 									<div class="user-name">
 										{{data.user.name}} <span>Employer</span>
@@ -317,7 +317,18 @@
                                                 {{#equal this.status 4}}
 												    <span class="dashboard-status-button red" style="font-family: Mahsa">منقضی شده</span></h3>
 												{{/equal}}
-                                                <h3 style="width: 100%; font-family: Mahsa">{{ trim this.description }}...</h3>
+                                                <!-- Task Description For Freelancer -->
+                                                {{#equal ../data.user.role 'freelancer'}}
+                                                    <h3 style="width: 100%; font-family: Mahsa">{{ trim this.description }}...</h3>
+                                                {{/equal}}
+                                                <!-- End /// Task Description For Freelancer -->
+                                                <!-- Task Description For Employer -->
+                                                {{#equal ../data.user.role 'employer'}}
+                                                    {{#ne this.status 1}}
+                                                        <h3 style="width: 100%; font-family: Mahsa">{{ trim this.description }}...</h3>
+                                                    {{/ne}}
+                                                {{/equal}}
+                                                <!-- End /// Task Description For Employer -->
 												<!-- Job Listing Footer -->
 												<div class="job-listing-footer">
 													<ul>
@@ -325,40 +336,53 @@
 													</ul>
 												</div>
 											</div>
+                                            <!-- Task Bids For Employer -->
+                                            {{#equal ../data.user.role 'employer'}}
+                                                {{#equal this.status 1}}
+                                                    <ul class="dashboard-task-info" style="left: 0; right: auto;" dir="ltr">
+                                                        {{#unless this.bids.length}}
+                                                            <li><strong>0</strong><span>تعداد پیشنهادها</span></li>
+                                                        {{/unless}}
+                                                        {{#if this.bids.length}}
+                                                            <li><strong>{{ this.bids.length }}</strong><span>تعداد پیشنهادها</span></li>
+                                                        {{/if}}
+                                                        <li><strong>{{this.bid_avg}}</strong><span>میانگین قیمت‌های پیشنهادی</span></li>
+                                                        <li><strong>{{this.min_budget}} - {{this.max_budget}}</strong>
+                                                        <span>قیمت {{this.budget_type}}</span>
+                                                        </li>
+                                                    </ul>
+                                                {{/equal}}
+                                            {{/equal}}
+                                            <!-- End /// Task Bids For Employer -->
 										</div>
 									</div>
 									
-									<!-- Task Details For Employer -->
-                                    {{#equal ../data.user.role 'employer'}}
-                                        <ul class="dashboard-task-info">
-                                            {{#unless this.bids.length}}
-                                                <li><strong>0</strong><span>پیشنهاد</span></li>
-                                            {{/unless}}
-                                            {{#if this.bids.length}}
-                                                <li><strong>{{ this.bids.length }}</strong><span>پیشنهاد</span></li>
-                                            {{/if}}
-                                            <li><strong>{{this.bid_avg}}</strong><span>میانگین قیمت‌های پیشنهادی</span></li>
-                                            <li><strong>{{this.min_budget}} - {{this.max_budget}}</strong>
-                                            <span>{{this.budget_type}} </span>
-                                            </li>
-                                        </ul>
-                                    {{/equal}}
-                                    <!-- End /// Task Details For Employer -->
+									
 									<!-- Bidders Button For Employer -->
                                     {{#equal ../data.user.role 'employer'}}
-                                        <div class="buttons-to-right always-visible">
-                                            <a href="/tasks/{{this._id}}/bidders" class="button ripple-effect">
-                                                <i class="icon-material-outline-supervisor-account"></i>مدیریت پیشنهادها
-                                                {{#unless this.bids.length}}
-                                                    <span class="button-info">0</span>
-                                                {{/unless}}
-                                                {{#if this.bids.length}}
-                                                    <span class="button-info">{{ this.bids.length }}</span>
-                                                {{/if}}
-                                            </a>
-                                        </div>
+                                        {{#equal this.status 1}}
+                                            <div class="buttons-to-right always-visible">
+                                                <a href="/tasks/{{this._id}}/bidders" class="button ripple-effect">مدیریت پیشنهادها
+                                                    {{#unless this.bids.length}}
+                                                        <span class="button-info" style="margin: 0 8px;">0</span>
+                                                    {{/unless}}
+                                                    {{#if this.bids.length}}
+                                                        <span class="button-info" style="margin: 0 8px;">{{ this.bids.length }}</span>
+                                                    {{/if}}
+                                                </a>
+                                            </div>
+                                        {{/equal}}
                                     {{/equal}}
                                     <!-- End /// Bidders Button For Employer -->
+                                    <!-- Details Button For Employer -->
+                                    {{#equal ../data.user.role 'employer'}}
+                                        {{#ne this.status 1}}
+                                            <div class="buttons-to-right always-visible">
+                                                <a href="/tasks/{{this._id}}" class="button ripple-effect">جزییات</a>
+                                            </div>
+                                        {{/ne}}
+                                    {{/equal}}
+                                     <!-- End /// Details Button For Employer -->
                                     <!-- Details Button For Freelancer -->
                                     {{#equal ../data.user.role 'freelancer'}}
                                         <div class="buttons-to-right always-visible">

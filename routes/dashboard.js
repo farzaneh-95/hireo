@@ -30,7 +30,7 @@ router.get('/dashboard', isLoggedIn, async (req, res) => {
     if (req.session.role === 'employer') {
         const reviewCount = await Review.find({ reviewee: req.session._id }).countDocuments();
         return res.render('dashboard', {
-            data,
+            // data,
             user,
             reviewCount,
             layout: false
