@@ -1,16 +1,24 @@
 <!doctype html>
 <html lang="en">
-
 	<head>
-
 		<title>Hireo</title>
-
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
 		<link rel="stylesheet" href="/css/style.css">
 		<link rel="stylesheet" href="/css/colors/blue.css">
-
+        <style>
+            @font-face {
+                font-family: 'Mahsa';
+                src: url('/fonts/Mahsa.eot?#') format('eot'),  
+                    url('/fonts/Mahsa.woff') format('woff'),
+                    url('/fonts/Mahsa.ttf') format('truetype');
+                font-style:normal;
+                font-weight:normal;
+            }
+            body {
+                font-family: Mahsa;
+            }
+        </style>
 	</head>
 <body class="gray">
 
@@ -263,97 +271,76 @@
 	================================================== -->
 	<div class="dashboard-content-container" data-simplebar>
 		<div class="dashboard-content-inner" >
-			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>نظرات</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Reviews</li>
-					</ul>
-				</nav> --}}
+				<h3 style="font-family: inherit; text-align: right;">نظرات</h3>
 			</div>
-	
 			<!-- Row -->
 			<div class="row">
-
 				<!-- Dashboard Box -->
 				<div class="col-xl-12">
 					<div class="dashboard-box margin-top-0">
-
 						<!-- Headline -->
 						{{#equal data.user.role 'employer'}}
 						<div class="headline">
-							<h3><i class="icon-material-outline-business"></i> امتیاز به فریلنسرها</h3>
+							<h3 style="text-align: right; font-family: inherit;"><i class="icon-material-outline-business"></i>امتیاز به فریلنسرها</h3>
 						</div>
 						{{/equal}}
-
 						{{#equal data.user.role 'freelancer'}}
 						<div class="headline">
 							<h3><i class="icon-material-outline-business"></i> امتیاز به کارفرماها</h3>
 						</div>
 						{{/equal}}
-
 						<div class="content">
-							<ul class="dashboard-box-list">
+							<ul class="dashboard-box-list" style="text-align: right; font-family: inherit;">
+                                <!-- Tasks -->
 								{{#each data.tasks}}
 								<li>
-									<div class="boxed-list-item">
-										<!-- Content -->
+									<div class="boxed-list-item" style="margin-bottom: 10px;">
 										<div class="item-content">
-											<h4 class="task-name">{{this.name}}</h4>
-											{{#equal this.review null}}
+                                            <h4 class="task-name" style="font-family: inherit; position: absolute; right: 20px;">{{this.name}}</h4>
 											<span class="company-not-rated margin-bottom-5">Not Rated</span>
-											
+                                            <a style="position: absolute; right: 20px; top: 60px;" href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this._id}}">
+                                                <i class="icon-material-outline-thumb-up"></i>ارسال نظر
+                                            </a>
+                                            <h4 class="task-name" style="display: none;">{{this.name}}</h4>
+                                            {{#equal ../data.user.role 'employer'}}
+                                            <h4 style="display: none;">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}}</h4>
+                                            <h4 style="display: none;">{{this.freelancer_id._id}}</h4>
+                                            {{/equal}}
+                                            {{#equal ../data.user.role 'freelancer'}}
+                                            <h4 style="display: none;">{{this.employer_id.name}}</h4>
+                                            <h4 style="display: none;">{{this.employer_id._id}}</h4>
+                                            {{/equal}}
+                                            <h4 style="display: none;">{{this._id}}</h4> 
 										</div>
 									</div>
-									<a href="#small-dialog-2" class="review-btn popup-with-zoom-anim button ripple-effect margin-top-5 margin-bottom-10" value="{{this._id}}"><i class="icon-material-outline-thumb-up"></i> ارسال نظر</a>
-									<h4 class="task-name" style="display: none;">{{this.name}}</h4>
-									{{#equal this.user 'employer'}}
-									<h4 style="display: none;">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}}</h4>
-									<h4 style="display: none;">{{this.freelancer_id._id}}</h4>
-									{{/equal}}
-									{{#equal this.user 'freelancer'}}
-									<h4 style="display: none;">{{this.employer_id.name}}</h4>
-									<h4 style="display: none;">{{this.employer_id._id}}</h4>
-									{{/equal}}
-									<h4 style="display: none;">{{this._id}}</h4>
-									{{/equal}}
-									{{#if this.review}}
-									<div class="item-details margin-top-10">
-										<div class="star-rating" data-rating="{{this.review.score}}"></div>
-										<div class="detail-item"><i class="icon-material-outline-date-range"></i> 
-										{{this.created_at}}</div>
-										</div>
-										<div class="item-description">
-											<p>{{this.review.comment}}</p>
-									</div>
-									{{/if}}
 								</li>
 								{{/each}}
+                                <!-- End /// Tasks -->
+                                <!-- Reviews -->
+                                {{#each data.reviews}}
+                                    <li>
+                                        <div class="boxed-list-item">
+                                            <div class="item-content">
+                                                <h4 class="task-name" style="font-family: inherit; position: absolute; right: 20px;">{{this.task.name}}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="item-details margin-top-10" style="position: absolute; left: 20; top: 20px;">
+                                            <div class="star-rating" data-rating="{{this.score}}"></div>
+                                            <div class="detail-item"><i class="icon-material-outline-date-range"></i> 
+                                            {{this.created_at}}
+                                            </div>
+                                        </div>
+                                        <div class="item-description" style="margin-top: 70px;">
+                                            <p>{{this.comment}}</p>
+                                        </div>
+								    </li>
+                                {{/each}}
+                                <!-- End /// Reviews -->
 							</ul>
 						</div>
 					</div>
-
-					<!-- Pagination -->
-					<div class="clearfix"></div>
-					<div class="pagination-container margin-top-40 margin-bottom-0">
-						<nav class="pagination">
-							<ul>
-								<li><a href="/reviews/my_reviews?page=1" class="ripple-effect {{#equal data.currPage 1}}current-page{{/equal}}">1</a></li>
-								<li><a href="/reviews/my_reviews?page=2" class="ripple-effect {{#equal data.currPage 2}}current-page{{/equal}}">2</a></li>
-								<li><a href="/reviews/my_reviews?page=3" class="ripple-effect {{#equal data.currPage 3}}current-page{{/equal}}">3</a></li>
-								<li class="pagination-arrow"><a id="next-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="clearfix"></div>
-					<!-- Pagination / End -->
-
 				</div>
 			</div>
 			<!-- Row / End -->
@@ -362,7 +349,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
@@ -486,55 +473,48 @@
 <!-- Leave a Review for Freelancer Popup
 ================================================== -->
 <div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
 	<!--Tabs -->
 	<div class="sign-in-form">
-
 		<ul class="popup-tabs-nav">
 		</ul>
-
 		<div class="popup-tabs-container">
-
 			<!-- Tab -->
 			<div class="popup-tab-content" id="tab2">
-				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>Leave a Review</h3>
-					<span>Rate <a href="#" id="freelancer-name">Peter Valentín</a> for the project <a href="#" id="task-name">Simple Chrome Extension</a> </span>
+					<h3 style="font-family: inherit;">نظر دادن</h3>
+					<span><a id="freelancer-name"></a> برای پروژه <a id="task-name"></a></span>
 				</div>
-					
 				<!-- Form -->
 				<form method="POST" id="leave-review-form" action="/reviews">
-
+                    {{#equal data.user.role 'freelancer'}}
+                        <div class="feedback-yes-no">
+                                <strong>آیا از پرداخت هزینه راضی بودید؟</strong>
+                                <div class="radio">
+                                    <input id="radio-1" name="radio" type="radio">
+                                    <label for="radio-1"><span class="radio-label"></span>Yes</label>
+                                </div>
+                            <div class="radio">
+                                <input id="radio-2" name="radio" type="radio">
+                                <label for="radio-2"><span class="radio-label"></span> No</label>
+                            </div>
+                        </div>
+                    {{/equal}}
+                    {{#equal data.user.role 'employer'}}
 					<div class="feedback-yes-no">
-						<strong>Was this delivered on budget?</strong>
-						<div class="radio">
-							<input id="radio-1" name="radio" type="radio">
-							<label for="radio-1"><span class="radio-label"></span> Yes</label>
-						</div>
-
-						<div class="radio">
-							<input id="radio-2" name="radio" type="radio">
-							<label for="radio-2"><span class="radio-label"></span> No</label>
-						</div>
-					</div>
-
-					<div class="feedback-yes-no">
-						<strong>Was this delivered on time?</strong>
+						<strong>آیا پروژه به موقع تحویل داده شد؟</strong>
 						<div class="radio">
 							<input id="radio-3" name="radio2" type="radio">
-							<label for="radio-3"><span class="radio-label"></span> Yes</label>
+							<label for="radio-3"><span class="radio-label"></span> بلی</label>
 						</div>
-
 						<div class="radio">
 							<input id="radio-4" name="radio2" type="radio">
-							<label for="radio-4"><span class="radio-label"></span> No</label>
+							<label for="radio-4"><span class="radio-label"></span> خیر</label>
 						</div>
 					</div>
-
+                    {{/equal}}
 					<div class="feedback-yes-no">
-						<strong>Your Rating</strong>
+						<strong>امتیاز شما</strong>
 						<div class="leave-rating">
 							<input type="radio" name="rating" id="rating-radio-1" value="1" required>
 							<label for="rating-radio-1" class="icon-material-outline-star"></label>
@@ -549,16 +529,16 @@
 						</div><div class="clearfix"></div>
 					</div>
 
-					<textarea class="with-border" placeholder="Comment" name="comment" id="message2" cols="7" required></textarea>
+					<textarea class="with-border" placeholder="نظر" name="comment" id="message2" cols="7" required style="font-family: inherit; text-align: right;"></textarea>
 
 					<input type="hidden" name="reviewee_id" id="reviewee">
 
 					<input type="hidden" name="task_id" id="task-id">
 				</form>
-				
 				<!-- Button -->
-				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
-
+				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="leave-review-form" style="font-family: inherit;">ثبت نظر
+                    <i class="icon-material-outline-arrow-right-alt"></i>
+                </button>
 			</div>
 
 		</div>
@@ -684,8 +664,6 @@ $('#snackbar-user-status label').click(function() {
 		$('#task-name').text($(event.target).next().text());
 		$('#reviewee').val($(event.target).next().next().next().text());
 		$('#task-id').val($(event.target).next().next().next().next().text());
-		console.log($(event.target).next().next().next().text());
-	
 	});
 
 	$('#logOut').on('click', () => {

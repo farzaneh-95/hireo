@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
+const persianDate = require('persian-date');
 
 const reviewSchema = new mongoose.Schema({
     reviewer: {
@@ -33,7 +34,7 @@ const reviewSchema = new mongoose.Schema({
     created_at: {
         type: Date,
         required: true,
-        get: created_at => created_at.toDateString(),
+        get: created_at => new persianDate(created_at.getTime()).format('LL'),
     },
 });
 
