@@ -31,16 +31,12 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style=" position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
@@ -235,7 +231,7 @@
 							<li><a href="#"><i class="icon-material-outline-assignment"></i> پروژه‌ها</a>
 								<ul>
 									<li><a href="/tasks/my_tasks">مدیریت پروژه‌ها <span class="nav-tag">{{data.user.tasks.length}}</span></a></li>
-									<li><a href="/tasks/create">ساخت پروژه/a></li>
+									<li><a href="/tasks/create">ساخت پروژه</a></li>
 								</ul>	
 							</li>
 						</ul>
@@ -283,7 +279,7 @@
 						<!-- Headline -->
 						{{#equal data.user.role 'employer'}}
 						<div class="headline">
-							<h3 style="text-align: right; font-family: inherit;"><i class="icon-material-outline-business"></i>امتیاز به فریلنسرها</h3>
+							<h3 style="text-align: right; font-family: inherit;"><i style="position: absolute; right: 0; top: 32px;" class="icon-material-outline-business"></i>انتقادات و پیشنهادات</h3>
 						</div>
 						{{/equal}}
 						{{#equal data.user.role 'freelancer'}}
@@ -501,7 +497,7 @@
                         </div>
                     {{/equal}}
                     {{#equal data.user.role 'employer'}}
-					<div class="feedback-yes-no">
+					<div class="feedback-yes-no" style="text-align: right;">
 						<strong>آیا پروژه به موقع تحویل داده شد؟</strong>
 						<div class="radio">
 							<input id="radio-3" name="radio2" type="radio">
@@ -513,26 +509,23 @@
 						</div>
 					</div>
                     {{/equal}}
-					<div class="feedback-yes-no">
+					<div class="feedback-yes-no" style="text-align: right;">
 						<strong>امتیاز شما</strong>
-						<div class="leave-rating">
-							<input type="radio" name="rating" id="rating-radio-1" value="1" required>
-							<label for="rating-radio-1" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-2" value="2" required>
-							<label for="rating-radio-2" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-3" value="3" required>
-							<label for="rating-radio-3" class="icon-material-outline-star"></label>
-							<input type="radio" name="rating" id="rating-radio-4" value="4" required>
-							<label for="rating-radio-4" class="icon-material-outline-star"></label>
+						<div class="leave-rating" style="text-align: right; position: absolute; right: 40px;">
 							<input type="radio" name="rating" id="rating-radio-5" value="5" required>
 							<label for="rating-radio-5" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-4" value="4" required>
+							<label for="rating-radio-4" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-3" value="3" required>
+							<label for="rating-radio-3" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-2" value="2" required>
+							<label for="rating-radio-2" class="icon-material-outline-star"></label>
+							<input type="radio" name="rating" id="rating-radio-1" value="1" required>
+							<label for="rating-radio-1" class="icon-material-outline-star"></label>
 						</div><div class="clearfix"></div>
 					</div>
-
-					<textarea class="with-border" placeholder="نظر" name="comment" id="message2" cols="7" required style="font-family: inherit; text-align: right;"></textarea>
-
+					<textarea class="with-border" placeholder="نظر" name="comment" id="message2" cols="7" required style="font-family: inherit; text-align: right; margin-top: 40px;"></textarea>
 					<input type="hidden" name="reviewee_id" id="reviewee">
-
 					<input type="hidden" name="task_id" id="task-id">
 				</form>
 				<!-- Button -->

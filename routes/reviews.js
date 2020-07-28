@@ -11,7 +11,7 @@ router.get('/my_reviews', async (req, res) => {
         const reviews = await Review.where('reviewer').equals(req.session._id).populate('task').exec();
         const tasks = await Task.where('status').equals(3).where('employer_id').equals(req.session._id).where('_id').nin(reviews.map(review => review.task))
             .sort({ created_at: 'desc' }).populate('freelancer_id').exec();
-        res.render('dashboard-reviews', { data: { user: req.app.get('user'), tasks, reviews, currPage: req.query.page || 1 }, layout: false }); 
+        res.render('dashboard-reviews', { data: { user: req.app.get('user'), tasks, reviews: await Review.where('reviewee').equals(req.session._id).populate('task').exec() }, layout: false }); 
     } else if (req.session.role === 'freelancer') {
         const tasks = await Task
             .where('status')
@@ -47,15 +47,14 @@ router.get('/my_reviews', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const rev = new Review ({
+    await new Review ({
         reviewer: req.session._id,
         reviewee: req.body.reviewee_id,
         task: req.body.task_id,
         score: req.body.rating,
         comment: req.body.comment,
         created_at: new Date(), 
-    });
-    await rev.save();
+    }).save();
     res.redirect('/reviews/my_reviews');
 });
 
