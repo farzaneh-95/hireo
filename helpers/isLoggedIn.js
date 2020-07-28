@@ -3,21 +3,18 @@ const Employer = require('../models/employer');
 
 const isLoggedIn = async (req, res, next) => {
     if (req.session.role === 'freelancer') {
-        const freelancer = await Freelancer.findById(req.session._id);
-        if (!freelancer) {
-            return res.render('home', { layout: false });
+        if (!await Freelancer.findById(req.session._id)) {
+            res.redirect('/');
         }
-        req.app.set('freelancer', freelancer);
-        return next();
+        next();
     } else if (req.session.role === 'employer') {
-        const employer = await Employer.findById(req.session._id);
-        if (!employer) {
-            return res.render('home');
+        if (!await Employer.findById(req.session._id)) {
+            res.redirect('/');
         }
-        req.app.set('employer', employer);
-        return next();
+        next();
+    } else {
+        res.redirect('/');
     }
-    return res.render('home', { layout: false });
 };
 
 module.exports = isLoggedIn

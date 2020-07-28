@@ -5,6 +5,7 @@ const Task = require('../models/task');
 const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
+const isLoggedIn = require('../helpers/isLoggedIn');
 
 router.get('/:id/bidders', async (req, res) => {
     const user = req.app.get('user');
@@ -32,7 +33,7 @@ router.get('/my_bids', async (req, res) => {
     });
 });
 
-router.get('/my_tasks', async (req, res) => {
+router.get('/my_tasks', isLoggedIn, async (req, res) => {
     const user = { ...req.app.get('user') };
     if (req.session.role === 'employer') {
         user.tasks.forEach(task => {
