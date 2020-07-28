@@ -13,7 +13,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 </head>
 <body class="gray">
 
@@ -270,22 +282,12 @@
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				{{#equal user.role 'freelancer'}}
-				<h3>سلام {{user.first_name}}!</h3>
+				    <h3 style="font-family: inherit;">سلام {{user.first_name}}!</h3>
 				{{/equal}}
 				{{#equal user.role 'employer'}}
-				<h3>سلام {{user.name}}!</h3>
+				    <h3 style="font-family: inherit; text-align: right;">سلام {{user.name}}</h3>
 				{{/equal}}
-				{{!-- <span>We are glad to see you again!</span> --}}
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Dashboard</li>
-					</ul>
-				</nav> --}}
 			</div>
-
 			{{#equal user.role 'freelancer'}}
 			<!-- Fun Facts Container -->
 			<div class="fun-facts-container">
@@ -323,12 +325,11 @@
 			{{/equal}}
 			<!-- Row -->
 			<div class="row">
-
 				<div class="col-xl-8">
 					<!-- Dashboard Box -->
 					<div class="dashboard-box main-box-in-row">
 						<div class="headline">
-							<h3><i class="icon-feather-bar-chart-2"></i> نمودار بازدید پروفایل شما</h3>
+							<h3 style="font-family: inherit;"><i class="icon-feather-bar-chart-2"></i>نمودار بازدید پروفایل شما</h3>
 							<div class="sort-by">
 								<select class="selectpicker hide-tick">
 									<option>Last 6 Months</option>
@@ -347,16 +348,14 @@
 					<!-- Dashboard Box / End -->
 				</div>
 				<div class="col-xl-4">
-
 					<!-- Dashboard Box -->
 					<!-- If you want adjust height of two boxes 
 						 add to the lower box 'main-box-in-row' 
 						 and 'child-box-in-row' to the higher box -->
 					<div class="dashboard-box child-box-in-row"> 
 						<div class="headline">
-							<h3><i class="icon-material-outline-note-add"></i> یادداشت ها</h3>
+							<h3 style="font-family: inherit;"><i class="icon-material-outline-note-add"></i>یادداشت ها</h3>
 						</div>	
-
 						<div class="content with-padding">
 							<!-- Note -->
 							<div class="dashboard-note">
