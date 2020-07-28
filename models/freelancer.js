@@ -54,7 +54,9 @@ const freelancerSchema = new mongoose.Schema({
         max: 5,
     },
 
-    profile_picture: String,
+    profile_picture: {
+        type: String,
+    },
 
     success: Number,
 

@@ -4,12 +4,11 @@ const Task = require('../models/task');
 const Job = require('../models/job');
 
 let user = {};
-
 const isUser = async (req, res, next) => {
     if (req.session.role === 'freelancer') {
         const freelancer = await Freelancer.findById(req.session._id);
         const tasks = await Task.find({ freelancer_id: req.session._id });
-        user = freelancer;
+        user = { ...freelancer._doc };
         user.tasks = tasks;
         user.role = req.session.role;
         req.app.set('user', user);

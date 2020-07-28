@@ -40,15 +40,11 @@ router.get('/my_tasks', isLoggedIn, async (req, res) => {
             const bids = Bid.find({ task_id: task._id });
             let minimalRatesSum = 0;
             bids.map(bid => { minimalRatesSum += bid.minimal_rate });
-             
             task.bids = bids;
             task.bid_avg = Math.floor(minimalRatesSum / bids.length) || 0;
         });
     }
-    return res.render('dashboard-manage-tasks', {
-        data: { user }, 
-        layout: false,
-    });
+    return res.render('dashboard-manage-tasks', { data: { user }, layout: false });
 });
 
 router.get('/create', isEmployer, async (req, res) => {

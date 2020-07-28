@@ -14,7 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 </head>
 <body class="gray">
 
@@ -71,14 +83,13 @@
 				{{#equal data.user.role 'freelancer'}}
 				<!-- User Menu -->
 				<div class="header-widget">
-
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
 							{{#if data.user.profile_picture}}
-							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div></a>
+							    <a href="#"><div class="user-avatar status-online"><img src="{{ data.user.profile_picture }}" alt=""></div></a>
 							{{else}}
-							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
+							    <a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
 							{{/if}}
 						</div>
 
@@ -268,21 +279,10 @@
 	================================================== -->
 	<div class="dashboard-content-container" data-simplebar>
 		<div class="dashboard-content-inner" >
-			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>مدیریت پروژه‌ها</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Manage Tasks</li>
-					</ul>
-				</nav> --}}
+				<h3 style="font-family: Mahsa; text-align: right">مدیریت پروژه‌ها</h3>
 			</div>
-	
 			<!-- Row -->
 			<div class="row" dir="rtl">
 				<!-- Dashboard Box -->
@@ -290,31 +290,38 @@
 					<div class="dashboard-box margin-top-0">
 						<!-- Headline -->
 						<div class="headline">
-							<h3 style="text-align: right;"><i class="icon-material-outline-assignment"></i> پروژه‌های من</h3>
+							<h3 style="text-align: right; font-family: Mahsa"><i class="icon-material-outline-assignment"></i> پروژه‌های من</h3>
 						</div>
 						<div class="content">
 							<ul class="dashboard-box-list" style="text-align: right;">
 								{{#each data.user.tasks}}
 								<li>
 									<!-- Job Listing -->
-									<div class="job-listing width-adjustment">
+									<div class="job-listing" style="width: 100%;">
 
 										<!-- Job Listing Details -->
 										<div class="job-listing-details">
 
 											<!-- Details -->
 											<div class="job-listing-description">
-												<h3 class="job-listing-title"><a href="#">{{this.name}}</a>
+												<h3 class="job-listing-title"><a style="font-family: Mahsa" href="#">{{ this.name }}</a>
 												{{#equal this.status 1}}
-												<span class="dashboard-status-button green">درحال انجام</span></h3>
+												    <span class="dashboard-status-button yellow" style="font-family: Mahsa">درحال بررسی</span></h3>
 												{{/equal}}
 												{{#equal this.status 2}}
-												<span class="dashboard-status-button red">منقضی شده</span></h3>
+												    <span class="dashboard-status-button" style="font-family: Mahsa; background-color: #66cbf3; color: #2664e9;">درحال انجام</span></h3>
 												{{/equal}}
+                                                {{#equal this.status 3}}
+												    <span class="dashboard-status-button green" style="font-family: Mahsa">انجام شده</span></h3>
+												{{/equal}}
+                                                {{#equal this.status 4}}
+												    <span class="dashboard-status-button red" style="font-family: Mahsa">منقضی شده</span></h3>
+												{{/equal}}
+                                                <h3 style="width: 100%; font-family: Mahsa">{{ trim this.description }}...</h3>
 												<!-- Job Listing Footer -->
 												<div class="job-listing-footer">
 													<ul>
-														<li>{{this.created_at}}</li>
+														<li style="font-family: Mahsa">{{this.created_at}}</li>
 													</ul>
 												</div>
 											</div>
@@ -373,7 +380,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>

@@ -4,11 +4,6 @@ const persianDate = require('persian-date');
 
 const budgetType = ['ثابت', 'ساعتی'];
 
-const status = {
-    Working: 1,
-    Expired: 2,
-};
-
 const taskSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -64,6 +59,11 @@ const taskSchema = new mongoose.Schema({
         type: Date,
         get: created_at => new persianDate(created_at.getTime()).format('LL'),
         required: true,
+    },
+    status: {
+        type: Number,
+        require: true,
+        default: 1,
     },
 });
 
