@@ -1,52 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
-
-<!-- Basic Page Needs
-================================================== -->
 <title>Hireo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<!-- CSS
-================================================== -->
+<!-- CSS -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
 <style>
-	.error-border {
-		border: solid 1px #dc3545 !important;
-	};
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
 </style>
-
 </head>
 <body>
-
 <!-- Wrapper -->
 <div id="wrapper">
-
-<!-- Header Container
-================================================== -->
+<!-- Header Container -->
 <header id="header-container" class="fullwidth transparent">
-
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/" class="current">خانه</a></li>
-
 						<li><a href="#">فرصت های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل ها</a>
@@ -56,10 +46,9 @@
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+                        <li><a href="/" class="current">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -67,8 +56,6 @@
 				
 			</div>
 			<!-- Left Side Content / End -->
-
-
 			<!-- Right Side Content / End -->
 			<div class="right-side">
 				{{#if data.user}}
@@ -202,17 +189,15 @@
 
 
 
-<!-- Intro Banner
-================================================== -->
+<!-- Intro Banner -->
 <!-- add class "disable-gradient" to enable consistent background overlay -->
 <div class="intro-banner" data-background-image="images/home-background.jpg">
 	<div class="container">
-		
 		<!-- Intro Headline -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="banner-headline">
-					<h3>
+					<h3 style="font-family: Mahsa; text-align: right;">
 						<strong>افراد متخصص استخدام کنید و یا در جایی که میخواهید استخدام شوید</strong>
 						<br>
 						<span>شرکت ‌های بسیار زیادی از این سایت برای تبدیل ایده‌هاشان به واقعیت استفاده میکنند</span>
@@ -220,7 +205,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Stats -->
 		<div class="row">
 			<div class="col-md-12">
@@ -240,125 +224,105 @@
 				</ul>
 			</div>
 		</div>
-
 	</div>
 </div>
-
-
-<!-- Content
-================================================== -->
+<!-- Content -->
 <!-- Category Boxes -->
-<div class="section margin-top-65">
+<div class="section margin-top-65" style="font-family: Mahsa;">
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
-
 				<div class="section-headline centered margin-bottom-15">
-					<h3>دسته بندی‌های شغلی</h3>
+					<h3 style="font-family: Mahsa;">دسته بندی‌های شغلی</h3>
 				</div>
-
 				<!-- Category Boxes Container -->
 				<div class="categories-container">
 					{{#each data.categories}}
-					<a href="/jobs?category={{this.category._id}}" class="category-box">
-						<div class="category-box-icon">
-							<i class="icon-line-awesome-file-code-o"></i>
-						</div>
-						<div class="category-box-counter">{{this.count}}</div>
-						<div class="category-box-content">
-							<h3>{{this.category.title}}</h3>
-							<p>{{this.category.description}}</p>
-						</div>
-					</a>
+                        <a href="/jobs?category={{this.category._id}}" class="category-box">
+                            <div class="category-box-icon">
+                                <i class="icon-line-awesome-file-code-o"></i>
+                            </div>
+                            <div class="category-box-counter">{{this.count}}</div>
+                            <div class="category-box-content">
+                                <h3 style="font-family: Mahsa; font-size: 20px;">{{this.category.title}}</h3>
+                                <p>{{this.category.description}}</p>
+                            </div>
+                        </a>
 					{{/each}}
 				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Category Boxes / End -->
-
-
 <!-- Features Jobs -->
 <div class="section gray margin-top-45 padding-top-65 padding-bottom-75">
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12">
-				
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-35">
-					<h3>فرصت‌های شغلی</h3>
-					<a href="/jobs" class="headline-link">مشاهده همه</a>
+					<h3 style="font-family: Mahsa; text-align: right; position: absolute; right: 0; bottom: -1px;">فرصت‌های شغلی</h3>
+					<a href="/jobs" class="headline-link" style="position: absolute; left: 0;">مشاهده همه</a>
 				</div>
-				
 				<!-- Jobs Container -->
 				<div class="listings-container compact-list-layout margin-top-35">
-					
 					<!-- Job Listing -->
 					{{#each data.jobs}}
-					<a href="/jobs/{{this._id}}" class="job-listing with-apply-button">
-
-						<!-- Job Listing Details -->
-						<div class="job-listing-details">
-
-							<!-- Logo -->
-							<div class="job-listing-company-logo">
-								{{#if this.posted_by.logo}}
-								<img src="{{this.posted_by.logo}}" alt="">
-								{{else}}
-								<img src="/images/company-logo-05.png" alt="">
-								{{/if}}
-							</div>
-
-							<!-- Details -->
-							<div class="job-listing-description">
-								<h3 class="job-listing-title">{{this.title}}</h3>
-
-								<!-- Job Listing Footer -->
-								<div class="job-listing-footer">
-									<ul>
-										<li><i class="icon-material-outline-business"></i> {{this.posted_by.name}} </li>
-										<li><i class="icon-material-outline-location-on"></i> {{this.posted_by.location}}</li>
-										<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
-										<li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Apply Button -->
-							<span class="list-apply-button ripple-effect">درخواست دادن</span>
-						</div>
-					</a>	
+                        <a href="/jobs/{{this._id}}" class="job-listing with-apply-button">
+                            <!-- Job Listing Details -->
+                            <div class="job-listing-details">
+                                <!-- Logo -->
+                                <div class="job-listing-company-logo">
+                                    {{#if this.posted_by.logo}}
+                                    <img src="{{this.posted_by.logo}}" alt="">
+                                    {{else}}
+                                    <img src="/images/company-logo-05.png" alt="">
+                                    {{/if}}
+                                </div>
+                                <!-- Details -->
+                                <div class="job-listing-description">
+                                    <h3 class="job-listing-title" style="font-family: Mahsa;">{{this.title}}</h3>
+                                    <!-- Job Listing Footer -->
+                                    <div class="job-listing-footer">
+                                        <ul>
+                                            <li><i class="icon-material-outline-business"></i> {{this.posted_by.name}} </li>
+                                            <li><i class="icon-material-outline-location-on"></i> {{this.posted_by.location}}</li>
+                                            <li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
+                                            <li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Apply Button -->
+                                <span class="list-apply-button ripple-effect">درخواست دادن</span>
+                            </div>
+                        </a>	
 					{{/each}}
 				</div>
 				<!-- Jobs Container / End -->
-
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Featured Jobs / End -->
-
-
 <!-- Features Cities -->
 <div class="section margin-top-65 margin-bottom-65">
 	<div class="container">
 		<div class="row">
-
 			<!-- Section Headline -->
-			
 			<div class="col-xl-12">
 				<div class="section-headline centered margin-top-0 margin-bottom-45">
-					<h3>شهرهای پرطرفدار</h3>
+					<h3 style="font-family: Mahsa;">شهرهای پرطرفدار</h3>
 				</div>
 			</div>
 			{{#each data.cities}}
 			<div class="col-xl-3 col-md-6">
 				<!-- Photo Box -->
-				<a href="/jobs?location={{this._id}}" class="photo-box" data-background-image="{{#equal this._id 'کرمان'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'تهران'}}images/featured-city-02.jpg{{/equal}}{{#equal this._id 'اصفهان'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'مشهد'}}images/featured-city-04.jpg{{/equal}}">
+				<a href="/jobs?location={{this._id}}" class="photo-box"
+                    data-background-image="{{#equal this._id 'کرمان'}}images/featured-city-01.jpg{{/equal}}{{#equal this._id 'تهران'}}images/featured-city-02.jpg{{/equal}}
+                        {{#equal this._id 'اصفهان'}}images/featured-city-03.jpg{{/equal}}{{#equal this._id 'مشهد'}}images/featured-city-04.jpg{{/equal}}">
 					<div class="photo-box-content">
-						<h3>{{this._id}}</h3>
+						<h3 style="font-family: Mahsa;">{{this._id}}</h3>
 						<span>{{this.count}} شغل</span>
 					</div>
 				</a>
@@ -368,89 +332,70 @@
 	</div>
 </div>
 <!-- Features Cities / End -->
-
-
 <!-- Highest Rated Freelancers -->
 <div class="section gray padding-top-65 padding-bottom-70 full-width-carousel-fix">
 	<div class="container">
 		<div class="row">
-
 			<div class="col-xl-12">
 				<!-- Section Headline -->
 				<div class="section-headline margin-top-0 margin-bottom-25">
-					<h3>بهترین فریلنسرها</h3>
-					<a href="/freelancers" class="headline-link">مشاهده همه</a>
+					<h3 style="text-align: right; font-family: Mahsa; position: absolute; right: 0; bottom: -1px;">بهترین فریلنسرها</h3>
+					<a href="/freelancers" class="headline-link" style="position: absolute; left: 0;">مشاهده همه</a>
 				</div>
 			</div>
-
 			<div class="col-xl-12">
 				<div class="default-slick-carousel freelancers-container freelancers-grid-layout">
-
 					<!--Freelancer -->
 					{{#each data.freelancers}}
-					<div class="freelancer">
-
-						<!-- Overview -->
-						<div class="freelancer-overview">
-							<div class="freelancer-overview-inner">
-								
-								<!-- Avatar -->
-								<div class="freelancer-avatar">
-									<a href="/freelancers/{{this._id}}"><img src="{{this.profile_picture}}" alt=""></a>
-								</div>
-
-								<!-- Name -->
-								<div class="freelancer-name">
-									<h4><a href="/freelancers/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></h4>
-									<span>{{this.tag_line}}</span>
-								</div>
-
-								<!-- Rating -->
-								<div class="freelancer-rating">
-									<div class="star-rating" data-rating="{{this.rate}}"></div>
-								</div>
-							</div>
-						</div>
-						
-						<!-- Details -->
-						<div class="freelancer-details">
-							<div class="freelancer-details-list">
-								<ul>
-									<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}</strong></li>
-									<li>امتیاز <strong>{{this.minimal_hourly_rate}} / hr</strong></li>
-									<li>درصد موفقیت <strong>{{this.success}}%</strong></li>
-								</ul>
-							</div>
-							<a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">View Profile <i class="icon-material-outline-arrow-right-alt"></i></a>
-						</div>
-					</div>
+                        <div class="freelancer">
+                            <!-- Overview -->
+                            <div class="freelancer-overview">
+                                <div class="freelancer-overview-inner">
+                                    <!-- Avatar -->
+                                    <div class="freelancer-avatar">
+                                        <a href="/freelancers/{{this._id}}"><img src="{{this.profile_picture}}" alt=""></a>
+                                    </div>
+                                    <!-- Name -->
+                                    <div class="freelancer-name">
+                                        <h4 style="font-family: Mahsa;"><a href="/freelancers/{{this._id}}">{{this.first_name}} {{this.last_name}}</a></h4>
+                                        <span>{{this.tag_line}}</span>
+                                    </div>
+                                    <!-- Rating -->
+                                    <div class="freelancer-rating">
+                                        <div class="star-rating" data-rating="{{this.rate}}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Details -->
+                            <div class="freelancer-details">
+                                <div class="freelancer-details-list">
+                                    <ul style="text-align: center;" dir="rtl">
+                                        <li style="margin: 0 10px;">موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}</strong></li>
+                                        <li style="margin: 0 10px;">دستمزد<strong>{{this.minimal_hourly_rate}} / ساعت</strong></li>
+                                        <li style="margin: 0 10px;">درصد موفقیت <strong>{{this.success}}%</strong></li>
+                                    </ul>
+                                </div>
+                                <a href="/freelancers/{{this._id}}" class="button button-sliding-icon ripple-effect">مشاهده پروفایل<i class="icon-material-outline-arrow-right-alt"></i></a>
+                            </div>
+                        </div>
 					{{/each}}
 					<!-- Freelancer / End -->
-
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
 <!-- Highest Rated Freelancers / End-->
-
-
-
-
 <!-- Footer
 ================================================== -->
 <div id="footer">
-	
 	<!-- Footer Top Section -->
 	<div class="footer-top-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-
 					<!-- Footer Rows Container -->
 					<div class="footer-rows-container">
-						
 						<!-- Left Side -->
 						<div class="footer-rows-left">
 							<div class="footer-row">
@@ -459,10 +404,8 @@
 								</div>
 							</div>
 						</div>
-						
 						<!-- Right Side -->
 						<div class="footer-rows-right">
-
 							<!-- Social Icons -->
 							<div class="footer-row">
 								<div class="footer-row-inner">
@@ -491,20 +434,7 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
-							<!-- Language Switcher -->
-							<div class="footer-row">
-								<div class="footer-row-inner">
-									<select class="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
-										<option>Français</option>
-										<option>Español</option>
-										<option>Deutsch</option>
-									</select>
-								</div>
-							</div>
 						</div>
-
 					</div>
 					<!-- Footer Rows Container / End -->
 				</div>
@@ -512,16 +442,14 @@
 		</div>
 	</div>
 	<!-- Footer Top Section / End -->
-
 	<!-- Footer Middle Section -->
 	<div class="footer-middle-section">
 		<div class="container">
 			<div class="row">
-
 				<!-- Links -->
-				<div class="col-xl-2 col-lg-2 col-md-3">
+				<div class="col-xl-2 col-lg-2 col-md-3" style="font-family: Mahsa;">
 					<div class="footer-links">
-						<h3>برای داوطلبان</h3>
+						<h3 style="font-family: Mahsa;">برای داوطلبان</h3>
 						<ul>
 							<li><a href="#"><span>شغل‌ها</span></a></li>
 							<li><a href="#"><span>ساخت رزومه</span></a></li>
@@ -529,11 +457,10 @@
 						</ul>
 					</div>
 				</div>
-
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>برای کارفرمایان</h3>
+						<h3 style="font-family: Mahsa;">برای کارفرمایان</h3>
 						<ul>
 							<li><a href="#"><span>کاندیدها</span></a></li>
 							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
@@ -541,35 +468,32 @@
 						</ul>
 					</div>
 				</div>
-
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>لینک‌های مفید</h3>
+						<h3 style="font-family: Mahsa;">لینک‌های مفید</h3>
 						<ul>
 							<li><a href="#"><span>تماس با ما</span></a></li>
 							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
 					</div>
 				</div>
-
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3>اکانت</h3>
+						<h3 style="font-family: Mahsa;">اکانت</h3>
 						<ul>
 							<li><a href="#"><span>ورود به سایت</span></a></li>
 							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
 					</div>
 				</div>
-
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="font-family: Mahsa;"><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید" style="font-family: Mahsa; text-align: right;">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -577,19 +501,17 @@
 		</div>
 	</div>
 	<!-- Footer Middle Section / End -->
-	
 	<!-- Footer Copyrights -->
 	<div class="footer-bottom-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Footer Copyrights / End -->
-
 </div>
 <!-- Footer / End -->
 
@@ -603,100 +525,69 @@
 
 	<!--Tabs -->
 	<div class="sign-in-form">
-
 		<ul class="popup-tabs-nav">
-			<li><a href="#login">Log In</a></li>
-			<li><a href="#register" id="register-btn-2">Register</a></li>
+			<li><a href="#login">ورود</a></li>
+			<li><a href="#register" id="register-btn-2">ثبت نام</a></li>
 		</ul>
-
 		<div class="popup-tabs-container">
-
 			<!-- Login -->
 			<div class="popup-tab-content" id="login">
-				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>We're glad to see you again!</h3>
-					<span>Don't have an account? <a href="#" class="register-tab">Sign Up!</a></span>
+					<h3 style="font-family: Mahsa;">به سایت ما خوش آمدید</h3>
+					<span>قبلا ثبت نام نکرده اید؟<a href="#" class="register-tab"> ثبت نام</a></span>
 				</div>
-					
 				<!-- Form -->
 				<div id="login-form">
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline" id="emailaddress-icon"></i>
-						<input type="email" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" required/>
+						<input style="font-family: Mahsa; text-align: right;" type="email" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" required/>
 					</div>
-
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-lock"></i>
-						<input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required/>
+						<input style="font-family: Mahsa; text-align: right;" type="password" class="input-text with-border" name="password" id="password" placeholder="رمز ورود" required/>
 					</div>
-					<a href="#" class="forgot-password">Forgot Password?</a>
+					<a style="font-family: Mahsa; position: absolute; right: 40px;" href="#" class="forgot-password">رمز عبور خود را فراموش کرده اید؟</a>
 				</div>
-				
 				<!-- Button -->
-				<button id="login-submit"class="button full-width button-sliding-icon ripple-effect" type="submit" form="login-form">Log In
+				<button style="margin-top: 50px; font-family: Mahsa;" id="login-submit"class="button full-width button-sliding-icon ripple-effect" type="submit" form="login-form">ورود
 					<i class="icon-material-outline-arrow-right-alt"></i>
 				</button>
-				
-				<!-- Social Login -->
-				<div class="social-login-separator"><span>or</span></div>
-				<div class="social-login-buttons">
-					<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Log In via Facebook</button>
-					<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Log In via Google+</button>
-				</div>
-
 			</div>
-
 			<!-- Register -->
 			<div class="popup-tab-content" id="register">
-				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>Let's create your account!</h3>
+					<h3 style="font-family: Mahsa;">ساخت اکانت</h3>
 				</div>
-
 				<!-- Account Type -->
 				<div class="account-type">
 					<div>
 						<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>
-						<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+						<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> فریلنسر</label>
 					</div>
-
 					<div>
 						<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>
-						<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+						<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> کارفرما</label>
 					</div>
 				</div>
-					
 				<!-- Form -->
 				<div id="register-account-form">
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline" id="emailaddress-register-icon"></i>
-						<input type="email" class="input-text with-border" name="email" id="emailaddress-register" placeholder="Email Address" required/>
+						<input style="font-family: Mahsa; text-align: right;" type="email" class="input-text with-border" name="email" id="emailaddress-register" placeholder="آدرس ایمیل" required/>
 					</div>
-
 					<div class="input-with-icon-left" id="password-register-div" title="Should be at least 8 characters long" data-tippy-placement="bottom">
 						<i class="icon-material-outline-lock" id="password-register-icon"></i>
-						<input type="password" class="input-text with-border" name="password" id="password-register" placeholder="Password" pattern=".{8,30}" required/>
+						<input style="font-family: Mahsa; text-align: right;" type="password" class="input-text with-border" name="password" id="password-register" placeholder="رمز ورود" pattern=".{8,30}" required/>
 					</div>
-
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-lock" id="password-repeat-register-icon"></i>
-						<input type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="Repeat Password" pattern=".{8,30}" required/>
+						<input style="font-family: Mahsa; text-align: right;" type="password" class="input-text with-border" name="password_repeat" id="password-repeat-register" placeholder="تکرار رمز ورود" pattern=".{8,30}" required/>
 					</div>
 				</div>
-				
 				<!-- Button -->
-				<button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form" id="register-submit">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
-				
-				<!-- Social Login -->
-				<div class="social-login-separator"><span>or</span></div>
-				<div class="social-login-buttons">
-					<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
-					<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>
-				</div>
-
+				<button style="font-family: Mahsa;" class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" form="register-account-form" id="register-submit">ثبت نام <i class="icon-material-outline-arrow-right-alt"></i></button>
 			</div>
 
 		</div>

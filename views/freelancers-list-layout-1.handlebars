@@ -1,15 +1,24 @@
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from www.vasterad.com/themes/hireo_082019/freelancers-list-layout-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:40 GMT -->
 <head>
-
 <!-- Basic Page Needs
 ================================================== -->
 <title>Hireo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
@@ -263,10 +272,10 @@
 
 							<!-- Name -->
 							<div class="freelancer-name">
-								<h4><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
-								<span>{{this.tag_line}}</span>
+								<h4 style="font-family: Mahsa;"><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
+								<span style="font-family: Mahsa;">{{this.tag_line}}</span>
 								<!-- Rating -->
-								<div class="freelancer-rating">
+								<div class="freelancer-rating" style="font-family: Mahsa;">
 									<div class="star-rating" data-rating="{{this.rate}}"></div>
 								</div>
 							</div>
@@ -274,7 +283,7 @@
 					</div>
 					
 					<!-- Details -->
-					<div class="freelancer-details">
+					<div class="freelancer-details" style="font-family: Mahsa;">
 						<div class="freelancer-details-list">
 							<ul>
 								<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}

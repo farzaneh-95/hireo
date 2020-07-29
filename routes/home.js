@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         .sort({ created_at: -1 })
         .limit(5)
         .populate('posted_by')
-        .exec();    
+        .exec(); 
     const cities = await Job
         .aggregate()
         .group({ _id: '$location', count: { $sum: 1 } })

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
+const persianDate = require('persian-date');
 
 const types = ['تمام وقت', 'فریلنسر', 'پاره وقت', 'کارآموز', 'موقت'];
 
@@ -28,10 +29,9 @@ const applySchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-
     created_at: {
         type: Date,
-        requried: true,
+        required: true,
     },
 });
 
@@ -88,13 +88,11 @@ const jobSchema = new mongoose.Schema({
         ref: 'Employer',
         required: true,
     },
-
     created_at: {
         type: Date,
         required: true,
-        get: created_at => created_at.toDateString(),
+        get: created_at => new persianDate(created_at.getTime()).format('LL'),
     },
-
     status: {
         type: Number,
         // default: status => Date.parse(this.created_at) + 12096e5 > Date.now() ? status = 1 : status = 2 ,
