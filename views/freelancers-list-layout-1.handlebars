@@ -36,35 +36,27 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">شغل‌ها</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">پروژه‌ها</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
-
-						<li><a href="/companies">شرکت‌ها</a></li>
-
+						<li><a href="/companies">شرکت ها</a></li>
 						<li><a href="/freelancers" class="current">فریلنسرها</a></li>
+                        <li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -212,22 +204,22 @@
 			<div class="sidebar-container">
 				
 				<!-- Location -->
-				<div class="sidebar-widget">
-					<h3>موقعیت</h3>
+				<div class="sidebar-widget" style="text-align: right;" dir="rtl">
+					<h3 style="font-family: Mahsa">موقعیت</h3>
 					<div class="input-with-icon">
 						<div id="autocomplete-container">
-							<input id="autocomplete-input" type="text" placeholder="موقعیت">
+							<input id="autocomplete-input" type="text" placeholder="موقعیت" style="font-family: Mahsa">
 						</div>
 						<i class="icon-material-outline-location-on"></i>
 					</div>
 				</div>
 
 				<!-- Keywords -->
-				<div class="sidebar-widget">
-					<h3>عنوان</h3>
+				<div class="sidebar-widget" style="text-align: right;" dir="rtl">
+					<h3 style="font-family: Mahsa" style="text-align: right;">عنوان</h3>
 					<div class="keywords-container">
 						<div class="keyword-input-container">
-							<input id="tagline" type="text" class="keyword-input" placeholder="Web Developer"/>
+							<input id="tagline" type="text" class="keyword-input" placeholder="توسعه‌دهنده وب" style="font-family: Mahsa"/>
 						</div>
 						<div class="keywords-list"><!-- keywords go here --></div>
 						<div class="clearfix"></div>
@@ -236,13 +228,13 @@
 
 				<div class="sidebar-widget">
 
-					<button class="button ripple-effect full-width" id="submit">فیلتر کن</button>
+					<button class="button ripple-effect full-width" id="submit" style="font-family: Mahsa">فیلتر کن</button>
 
 				</div>
 
 				<div class="sidebar-widget">
 					
-					<button class="button ripple-effect full-width" style="background-color: #303030;" id="clear">پاک کن</button>
+					<button class="button ripple-effect full-width" style="background-color: #303030; font-family: Mahsa" id="clear">پاک کن</button>
 					<div class="clearfix"></div>
 
 				</div>
@@ -288,7 +280,7 @@
 							<ul>
 								<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}
 								</strong></li>
-								<li>امتباز <strong>{{this.minimal_hourly_rate}} / hr</strong></li>
+								<li>امتباز <strong>{{this.minimal_hourly_rate}} / ساعت</strong></li>
 								<li></li>
 							</ul>
 						</div>
@@ -418,7 +410,7 @@
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
 						<h3 style="font-family: Mahsa;">اکانت</h3>
-						<ul >
+						<ul style="font-family: Mahsa;>
 							<li><a href="#"><span>ورود به سایت</span></a></li>
 							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
@@ -539,7 +531,8 @@ $('#snackbar-user-status label').click(function() {
 			} else {
 				lc = location.href.split('location=')[1];
 			}
-			$('#autocomplete-input').val(lc.replace('%20', ' '));
+			const urlParams = new URLSearchParams(window.location.search);
+			$('#autocomplete-input').val(urlParams.get('location'));
 		}
 
 		if (location.href.split('title=').length > 1) {
@@ -549,7 +542,8 @@ $('#snackbar-user-status label').click(function() {
 			} else {
 				lc = location.href.split('title=')[1];
 			}
-			$('#tagline').val(lc);
+			const urlParams = new URLSearchParams(window.location.search);
+			$('#tagline').val(urlParams.get('title'));
 		}
 	});	
 </script>
