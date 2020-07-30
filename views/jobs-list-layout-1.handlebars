@@ -295,23 +295,16 @@
 
 
 			<!-- Pagination -->
-			<div class="clearfix"></div>
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Pagination -->
-					<div class="pagination-container margin-top-60 margin-bottom-60">
-						<nav class="pagination">
-							<ul class="page-no">
-								<li ><a href="/jobs?page=1">1</a></li>
-								<li ><a href="/jobs?page=2">2</a></li>
-								<li ><a href="/jobs?page=3">3</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
+            <div class="pagination-container margin-top-40" style="margin-bottom: 50px;">
+                <nav class="pagination">
+                    <ul>
+                        <li class="pagination-arrow"><a href="#" id="prev-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+                        <li><a href="#" class="ripple-effect current-page">{{ data.currentPage }}</a></li>
+                        <li class="pagination-arrow"><a href="#" id="next-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
 			<!-- Pagination / End -->
-
 		</div>
 	</div>
 </div>
@@ -475,6 +468,9 @@
 </div>
 <!-- Wrapper / End -->
 
+<!-- Has Next Page Hidden -->
+<h1 id="has-next-page" style="display: none;">{{ data.hasNextPage }}</h1>
+<!-- End /// Has Next Page Hidden -->
 <!-- Scripts
 ================================================== -->
 <script src="/js/jquery-3.4.1.min.js"></script>
@@ -522,6 +518,60 @@ $('#snackbar-user-status label').click(function() {
 
 <script>
 	$(document).ready(() => {
+        // next page pagination
+        $('#next-page').on('click', () => {
+            if ($('#has-next-page').text() === '0') {
+                return false;
+            }
+			const location = $('#autocomplete-input').val();
+			const category = $('#category option:selected').attr('value');
+			const title = $('#title-search').val();
+            let page = '';
+            if (window.location.href.indexOf('page=') !== -1) {
+                if (window.location.href.indexOf('&', window.location.href.indexOf('page=')) !== -1) {
+                    page = window.location.href.substring
+                        (window.location.href.indexOf('page=') + 5, window.location.href.indexOf('&', window.location.href.indexOf('page=')))
+                        .replace(/\D/g,'');
+                } else {
+                    page = window.location.href.substring(window.location.href.indexOf('page=') + 5)
+                        .replace(/\D/g,'');
+                }
+            }
+			let url = '/jobs?req=1';
+			location ? url = url + '&location=' + location : '';
+			category ? url = url + '&category=' + category : '';
+			title ? url = url + '&title=' + title : '';
+            page ? url = url + '&page=' + (parseInt(page) + 1).toString() : url = url + '&page=2';
+			window.location.href = url;
+		});
+
+        // prev page pagination
+        $('#prev-page').on('click', () => {
+			const location = $('#autocomplete-input').val();
+			const category = $('#category option:selected').attr('value');
+			const title = $('#title-search').val();
+            let page = '';
+            if (window.location.href.indexOf('page=') !== -1) {
+                if (window.location.href.indexOf('&', window.location.href.indexOf('page=')) !== -1) {
+                    page = window.location.href.substring
+                        (window.location.href.indexOf('page=') + 5, window.location.href.indexOf('&', window.location.href.indexOf('page=')))
+                        .replace(/\D/g,'');;
+                } else {
+                    page = window.location.href.substring(window.location.href.indexOf('page=') + 5)
+                        .replace(/\D/g,'');;
+                }
+            }
+            if (page === '1') {
+                return false;
+            }
+			let url = '/jobs?req=1';
+			location ? url = url + '&location=' + location : '';
+			category ? url = url + '&category=' + category : '';
+			title ? url = url + '&title=' + title : '';
+            page ? url = url + '&page=' + (parseInt(page) - 1).toString() : url = url + '&page=1';
+			window.location.href = url;
+		});
+
 		$('#logOut').on('click', () => {
 			$.ajax({
 				url: '/logout',

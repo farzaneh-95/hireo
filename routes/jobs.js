@@ -123,6 +123,8 @@ router.get('/', async (req, res) => {
             jobs: jobs.docs,
             categories,
             user,
+            currentPage: parseInt(req.query.page) || 1,
+            hasNextPage: await query.countDocuments() > (parseInt(req.query.page) || 1) * 8 ? '1' : '0',
         },
         layout: false
     });
