@@ -9,6 +9,25 @@
 <title>Hireo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+
+    h2, h3, h4, ul, div {
+        font-family: Mahsa !important;
+    }
+
+	input {
+		text-align: right;
+	}
+
+</style>
 
 <!-- CSS
 ================================================== -->
@@ -27,35 +46,27 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#" class="current">فرصت‌های کاری</a>
+						<li><a class="current">فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">شغل‌ها</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">پروژها</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
-
-						<li><a href="/companies">شرکت‌ها</a></li>
-
+						<li><a href="/companies">شرکت ها</a></li>
 						<li><a href="/freelancers">فریلنسرها</a></li>
+                        <li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -111,7 +122,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -162,7 +173,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -204,7 +215,7 @@
 				
 				<!-- Location -->
 				<div class="sidebar-widget">
-					<h3>موقعیت</h3>
+					<h3 style="text-align: right;">موقعیت</h3>
 					<div class="input-with-icon">
 						<div id="autocomplete-container">
 							<input id="autocomplete-input" type="text" placeholder="موقعیت">
@@ -215,7 +226,7 @@
 
 				<!-- Category -->
 				<div class="sidebar-widget">
-					<h3>دسته‌بندی‌ها</h3>
+					<h3 style="text-align: right;">دسته‌بندی‌ها</h3>
 					<select id="categories" class="selectpicker default" data-selected-text-format="count" data-size="7" title="همه دسته‌بندی‌ها" >
 						{{#each data.categories}}
 						<option value="{{this._id}}">{{this.title}}</option>
@@ -225,7 +236,7 @@
 
 				<!-- Keywords -->
 				<div class="sidebar-widget">
-					<h3>عنوان</h3>
+					<h3 style="text-align: right;">عنوان</h3>
 					<div class="keywords-container">
 						<div class="keyword-input-container">
 							<input id="search-title" type="text" class="keyword-input" placeholder="عنوان شغلی"/>
@@ -250,7 +261,7 @@
 
 			</div>
 		</div>
-		<div class="col-xl-9 col-lg-8 content-left-offset">
+		<div class="col-xl-9 col-lg-8 content-left-offset" dir="rtl" style="text-align: right;">
 
 			<!-- Tasks Container -->
 			<div class="tasks-list-container compact-list margin-top-35">
@@ -260,11 +271,11 @@
 				<a href="/tasks/{{this._id}}" class="task-listing">
 
 					<!-- Job Listing Details -->
-					<div class="task-listing-details">
+					<div class="task-listing-details" style="padding-right: 38px;padding-left: 0;">
 
 						<!-- Details -->
 						<div class="task-listing-description">
-							<h3 class="task-listing-title">{{this.name}}</h3>
+							<h3 class="task-listing-title" style="padding-right: 15px">{{this.name}}</h3>
 							<ul class="task-icons">
 								<li><i class="icon-material-outline-location-on"></i> {{this.location}}</li>
 								<li><i class="icon-material-outline-access-time"></i> {{this.created_at}}</li>
@@ -302,10 +313,10 @@
 					<!-- Pagination -->
 					<div class="pagination-container margin-top-60 margin-bottom-60">
 						<nav class="pagination">
-							<ul class="page-no">	
-								<li><a href="/tasks?page=1" class="ripple-effect">1</a></li>
-								<li><a href="/tasks?page=2" class="ripple-effect">2</a></li>
-								<li><a href="/tasks?page=3" class="ripple-effect">3</a></li>
+							<ul>	
+								<li class="pagination-arrow"><a href="#" id="next-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+								<li><a href="#" class="ripple-effect current-page">{{ data.currentPage }}</a></li>
+								<li class="pagination-arrow"><a href="#" id="prev-page" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -371,18 +382,6 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
-							<!-- Language Switcher -->
-							<div class="footer-row">
-								<div class="footer-row-inner">
-									<select class="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
-										<option>Français</option>
-										<option>Español</option>
-										<option>Deutsch</option>
-									</select>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -446,10 +445,10 @@
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="text-align: right;"></i>ثبت نام در خبرنامه سایت <i class="icon-feather-mail"></i></h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -463,7 +462,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
@@ -475,6 +474,10 @@
 
 </div>
 <!-- Wrapper / End -->
+
+<!-- Has Next Page Hidden -->
+<h1 id="has-next-page" style="display: none;">{{ data.hasNextPage }}</h1>
+<!-- End /// Has Next Page Hidden -->
 
 <!-- Scripts
 ================================================== -->
@@ -523,6 +526,60 @@ $('#snackbar-user-status label').click(function() {
 
 <script>
 	$(document).ready(() => {
+		// next page pagination
+        $('#next-page').on('click', () => {
+            if ($('#has-next-page').text() === '0') {
+                return false;
+            }
+			const location = $('#autocomplete-input').val();
+			const category = $('#category option:selected').attr('value');
+			const title = $('#title-search').val();
+            let page = '';
+            if (window.location.href.indexOf('page=') !== -1) {
+                if (window.location.href.indexOf('&', window.location.href.indexOf('page=')) !== -1) {
+                    page = window.location.href.substring
+                        (window.location.href.indexOf('page=') + 5, window.location.href.indexOf('&', window.location.href.indexOf('page=')))
+                        .replace(/\D/g,'');
+                } else {
+                    page = window.location.href.substring(window.location.href.indexOf('page=') + 5)
+                        .replace(/\D/g,'');
+                }
+            }
+			let url = '/tasks?req=1';
+			location ? url = url + '&location=' + location : '';
+			category ? url = url + '&category=' + category : '';
+			title ? url = url + '&title=' + title : '';
+            page ? url = url + '&page=' + (parseInt(page) + 1).toString() : url = url + '&page=2';
+			window.location.href = url;
+		});
+
+        // prev page pagination
+        $('#prev-page').on('click', () => {
+			const location = $('#autocomplete-input').val();
+			const category = $('#category option:selected').attr('value');
+			const title = $('#title-search').val();
+            let page = '';
+            if (window.location.href.indexOf('page=') !== -1) {
+                if (window.location.href.indexOf('&', window.location.href.indexOf('page=')) !== -1) {
+                    page = window.location.href.substring
+                        (window.location.href.indexOf('page=') + 5, window.location.href.indexOf('&', window.location.href.indexOf('page=')))
+                        .replace(/\D/g,'');;
+                } else {
+                    page = window.location.href.substring(window.location.href.indexOf('page=') + 5)
+                        .replace(/\D/g,'');;
+                }
+            }
+            if (page === '1') {
+                return false;
+            }
+			let url = '/tasks?req=1';
+			location ? url = url + '&location=' + location : '';
+			category ? url = url + '&category=' + category : '';
+			title ? url = url + '&title=' + title : '';
+            page ? url = url + '&page=' + (parseInt(page) - 1).toString() : url = url + '&page=1';
+			window.location.href = url;
+		});
+
 		$('#logOut').on('click', () => {
 			$.ajax({
 				url: '/logout',
@@ -536,14 +593,6 @@ $('#snackbar-user-status label').click(function() {
 		$('.task-listing-text').each((index, element) => {
 			if ($(element).text().length > 200) {
 				$(element).text($(element).text().slice(0, 200) + '...');
-			}
-		});
-
-		$('.page-no li a').each((index, element) => {
-			if ($(element).text() == location.href.split('page=')[1]) {
-				$(element).addClass('current-page');
-			} else if (index == 0 && location.href.split('page=').length <= 1) {
-				$(element).addClass('current-page');
 			}
 		});
 
@@ -563,34 +612,19 @@ $('#snackbar-user-status label').click(function() {
 		});
 
 		if (location.href.split('location=').length > 1) {
-			let lc;
-			if (location.href.split('location=')[1].split('&').length > 1) {
-				lc = location.href.split('location=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('location=')[1];
-			}
-			$('#autocomplete-input').val(lc.replace('%20', ' '));
+			const urlParams = new URLSearchParams(window.location.search);
+			$('#autocomplete-input').val(urlParams.get('location'));
 		}
 
 		if (location.href.split('title=').length > 1) {
-			let lc;
-			if (location.href.split('title=')[1].split('&').length > 1) {
-				lc = location.href.split('title=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('title=')[1];
-			}
-			$('#search-title').val(lc);
+			const urlParams = new URLSearchParams(window.location.search);
+			$('#search-title').val(urlParams.get('title'));
 		}
 
 		if (location.href.split('category=').length > 1) {
-			let lc;
-			if (location.href.split('category=')[1].split('&').length > 1) {
-				lc = location.href.split('category=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('category=')[1];
-			}
+			const urlParams = new URLSearchParams(window.location.search);
 			$('#categories option').each((index, element) => {
-				if ($(element).attr('value') == lc) {
+				if ($(element).attr('value') == urlParams.get('category')) {
 					$(element).attr('selected', 'selected');
 				}
 			});

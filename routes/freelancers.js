@@ -24,6 +24,8 @@ router.get('/', async (req, res) => {
         data: {
             user,
             freelancers: freelancers.docs,
+            currentPage: parseInt(req.query.page) || 1,
+            hasNextPage: await query.countDocuments() > (parseInt(req.query.page) || 1) * 5 ? '1' : '0',
         },
         layout: false,
     });

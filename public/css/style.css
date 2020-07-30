@@ -11631,7 +11631,7 @@ select.selectpicker {
 	overflow: hidden;
 	width: 100%;
 	line-height: 48px;
-	text-align: left;
+	text-align: right;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 90%;
@@ -12045,6 +12045,7 @@ select.selectpicker {
 }
 
 .bootstrap-select.open .dropdown-menu {
+	text-align: right;
 	opacity: 1;
 	pointer-events: all;
 	visibility: visible

@@ -589,14 +589,6 @@ $('#snackbar-user-status label').click(function() {
 		$('#clear').on('click', () => {
 			window.location.href = '/jobs';
 		});
-
-		$('.page-no li a').each((index, element) => {
-			if ($(element).text() == location.href.split('page=')[1]) {
-				$(element).addClass('current-page');
-			} else if (index == 0 && location.href.split('page=').length <= 1) {
-				$(element).addClass('current-page');
-			}
-		});
 		
 		if (location.href.split('location=').length > 1) {
 			const urlParams = new URLSearchParams(window.location.search);

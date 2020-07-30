@@ -111,6 +111,8 @@ router.get('/', async (req, res) => {
             user,
             tasks: tasks.docs,
             categories,
+            currentPage: parseInt(req.query.page) || 1,
+            hasNextPage: await query.countDocuments() > (parseInt(req.query.page) || 1) * 5 ? '1' : '0',
         },
         role: req.session.role,
         layout: false 
