@@ -15,8 +15,8 @@
         font-style:normal;
         font-weight:normal;
     }
-    body {
-        font-family: Mahsa;
+    h2, h3, h4, ul, div, .companies-list {
+        font-family: Mahsa !important;
     }
 </style>
 <!-- CSS
@@ -205,7 +205,7 @@
 				
 				<!-- Location -->
 				<div class="sidebar-widget" style="text-align: right;" dir="rtl">
-					<h3 style="font-family: Mahsa">موقعیت</h3>
+					<h3>موقعیت</h3>
 					<div class="input-with-icon">
 						<div id="autocomplete-container">
 							<input id="autocomplete-input" type="text" placeholder="موقعیت" style="font-family: Mahsa">
@@ -216,7 +216,7 @@
 
 				<!-- Keywords -->
 				<div class="sidebar-widget" style="text-align: right;" dir="rtl">
-					<h3 style="font-family: Mahsa" style="text-align: right;">عنوان</h3>
+					<h3 style="text-align: right;">عنوان</h3>
 					<div class="keywords-container">
 						<div class="keyword-input-container">
 							<input id="tagline" type="text" class="keyword-input" placeholder="توسعه‌دهنده وب" style="font-family: Mahsa"/>
@@ -264,10 +264,10 @@
 
 							<!-- Name -->
 							<div class="freelancer-name">
-								<h4 style="font-family: Mahsa;"><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
-								<span style="font-family: Mahsa;">{{this.tag_line}}</span>
+								<h4><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
+								<span>{{this.tag_line}}</span>
 								<!-- Rating -->
-								<div class="freelancer-rating" style="font-family: Mahsa;">
+								<div class="freelancer-rating">
 									<div class="star-rating" data-rating="{{this.rate}}"></div>
 								</div>
 							</div>
@@ -275,7 +275,7 @@
 					</div>
 					
 					<!-- Details -->
-					<div class="freelancer-details" style="font-family: Mahsa;">
+					<div class="freelancer-details">
 						<div class="freelancer-details-list">
 							<ul>
 								<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}
@@ -375,10 +375,10 @@
 		<div class="container">
 			<div class="row">
 				<!-- Links -->
-				<div class="col-xl-2 col-lg-2 col-md-3" style="font-family: Mahsa;">
+				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3 style="font-family: Mahsa;">برای داوطلبان</h3>
-						<ul style="font-family: Mahsa;">
+						<h3>برای داوطلبان</h3>
+						<ul>
 							<li><a href="#"><span>شغل‌ها</span></a></li>
 							<li><a href="#"><span>ساخت رزومه</span></a></li>
 							<li><a href="#"><span>بوک مارک‌های من</span></a></li>
@@ -388,8 +388,8 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3 style="font-family: Mahsa;">برای کارفرمایان</h3>
-						<ul style="font-family: Mahsa;">
+						<h3>برای کارفرمایان</h3>
+						<ul>
 							<li><a href="#"><span>کاندیدها</span></a></li>
 							<li><a href="/jobs/create"><span>پست موقعیت شغلی</span></a></li>
 							<li><a href="/tasks/create"><span>پست پروژه</span></a></li>
@@ -399,8 +399,8 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3 style="font-family: Mahsa;">لینک‌های مفید</h3>
-						<ul style="font-family: Mahsa;">
+						<h3>لینک‌های مفید</h3>
+						<ul>
 							<li><a href="#"><span>تماس با ما</span></a></li>
 							<li><a href="#"><span>قوانین و مقررات</span></a></li>
 						</ul>
@@ -409,8 +409,8 @@
 				<!-- Links -->
 				<div class="col-xl-2 col-lg-2 col-md-3">
 					<div class="footer-links">
-						<h3 style="font-family: Mahsa;">اکانت</h3>
-						<ul style="font-family: Mahsa;>
+						<h3>اکانت</h3>
+						<ul>
 							<li><a href="#"><span>ورود به سایت</span></a></li>
 							<li><a href="#"><span>اکانت من</span></a></li>
 						</ul>
@@ -418,7 +418,7 @@
 				</div>
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3 style="font-family: Mahsa;"><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="text-align: right;"></i>ثبت نام در خبرنامه سایت <i class="icon-feather-mail"></i></h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
 						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید" style="font-family: Mahsa; text-align: right;">

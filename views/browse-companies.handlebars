@@ -9,6 +9,20 @@
 <title>Hireo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+
+    h2, h3, h4, ul, div, .companies-list {
+        font-family: Mahsa !important;
+    }
+</style>
 
 <!-- CSS
 ================================================== -->
@@ -27,35 +41,27 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">شغل‌ها</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">پروژه‌ها</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
-
-						<li><a href="/companies" class="current">شرکت‌ها</a></li>
-
+						<li><a href="/companies" class="current">شرکت ها</a></li>
 						<li><a href="/freelancers">فریلنسرها</a></li>
+                        <li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -111,7 +117,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -162,7 +168,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -284,18 +290,6 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
-							<!-- Language Switcher -->
-							<div class="footer-row">
-								<div class="footer-row-inner">
-									<select class="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
-										<option>Français</option>
-										<option>Español</option>
-										<option>Deutsch</option>
-									</select>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -359,10 +353,10 @@
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="text-align: right;"></i>ثبت نام در خبرنامه سایت <i class="icon-feather-mail"></i></h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید" style="font-family: Mahsa; text-align: right;">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -376,7 +370,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
