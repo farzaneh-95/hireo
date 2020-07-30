@@ -120,6 +120,10 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    if (!req.app.get('user').name) {
+        req.app.set('error', 'name');
+        return res.redirect('/dashboard_settings');
+    }
     const data = {
         name: req.body.projectName,
         category_id: req.body.categoryId,

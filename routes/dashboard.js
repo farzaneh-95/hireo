@@ -56,27 +56,25 @@ router.get('/dashboard_settings', async (req, res) => {
         countries: countries, 
         locations,
         role: req.session.role, 
+        error: req.app.get('error'),
         layout: false 
     });
 });
 
 router.post('/dashboard_settings', async (req, res) => {
-    const user = req.app.get('user');
     if (req.session.role == 'freelancer') {
-        user.first_name = req.body.first_name;
-        user.last_name = req.body.last_name;
-        user.skills = req.body.skills;
-        user.minimal_hourly_rate = req.body.rate;
-        user.tag_line = req.body.tag_line;
-        user.nationality = req.body.nationality;
-        user.bio = req.body.bio;
-        await user.save();
+        await Freelancer.updateOne({ _id: req.app.get('user')._id }, { 
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            skills: req.body.skills, 
+            minimal_hourly_rate: req.body.minimal_hourly_rate,
+            tag_line: req.body.tag_line,
+            nationality: req.body.nationality,
+            bio: req.body.bio,
+        });
         res.send({ Message: 'Ok' });
     } else {
-            user.name = req.body.name;
-            user.location = req.body.location;
-            user.bio = req.body.bio;
-            await user.save();
+            await Employer.updateOne({ _id: req.app.get('user')._id }, { name: req.body.name, location: req.body.location, bio: req.body.bio });
             res.send({ Message: 'Ok' });
         }
 });

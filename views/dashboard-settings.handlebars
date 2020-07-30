@@ -603,7 +603,7 @@
 									<div class="col-xl-12">
 										<div class="submit-field">
 											<h5>موقعیت</h5>
-											<select class="selectpicker with-border" data-size="7" id="location" title="Select Location" data-live-search="true">
+											<select class="selectpicker with-border" data-size="7" id="location" title="انتخاب موقعیت" data-live-search="true">
 												{{#each locations}}
 												<option>{{this}}</option>
 												{{/each}}
@@ -677,7 +677,7 @@
 </div>
 <!-- Wrapper / End -->
 
-
+<h1 style="display: none;">{{ data.error }}</h1>
 <!-- Scripts
 ================================================== -->
 <script src="/js/jquery-3.4.1.min.js"></script>
@@ -808,6 +808,18 @@ $('#snackbar-user-status label').click(function() {
 
 <script>
 	$(document).ready(() => {
+        if ($('#no-name-error').text() === 'name') {
+            Snackbar.show({
+                text: 'تغییرات ذخیره شد',
+                pos: 'bottom-center',
+                showAction: false,
+                actionText: "Dismiss",
+                duration: 3000,
+                textColor: '#fff',
+                backgroundColor: '#383838'
+		    });
+        }
+        
 		$('#nationality option').each((index, element) => {
 			if ($('#lc').text() === $(element).val()) {
 				$(element).attr('selected', 'selected');
