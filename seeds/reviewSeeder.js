@@ -11,7 +11,7 @@ module.exports = async (freelancers, employers, tasks) => {
                 reviewer: task.freelancer_id,
                 reviewee: task.employer_id,
                 task: task._id,
-                score: faker.random.number({ min: 2, max: 5 }),
+                score: faker.random.number(100) > 80 ? 5 : faker.random.number({ min: 2, max: 4 }),
                 comment: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ',
                 created_at: new Date(),
             });
@@ -19,7 +19,7 @@ module.exports = async (freelancers, employers, tasks) => {
                 reviewer: task.employer_id,
                 reviewee: task.freelancer_id,
                 task: task._id,
-                score: faker.random.number({ min: 2, max: 5 }),
+                score: faker.random.number(100) > 80 ? 5 : faker.random.number({ min: 2, max: 4 }),
                 comment: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. ',
                 created_at: new Date(),
             });
