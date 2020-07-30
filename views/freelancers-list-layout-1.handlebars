@@ -241,7 +241,7 @@
 
 			</div>
 		</div>
-		<div class="col-xl-9 col-lg-8 content-left-offset">
+		<div class="col-xl-9 col-lg-8 content-left-offset" dir="rtl">
 			
 			<!-- Freelancers List Container -->
 			<div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
@@ -263,7 +263,7 @@
 							</div>
 
 							<!-- Name -->
-							<div class="freelancer-name">
+							<div class="freelancer-name" style="text-align: right;margin: 0 30px 0 0">
 								<h4><a href="#">{{this.first_name}} {{this.last_name}} </a></h4>
 								<span>{{this.tag_line}}</span>
 								<!-- Rating -->
@@ -275,7 +275,7 @@
 					</div>
 					
 					<!-- Details -->
-					<div class="freelancer-details">
+					<div class="freelancer-details" style="position: absolute; left: 0;">
 						<div class="freelancer-details-list">
 							<ul>
 								<li>موقعیت <strong><i class="icon-material-outline-location-on"></i> {{this.nationality}}
@@ -525,23 +525,11 @@ $('#snackbar-user-status label').click(function() {
 		});
 
 		if (location.href.split('location=').length > 1) {
-			let lc;
-			if (location.href.split('location=')[1].split('&').length > 1) {
-				lc = location.href.split('location=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('location=')[1];
-			}
 			const urlParams = new URLSearchParams(window.location.search);
 			$('#autocomplete-input').val(urlParams.get('location'));
 		}
 
 		if (location.href.split('title=').length > 1) {
-			let lc;
-			if (location.href.split('title=')[1].split('&').length > 1) {
-				lc = location.href.split('title=')[1].split('&')[0];
-			} else {
-				lc = location.href.split('title=')[1];
-			}
 			const urlParams = new URLSearchParams(window.location.search);
 			$('#tagline').val(urlParams.get('title'));
 		}

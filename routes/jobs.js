@@ -162,7 +162,7 @@ router.get('/:id', async (req, res) => {
         data: user,
         job,
         employer_name: employer.name || 'No Name',
-        employer_link: '/employers/' + employer._id,
+        employer_link: '/companies/' + employer._id,
         employer_img: employer.logo || '/images/company-logo-05.png',
         employer_location: employer.location || 'Somewhere',
         similarJobs,
