@@ -14,7 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 </head>
 <body class="gray">
 
@@ -265,21 +277,12 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" data-simplebar style="text-align: right;">
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>مدیریت شغل‌ها</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Manage Jobs</li>
-					</ul>
-				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -313,12 +316,14 @@
 											<div class="job-listing-description">
 												<h3 class="job-listing-title"><a href="#">{{this.job.title}}</a>
 												{{#equal this.job.status 1}}
-													<span class="dashboard-status-button green">در حال انجام</span>
+													<span class="dashboard-status-button green">در حال بررسی</span>
 												{{/equal}}
 												{{#equal this.job.status 2}}
+													<span class="dashboard-status-button red">در حال انجام</span>
+												{{/equal}}
+												{{#equal this.job.status 3}}
 													<span class="dashboard-status-button red">منقضی شده</span>
 												{{/equal}}
-												
 												</h3>
 
 												<!-- Job Listing Footer -->
@@ -327,15 +332,35 @@
 														<li class="job-created-at"><i class="icon-material-outline-date-range"></i> تاریخ پست : {{this.job.created_at}}</li>
 													</ul>
 												</div>
+                                                <h3 class="job-listing-title"><a>{{ trim this.job.description }}</a>
 											</div>
 										</div>
 									</div>
 
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible">
-										<a href="/jobs/{{this.job._id}}/candidates" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> مدیریت کاندیدها <span class="button-info">{{this.applyCount}}</span></a>
-										<a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-										<a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                        {{#equal this.job.status 1}}
+                                            <a href="/jobs/{{this.job._id}}/candidates" class="button ripple-effect">
+                                                <span class="button-info" style="margin-right: 10px;">{{this.applyCount}}</span><i class="icon-material-outline-supervisor-account"></i> مدیریت کاندیدها 
+                                            </a>
+                                        {{/equal}}
+                                        {{#equal this.job.status 2}}
+                                            <a href="/jobs/{{this.job._id}}/candidates" class="button ripple-effect">
+                                                <i class="icon-material-outline-supervisor-account"></i> مشاهده جزییات
+                                            </a>
+                                        {{/equal}}
+                                        {{#equal this.job.status 3}}
+                                            <a href="/jobs/{{this.job._id}}/candidates" class="button ripple-effect">
+                                                <i class="icon-material-outline-supervisor-account"></i> مشاهده جزییات
+                                            </a>
+                                        {{/equal}}
+										{{!-- <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a> --}}
+                                        {{#equal this.job.status 1}}
+										    <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                        {{/equal}}
+                                        {{#equal this.job.status 3}}
+										    <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                        {{/equal}}
 									</div>
 								</li>
 								{{/each}}

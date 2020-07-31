@@ -48,7 +48,7 @@ router.get('/my_jobs', async (req, res) => {
         const myJobs = await Job
             .where('posted_by')
             .equals(req.session._id)
-            .sort({ created_at: 'desc' });
+            .sort({ created_at: 'desc', status: 'asc' });
         
         const tempJobs = [];
         myJobs.forEach(async job => {

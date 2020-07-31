@@ -95,7 +95,6 @@ const jobSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
-        // default: status => Date.parse(this.created_at) + 12096e5 > Date.now() ? status = 1 : status = 2 ,
     },
 
     applies: [applySchema],
