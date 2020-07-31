@@ -120,9 +120,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    if (!req.app.get('user').name) {
-        req.app.set('error', 'name');
-        return res.redirect('/dashboard_settings');
+    if (!req.app.get('user').name || !req.app.get('user').location) {
+        return res.status(400).send({ Error: 'Please Complete Your Profile' });
     }
     const data = {
         name: req.body.projectName,

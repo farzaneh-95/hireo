@@ -91,7 +91,7 @@ router.post('/', async (req, res) => {
         created_at: new Date(),
     });
     await job.save();
-    res
+    return res
         .status(201)
         .send({ Message: 'Ok' });
 });

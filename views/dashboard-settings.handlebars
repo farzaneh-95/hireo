@@ -637,7 +637,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
@@ -677,7 +677,6 @@
 </div>
 <!-- Wrapper / End -->
 
-<h1 style="display: none;">{{ data.error }}</h1>
 <!-- Scripts
 ================================================== -->
 <script src="/js/jquery-3.4.1.min.js"></script>
@@ -808,18 +807,6 @@ $('#snackbar-user-status label').click(function() {
 
 <script>
 	$(document).ready(() => {
-        if ($('#no-name-error').text() === 'name') {
-            Snackbar.show({
-                text: 'تغییرات ذخیره شد',
-                pos: 'bottom-center',
-                showAction: false,
-                actionText: "Dismiss",
-                duration: 3000,
-                textColor: '#fff',
-                backgroundColor: '#383838'
-		    });
-        }
-        
 		$('#nationality option').each((index, element) => {
 			if ($('#lc').text() === $(element).val()) {
 				$(element).attr('selected', 'selected');

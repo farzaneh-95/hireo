@@ -16,6 +16,17 @@
 <link rel="stylesheet" href="/css/colors/blue.css">
 
 <style>
+	@font-face {
+		font-family: 'Mahsa';
+		src: url('/fonts/Mahsa.eot?#') format('eot'),  
+			url('/fonts/Mahsa.woff') format('woff'),
+			url('/fonts/Mahsa.ttf') format('truetype');
+		font-style:normal;
+		font-weight:normal;
+	}
+	body, input {
+		font-family: Mahsa;
+	}
 	.error-border {
 		border: 1px solid #dc3545 !important;
 	};
@@ -33,35 +44,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -271,21 +273,12 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" data-simplebar>
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>ساخت پروژه</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Post a Task</li>
-					</ul>
-				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -306,14 +299,14 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>نام پروژه‌</h5>
-										<input type="text" class="with-border" id="project_name" required>
+										<input type="text" class="with-border" id="project_name" style="text-align: right;" required>
 									</div>
 								</div>
 
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>دسته‌بتدی</h5>
-										<select required class="selectpicker with-border" data-size="7" id="categories" title="انتخاب کنید ...">
+										<select required class="selectpicker with-border" data-size="7" id="categories" title="...انتخاب کنید ">
 											{{#each data.categories}}
 											<option value="{{this._id}}">{{this.title}}</option>
 											{{/each}}
@@ -326,7 +319,7 @@
 										<h5>موقعیت  <i class="help-icon" id="location" data-tippy-placement="right" title="اگر پروژه آنلاین هست لازم به وارد کردن نیست"></i></h5>
 										<div class="input-with-icon">
 											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text">
+												<input id="autocomplete-input" class="with-border" type="text" style="text-align: right;">
 											</div>
 											<i class="icon-material-outline-location-on"></i>
 										</div>
@@ -339,14 +332,14 @@
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input class="with-border" type="text" id="min_budget" placeholder="حداقل">
+													<input class="with-border" type="text" id="max_budget" placeholder="حداکثر" style="text-align: right;">
 												</div>
 											</div>
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input class="with-border" type="text" id="max_budget" placeholder="حداکثر">
+													<input class="with-border" type="text" id="min_budget" placeholder="حداقل" style="text-align: right;">
 												</div>
-											</div>
+											</div>											
 										</div>
 										<div class="feedback-yes-no margin-top-0">
 											<div class="radio">
@@ -367,7 +360,7 @@
 										<h5>چه مهارت‌هایی برای انجام پروژه‌ لازم است؟ <i class="help-icon" data-tippy-placement="right" title="حداقل 5 تا از مهارت‌های مناسب پروژه شما "></i></h5>
 										<div class="keywords-container">
 											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" id="skills" placeholder="اضافه کنید ..."/>
+												<input type="text" class="keyword-input with-border" id="skills" placeholder="...اضافه کنید"/>
 												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
 											</div>
 											<div class="keywords-list"><!-- keywords go here --></div>
@@ -380,7 +373,7 @@
 								<div class="col-xl-12">
 									<div class="submit-field">
 										<h5>شرح پروژه‌</h5>
-										<textarea cols="30" rows="5" id="project_disc" class="with-border"></textarea>
+										<textarea cols="30" rows="5" id="project_disc" class="with-border" style="text-align: right;"></textarea>
 									</div>
 								</div>
 
@@ -400,7 +393,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
@@ -636,7 +629,7 @@ $('#snackbar-user-status label').click(function() {
 				contentType: 'application/json',
 				data,
 				success: (result, statusCode, xhr) => {
-					$('#success-message').text('Your Job Posted');
+					$('#success-message').text('درخواست شما فرستاذه شد');
 					$('#project_name').val('');
 					$('#autocomplete-input').val('');
 					$('#min_budget').val('');
@@ -646,7 +639,15 @@ $('#snackbar-user-status label').click(function() {
 
 				},
 				error: (xhr, status, err) => {
-					window.location = '/dashboard_settings';
+					Snackbar.show({
+						text: 'لطفا پروفایل خود را از قسمت تنظیمات تکمیل کنید',
+						pos: 'bottom-center',
+						showAction: false,
+						actionText: "Dismiss",
+						duration: 4000,
+						textColor: '#fff',
+						backgroundColor: '#383838'
+					}); 
 				},
 			});
 		}

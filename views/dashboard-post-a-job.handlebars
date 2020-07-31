@@ -298,7 +298,7 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>عنوان شغل</h5>
-										<input type="text" class="with-border" id="job-title">
+										<input type="text" class="with-border" id="job-title" style="text-align: right;">
 									</div>
 								</div>
 
@@ -344,12 +344,12 @@
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input id="job-min" class="with-border" type="text" placeholder="حداقل" style="text-align: right;">
+													<input id="job-max" class="with-border" type="text" placeholder="حداکثر" style="text-align: right;padding-right: 15px">
 												</div>
 											</div>
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input id="job-max" class="with-border" type="text" placeholder="حداکثر" style="text-align: right;">
+													<input id="job-min" class="with-border" type="text" placeholder="حداقل" style="text-align: right;padding-right: 15px">
 												</div>
 											</div>
 										</div>
@@ -358,7 +358,7 @@
 
 								<div class="col-xl-4">
 									<div class="submit-field">
-										<h5><span>(اختیاری)</span> Tags   <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
+										<h5><span>(اختیاری)</span> Tags   <i class="help-icon" data-tippy-placement="right" title="حداقل 5 تا از مهارت‌های مناسب پروژه شما"></i></h5>
 										<div class="keywords-container">
 											<div class="keyword-input-container">
 												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
@@ -374,7 +374,7 @@
 								<div class="col-xl-12">
 									<div class="submit-field">
 										<h5>شرح موقعیت شغلی</h5>
-										<textarea id="job-desc" cols="30" rows="5" class="with-border"></textarea>
+										<textarea id="job-desc" cols="30" rows="5" class="with-border" style="text-align: right;"></textarea>
 									</div>
 								</div>
 
@@ -639,7 +639,15 @@ $('#snackbar-user-status label').click(function() {
 					$('.keyword').remove();
 				},
 				error: (xhr, status, err) => {
-					window.location = '/dashboard_settings';
+					Snackbar.show({
+						text: 'لطفا پروفایل خود را از قسمت تنظیمات تکمیل کنید',
+						pos: 'bottom-center',
+						showAction: false,
+						actionText: "Dismiss",
+						duration: 4000,
+						textColor: '#fff',
+						backgroundColor: '#383838'
+					}); 
 				},
 			});
 		}
