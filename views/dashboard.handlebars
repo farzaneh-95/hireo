@@ -1,32 +1,32 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+	<head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>Hireo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- Basic Page Needs
+		================================================== -->
+		<title>Hireo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- CSS
-================================================== -->
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/colors/blue.css">
-<style>
-    @font-face {
-        font-family: 'Mahsa';
-        src: url('/fonts/Mahsa.eot?#') format('eot'),  
-            url('/fonts/Mahsa.woff') format('woff'),
-            url('/fonts/Mahsa.ttf') format('truetype');
-        font-style:normal;
-        font-weight:normal;
-    }
-    body {
-        font-family: Mahsa;
-    }
-</style>
-</head>
+		<!-- CSS
+		================================================== -->
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/colors/blue.css">
+		<style>
+			@font-face {
+				font-family: 'Mahsa';
+				src: url('/fonts/Mahsa.eot?#') format('eot'),  
+					url('/fonts/Mahsa.woff') format('woff'),
+					url('/fonts/Mahsa.ttf') format('truetype');
+				font-style:normal;
+				font-weight:normal;
+			}
+			body {
+				font-family: Mahsa;
+			}
+		</style>
+	</head>
 <body class="gray">
 
 <!-- Wrapper -->
@@ -38,35 +38,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -282,10 +273,10 @@
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				{{#equal user.role 'freelancer'}}
-				    <h3 style="font-family: inherit;">سلام {{user.first_name}}!</h3>
+				    <h3 style="font-family: inherit; text-align: right;"> !سلام {{user.first_name}}</h3>
 				{{/equal}}
 				{{#equal user.role 'employer'}}
-				    <h3 style="font-family: inherit; text-align: right;">سلام {{user.name}}</h3>
+				    <h3 style="font-family: inherit; text-align: right;"> !سلام {{user.name}}</h3>
 				{{/equal}}
 			</div>
 			{{#equal user.role 'freelancer'}}
@@ -329,14 +320,7 @@
 					<!-- Dashboard Box -->
 					<div class="dashboard-box main-box-in-row">
 						<div class="headline">
-							<h3 style="font-family: inherit;"><i class="icon-feather-bar-chart-2"></i>نمودار بازدید پروفایل شما</h3>
-							<div class="sort-by">
-								<select class="selectpicker hide-tick">
-									<option>Last 6 Months</option>
-									<option>This Year</option>
-									<option>This Month</option>
-								</select>
-							</div>
+							<h3 style="font-family: inherit;text-align: right;">نمودار بازدید پروفایل شما <i class="icon-feather-bar-chart-2"></i></h3>
 						</div>
 						<div class="content">
 							<!-- Chart -->
@@ -354,7 +338,7 @@
 						 and 'child-box-in-row' to the higher box -->
 					<div class="dashboard-box child-box-in-row"> 
 						<div class="headline">
-							<h3 style="font-family: inherit;"><i class="icon-material-outline-note-add"></i>یادداشت ها</h3>
+							<h3 style="font-family: inherit; text-align: right;">یادداشت ها <i class="icon-material-outline-note-add"></i></h3>
 						</div>	
 						<div class="content with-padding">
 							<!-- Note -->

@@ -1,26 +1,37 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+	<head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>Hireo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- Basic Page Needs
+		================================================== -->
+		<title>Hireo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- CSS
-================================================== -->
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/colors/blue.css">
+		<!-- CSS
+		================================================== -->
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/colors/blue.css">
 
-<style>
-	.error-border {
-		border: solid 1px #dc3545 !important;
-	};
-</style>
+		<style>
+			@font-face {
+                font-family: 'Mahsa';
+                src: url('/fonts/Mahsa.eot?#') format('eot'),  
+                    url('/fonts/Mahsa.woff') format('woff'),
+                    url('/fonts/Mahsa.ttf') format('truetype');
+                font-style:normal;
+                font-weight:normal;
+            }
+            body, input {
+                font-family: Mahsa;
+            }
+			.error-border {
+				border: solid 1px #dc3545 !important;
+			};
+		</style>
 
-</head>
+	</head>
 <body class="gray">
 
 <!-- Wrapper -->
@@ -32,35 +43,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -275,20 +277,11 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>پست موقعیت شغلی</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Post a Job</li>
-					</ul>
-				</nav> --}}
+				<h3 style="text-align: right;">پست موقعیت شغلی</h3>
 			</div>
 	
 			<!-- Row -->
-			<div class="row">
+			<div class="row" style="text-align: right;">
 
 				<!-- Dashboard Box -->
 				<div class="col-xl-12">
@@ -296,7 +289,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3 id="submit-success"><i class="icon-feather-folder-plus"></i> فرم ثبت موقعیت شغلی</h3>
+							<h3 id="submit-success"></i> فرم ثبت موقعیت شغلی <i class="icon-feather-folder-plus"></i></h3>
 						</div>
 
 						<div class="content with-padding padding-bottom-10">
@@ -312,7 +305,7 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>نوع قرارداد</h5>
-										<select id="job-type"class="selectpicker with-border" data-size="7" title="انتخاب کنید ...">
+										<select id="job-type"class="selectpicker with-border" data-size="7" title="...انتخاب کنید">
 											<option value="0">تمام وقت</option>
 											<option value="1">فریلنس</option>
 											<option value="2">پاره‌وقت</option>
@@ -325,7 +318,7 @@
 								<div class="col-xl-4">
 									<div class="submit-field">
 										<h5>دسته‌بندی</h5>
-										<select id="job-category"class="selectpicker with-border" data-size="7" title="انتخاب کنید ...">
+										<select id="job-category"class="selectpicker with-border" data-size="7" title="...انتخاب کنید">
 											{{#each categories}}
 											<option value="{{this._id}}">{{this.title}}</option>
 											{{/each}}
@@ -338,7 +331,7 @@
 										<h5>موقعیت</h5>
 										<div class="input-with-icon">
 											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text" placeholder="آدرس را وارد کنید">
+												<input id="autocomplete-input" class="with-border" type="text" placeholder="آدرس را وارد کنید" style="text-align: right;">
 											</div>
 											<i class="icon-material-outline-location-on"></i>
 										</div>
@@ -351,12 +344,12 @@
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input id="job-min" class="with-border" type="text" placeholder="حداقل">
+													<input id="job-min" class="with-border" type="text" placeholder="حداقل" style="text-align: right;">
 												</div>
 											</div>
 											<div class="col-xl-6">
 												<div class="input-with-icon">
-													<input id="job-max" class="with-border" type="text" placeholder="حداکثر">
+													<input id="job-max" class="with-border" type="text" placeholder="حداکثر" style="text-align: right;">
 												</div>
 											</div>
 										</div>
@@ -365,11 +358,11 @@
 
 								<div class="col-xl-4">
 									<div class="submit-field">
-										<h5>Tags <span>(اختیاری)</span>  <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
+										<h5><span>(اختیاری)</span> Tags   <i class="help-icon" data-tippy-placement="right" title="Maximum of 10 tags"></i></h5>
 										<div class="keywords-container">
 											<div class="keyword-input-container">
-												<input type="text" class="keyword-input with-border" placeholder="عنوان شغلی یا مسئولیت‌ها"/>
 												<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+												<input type="text" class="keyword-input with-border" placeholder="عنوان شغلی یا مسئولیت‌ها"/>
 											</div>
 											<div class="keywords-list"><!-- keywords go here --></div>
 											<div class="clearfix"></div>
@@ -401,7 +394,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
