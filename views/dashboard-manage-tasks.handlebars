@@ -33,41 +33,33 @@
 <!-- Wrapper -->
 <div id="wrapper">
 
+<!-- Wrapper -->
 <!-- Header Container
 ================================================== -->
 <header id="header-container" class="fullwidth dashboard-header not-sticky">
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -83,13 +75,14 @@
 				{{#equal data.user.role 'freelancer'}}
 				<!-- User Menu -->
 				<div class="header-widget">
+
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
 							{{#if data.user.profile_picture}}
-							    <a href="#"><div class="user-avatar status-online"><img src="{{ data.user.profile_picture }}" alt=""></div></a>
+							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div></a>
 							{{else}}
-							    <a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
+							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
 							{{/if}}
 						</div>
 
@@ -153,9 +146,9 @@
 								<!-- User Name / Avatar -->
 								<div class="user-details">
 									{{#if data.user.logo}}
-									    <div class="user-avatar status-online"><img src="{{ data.user.logo }}" alt=""></div>
+									<div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div>
 									{{else}}
-									    <div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
+									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
 									{{/if}}
 									<div class="user-name">
 										{{data.user.name}} <span>Employer</span>

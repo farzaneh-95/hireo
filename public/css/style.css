@@ -6878,7 +6878,7 @@ table.basic-table {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
-	float: left;
+	float: right;
 	margin-right: 0;
 	position: relative
 }
@@ -6921,7 +6921,7 @@ table.basic-table {
 
 .star-rating:before {
 	content: attr(data-rating);
-	float: left;
+	float: right;
 	border-radius: 4px;
 	background-color: #febe42;
 	color: #fff;
@@ -6971,7 +6971,7 @@ table.basic-table {
 
 .leave-rating label {
 	font-size: 24px;
-	float: right;
+	float: left;
 	letter-spacing: 0;
 	color: #dadada;
 	cursor: pointer;
@@ -14773,16 +14773,16 @@ a.attachment-box:hover i {
 }
 
 .profile-overview .overview-item {
+	border-right: 0;
+	padding-right: 0;
+}
+
+.profile-overview .overview-item:last-child {
 	flex: 1;
 	border-right: 1px solid #e0e0e0;
 	margin-right: 20px;
 	padding-right: 20px;
 	flex-grow: 1
-}
-
-.profile-overview .overview-item:last-child {
-	border-right: 0;
-	padding-right: 0
 }
 
 .profile-overview .overview-item strong {
