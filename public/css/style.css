@@ -11635,7 +11635,8 @@ select.selectpicker {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 90%;
-	float: left;
+	float: right;
+	padding-right: inherit;
 	height: 48px;
 	display: block
 }
