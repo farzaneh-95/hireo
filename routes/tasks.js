@@ -6,6 +6,7 @@ const Bid = require('../models/bid');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 const isLoggedIn = require('../helpers/isLoggedIn');
+const isFreelancer = require('../helpers/isFreelancer');
 
 router.get('/:id/bidders', async (req, res) => {
     const user = req.app.get('user');
@@ -21,7 +22,7 @@ router.get('/:id/bidders', async (req, res) => {
     });
 });
 
-router.get('/my_bids', async (req, res) => {
+router.get('/my_bids', isFreelancer, async (req, res) => {
     const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();
     return res.render('dashboard-my-active-bids', {

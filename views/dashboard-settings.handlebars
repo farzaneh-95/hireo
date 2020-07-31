@@ -14,7 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 </head>
 <body class="gray">
 
@@ -501,16 +513,7 @@
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
-				<h3>تنظیمات</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Settings</li>
-					</ul>
-				</nav> --}}
+				<h3 style="text-align: right;">تنظیمات</h3>
 			</div>
 	
 			<!-- Row -->
@@ -522,10 +525,10 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-account-circle"></i> اکانت من</h3>
+							<h3 style="text-align: right;"><i class="icon-material-outline-account-circle"></i> اکانت من</h3>
 						</div>
 
-						<div class="content with-padding padding-bottom-0">
+						<div class="content with-padding padding-bottom-0" style="text-align: right;">
 
 							<div class="row">
 
@@ -549,7 +552,7 @@
 										<div class="col-xl-6">
 											<div class="submit-field">
 												<h5>نام</h5>
-												<input type="text" class="with-border" id="emp_name" value="{{user.name}}">
+												<input style="text-align: right;" type="text" class="with-border" id="emp_name" value="{{user.name}}">
 											</div>
 										</div>
 
@@ -560,12 +563,12 @@
 												<div class="account-type">
 													<div>
 														<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" disabled/>
-														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>
+														<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> فریلنسر</label>
 													</div>
 
 													<div>
 														<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" checked disabled/>
-														<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>
+														<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> کارفرما</label>
 													</div>
 												</div>
 											</div>
@@ -573,8 +576,8 @@
 
 										<div class="col-xl-6">
 											<div class="submit-field">
-												<h5>Email</h5>
-												<input type="text" class="with-border" value="{{data.email}}" disabled>
+												<h5>آدرس ایمیل</h5>
+												<input style="text-align: right;" type="text" class="with-border" value="{{data.email}}" disabled>
 											</div>
 										</div>
 
@@ -592,7 +595,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-face"></i> پروفایل من</h3>
+							<h3 style="text-align: right;"><i class="icon-material-outline-face"></i> پروفایل من</h3>
 						</div>
 
 						 <div class="content">
@@ -602,7 +605,7 @@
 									
 									<div class="col-xl-12">
 										<div class="submit-field">
-											<h5>موقعیت</h5>
+											<h5 style="text-align: right;">موقعیت</h5>
 											<select class="selectpicker with-border" data-size="7" id="location" title="انتخاب موقعیت" data-live-search="true">
 												{{#each locations}}
 												<option>{{this}}</option>
@@ -613,8 +616,8 @@
 
 									<div class="col-xl-12">
 										<div class="submit-field">
-											<h5>خودتان را معرفی کنید</h5>
-											<textarea cols="30" rows="5" id="bio" class="with-border">{{data.bio}}</textarea>
+											<h5 style="text-align: right;">خودتان را معرفی کنید</h5>
+											<textarea style="text-align: right;" cols="30" rows="5" id="bio" class="with-border">{{data.bio}}</textarea>
 										</div>
 									</div>
 
@@ -626,7 +629,7 @@
 				</div>
 
 				<!-- Button -->
-				<div class="col-xl-12">
+				<div class="col-xl-12" style="text-align: right;">
 					<a href="#" class="button ripple-effect big margin-top-30" id="save_employer">ذخیره تغییرات</a>
 				</div>
 
