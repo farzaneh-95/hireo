@@ -4,7 +4,7 @@ const Freelancer = require('../models/freelancer');
 
 module.exports = async () => {
     const freelancers = [];
-    const skills = ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML5', 'Mongodb', 'React', 'Vuejs', 'Photoshop', 'Redis'];
+    const skills = ['Laravel', 'Node.js', 'Express', 'Mysql', 'HTML', 'Mongodb', 'React', 'Vuejs', 'Photoshop', 'Redis'];
     const countries = ['آمریکا', 'ایران', 'فرانسه', 'اسپانیا', 'آلمان', 'سوئد'];
     const profilePictures = ['/images/user-avatar-big-01.jpg', '/images/user-avatar-big-02.jpg'];
     const firstNames = ['علیرضا', 'فرزانه', 'امیر', 'محسن', 'رویا', 'پردیس', 'مهدیس', 'مهدیه' ,'سامان', 'رامین', 'علی', 'محمد'];

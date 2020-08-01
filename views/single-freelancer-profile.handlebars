@@ -14,6 +14,21 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa !important;
+		text-align: right;
+		direction: rtl;
+    }
+</style>
 
 </head>
 <body>
@@ -23,39 +38,31 @@
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container" class="fullwidth">
+<header id="header-container" class="fullwidth" dir="ltr">
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">شغل‌ها</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">پروژه‌ها</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
-
-						<li><a href="/companies">شرکت‌ها</a></li>
-
+						<li><a href="/companies">شرکت ها</a></li>
 						<li><a href="/freelancers">فریلنسرها</a></li>
+                        <li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -111,7 +118,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -162,7 +169,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -202,11 +209,11 @@
 				<div class="single-page-header-inner">
 					<div class="left-side">
 						<div class="header-image freelancer-avatar"><img src="{{data.freelancer.profile_picture}}" alt=""></div>
-						<div class="header-details">
+						<div class="header-details" style="text-align: right;margin: 0 30px 0 0">
 							<h3>{{data.freelancer.first_name}} {{data.freelancer.last_name}}<span>{{data.freelancer.tag_line}}</span></h3>
 							<ul>
+								<li style="margin-right: 0px;">{{data.freelancer.nationality}}</li>
 								<li><div class="star-rating" data-rating="{{data.freelancer.rate}}"></div></li>
-								<li>{{data.freelancer.nationality}}</li>
 							</ul>
 						</div>
 					</div>
@@ -223,7 +230,7 @@
 	<div class="row">
 		
 		<!-- Content -->
-		<div class="col-xl-8 col-lg-8 content-right-offset">
+		<div class="col-xl-8 col-lg-8 content-right-offset" style="padding-left: 30px;padding-right: 15px;">
 			
 			<!-- Page Content -->
 			<div class="single-page-section">
@@ -277,13 +284,13 @@
 							
 							<!-- Content -->
 							<div class="item-content">
-								<h4>{{this.title}}</h4>
+								<h4 style="margin-right: 20px;">{{this.title}}</h4>
 								<div class="item-details margin-top-7">
-									<div class="detail-item"><a href="#"><i class="icon-material-outline-business"></i> Acodia</a></div>
-									<div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019 - Present</div>
+									<div class="detail-item"><a href="#"> <i class="icon-material-outline-business"></i> {{this.location}}</a></div>
+									{{!-- <div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2019 - Present</div> --}}
 								</div>
 								<div class="item-description">
-									<p>Focus the team on the tasks at hand or the internal and external customer requirements.</p>
+									<p style="margin-right: 20px;">{{this.description}}</p>
 								</div>
 							</div>
 						</div>
@@ -374,7 +381,7 @@
 
 					<!-- Copy URL -->
 					<div class="copy-url">
-						<input id="copy-url" type="text" value="" class="with-border">
+						<input id="copy-url" type="text" value="" class="with-border" dir="ltr">
 						<button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i class="icon-material-outline-file-copy"></i></button>
 					</div>
 
@@ -457,18 +464,6 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
-							<!-- Language Switcher -->
-							<div class="footer-row">
-								<div class="footer-row-inner">
-									<select class="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
-										<option>Français</option>
-										<option>Español</option>
-										<option>Deutsch</option>
-									</select>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -480,7 +475,7 @@
 	<!-- Footer Top Section / End -->
 
 	<!-- Footer Middle Section -->
-	<div class="footer-middle-section">
+	<div class="footer-middle-section" dir="ltr" style="text-align: left;">
 		<div class="container">
 			<div class="row">
 
@@ -532,10 +527,10 @@
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="text-align: right;"></i>ثبت نام در خبرنامه سایت <i class="icon-feather-mail"></i></h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید" style="font-family: Mahsa; text-align: right;">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -545,11 +540,11 @@
 	<!-- Footer Middle Section / End -->
 	
 	<!-- Footer Copyrights -->
-	<div class="footer-bottom-section">
+	<div class="footer-bottom-section" dir="ltr">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
@@ -571,7 +566,7 @@
 	<div class="sign-in-form">
 
 		<ul class="popup-tabs-nav">
-			<li><a href="#tab">Make an Offer</a></li>
+			<li><a href="#tab">پیشنهاد</a></li>
 		</ul>
 
 		<div class="popup-tabs-container">
@@ -581,7 +576,7 @@
 				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>Discuss your project with David</h3>
+					<h3>انتقاد یا پیشنهاد خود را اینجا وارد کنید</h3>
 				</div>
 					
 				<!-- Form -->
@@ -589,26 +584,19 @@
 
 					<div class="input-with-icon-left">
 						<i class="icon-material-outline-account-circle"></i>
-						<input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name"/>
+						<input type="text" class="input-text with-border" name="name" id="name" placeholder="نام و نام‌خانوادگی" style="padding: 0 56px"/>
 					</div>
 
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline"></i>
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address"/>
+						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" style="padding: 0 56px"/>
 					</div>
 
-					<textarea name="textarea" cols="10" placeholder="Message" class="with-border"></textarea>
-
-					<div class="uploadButton margin-top-25">
-						<input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple/>
-						<label class="uploadButton-button ripple-effect" for="upload">Add Attachments</label>
-						<span class="uploadButton-file-name">Allowed file types: zip, pdf, png, jpg <br> Max. files size: 50 MB.</span>
-					</div>
-
+					<textarea name="textarea" cols="10" placeholder="پیام" class="with-border"></textarea>
 				</form>
 				
 				<!-- Button -->
-				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit">Make an Offer <i class="icon-material-outline-arrow-right-alt"></i></button>
+				<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit">ارسال پیشنهاد <i class="icon-material-outline-arrow-right-alt"></i></button>
 
 			</div>
 			<!-- Login -->

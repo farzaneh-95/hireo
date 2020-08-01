@@ -6,6 +6,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/colors/blue.css">
+	<style>
+		@font-face {
+			font-family: 'Mahsa';
+			src: url('/fonts/Mahsa.eot?#') format('eot'),  
+				url('/fonts/Mahsa.woff') format('woff'),
+				url('/fonts/Mahsa.ttf') format('truetype');
+			font-style:normal;
+			font-weight:normal;
+		}
+		body {
+			font-family: Mahsa !important;
+			text-align: right;
+			direction: rtl;
+		}
+		.my-sidebar li {
+			padding-left: 0;
+			padding-right: 38px;
+		}
+		.my-sidebar li i {
+			right: 0;
+		}
+	</style>
 </head>
 <body>
 
@@ -14,39 +36,31 @@
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container" class="fullwidth">
+<header id="header-container" class="fullwidth" dir="ltr">
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 20px; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت های کاری</a>
 							<ul class="dropdown-nav">
-								<li><a href="/jobs">شغل‌ها</a>
+								<li><a href="/jobs">شغل ها</a>
 								</li>
-								<li><a href="/tasks">پروژه‌ها</a>
+								<li><a href="/tasks">پروژه ها </a>
 									
 								</li>
 							</ul>
 						</li>
-
-						<li><a href="/companies">شرکت‌ها</a></li>
-
+						<li><a href="/companies">شرکت ها</a></li>
 						<li><a href="/freelancers">فریلنسرها</a></li>
+                        <li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -58,16 +72,16 @@
 
 			<!-- Right Side Content / End -->
 			<div class="right-side">
-				{{#if data.user}}
-				{{#equal data.user.role 'freelancer'}}
+				{{#if user}}
+				{{#equal user.role 'freelancer'}}
 				<!-- User Menu -->
 				<div class="header-widget">
 
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							{{#if data.user.profile_picture}}
-							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div></a>
+							{{#if user.profile_picture}}
+							<a href="#"><div class="user-avatar status-online"><img src="{{user.profile_picture}}" alt=""></div></a>
 							{{else}}
 							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
 							{{/if}}
@@ -81,13 +95,13 @@
 
 								<!-- User Name / Avatar -->
 								<div class="user-details">
-									{{#if data.user.profile_picture}}
-									<div class="user-avatar status-online"><img src="{{data.user.profile_picture}}" alt=""></div>
+									{{#if user.profile_picture}}
+									<div class="user-avatar status-online"><img src="{{user.profile_picture}}" alt=""></div>
 									{{else}}
 									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
 									{{/if}}
 									<div class="user-name">
-										{{data.user.first_name}} {{data.user.last_name}} <span>Freelancer</span>
+										{{user.first_name}} {{user.last_name}} <span>Freelancer</span>
 									</div>
 								</div>
 								
@@ -102,7 +116,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات</a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -110,15 +124,15 @@
 				</div>
 				<!-- User Menu / End -->
 				{{/equal}}
-				{{#equal data.user.role 'employer'}}
+				{{#equal user.role 'employer'}}
 				<!-- User Menu -->
 				<div class="header-widget">
 
 					<!-- Messages -->
 					<div class="header-notifications user-menu">
 						<div class="header-notifications-trigger">
-							{{#if data.user.logo}}
-							<a href="#"><div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div></a>
+							{{#if user.logo}}
+							<a href="#"><div class="user-avatar status-online"><img src="{{user.logo}}" alt=""></div></a>
 							{{else}}
 							<a href="#"><div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div></a>
 							{{/if}}
@@ -132,13 +146,13 @@
 
 								<!-- User Name / Avatar -->
 								<div class="user-details">
-									{{#if data.user.logo}}
-									<div class="user-avatar status-online"><img src="{{data.user.logo}}" alt=""></div>
+									{{#if user.logo}}
+									<div class="user-avatar status-online"><img src="{{user.logo}}" alt=""></div>
 									{{else}}
 									<div class="user-avatar status-online"><img src="/images/user-avatar-placeholder.png" alt=""></div>
 									{{/if}}
 									<div class="user-name">
-										{{data.user.name}} <span>Employer</span>
+										{{user.name}} <span>Employer</span>
 									</div>
 								</div>
 								
@@ -153,7 +167,7 @@
 							
 							<ul class="user-menu-small-nav">
 								<li><a href="/dashboard"><i class="icon-material-outline-dashboard"></i> داشبورد</a></li>
-								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنظیمات/a></li>
+								<li><a href="/dashboard_settings"><i class="icon-material-outline-settings"></i> تنطیمات</a></li>
 								<li><a href="/logout" id="logOut"><i class="icon-material-outline-power-settings-new"></i> خروج</a></li>
 							</ul>
 						</div>
@@ -193,7 +207,7 @@
 				<div class="single-page-header-inner">
 					<div class="left-side">
 						<div class="header-image"><a href="/single-company-profile.html"><img src="{{employer_img}}" alt=""></a></div>
-						<div class="header-details">
+						<div class="header-details" style="text-align: right;margin: 0 30px 0 0">
 							<h3>{{job.title}}</h3>
 							<h5>درباره کارفرما</h5>
 							<ul>
@@ -221,7 +235,7 @@
 	<div class="row">
 		
 		<!-- Content -->
-		<div class="col-xl-8 col-lg-8 content-right-offset">
+		<div class="col-xl-8 col-lg-8 content-right-offset" style="padding-left: 30px;padding-right: 15px;">
 
 			<div class="single-page-section">
 				<h3 class="margin-bottom-25">شرح موقعیت شغلی</h3>
@@ -249,7 +263,7 @@
 							</div>
 
 							<!-- Details -->
-							<div class="job-listing-description">
+							<div class="job-listing-description" style="padding-right: 20px;">
 								{{#if this.posted_by.name}}
 								<h4 class="job-listing-company">{{this.posted_by.name}}</h4>
 								{{else}}
@@ -263,9 +277,9 @@
 							<ul>
 								<li><i class="icon-material-outline-location-on"></i> {{this.location}}</li>
 								<li><i class="icon-material-outline-business-center"></i> {{this.type}}</li>
-								<li><i class="icon-material-outline-account-balance-wallet"></i> {{this.min_salary}}
-								-${{this.max_salary}}</li>
-								<li><i class="icon-material-outline-access-time"></i>{{this.created_at}}</li>
+								<li> {{this.min_salary}}
+								-{{this.max_salary}} <i class="icon-material-outline-account-balance-wallet"></i></li>
+								<li style="padding-right: 10px;"><i class="icon-material-outline-access-time"></i>{{this.created_at}}</li>
 							</ul>
 						</div>
 					</a>
@@ -291,7 +305,7 @@
 					<div class="job-overview">
 						<div class="job-overview-headline">خلاصه موقعیت شغلی</div>
 						<div class="job-overview-inner">
-							<ul>
+							<ul class="my-sidebar">
 								<li>
 									<i class="icon-material-outline-location-on"></i>
 									<span>موقعیت</span>
@@ -323,7 +337,7 @@
 
 					<!-- Copy URL -->
 					<div class="copy-url">
-						<input id="copy-url" type="text" value="" class="with-border">
+						<input id="copy-url" type="text" value="" class="with-border" dir="ltr">
 						<button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i class="icon-material-outline-file-copy"></i></button>
 					</div>
 
@@ -402,18 +416,6 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-							
-							<!-- Language Switcher -->
-							<div class="footer-row">
-								<div class="footer-row-inner">
-									<select class="selectpicker language-switcher" data-selected-text-format="count" data-size="5">
-										<option selected>English</option>
-										<option>Français</option>
-										<option>Español</option>
-										<option>Deutsch</option>
-									</select>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -425,7 +427,7 @@
 	<!-- Footer Top Section / End -->
 
 	<!-- Footer Middle Section -->
-	<div class="footer-middle-section">
+	<div class="footer-middle-section" dir="ltr" style="text-align: left;">
 		<div class="container">
 			<div class="row">
 
@@ -477,10 +479,10 @@
 
 				<!-- Newsletter -->
 				<div class="col-xl-4 col-lg-4 col-md-12">
-					<h3><i class="icon-feather-mail"></i>ثبت نام در خبرنامه سایت</h3>
+					<h3 style="text-align: right;"></i>ثبت نام در خبرنامه سایت <i class="icon-feather-mail"></i></h3>
 					{{!-- <p>Weekly breaking news, analysis and cutting edge advices on job searching.</p> --}}
 					<form action="#" method="get" class="newsletter">
-						<input type="text" name="fname" placeholder="Enter your email address">
+						<input type="text" name="fname" placeholder="ایمیل خود را وارد کنید" style="font-family: Mahsa; text-align: right;">
 						<button type="submit"><i class="icon-feather-arrow-right"></i></button>
 					</form>
 				</div>
@@ -490,11 +492,11 @@
 	<!-- Footer Middle Section / End -->
 	
 	<!-- Footer Copyrights -->
-	<div class="footer-bottom-section">
+	<div class="footer-bottom-section" dir="ltr">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 			</div>
 		</div>
@@ -516,7 +518,7 @@
 	<div class="sign-in-form">
 
 		<ul class="popup-tabs-nav">
-			<li><a href="#tab">Apply Now</a></li>
+			<li><a href="#tab">فرستادن درخواست</a></li>
 		</ul>
 
 		<div class="popup-tabs-container">
@@ -535,18 +537,18 @@
 						<i class="icon-material-outline-account-circle"></i>
 						{{#equal hasApplied 0}}
 						{{!-- <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/> --}}
-						<input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="Phone Number" required/>
+						<input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="شماره تلفن" style="padding: 0 56px" required/>
 						{{/equal}}
 					</div>
 					<div class="input-with-icon-left">
 						<i class="icon-material-baseline-mail-outline"></i>
 						{{#equal hasApplied 0}}
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address" disabled value="{{freelancer.email}}"/>
+						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" disabled value="{{freelancer.email}}" style="padding: 0 56px"/>
 						{{/equal}}
 					</div>
 					<div class="uploadButton">
 						<input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
-						<label class="uploadButton-button ripple-effect" for="upload-cv">Select File</label>
+						<label class="uploadButton-button ripple-effect" for="upload-cv">انتخاب فایل</label>
 						{{!-- <span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span> --}}
 					</div>
 					<!-- Button -->

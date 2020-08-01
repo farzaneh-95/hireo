@@ -26,6 +26,9 @@
     body {
         font-family: Mahsa;
     }
+	input {
+		text-align: right;
+	}
 </style>
 </head>
 <body class="gray">
@@ -268,21 +271,12 @@
 	{{#equal user.role 'freelancer'}}
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" data-simplebar>
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>تنظیمات</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Settings</li>
-					</ul>
-				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -294,44 +288,26 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-account-circle"></i> اکانت من</h3>
+							<h3> اکانت من <i class="icon-material-outline-account-circle"></i></h3>
 						</div>
 
 						<div class="content with-padding padding-bottom-0">
 
 							<div class="row">
-
-								<div class="col-auto">
-									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
-										{{#if data.profile_picture}}
-										<img class="profile-pic" src="{{data.profile_picture}}" alt="" />
-										<div class="upload-button"></div>
-										<input class="file-upload" type="file" accept="image/*"/>
-										{{else}}
-										<img class="profile-pic" src="/images/user-avatar-placeholder.png" alt="" />
-										<div class="upload-button"></div>
-										<input class="file-upload" type="file" accept="image/*"/>
-										{{/if}}
-									</div>
-								</div>
-
 								<div class="col">
 									<div class="row">
-
-										<div class="col-xl-6">
-											<div class="submit-field">
-												<h5>نام</h5>
-												<input type="text" class="with-border" id="first_name" value="{{data.first_name}}">
-											</div>
-										</div>
-
 										<div class="col-xl-6">
 											<div class="submit-field">
 												<h5>نام خانوادگی</h5>
 												<input type="text" class="with-border" id="last_name" value="{{data.last_name}}">
 											</div>
 										</div>
-
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>نام</h5>
+												<input type="text" class="with-border" id="first_name" value="{{data.first_name}}">
+											</div>
+										</div>
 										<div class="col-xl-6">
 											<!-- Account Type -->
 											<div class="submit-field">
@@ -352,11 +328,25 @@
 
 										<div class="col-xl-6">
 											<div class="submit-field">
-												<h5>Email</h5>
+												<h5>آدرس ایمیل</h5>
 												<input type="text" class="with-border" value="{{data.email}}" disabled>
 											</div>
 										</div>
 
+									</div>
+								</div>
+
+								<div class="col-auto">
+									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
+										{{#if data.profile_picture}}
+										<img class="profile-pic" src="{{data.profile_picture}}" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{else}}
+										<img class="profile-pic" src="/images/user-avatar-placeholder.png" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{/if}}
 									</div>
 								</div>
 							</div>
@@ -371,7 +361,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-face"></i> پروفایل من</h3>
+							<h3 style="text-align: right;">پروفایل من <i class="icon-material-outline-face"></i></h3>
 						</div>
 
 						<div class="content">
@@ -393,12 +383,12 @@
 
 									<div class="col-xl-8">
 										<div class="submit-field">
-											<h5>مهارت‌ها <i class="help-icon" data-tippy-placement="right" title="Add up to 10 skills"></i></h5>
+											<h5>مهارت‌ها <i class="help-icon" data-tippy-placement="right" title="حداقل 5 مهارت وارد کنید"></i></h5>
 
 											<!-- Skills List -->
-											<div class="keywords-container">
+											<div class="keywords-container" style="margin-bottom: 80px;">
 												<div class="keyword-input-container">
-													<input type="text" class="keyword-input with-border" placeholder="e.g. Angular, Laravel"/>
+													<input type="text" class="keyword-input with-border" placeholder="" style="text-align: left;"/>
 													<button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
 												</div>
 												<div class="keywords-list">
@@ -425,7 +415,7 @@
 									<div class="col-xl-6">
 										<div class="submit-field">
 											<h5>ملیت</h5>
-											<select class="selectpicker with-border" data-size="7" id="nationality" title="Select Job Type" data-live-search="true">
+											<select class="selectpicker with-border" data-size="7" id="nationality" title="ملیت خود را انتخاب کنید" data-live-search="true">
 												{{#each countries}}
 												<option>{{this}}</option>
 												{{#equal this data.nationality}}
@@ -438,8 +428,8 @@
 
 									<div class="col-xl-12">
 										<div class="submit-field">
-											<h5>خودتان رت معرفی کنید</h5>
-											<textarea cols="30" rows="5" id="bio" class="with-border">{{data.bio}}</textarea>
+											<h5>خودتان را معرفی کنید</h5>
+											<textarea cols="30" rows="5" id="bio" class="with-border" style="text-align: right;">{{data.bio}}</textarea>
 										</div>
 									</div>
 
@@ -516,27 +506,12 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3 style="text-align: right;"><i class="icon-material-outline-account-circle"></i> اکانت من</h3>
+							<h3 style="text-align: right;"></i> اکانت من <i class="icon-material-outline-account-circle"></i></h3>
 						</div>
 
 						<div class="content with-padding padding-bottom-0" style="text-align: right;">
 
 							<div class="row">
-
-								<div class="col-auto">
-									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
-										{{#if user.logo}}
-										<img class="profile-pic" src="{{user.logo}}" alt="" />
-										<div class="upload-button"></div>
-										<input class="file-upload" type="file" accept="image/*"/>
-										{{else}}
-										<img class="profile-pic" src="/images/user-avatar-placeholder.png" alt="" />
-										<div class="upload-button"></div>
-										<input class="file-upload" type="file" accept="image/*"/>
-										{{/if}}
-									</div>
-								</div>
-
 								<div class="col">
 									<div class="row">
 
@@ -544,6 +519,15 @@
 											<div class="submit-field">
 												<h5>نام</h5>
 												<input style="text-align: right;" type="text" class="with-border" id="emp_name" value="{{user.name}}">
+											</div>
+										</div>
+
+										
+
+										<div class="col-xl-6">
+											<div class="submit-field">
+												<h5>آدرس ایمیل</h5>
+												<input style="text-align: right;" type="text" class="with-border" value="{{data.email}}" disabled>
 											</div>
 										</div>
 
@@ -565,13 +549,19 @@
 											</div>
 										</div>
 
-										<div class="col-xl-6">
-											<div class="submit-field">
-												<h5>آدرس ایمیل</h5>
-												<input style="text-align: right;" type="text" class="with-border" value="{{data.email}}" disabled>
-											</div>
-										</div>
-
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="avatar-wrapper" data-tippy-placement="bottom" title="Change Avatar">
+										{{#if user.logo}}
+										<img class="profile-pic" src="{{user.logo}}" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{else}}
+										<img class="profile-pic" src="/images/user-avatar-placeholder.png" alt="" />
+										<div class="upload-button"></div>
+										<input class="file-upload" type="file" accept="image/*"/>
+										{{/if}}
 									</div>
 								</div>
 							</div>
@@ -586,7 +576,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3 style="text-align: right;"><i class="icon-material-outline-face"></i> پروفایل من</h3>
+							<h3 style="text-align: right;"> پروفایل من <i class="icon-material-outline-face"></i></h3>
 						</div>
 
 						 <div class="content">

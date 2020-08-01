@@ -67,7 +67,7 @@ router.post('/dashboard_settings', async (req, res) => {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             skills: req.body.skills, 
-            minimal_hourly_rate: req.body.minimal_hourly_rate,
+            minimal_hourly_rate: req.body.rate,
             tag_line: req.body.tag_line,
             nationality: req.body.nationality,
             bio: req.body.bio,

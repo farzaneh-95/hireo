@@ -48,7 +48,7 @@ router.get('/my_jobs', async (req, res) => {
         const myJobs = await Job
             .where('posted_by')
             .equals(req.session._id)
-            .sort({ created_at: 'desc', status: 'asc' });
+            .sort({ status: 'asc', created_at: 'desc' });
         
         const tempJobs = [];
         myJobs.forEach(async job => {
@@ -159,7 +159,7 @@ router.get('/:id', async (req, res) => {
         .populate('posted_by')
         .exec();
     res.render('single-job-page', {
-        data: user,
+        user,
         job,
         employer_name: employer.name || 'No Name',
         employer_link: '/companies/' + employer._id,

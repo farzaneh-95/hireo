@@ -1,7 +1,1 @@
-module.exports = [
-    'United States',
-    'United Kingdom',
-    'Spain',
-    'France',
-    'Sweden',
-];
+module.exports =  ['آمریکا', 'ایران', 'فرانسه', 'اسپانیا', 'آلمان', 'سوئد']

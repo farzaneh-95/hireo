@@ -39,7 +39,8 @@ router.get('/:id', async (req, res) => {
     const tasksDone = await Task.find({ freelancer_id: freelancer._id, status: 3 }).countDocuments();
     const tasks = await Task.find({ freelancer_id: freelancer._id }).sort({ created_at: 'desc' }).limit(5);
     const reviews = await Review.find({ reviewee: freelancer._id }).sort({ created_at: 'desc' }).limit(5).populate('task').exec();
-    const jobs = await Job.find({ freelancer_id: freelancer._id }).sort({ created_at: 'desc' }).limit(3).populate('posted_by').exec();
+    const jobs = await Job.find({ 'applies.freelancer_id': freelancer._id,  'applies.accepted': true }).sort({ created_at: 'desc' })
+        .limit(3).populate('posted_by').exec();
     return res.render('single-freelancer-profile', {
         data: {
             user,

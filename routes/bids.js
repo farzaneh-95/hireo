@@ -14,7 +14,7 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
     const task = await Task.findById(req.body.task_id);
     const delivery_time = {
         quantity: parseInt(req.body.delivery_time),
-        type: req.body.type === 'Hours' ? 1 : 2,
+        type: req.body.type,
     };
     const bid = new Bid({
         freelancer_id: req.session._id,
