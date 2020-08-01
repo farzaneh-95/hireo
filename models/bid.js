@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const types = ['Days', 'Hours'];
+const types = ['روز', 'ساعت'];
 
 const deliveryTimeSchema = new mongoose.Schema({
     quantity: Number,
     type: {
         type: Number,
-        get: type => types[type],
+        get: type => types[type - 1],
     }
 });
 
