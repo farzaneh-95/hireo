@@ -38,8 +38,8 @@ router.get('/my_bids', isFreelancer, async (req, res) => {
 router.get('/my_tasks', isLoggedIn, async (req, res) => {
     const user = { ...req.app.get('user') };
     if (req.session.role === 'employer') {
+        const bids = await Bid.find({ task_id: { $in: user.tasks.map(task => task._id) } });
         user.tasks.forEach(task => {
-            const bids = Bid.find({ task_id: task._id });
             let minimalRatesSum = 0;
             bids.map(bid => { minimalRatesSum += bid.minimal_rate });
             task.bids = bids;
@@ -68,7 +68,7 @@ router.get('/:id', async (req, res) => {
     if (!task) {
         return res.render('404', { layout: false });
     }
-    const rate = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: "$score" } }).match({ _id: task.employer_id }).exec();
+    let rate = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: "$score" } }).match({ _id: task.employer_id }).exec();
     let score = 0;
     if (rate.length > 0) {
         score = rate[0].average
@@ -76,15 +76,29 @@ router.get('/:id', async (req, res) => {
     task = await task.populate('employer_id').execPopulate();
     const tempTask = { ...task._doc };
     tempTask.employer_id.rate = score;
+    tempTask.budget_type = task.budget_type;
+    tempTask.created_at = task.created_at;
     const bids = await Bid
         .where('task_id')
         .equals(task._id)
         .populate('freelancer_id')
         .exec();
+    const rates = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: "$score" } }).match({ _id: { $in: bids.map(bid => bid.freelancer_id._id) } }).exec()
+    const tempBids = [];
+    bids.map(bid => {
+        const temp = { ...bid._doc };
+        rates.map(rate => {
+            if (rate._id === bid.freelancer_id._id) {
+                score = rate.average;
+            }
+        });
+        temp.freelancer_id.rate = score;
+        tempBids.push(temp);
+    });
     return res.render('single-task-page', {
         data: {
             task: tempTask,
-            bids,
+            bids: tempBids,
             user,
         },
         layout: false 

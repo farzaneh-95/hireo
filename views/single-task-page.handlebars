@@ -316,7 +316,7 @@
 							<span class="bidding-detail">حداقل نرخ خود را وارد کنید</span>
 
 							<!-- Price Slider -->
-							<div class="bidding-value">T<span id="biddingVal"></span></div>
+							<div class="bidding-value">تومان<span id="biddingVal"></span></div>
 							<input class="bidding-slider" type="text" value="" id="minimal-rate" data-slider-handle="custom" data-slider-currency="T" data-slider-min="{{data.task.min_budget}}" data-slider-max="{{data.task.max_budget}}" data-slider-value="auto" data-slider-step="10" data-slider-tooltip="hide" />
 							
 							<!-- Headline -->
@@ -572,7 +572,8 @@ $('.copy-url-button').click(function() {
 
 <script>
 	$('#snackbar-place-bid').on('click', () => {
-		const minimal_rate = $('#biddingVal').text();
+		let minimal_rate = $('#biddingVal').text();
+        minimal_rate = minimal_rate.replaceAll(',', '');
 		const delivery_time = $('#delivery-time').val();
 		const type = $('#type option:selected').val();
 		$.ajax({
