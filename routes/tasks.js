@@ -7,6 +7,7 @@ const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 const isLoggedIn = require('../helpers/isLoggedIn');
 const isFreelancer = require('../helpers/isFreelancer');
+const Review = require('../models/review');
 
 router.get('/:id/bidders', async (req, res) => {
     const user = req.app.get('user');
@@ -67,9 +68,14 @@ router.get('/:id', async (req, res) => {
     if (!task) {
         return res.render('404', { layout: false });
     }
-    task = await task
-        .populate('employer_id')
-        .execPopulate();
+    const rate = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: "$score" } }).match({ _id: task.employer_id }).exec();
+    let score = 0;
+    if (rate.length > 0) {
+        score = rate[0].average
+    }
+    task = await task.populate('employer_id').execPopulate();
+    const tempTask = { ...task._doc };
+    tempTask.employer_id.rate = score;
     const bids = await Bid
         .where('task_id')
         .equals(task._id)
@@ -77,7 +83,7 @@ router.get('/:id', async (req, res) => {
         .exec();
     return res.render('single-task-page', {
         data: {
-            task,
+            task: tempTask,
             bids,
             user,
         },
@@ -106,7 +112,7 @@ router.get('/', async (req, res) => {
             .where('name')
             .equals(new RegExp(req.query.title, 'i'));
     }
-    const tasks = await Task.paginate(query, { limit: 5, page: req.query.page });
+    const tasks = await Task.paginate(query, { limit: 5, page: req.query.page, sort: '-created_at' });
     res.render('tasks-list-layout-1', {
         data: {
             user,
@@ -143,7 +149,7 @@ router.post('/', async (req, res) => {
     }
     const task = new Task(data);
     await task.save();
-    return res.send({ message: 'ok' });
+    return res.redirect('/tasks/my_tasks');
 });
 
 
