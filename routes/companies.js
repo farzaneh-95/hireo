@@ -29,13 +29,21 @@ router.get('/:id', async (req, res) => {
     const user = req.app.get('user');
     const company = await Employer.findById(req.params.id);
     const jobs = await Job.find({ posted_by: company._id, status: 1 }).limit(3);
-    const reviews = await Review.find({ reviewee: company._id }).sort({ created_at: 'desc' }).limit(3).populate('task').exec();
+    const score = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: company._id }).exec();
+    const tempCompany = { ...company._doc };
+    tempCompany.rate = score[0].average;
+    if (tempCompany.rate.toString().split('.')[1] > 5) {
+        tempCompany.rate = tempCompany.rate.toString().split('.')[0] + '.5';
+    }
+    if (tempCompany.rate.toString().split('.')[1] < 5) {
+        tempCompany.rate = tempCompany.rate.toString().split('.')[0];
+    }
     res.render('single-company-profile', {
         data: {
             user,
-            company,
+            company: tempCompany,
             jobs,
-            reviews,
+            reviews: await Review.find({ reviewee: company._id }).populate('task').exec(),
         },
         layout: false,
     });

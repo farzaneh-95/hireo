@@ -6701,7 +6701,7 @@ table.basic-table {
 	min-width: 48px;
 	background-color: #66676b;
 	color: #fff;
-	border-radius: 0 4px 4px 0
+	border-radius: 4px 4px 4px 4px
 }
 
 .share-buttons {
