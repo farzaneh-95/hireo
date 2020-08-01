@@ -3,16 +3,18 @@ const router = require('express').Router();
 const Category = require('../models/category');
 const Task = require('../models/task');
 const Bid = require('../models/bid');
-const Freelancer = require('../models/freelancer');
-const isEmployer = require('../helpers/isEmployer');
-const isLoggedIn = require('../helpers/isLoggedIn');
-const isFreelancer = require('../helpers/isFreelancer');
 const Review = require('../models/review');
+const isEmployer = require('../helpers/isEmployer');
+const isFreelancer = require('../helpers/isFreelancer');
 
-router.get('/:id/bidders', async (req, res) => {
+
+router.get('/:id/bidders', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const task = await Task.findById(req.params.id);
     const bids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
+    if (task.employer_id.toString() !== req.session._id) {
+        return res.redirect();
+    }
     res.render('dashboard-manage-bidders', { 
         data: {
             user,
@@ -35,7 +37,7 @@ router.get('/my_bids', isFreelancer, async (req, res) => {
     });
 });
 
-router.get('/my_tasks', isLoggedIn, async (req, res) => {
+router.get('/my_tasks', isEmployer, async (req, res) => {
     const user = { ...req.app.get('user') };
     if (req.session.role === 'employer') {
         const bids = await Bid.find({ task_id: { $in: user.tasks.map(task => task._id) } });

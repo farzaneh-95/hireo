@@ -32,10 +32,10 @@ router.get('/:id', async (req, res) => {
     const score = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: company._id }).exec();
     const tempCompany = { ...company._doc };
     tempCompany.rate = score[0].average;
-    if (tempCompany.rate.toString().split('.')[1] > 5) {
+    if (tempCompany.rate.toString().split('.')[1].split('')[0] > 5) {
         tempCompany.rate = tempCompany.rate.toString().split('.')[0] + '.5';
     }
-    if (tempCompany.rate.toString().split('.')[1] < 5) {
+    if (tempCompany.rate.toString().split('.')[1].split('')[0] < 5) {
         tempCompany.rate = tempCompany.rate.toString().split('.')[0];
     }
     res.render('single-company-profile', {

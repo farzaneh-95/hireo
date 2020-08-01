@@ -2,16 +2,17 @@ const router = require('express').Router();
 
 const Freelancer = require('../models/freelancer');
 const Employer = require('../models/employer');
-const Task = require('../models/task');
 const Bid  = require('../models/bid');
 const Review = require('../models/review');
-const countries = require('../helpers/countries');
-const isLoggedIn = require('../helpers/isLoggedIn');
 const Job = require('../models/job');
+const countries = require('../helpers/countries');
 let locations = require('../helpers/locations');
 
-router.get('/dashboard', isLoggedIn, async (req, res) => {
+router.get('/dashboard', async (req, res) => {
     const user = req.app.get('user');
+    if (user === null) {
+        return res.redirect('/');
+    }
     // const data = req.app.get('freelancer') || req.app.get('employer');
     // data.first_name = data.first_name || 'New User';  
     if (req.session.role === 'freelancer') {
@@ -49,6 +50,8 @@ router.get('/dashboard_settings', async (req, res) => {
         data = await Freelancer.findById(req.session._id);
     } else if (req.session.role === 'employer') {
         data = await Employer.findById(req.session._id);
+    } else {
+        return res.redirect('/');
     }
     res.render('dashboard-settings', { 
         data,
