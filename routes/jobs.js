@@ -6,7 +6,6 @@ const Job = require('../models/job');
 const Employer = require('../models/employer');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
-const isUserVerified = require('../helpers/isUserVerified');
 
 const upload = multer ({ dest: 'uploads/' })
 
@@ -30,9 +29,13 @@ router.post('/apply', async (req, res) => {
     return res.status(201).send({ Message: 'Ok' });
 });
 
-router.get('/:id/candidates', async (req, res) => { 
+router.get('/:id/candidates', isEmployer, async (req, res) => { 
     const user = req.app.get('user');
     const candidates = (await Job.find({_id: req.params.id}).populate('applies.freelancer_id').exec())[0].applies;
+    const jobs = await Job.findById(req.params.id);
+    if (jobs.posted_by.toString() !== req.session._id) {
+        return res.status(401).send({ Error: 'Unauthorized Access' });
+    }
     return res.render('dashboard-manage-candidates', {
         data: {
             user,
@@ -42,7 +45,7 @@ router.get('/:id/candidates', async (req, res) => {
     });
 });
 
-router.get('/my_jobs', async (req, res) => {
+router.get('/my_jobs', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     if (req.session.role === 'employer') {
         const myJobs = await Job
