@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
             user,
             company: tempCompany,
             jobs,
-            reviews: await Review.find({ reviewee: company._id }).populate('task').exec(),
+            reviews: await Review.find({ reviewee: company._id }).limit(5).populate('task').exec(),
         },
         layout: false,
     });
