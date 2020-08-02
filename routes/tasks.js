@@ -11,10 +11,24 @@ const isFreelancer = require('../helpers/isFreelancer');
 router.get('/:id/bidders', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const task = await Task.findById(req.params.id);
-    const bids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
-    if (task.employer_id.toString() !== req.session._id) {
-        return res.redirect();
+    if (!task || task.employer_id.toString() !== req.session._id) {
+        return res.redirect('/404');
     }
+    const tempBids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
+    const reviews = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: { $in: tempBids.map(bid => bid.freelancer_id._id) } }).exec();
+    const bids = [];
+    console.log(tempBids.map(bid => bid.freelancer_id._id));
+    tempBids.map(bid => {
+        const temp = { ...bid._doc };
+        let score = 0;
+        reviews.map(review => {
+            if (review._id.toString() === temp.freelancer_id._id.toString()) {
+                score = review.average;
+            }
+        });
+        temp.freelancer_id.rate = score;
+        bids.push(temp);
+    });
     res.render('dashboard-manage-bidders', { 
         data: {
             user,

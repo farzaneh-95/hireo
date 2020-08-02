@@ -14,7 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
-
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
 </head>
 <body class="gray">
 
@@ -269,9 +281,9 @@
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
-			<div class="dashboard-headline">
+			<div style="text-align: right;" class="dashboard-headline">
 				<h3>مدیریت پیشنهادها</h3>
-				<span class="margin-top-7">Bids for <a href="#">{{data.task.name}}</a></span>
+				<span class="margin-top-7">پیشنهادها برای <a href="/tasks/{{ data.task._id }}">{{data.task.name}}</a></span>
 
 				<!-- Breadcrumbs -->
 				{{!-- <nav id="breadcrumbs" class="dark">
