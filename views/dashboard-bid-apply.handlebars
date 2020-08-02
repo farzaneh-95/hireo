@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-manage-bidders.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:50 GMT -->
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Hireo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/colors/blue.css">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa;
+    }
+</style>
+</head>
+<body>
+    <div id="small-dialog-1" class="zoom-anim-dialog dialog-with-tabs">
+
+	<!--Tabs -->
+	<div class="sign-in-form">
+
+		<ul class="popup-tabs-nav">
+			<li><a>پذیرفتن پیشنهاد</a></li>
+		</ul>
+
+		<div class="popup-tabs-container">
+
+			<!-- Tab -->
+			<div class="popup-tab-content" id="tab">
+				
+				<!-- Welcome Text -->
+				<div class="welcome-text">
+					<h3 id="bidder-fullname-accept">{{ bid.task_id.name }}</h3>
+					<div class="bid-acceptance margin-top-15">
+						{{ bid.minimal_rate }}
+					</div>
+                    <h3 style="margin-top: 20px;" id="bidder-fullname-accept">{{ bid.freelancer_id.first_name }} {{ bid.freelancer_id.last_name }}</h3>
+				</div>
+
+				{{!-- <form id="terms">
+					<div class="radio" style="position: absolute; right: 50px;">
+						<input id="radio-1" name="radio" type="radio" required style="position: absolute; right: 0;">
+						<label style="text-align: right;" for="radio-1"><span class="radio-label"></span>  پذیرفتن شرایط و قوانین</label>
+					</div>
+				</form> --}}
+
+				<!-- Button -->
+                <form action="/tasks/{{ bid.task_id._id }}/bids/{{ bid._id }}/apply" method="POST">
+				    <button style="margin-top: 100px;" class="button full-width button-sliding-icon ripple-effect" type="submit">پذیرفتن</button>
+                </form>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+</body>

@@ -181,6 +181,19 @@ router.post('/', async (req, res) => {
     return res.redirect('/tasks/my_tasks');
 });
 
+router.get('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
+    res.render('dashboard-bid-apply', {
+        layout: false,
+        bid: await Bid.findById(req.params.bidId).populate('freelancer_id').populate('task_id'),
+    });
+});
 
+router.post('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
+    const bid = await Bid.findById(req.params.bidId);
+    const task = await Task.findById(req.params.taskId);
+    task.status = 2;
+    await task.save();
+    res.redirect('/tasks/' + task._id + '/bidders');
+});
 
 module.exports = router;

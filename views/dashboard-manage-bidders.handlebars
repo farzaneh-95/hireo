@@ -330,7 +330,7 @@
 
 											<!-- Name -->
 											<div class="freelancer-name">
-												<h4 style="text-align: right;"><a href="/freelancers/{{ this.freelancer_id._id }}">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}} </a></h4>
+												<h4 style="text-align: right;"><a href="/freelancers/{{ this.freelancer_id._id }}" id="bidder-fullname">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}} </a></h4>
 
 												<!-- Details -->
 												<span style="position: absolute; right: 20px;" class="freelancer-detail-item"><a><i class="icon-feather-mail"></i> <span class="__cf_email__" data-cfemail="0d696c7b64694d68756c607d6168236e6260">{{ this.freelancer_id.email }}</span></a></span>
@@ -348,7 +348,7 @@
 
 												<!-- Buttons -->
 												<div class="buttons-to-right always-visible" style="text-align: right; margin-top: 100px;">
-													<a href="#small-dialog-1"  class="popup-with-zoom-anim button ripple-effect"><i class="icon-material-outline-check"></i> پذیرفتن پیشنهاد</a>
+													<a href="/tasks/{{ this.task_id }}/bids/{{ this._id }}/apply"  class="popup-with-zoom-anim button ripple-effect" id="accept"><i class="icon-material-outline-check"></i> پذیرفتن پیشنهاد</a>
 													<a href="#" class="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 												</div>
 											</div>
@@ -406,7 +406,7 @@
 </div>
 <!-- Wrapper / End -->
 
-
+<h1 style="display: none;" id="bidder-fullname-hidden"></h1>
 <!-- Bid Acceptance Popup
 ================================================== -->
 <div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
@@ -415,7 +415,7 @@
 	<div class="sign-in-form">
 
 		<ul class="popup-tabs-nav">
-			<li><a href="#tab1">Accept Offer</a></li>
+			<li><a href="#tab1">پذیرفتن پیشنهاد</a></li>
 		</ul>
 
 		<div class="popup-tabs-container">
@@ -425,7 +425,7 @@
 				
 				<!-- Welcome Text -->
 				<div class="welcome-text">
-					<h3>Accept Offer From David</h3>
+					<h3 id="bidder-fullname-accept">مبلغ</h3>
 					<div class="bid-acceptance margin-top-15">
 						$3200
 					</div>
@@ -526,6 +526,10 @@ $('#logOut').on('click', () => {
 			window.location.href = '/';
 		}
 	});
+});
+
+$('#accept').on('click', () => {
+    window.location.href = $('#accept').href();
 });
 </script>
 
