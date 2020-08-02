@@ -117,7 +117,7 @@ router.get('/', async (req, res) => {
             .where('title')
             .equals(new RegExp(req.query.title), 'i');
     }
-    const jobs = await Job.paginate(query, { limit: 8, page: parseInt(req.query.page), populate: 'posted_by' });
+    const jobs = await Job.paginate(query, { limit: 8, page: parseInt(req.query.page), sort: '-created_at', populate: 'posted_by' });
     const categories = await Category.find();
     res.render('jobs-list-layout-1', {
         data: {

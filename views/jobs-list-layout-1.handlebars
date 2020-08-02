@@ -274,7 +274,12 @@
 
 						<!-- Logo -->
 						<div class="job-listing-company-logo">
-							<img src="{{this.posted_by.logo}}" alt="">
+                            {{#unless this.posted_by.logo}}
+                                <img src="/images/company-logo-05.png" alt="">
+                            {{/unless}}
+                            {{#if this.posted_by.logo}}
+							    <img src="{{this.posted_by.logo}}" alt="">
+                            {{/if}}
 						</div>
 
 						<!-- Details -->
