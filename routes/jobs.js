@@ -94,7 +94,7 @@ router.post('/', async (req, res) => {
         created_at: new Date(),
     });
     await job.save();
-    return res.redirect('/jobs/my_jobs');
+    return res.status(201).send({ Message: 'Ok' });
 });
 
 router.get('/', async (req, res) => {
@@ -172,6 +172,11 @@ router.get('/:id', async (req, res) => {
         freelancer,
         layout: false,
     });
+});
+
+router.delete('/:id', async (req, res) => {
+    await Job.deleteOne({ _id: req.params.id });
+    res.json({ message: 'deleted' });
 });
 
 module.exports = router;

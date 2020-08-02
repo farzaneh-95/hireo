@@ -95,6 +95,8 @@ const jobSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
+        default: 1,
+        required: true,
     },
 
     applies: [applySchema],

@@ -340,17 +340,12 @@
                                                 <i class="icon-material-outline-supervisor-account"></i> مشاهده جزییات
                                             </a>
                                         {{/equal}}
-                                        {{#equal this.job.status 3}}
-                                            <a href="/jobs/{{this.job._id}}/candidates" class="button ripple-effect">
-                                                <i class="icon-material-outline-supervisor-account"></i> مشاهده جزییات
-                                            </a>
-                                        {{/equal}}
 										{{!-- <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a> --}}
                                         {{#equal this.job.status 1}}
-										    <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+										    <a href="{{ this.job._id }}" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top" id="delete"><i class="icon-feather-trash-2"></i></a>
                                         {{/equal}}
-                                        {{#equal this.job.status 3}}
-										    <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                        {{#equal this.job.status 2}}
+										    <a href="{{ this.job._id }}" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top" id="delete"><i class="icon-feather-trash-2"></i></a>
                                         {{/equal}}
 									</div>
 								</li>
@@ -445,6 +440,16 @@ $('#snackbar-user-status label').click(function() {
 			method: 'GET',
 			success: (data, status, xhr) => {
 				window.location.href = '/';
+			}
+		});
+	});
+
+    $('#delete').on('click', () => {
+		$.ajax({
+			url: '/jobs/' + $('#delete').attr('href'),
+			method: 'DELETE',
+			success: (data, status, xhr) => {
+				window.location.href = '/jobs/my_jobs';
 			}
 		});
 	});

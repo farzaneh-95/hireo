@@ -630,13 +630,14 @@ $('#snackbar-user-status label').click(function() {
 				}),
 				contentType: 'application/json',
 				success: (data, status, xhr) => {
-					$('#submit-success').text('درخواست شما ذخیره شد');
-					$('#job-title').val('');
-					$('#autocomplete-input').val('');
-					$('#job-min').val('');
-					$('#job-max').val('');
-					$('#job-desc').val('');
-					$('.keyword').remove();
+                    window.location.href = '/jobs/my_jobs';
+					//$('#submit-success').text('درخواست شما ذخیره شد');
+					//$('#job-title').val('');
+					//$('#autocomplete-input').val('');
+					//$('#job-min').val('');
+					//$('#job-max').val('');
+					//$('#job-desc').val('');
+					//$('.keyword').remove();
 				},
 				error: (xhr, status, err) => {
 					Snackbar.show({
