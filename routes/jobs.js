@@ -94,9 +94,7 @@ router.post('/', async (req, res) => {
         created_at: new Date(),
     });
     await job.save();
-    return res
-        .status(201)
-        .send({ Message: 'Ok' });
+    return res.redirect('/jobs/my_jobs');
 });
 
 router.get('/', async (req, res) => {
