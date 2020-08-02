@@ -65,13 +65,35 @@ const jobSchema = new mongoose.Schema({
     min_salary: {
         type: Number,
         required: true,
-        get: min_salary => min_salary >= 1000 ? (min_salary / 1000).toString() + 'k' : min_salary,
+        get: min_salary => {
+            min_salary = min_salary.toString();
+            let j = 0;
+            for (let i = min_salary.length - 1; i >= 0 ; i--) {
+                j++;
+                if (j === 3 && i !== 0) {
+                    min_salary = min_salary.substring(0, i) + ',' + min_salary.substring(i);
+                    j = 0;
+                }
+            }
+            return min_salary;
+        },
     },
 
     max_salary: {
         type: Number,
         required: true,
-        get: max_salary => max_salary >= 1000 ? (max_salary / 1000).toString() + 'k' : max_salary,
+        get: min_salary => {
+            min_salary = min_salary.toString();
+            let j = 0;
+            for (let i = min_salary.length - 1; i >= 0 ; i--) {
+                j++;
+                if (j === 3 && i !== 0) {
+                    min_salary = min_salary.substring(0, i) + ',' + min_salary.substring(i);
+                    j = 0;
+                }
+            }
+            return min_salary;
+        },
     },
 
     tags: [String],
