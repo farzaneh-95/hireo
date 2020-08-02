@@ -14,6 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa !important;
+    }
+</style>
 
 </head>
 <body class="gray">
@@ -27,35 +40,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -265,22 +269,13 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" data-simplebar>
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>مدیریت پیشنهادها</h3>
-				<span class="margin-top-7">Bids for <a href="#">{{data.task.name}}</a></span>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Manage Bidders</li>
-					</ul>
-				</nav> --}}
+				<span class="margin-top-7">پیشنهادهای  <a href="#">{{data.task.name}}</a></span>
 			</div>
 	
 			<!-- Row -->
@@ -292,14 +287,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-supervisor-account"></i> {{data.bids.length}} پیشنهاد</h3>
-							<div class="sort-by">
-								<select class="selectpicker hide-tick">
-									<option>Highest First</option>
-									<option>Lowest First</option>
-									<option>Fastest First</option>
-								</select>
-							</div>
+							<h3> پیشنهاد {{data.bids.length}} <i class="icon-material-outline-supervisor-account"></i></h3>
 						</div>
 
 						<div class="content">
@@ -356,7 +344,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
