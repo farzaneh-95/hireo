@@ -14,6 +14,19 @@
 ================================================== -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/colors/blue.css">
+<style>
+    @font-face {
+        font-family: 'Mahsa';
+        src: url('/fonts/Mahsa.eot?#') format('eot'),  
+            url('/fonts/Mahsa.woff') format('woff'),
+            url('/fonts/Mahsa.ttf') format('truetype');
+        font-style:normal;
+        font-weight:normal;
+    }
+    body {
+        font-family: Mahsa !important;
+    }
+</style>
 
 </head>
 <body class="gray">
@@ -27,35 +40,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -265,21 +269,12 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" data-simplebar>
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>مدیریت کاندیدها</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>Manage Candidates</li>
-					</ul>
-				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -291,7 +286,7 @@
 
 						<!-- Headline -->
 						<div class="headline">
-							<h3><i class="icon-material-outline-supervisor-account"></i> {{data.candidates.length}} کاندید</h3>
+							<h3> کاندید {{data.candidates.length}} <i class="icon-material-outline-supervisor-account"></i></h3>
 						</div>
 
 						<div class="content">
@@ -299,33 +294,26 @@
 								{{#each data.candidates}}
 								<li>
 									<!-- Overview -->
-									<div class="freelancer-overview manage-candidates">
+									<div class="freelancer-overview manage-candidates" style="text-align: right;right: 0" dir="rtl" >
 										<div class="freelancer-overview-inner">
-
-											<!-- Avatar -->
-											<div class="freelancer-avatar">
-												<div class="verified-badge"></div>
-												<a href="#"><img src="{{this.freelancer_id.profile_picture}}" alt=""></a>
-											</div>
-
 											<!-- Name -->
 											<div class="freelancer-name">
-												<h4><a href="#">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}}</a></h4>
+												<h4 style="text-align: right;"><a href="#">{{this.freelancer_id.first_name}} {{this.freelancer_id.last_name}}</a></h4>
 
 												<!-- Details -->
-												<span class="freelancer-detail-item"><a href="#"><i class="icon-feather-mail"></i> <span class="__cf_email__" data-cfemail="7f0c16111b063f1a071e120f131a511c1012">[email&#160;protected]</span></a></span>
-												<span class="freelancer-detail-item"><i class="icon-feather-phone"></i> {{this.phone}}</span>
+												<span class="freelancer-detail-item" style="position: absolute;right: 34px"><a href="#"><i class="icon-feather-mail"></i> <span class="__cf_email__" data-cfemail="7f0c16111b063f1a071e120f131a511c1012">{{ this.freelancer_id.email }}</span></a></span>
+												<span class="freelancer-detail-item" style="position: absolute;right: 209px"><i class="icon-feather-phone"></i> {{this.phone}}</span>
 
 												<!-- Rating -->
-												<div class="freelancer-rating">
+												<div class="freelancer-rating" style="text-align: right;margin-top: 34px">
 													<div class="star-rating" data-rating="{{this.freelancer_id.rate}}"></div>
 												</div>
 
 												<!-- Buttons -->
-												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+												<div class="buttons-to-right always-visible margin-top-25 margin-bottom-5" style="text-align: right;">
 													<a href="#" class="button ripple-effect"><i class="icon-feather-file-text"></i> دانلود رزومه</a>
-													<a href="#" class="button gray ripple-effect ico" title="Accept this Candidate" data-tippy-placement="top"><i class="icon-feather-thumbs-up"></i></a>
-													<a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+													<a href="#" class="button gray ripple-effect ico" title="Accept this Candidate" data-tippy-placement="top" style="padding-right: 8px;"><i class="icon-feather-thumbs-up"></i></a>
+													<a href="#" class="button gray ripple-effect ico" title="Remove Candidate" data-tippy-placement="top" style="padding-right: 8px;"><i class="icon-feather-trash-2"></i></a>
 												</div>
 											</div>
 										</div>
@@ -344,7 +332,7 @@
 			<div class="dashboard-footer-spacer"></div>
 			<div class="small-footer margin-top-15">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>

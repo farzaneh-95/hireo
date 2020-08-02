@@ -6,7 +6,7 @@ const deliveryTimeSchema = new mongoose.Schema({
     quantity: Number,
     type: {
         type: Number,
-        get: type => types[type - 1],
+        get: type => types[type],
     }
 });
 

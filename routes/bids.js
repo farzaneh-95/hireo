@@ -20,7 +20,7 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
         freelancer_id: req.session._id,
         task_id: req.body.task_id,
         minimal_rate: req.body.minimal_rate,
-        delivery_time,
+        delivery_time: req.body.delivery_time - 1,
         created_at: new Date(), 
     });
     await bid.save();

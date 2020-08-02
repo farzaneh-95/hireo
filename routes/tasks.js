@@ -12,7 +12,7 @@ router.get('/:id/bidders', isEmployer, async (req, res) => {
     const user = req.app.get('user');
     const task = await Task.findById(req.params.id);
     if (!task || task.employer_id.toString() !== req.session._id) {
-        return res.redirect('/404');
+        return res.redirect('/');
     }
     const tempBids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
     const reviews = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: { $in: tempBids.map(bid => bid.freelancer_id._id) } }).exec();

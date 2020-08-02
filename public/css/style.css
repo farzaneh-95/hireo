@@ -6879,6 +6879,7 @@ table.basic-table {
 	margin: 0;
 	padding: 0;
 	float: right;
+	direction: rtl	;
 	margin-right: 0;
 	position: relative
 }
