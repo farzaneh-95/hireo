@@ -17,7 +17,6 @@ router.get('/:id/bidders', isEmployer, async (req, res) => {
     const tempBids = await Bid.find({ task_id: req.params.id }).populate('freelancer_id').exec();
     const reviews = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: { $in: tempBids.map(bid => bid.freelancer_id._id) } }).exec();
     const bids = [];
-    console.log(tempBids.map(bid => bid.freelancer_id._id));
     tempBids.map(bid => {
         const temp = { ...bid._doc };
         let score = 0;
