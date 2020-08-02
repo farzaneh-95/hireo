@@ -572,8 +572,8 @@ $('.copy-url-button').click(function() {
 
 <script>
 	$('#snackbar-place-bid').on('click', () => {
-		let minimal_rate = $('#biddingVal').text();
-        minimal_rate = minimal_rate.replaceAll(',', '');
+		let minimal_rate = $('#biddingVal').text().toString();
+        minimal_rate = minimal_rate.replace(/,/g, '');
 		const delivery_time = $('#delivery-time').val();
 		const type = $('#type option:selected').val();
 		$.ajax({

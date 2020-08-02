@@ -15261,7 +15261,7 @@ screen and (-ms-high-contrast:none) {
 	position: absolute;
 	top: calc(50% + 3px);
 	transform: translateY(-50%);
-	right: 30px;
+	left: 30px;
 	z-index: 100;
 	height: 33px
 }
