@@ -12,19 +12,24 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
         return res.status(400).send({ Error: 'Already bid' });
     }
     const task = await Task.findById(req.body.task_id);
-    const delivery_time = {
-        quantity: parseInt(req.body.delivery_time),
-        type: req.body.type,
-    };
-    const bid = new Bid({
-        freelancer_id: req.session._id,
-        task_id: req.body.task_id,
-        minimal_rate: req.body.minimal_rate,
-        delivery_time: req.body.delivery_time - 1,
-        created_at: new Date(), 
-    });
-    await bid.save();
-    return res.status(201).send({ Message: 'Ok' });
+    if (task.status === 1) {
+        const delivery_time = {
+            quantity: parseInt(req.body.delivery_time ),
+            type: req.body.type - 1,
+        };
+        const bid = new Bid({
+            freelancer_id: req.session._id,
+            task_id: req.body.task_id,
+            minimal_rate: req.body.minimal_rate,
+            delivery_time: delivery_time,
+            created_at: new Date(), 
+        });
+        await bid.save();
+        res.status(201).send({ Message: 'Ok' });
+    } else {
+        res.status(400).send({ Error: 'Bad request' });
+    }
+    
 });
 
 

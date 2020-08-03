@@ -324,7 +324,7 @@
 
 												<!-- Buttons -->
 												<div class="buttons-to-right always-visible" style="text-align: right; margin-top: 100px;">
-													<a href="/tasks/{{ this.task_id }}/bids/{{ this._id }}/apply"  class="popup-with-zoom-anim button ripple-effect" id="accept"><i class="icon-material-outline-check"></i> پذیرفتن پیشنهاد</a>
+													<a href="/tasks/{{ this.task_id }}/bids/{{ this._id }}/apply" class="button ripple-effect" id="accept"><i class="icon-material-outline-check"></i> پذیرفتن پیشنهاد</a>
 													<a href="#" class="button gray ripple-effect ico" title="Remove Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 												</div>
 											</div>
@@ -481,32 +481,28 @@
 
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
 <script>
-// Snackbar for user status switcher
-$('#snackbar-user-status label').click(function() { 
-	Snackbar.show({
-		text: 'Your status has been changed!',
-		pos: 'bottom-center',
-		showAction: false,
-		actionText: "Dismiss",
-		duration: 3000,
-		textColor: '#fff',
-		backgroundColor: '#383838'
+	// Snackbar for user status switcher
+	$('#snackbar-user-status label').click(function() { 
+		Snackbar.show({
+			text: 'Your status has been changed!',
+			pos: 'bottom-center',
+			showAction: false,
+			actionText: "Dismiss",
+			duration: 3000,
+			textColor: '#fff',
+			backgroundColor: '#383838'
+		}); 
 	}); 
-}); 
 
-$('#logOut').on('click', () => {
-	$.ajax({
-		url: '/logout',
-		method: 'GET',
-		success: (data, status, xhr) => {
-			window.location.href = '/';
-		}
+	$('#logOut').on('click', () => {
+		$.ajax({
+			url: '/logout',
+			method: 'GET',
+			success: (data, status, xhr) => {
+				window.location.href = '/';
+			}
+		});
 	});
-});
-
-$('#accept').on('click', () => {
-    window.location.href = $('#accept').href();
-});
 </script>
 
 </body>

@@ -260,7 +260,7 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" dir="rtl" data-simplebar>
 		<div class="dashboard-content-inner" >
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
@@ -279,7 +279,7 @@
 						{{/equal}}
 						{{#equal data.user.role 'freelancer'}}
 						<div class="headline">
-							<h3 style="text-align: right;"> امتیاز به کارفرماها <i class="icon-material-outline-business"></i></h3>
+							<h3 style="text-align: right;"><i class="icon-material-outline-business"></i> امتیاز به کارفرماها</h3>
 						</div>
 						{{/equal}}
 						<div class="content">
@@ -317,13 +317,13 @@
                                                 <h4 class="task-name" style="font-family: inherit; position: absolute; right: 20px;">{{this.task.name}}</h4>
                                             </div>
                                         </div>
-                                        <div class="item-details margin-top-10" style="position: absolute; left: 20; top: 20px;">
+                                        <div class="item-details margin-top-10" style="position: absolute; left: 30px; top: 20px;">
                                             <div class="star-rating" data-rating="{{this.score}}"></div>
                                             <div class="detail-item"><i class="icon-material-outline-date-range"></i> 
                                             {{this.created_at}}
                                             </div>
                                         </div>
-                                        <div class="item-description" style="margin-top: 70px;">
+                                        <div class="item-description" style="margin-top: 70px;" dir="rtl">
                                             <p>{{this.comment}}</p>
                                         </div>
 								    </li>

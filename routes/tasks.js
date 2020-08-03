@@ -50,17 +50,27 @@ router.get('/my_bids', isFreelancer, async (req, res) => {
     });
 });
 
-router.get('/my_tasks', isEmployer, async (req, res) => {
+router.get('/my_tasks', async (req, res) => {
     const user = { ...req.app.get('user') };
     if (req.session.role === 'employer') {
         const bids = await Bid.find({ task_id: { $in: user.tasks.map(task => task._id) } });
+        const expiredTasks = [];
         user.tasks.forEach(task => {
             let minimalRatesSum = 0;
-            bids.map(bid => { minimalRatesSum += bid.minimal_rate });
+            bids.map(bid => { 
+                if (bid.task_id.toString() === task._id.toString()) {
+                    minimalRatesSum += bid.minimal_rate;
+                }
+            });
             task.bids = bids;
             task.bid_avg = Math.floor(minimalRatesSum / bids.length) || 0;
+            if (Date.parse(task.get('created_at', null, { getters: false })) + 12096e5 < Date.now() && task.status === 1) {
+                expiredTasks.push(task._id);
+            }
         });
+        await Task.updateMany({ _id: { $in: expiredTasks } }, { status: 4 });
     }
+    console.log(user.tasks[0].bids);
     return res.render('dashboard-manage-tasks', { data: { user }, layout: false });
 });
 
@@ -193,7 +203,7 @@ router.post('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
     const task = await Task.findById(req.params.taskId);
     task.status = 2;
     await task.save();
-    res.redirect('/tasks/' + task._id + '/bidders');
+    res.redirect('/tasks/my_tasks');
 });
 
 module.exports = router;

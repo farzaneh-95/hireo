@@ -43,7 +43,7 @@ router.post('/:id/apply', upload.single('cv'), async (req, res) => {
     const candidate = {
         freelancer_id: req.session._id,
         phone: req.body.phone,
-        cv_path: req.filename,
+        cv_path: req.file.filename,
         created_at: new Date(), 
     };
     job.freelancer_id.push(req.session._id);
@@ -78,7 +78,7 @@ router.get('/my_jobs', isEmployer, async (req, res) => {
     const expiredJobs = [];
     myJobs.forEach(job => {
         tempJobs.push({ job: job, applyCount: job.applies.length })
-        if (Date.parse(job.get('created_at', null, { getters: false })) + 12096e5 < Date.now()) {
+        if (Date.parse(job.get('created_at', null, { getters: false })) + 12096e5 < Date.now() && job.status === 1) {
             expiredJobs.push(job._id);
         }
     });
