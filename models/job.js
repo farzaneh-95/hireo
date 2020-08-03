@@ -23,6 +23,7 @@ const applySchema = new mongoose.Schema({
 
     cv_path: {
         type: String,
+        required: true,
     },
 
     accepted: {

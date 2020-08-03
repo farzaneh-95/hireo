@@ -8,7 +8,16 @@ const Employer = require('../models/employer');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
 
-const upload = multer ({ dest: 'uploads/' })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '.' + file.mimetype.split('/')[1])
+    }
+  });
+   
+const upload = multer({ storage: storage })
 
 router.get('/:id/apply', async (req, res) => {
     const job = await Job.findOne({ status: 1, _id: req.params.id });
@@ -29,24 +38,18 @@ router.get('/:id/apply', async (req, res) => {
     return res.render('apply-for-a-job', {job_id: job._id, freelancer, hasApplied, layout: false });
 });
 
-router.post('/:id/apply', async (req, res) => {
-    if (req.body.phone_number === '') {
-        return res.status(400).send('شماره تلفن را وارد کنید');
-    }
-    const exists = await Job.exists({ _id: req.params.id, freelancer_id: req.session._id });
-    if (exists) {
-        return res.status(400).send( 'قبلا درخواست داده‌اید' );
-    }
+router.post('/:id/apply', upload.single('cv'), async (req, res) => {
     const job = await Job.findById(req.params.id);
     const candidate = {
         freelancer_id: req.session._id,
-        phone: req.body.phone_number,
+        phone: req.body.phone,
+        cv_path: req.filename,
         created_at: new Date(), 
     };
     job.freelancer_id.push(req.session._id);
     job.applies.push(candidate);
     await job.save();
-    return res.status(201).send({ Message: 'Ok' });
+    return res.redirect('/jobs/' + req.params.id);
 });
 
 router.get('/:id/candidates', isEmployer, async (req, res) => { 
@@ -170,7 +173,7 @@ router.get('/:id', async (req, res) => {
     if (req.session.role === 'freelancer') {
         freelancer = await Freelancer.findById(req.session._id);
         job.applies.forEach(apply => {
-            if (apply.freelancer_id === freelancer._id) {
+            if (apply.freelancer_id.toString() === freelancer._id.toString()) {
                 hasApplied = 1;
                 return;
             }

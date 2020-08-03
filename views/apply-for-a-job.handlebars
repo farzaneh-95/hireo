@@ -55,19 +55,15 @@
                     <div >
                         <div class="input-with-icon-left">
                             <i class="icon-material-outline-account-circle"></i>
-                            {{#equal hasApplied 0}}
                             {{!-- <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/> --}}
                             <input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="شماره تلفن" style="padding: 0 56px" required/>
-                            {{/equal}}
                         </div>
                         <div class="input-with-icon-left">
                             <i class="icon-material-baseline-mail-outline"></i>
-                            {{#equal hasApplied 0}}
-                            <input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" disabled value="{{freelancer.email}}" style="padding: 0 56px"/>
-                            {{/equal}}
+                            <input type="text" class="input-text with-border" name="email" id="emailaddress" placeholder="آدرس ایمیل" disabled value="{{freelancer.email}}" style="padding: 0 56px"/>
                         </div>
                         <div class="uploadButton">
-                            <input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
+                            <input class="uploadButton-input" name="cv" type="file" accept="image/*, application/pdf" id="upload-cv" />
                             <label class="uploadButton-button ripple-effect" for="upload-cv">انتخاب فایل</label>
                             {{!-- <span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span> --}}
                         </div>
@@ -99,35 +95,5 @@
     <script src="/js/magnific-popup.min.js"></script>
     <script src="/js/slick.min.js"></script>
     <script src="/js/custom.js"></script>
-
-    <script>
-        $('#submit-apply').on('click', () => {
-            const phone_number = $('#phone').val();
-            const email = $('#emailaddress').val();
-            const job_id = $(location).attr('href').split('jobs/')[1];
-            $.ajax({
-                'url': '/jobs/' + job_id.split('/apply')[0] + '/apply',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    phone_number,
-                    email,
-                }),
-                error: (xhr, status, err) => {
-                    Snackbar.show({
-                        text: xhr.responseText,
-                    });
-                },
-                success: (data, statusCode, xhr) => {
-                    Snackbar.show({
-                        text: 'درخواست شما فرستاده شد',
-                    });
-                },
-            });
-            setTimeout(function(){
-                location.reload(true);
-            }, 1000);
-        });
-    </script>
 </body>
 </html>
