@@ -3,6 +3,7 @@ const multer  = require('multer');
 
 const Category = require('../models/category');
 const Job = require('../models/job');
+const Review = require('../models/review');
 const Employer = require('../models/employer');
 const Freelancer = require('../models/freelancer');
 const isEmployer = require('../helpers/isEmployer');
@@ -138,6 +139,13 @@ router.get('/:id', async (req, res) => {
         return res.render('404', { layout: false });
     }
     const employer = await Employer.findById(job.posted_by);
+    const review = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: employer._id });
+    let score;
+    if (review.length === 0) {
+        score = 0;
+    } else {
+        score = Math.round(review[0].average);
+    }
     let hasApplied = 0;
     let freelancer;
     if (req.session.role === 'freelancer') {
@@ -166,6 +174,7 @@ router.get('/:id', async (req, res) => {
         employer_link: '/companies/' + employer._id,
         employer_img: employer.logo || '/images/company-logo-05.png',
         employer_location: employer.location || 'Somewhere',
+        employer_rate: score,
         similarJobs,
         role: req.session.role || 'unknown',
         hasApplied,
