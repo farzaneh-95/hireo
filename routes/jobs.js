@@ -70,22 +70,20 @@ router.get('/:id/candidates', isEmployer, async (req, res) => {
 
 router.get('/my_jobs', isEmployer, async (req, res) => {
     const user = req.app.get('user');
-    if (req.session.role === 'employer') {
-        const myJobs = await Job
-            .where('posted_by')
-            .equals(req.session._id)
-            .sort({ status: 'asc', created_at: 'desc' });
-        
-        const tempJobs = [];
-        myJobs.forEach(async job => {
-            tempJobs.push({ job: job, applyCount: job.applies.length })
-            if (Date.parse(job.created_at) + 12096e5 < Date.now()) {
-                job.status = 2;
-                await job.save();
-            }
-        });
-        res.render('dashboard-manage-jobs', { data: { jobs: tempJobs, user }, layout: false, });
-    }
+    const myJobs = await Job
+        .where('posted_by')
+        .equals(req.session._id)
+        .sort({ status: 'asc', created_at: 'desc' });
+    const tempJobs = [];
+    const expiredJobs = [];
+    myJobs.forEach(job => {
+        tempJobs.push({ job: job, applyCount: job.applies.length })
+        if (Date.parse(job.get('created_at', null, { getters: false })) + 12096e5 < Date.now()) {
+            expiredJobs.push(job._id);
+        }
+    });
+    await Job.updateMany({ _id: { $in: expiredJobs } }, { status: 2 });
+    res.render('dashboard-manage-jobs', { data: { jobs: tempJobs, user }, layout: false, });
 });
 
 router.get('/create', isEmployer, async (req, res) => {
