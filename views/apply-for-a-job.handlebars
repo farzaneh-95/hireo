@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Hireo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/colors/blue.css">
+	<style>
+		@font-face {
+			font-family: 'Mahsa';
+			src: url('/fonts/Mahsa.eot?#') format('eot'),  
+				url('/fonts/Mahsa.woff') format('woff'),
+				url('/fonts/Mahsa.ttf') format('truetype');
+			font-style:normal;
+			font-weight:normal;
+		}
+		body {
+			font-family: Mahsa !important;
+			text-align: right;
+			direction: rtl;
+		}
+		.my-sidebar li {
+			padding-left: 0;
+			padding-right: 38px;
+		}
+		.my-sidebar li i {
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+    <!-- Apply for a job popup
+    ================================================== -->
+    <div id="small-dialog" class="zoom-anim-dialog dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+                <li><a href="#tab">فرستادن درخواست</a></li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <form action="/jobs/{{job_id}}/apply" method="POST" enctype="multipart/form-data" class="popup-tab-content" id="apply-now-form">
+                    
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>ضمیمه کردن فایل رزومه</h3>
+                    </div>
+                        
+                    <!-- Form -->
+                    <div >
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-account-circle"></i>
+                            {{#equal hasApplied 0}}
+                            {{!-- <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/> --}}
+                            <input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="شماره تلفن" style="padding: 0 56px" required/>
+                            {{/equal}}
+                        </div>
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-baseline-mail-outline"></i>
+                            {{#equal hasApplied 0}}
+                            <input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" disabled value="{{freelancer.email}}" style="padding: 0 56px"/>
+                            {{/equal}}
+                        </div>
+                        <div class="uploadButton">
+                            <input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
+                            <label class="uploadButton-button ripple-effect" for="upload-cv">انتخاب فایل</label>
+                            {{!-- <span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span> --}}
+                        </div>
+                        <!-- Button -->
+                        
+                    </div>
+                    
+                    <button id="submit-apply" class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- Apply for a job popup / End -->
+
+    <!-- Scripts
+    ================================================== -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/jquery-migrate-3.1.0.min.html"></script>
+    <script src="/js/mmenu.min.js"></script>
+    <script src="/js/tippy.all.min.js"></script>
+    <script src="/js/simplebar.min.js"></script>
+    <script src="/js/bootstrap-slider.min.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
+    <script src="/js/snackbar.js"></script>
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/counterup.min.js"></script>
+    <script src="/js/magnific-popup.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/custom.js"></script>
+
+    <script>
+        $('#submit-apply').on('click', () => {
+            const phone_number = $('#phone').val();
+            const email = $('#emailaddress').val();
+            const job_id = $(location).attr('href').split('jobs/')[1];
+            $.ajax({
+                'url': '/jobs/' + job_id.split('/apply')[0] + '/apply',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    phone_number,
+                    email,
+                }),
+                error: (xhr, status, err) => {
+                    Snackbar.show({
+                        text: xhr.responseText,
+                    });
+                },
+                success: (data, statusCode, xhr) => {
+                    Snackbar.show({
+                        text: 'درخواست شما فرستاده شد',
+                    });
+                },
+            });
+            setTimeout(function(){
+                location.reload(true);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

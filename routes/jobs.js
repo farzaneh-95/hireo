@@ -10,15 +10,34 @@ const isEmployer = require('../helpers/isEmployer');
 
 const upload = multer ({ dest: 'uploads/' })
 
-router.post('/apply', async (req, res) => {
+router.get('/:id/apply', async (req, res) => {
+    const job = await Job.findOne({ status: 1, _id: req.params.id });
+    if (!job) {
+        return res.render('404', { layout: false });
+    }
+    let hasApplied = 0;
+    let freelancer;
+    if (req.session.role === 'freelancer') {
+        freelancer = await Freelancer.findById(req.session._id);
+        job.applies.forEach(apply => {
+            if (apply.freelancer_id === freelancer._id) {
+                hasApplied = 1;
+                return;
+            }
+        });
+    }
+    return res.render('apply-for-a-job', {job_id: job._id, freelancer, hasApplied, layout: false });
+});
+
+router.post('/:id/apply', async (req, res) => {
     if (req.body.phone_number === '') {
         return res.status(400).send('شماره تلفن را وارد کنید');
     }
-    const exists = await Job.exists({ _id: req.body.job_id, freelancer_id: req.session._id });
+    const exists = await Job.exists({ _id: req.params.id, freelancer_id: req.session._id });
     if (exists) {
         return res.status(400).send( 'قبلا درخواست داده‌اید' );
     }
-    const job = await Job.findById(req.body.job_id);
+    const job = await Job.findById(req.params.id);
     const candidate = {
         freelancer_id: req.session._id,
         phone: req.body.phone_number,

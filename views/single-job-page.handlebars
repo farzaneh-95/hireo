@@ -297,7 +297,7 @@
 
 				{{#equal role 'freelancer'}}
 					{{#equal hasApplied 0}}
-					<a href="#small-dialog" class="apply-now-button popup-with-zoom-anim">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></a>
+					<a href="/jobs/{{job._id}}/apply" class="apply-now-button">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></a>
 					{{/equal}}
 				{{/equal}}
 				<!-- Sidebar Widget -->
@@ -510,59 +510,7 @@
 <!-- Wrapper / End -->
 
 
-<!-- Apply for a job popup
-================================================== -->
-<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
-	<!--Tabs -->
-	<div class="sign-in-form">
-
-		<ul class="popup-tabs-nav">
-			<li><a href="#tab">فرستادن درخواست</a></li>
-		</ul>
-
-		<div class="popup-tabs-container">
-
-			<!-- Tab -->
-			<form action="/jobs/apply" method="POST" enctype="multipart/form-data" class="popup-tab-content" id="apply-now-form">
-				
-				<!-- Welcome Text -->
-				<div class="welcome-text">
-					<h3>ضمیمه کردن فایل رزومه</h3>
-				</div>
-					
-				<!-- Form -->
-				<div >
-					<div class="input-with-icon-left">
-						<i class="icon-material-outline-account-circle"></i>
-						{{#equal hasApplied 0}}
-						{{!-- <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name" disabled value="{{freelancer.first_name}} {{freelancer.last_name}}"/> --}}
-						<input type="text" class="input-text with-border" name="phone" id="phone" value="" placeholder="شماره تلفن" style="padding: 0 56px" required/>
-						{{/equal}}
-					</div>
-					<div class="input-with-icon-left">
-						<i class="icon-material-baseline-mail-outline"></i>
-						{{#equal hasApplied 0}}
-						<input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="آدرس ایمیل" disabled value="{{freelancer.email}}" style="padding: 0 56px"/>
-						{{/equal}}
-					</div>
-					<div class="uploadButton">
-						<input class="uploadButton-input" name="files" type="file" accept="image/*, application/pdf" id="upload-cv" />
-						<label class="uploadButton-button ripple-effect" for="upload-cv">انتخاب فایل</label>
-						{{!-- <span class="uploadButton-file-name">Upload your CV / resume relevant file. <br> Max. file size: 50 MB.</span> --}}
-					</div>
-					<!-- Button -->
-					
-				</div>
-				
-				<button id="submit-apply" class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit" form="apply-now-form">ارسال رزومه <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-			</form>
-
-		</div>
-	</div>
-</div>
-<!-- Apply for a job popup / End -->
 
 
 <!-- Scripts
@@ -614,35 +562,7 @@ $('.copy-url-button').click(function() {
 			}
 		});
 	});
-
-	$('#submit-apply').on('click', () => {
-		const phone_number = $('#phone').val();
-		const email = $('#emailaddress').val();
-		$('#small-dialog').remove();
-		$.ajax({
-			'url': '/jobs/apply',
-			method: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({
-				phone_number,
-				email,
-				job_id: window.location.href.split('jobs/')[1],
-			}),
-			error: (xhr, status, err) => {
-				Snackbar.show({
-					text: xhr.responseText,
-				});
-			},
-			success: (data, statusCode, xhr) => {
-				Snackbar.show({
-					text: 'درخواست شما فرستاده شد',
-				});
-			},
-		});
-		setTimeout(function(){
-			location.reload(true);
-		}, 1000);
-	});
+	
 </script>
 
 </body>
