@@ -20,6 +20,16 @@ router.get('/', async (req, res) => {
             .equals(new RegExp(req.query.title), 'i');
     }
     const freelancers = await Freelancer.paginate(query, { limit: 5, page: parseInt(req.query.page) });
+    freelancers.docs.map(async freelancer => {
+        const scores = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: freelancer._id }).exec();
+        let score;
+        if (scores.length === 0) {
+            score = 0;
+        } else {
+            score = Math.round(scores[0].average);
+        }
+        freelancer.rate = score;
+    });
     return res.render('freelancers-list-layout-1', {
         data: {
             user,
@@ -39,7 +49,7 @@ router.get('/:id', async (req, res) => {
     const tasksDone = await Task.find({ freelancer_id: freelancer._id, status: 3 }).countDocuments();
     const tasks = await Task.find({ freelancer_id: freelancer._id }).sort({ created_at: 'desc' }).limit(5);
     const reviews = await Review.find({ reviewee: freelancer._id }).sort({ created_at: 'desc' }).limit(5).populate('task').exec();
-    const scores = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: freelancer._id });
+    const scores = await Review.aggregate().group({ _id: '$reviewee', average: { $avg: '$score' } }).match({ _id: freelancer._id }).exec();
     const jobs = await Job.find({ 'applies.freelancer_id': freelancer._id,  'applies.accepted': true }).sort({ created_at: 'desc' })
         .limit(3).populate('posted_by').exec();
     let score;

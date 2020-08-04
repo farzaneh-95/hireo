@@ -16,7 +16,7 @@ router.get('/dashboard', async (req, res) => {
     // const data = req.app.get('freelancer') || req.app.get('employer');
     // data.first_name = data.first_name || 'New User';  
     if (req.session.role === 'freelancer') {
-        const wonTasks = await Bid.find({ freelancer_id: req.session._id }).countDocuments();
+        const wonTasks = await Bid.find({ freelancer_id: req.session._id, accepted: true }).countDocuments();
         const appliedJobs = await Job.find({ freelancer_id: req.session._id }).countDocuments();
         const reviewCount = await Review.find({ reviewee: req.session._id }).countDocuments();
         return res.render('dashboard', {

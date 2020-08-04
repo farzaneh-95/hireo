@@ -15,7 +15,6 @@ module.exports = async (freelancers, tasks) => {
                     quantity: faker.random.number({ min: 1, max: 60 }),
                     type: faker.random.number(1),
                 },
-                accepted: faker.random.boolean(),
                 created_at: new Date(),
             });
         }

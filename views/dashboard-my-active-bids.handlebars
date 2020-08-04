@@ -4,16 +4,29 @@
 <!-- Mirrored from www.vasterad.com/themes/hireo_082019/dashboard-my-active-bids.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Jan 2020 11:18:51 GMT -->
 <head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>Hireo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Basic Page Needs
+	================================================== -->
+	<title>Hireo</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- CSS
-================================================== -->
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/colors/blue.css">
+	<!-- CSS
+	================================================== -->
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/colors/blue.css">
+	<style>
+		@font-face {
+			font-family: 'Mahsa';
+			src: url('/fonts/Mahsa.eot?#') format('eot'),  
+				url('/fonts/Mahsa.woff') format('woff'),
+				url('/fonts/Mahsa.ttf') format('truetype');
+			font-style:normal;
+			font-weight:normal;
+		}
+		body {
+			font-family: Mahsa !important;
+		}
+	</style>
 
 </head>
 <body class="gray">
@@ -27,35 +40,26 @@
 
 	<!-- Header -->
 	<div id="header">
+        <div id="logo" style="left: 0; position: absolute;">
+			<a href="/"><img src="/images/logo.png" alt=""></a>
+		</div>
 		<div class="container">
-			
 			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="/"><img src="/images/logo.png" alt=""></a>
-				</div>
-
+			<div class="right-side" style="position: relative; right: 150px;">
 				<!-- Main Navigation -->
 				<nav id="navigation">
 					<ul id="responsive">
-
-						<li><a href="/">خانه</a></li>
-
-						<li><a href="#">فرصت‌های کاری</a>
+						<li><a>فرصت‌های کاری</a>
 							<ul class="dropdown-nav">
 								<li><a href="/jobs">شغل‌ها</a>
 								</li>
 								<li><a href="/tasks">پروژه‌ها</a>
-									
 								</li>
 							</ul>
 						</li>
-
 						<li><a href="/companies">شرکت‌ها</a></li>
-
 						<li><a href="/freelancers">فریلنسرها</a></li>
+						<li><a href="/">خانه</a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -265,21 +269,12 @@
 
 	<!-- Dashboard Content
 	================================================== -->
-	<div class="dashboard-content-container" data-simplebar>
+	<div class="dashboard-content-container" style="text-align: right;" dir="rtl" data-simplebar>
 		<div class="dashboard-content-inner" >
 			
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>پیشنهادهای من</h3>
-
-				<!-- Breadcrumbs -->
-				{{!-- <nav id="breadcrumbs" class="dark">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Dashboard</a></li>
-						<li>My Active Bids</li>
-					</ul>
-				</nav> --}}
 			</div>
 	
 			<!-- Row -->
@@ -318,7 +313,7 @@
 									</ul>
 
 									<!-- Buttons -->
-									<div class="buttons-to-right always-visible">
+									<div class="buttons-to-right always-visible" style="text-align: left;" dir="ltr">
 										<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect ico" title="Edit Bid" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
 										<a href="#" class="button red ripple-effect ico" title="Cancel Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 									</div>
@@ -398,9 +393,9 @@
 
 			<!-- Footer -->
 			<div class="dashboard-footer-spacer"></div>
-			<div class="small-footer margin-top-15">
+			<div class="small-footer margin-top-15" dir="ltr">
 				<div class="small-footer-copyrights">
-					© 2019 <strong>Hireo</strong>. All Rights Reserved.
+					© 2020 <strong>Hireo</strong>. All Rights Reserved.
 				</div>
 				<ul class="footer-social-links">
 					<li>
