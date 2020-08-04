@@ -70,7 +70,6 @@ router.get('/my_tasks', async (req, res) => {
         });
         await Task.updateMany({ _id: { $in: expiredTasks } }, { status: 4 });
     }
-    console.log(user.tasks[0].bids);
     return res.render('dashboard-manage-tasks', { data: { user }, layout: false });
 });
 

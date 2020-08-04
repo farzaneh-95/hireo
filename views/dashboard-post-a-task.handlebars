@@ -298,8 +298,13 @@
 
 								<div class="col-xl-4">
 									<div class="submit-field">
-										<h5>نام پروژه‌</h5>
-										<input type="text" class="with-border" id="project_name" style="text-align: right;" required>
+										<h5>موقعیت  <i class="help-icon" id="location" data-tippy-placement="right" title="اگر پروژه آنلاین هست لازم به وارد کردن نیست"></i></h5>
+										<div class="input-with-icon">
+											<div id="autocomplete-container">
+												<input id="autocomplete-input" class="with-border" type="text" style="text-align: right;">
+											</div>
+											<i class="icon-material-outline-location-on"></i>
+										</div>
 									</div>
 								</div>
 
@@ -316,13 +321,8 @@
 
 								<div class="col-xl-4">
 									<div class="submit-field">
-										<h5>موقعیت  <i class="help-icon" id="location" data-tippy-placement="right" title="اگر پروژه آنلاین هست لازم به وارد کردن نیست"></i></h5>
-										<div class="input-with-icon">
-											<div id="autocomplete-container">
-												<input id="autocomplete-input" class="with-border" type="text" style="text-align: right;">
-											</div>
-											<i class="icon-material-outline-location-on"></i>
-										</div>
+										<h5>نام پروژه‌</h5>
+										<input type="text" class="with-border" id="project_name" style="text-align: right;" required>
 									</div>
 								</div>
 	
@@ -373,7 +373,7 @@
 								<div class="col-xl-12">
 									<div class="submit-field">
 										<h5>شرح پروژه‌</h5>
-										<textarea cols="30" rows="5" id="project_disc" class="with-border" style="text-align: right;"></textarea>
+										<textarea cols="30" rows="5" id="project_disc" class="with-border" style="text-align: right;" dir="rtl"></textarea>
 									</div>
 								</div>
 
@@ -629,13 +629,7 @@ $('#snackbar-user-status label').click(function() {
 				contentType: 'application/json',
 				data,
 				success: (result, statusCode, xhr) => {
-					$('#success-message').text('درخواست شما فرستاذه شد');
-					$('#project_name').val('');
-					$('#autocomplete-input').val('');
-					$('#min_budget').val('');
-					$('#max_budget').val('');
-					$('#project_disc').val('');
-					$('.keyword-text').remove();
+					window.location.href = '/tasks/my_tasks';
 
 				},
 				error: (xhr, status, err) => {
