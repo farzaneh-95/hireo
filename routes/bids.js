@@ -37,7 +37,7 @@ router.post('/tasks/bids', isFreelancer, async (req, res) => {
 router.post('/tasks/edit_bids', async (req, res) => {
     const delivery_time = {
         quantity: parseInt(req.body.delivery_time),
-        type: req.body.type === 'Hours' ? 1 : 2,
+        type: req.body.type === req.body.type - 1,
     };
     if (!await Task.find({ freelancer_id: req.session._id, _id: req.body.task_id, status: 1 }).exists(1)) {
         return res.status(404).send({ Error: 'Not Found' });

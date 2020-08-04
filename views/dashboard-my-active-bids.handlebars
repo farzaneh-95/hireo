@@ -308,7 +308,7 @@
 									
 									<!-- Task Details -->
 									<ul class="dashboard-task-info">
-										<li><strong>{{this.minimal_rate}}</strong><span>{{this.task_id.budget_type}} </span></li>
+										<li><strong>{{this.minimal_rate}} تومان</strong><span>{{this.task_id.budget_type}} </span></li>
 										<li><strong>{{this.delivery_time.quantity}} {{this.delivery_time.type}}</strong><span>مدت زمان تحویل</span></li>
 									</ul>
 
@@ -359,13 +359,13 @@
 														</div>
 														<div class="bidding-field">
 															<select id="type" class="selectpicker default with-border">
-																{{#equal this.delivery_time.type 1}}
-																<option>Days</option>
-																<option selected>Hours</option>
+																{{#equal this.delivery_time.type 'ساعت'}}
+																<option value="1">روز</option>
+																<option value="2" selected>ساعت</option>
 																{{/equal}}
-																{{#equal this.delivery_time.type 0}}
-																<option selected>Days</option>
-																<option>Hours</option>
+																{{#equal this.delivery_time.type 'روز'}}
+																<option selected>روز</option>
+																<option>ساعت</option>
 																{{/equal}}
 															</select>
 														</div>
@@ -470,7 +470,7 @@ $('#snackbar-user-status label').click(function() {
 	$('#save-changes').on('click', () => {
 		const minimal_rate = $('#biddingVal').text();
 		const delivery_time = $('#delivery-time').val();
-		const type = $('#type option:selected').text();
+		const type = $('#type option:selected').val();
 		const task_id = $('#task-id').text();
 		console.log(minimal_rate, delivery_time, type, task_id);
 		$.ajax({

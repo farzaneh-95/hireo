@@ -41,7 +41,6 @@ router.get('/:id/bidders', isEmployer, async (req, res) => {
 router.get('/my_bids', isFreelancer, async (req, res) => {
     const user = req.app.get('user');
     const bids = await Bid.find({ freelancer_id: req.session._id}).populate('task_id').exec();
-    console.log(bids);
     return res.render('dashboard-my-active-bids', {
         data: {
             bids,

@@ -13,7 +13,7 @@ module.exports = async (freelancers, tasks) => {
                 minimal_rate: faker.random.number({ min: task.min_budget, max: task.max_budget }),
                 delivery_time: {
                     quantity: faker.random.number({ min: 1, max: 60 }),
-                    type: faker.random.number(1),
+                    type: faker.random.number({ min: 0, max: 1 }),
                 },
                 created_at: new Date(),
             });
