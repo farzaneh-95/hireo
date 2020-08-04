@@ -22,7 +22,7 @@ router.get('/:id/bidders', isEmployer, async (req, res) => {
         let score = 0;
         reviews.map(review => {
             if (review._id.toString() === temp.freelancer_id._id.toString()) {
-                score = review.average;
+                score = Math.round(review.average);
             }
         });
         temp.freelancer_id.rate = score;
@@ -57,20 +57,21 @@ router.get('/my_tasks', async (req, res) => {
         const expiredTasks = [];
         user.tasks.forEach(task => {
             let minimalRatesSum = 0;
+            const temp = [];
             bids.map(bid => { 
                 if (bid.task_id.toString() === task._id.toString()) {
                     minimalRatesSum += bid.minimal_rate;
+                    temp.push(bid);
                 }
             });
-            task.bids = bids;
-            task.bid_avg = Math.floor(minimalRatesSum / bids.length) || 0;
+            task.bids = temp;
+            task.bid_avg = Math.floor(minimalRatesSum / temp.length) || 0;
             if (Date.parse(task.get('created_at', null, { getters: false })) + 12096e5 < Date.now() && task.status === 1) {
                 expiredTasks.push(task._id);
             }
         });
         await Task.updateMany({ _id: { $in: expiredTasks } }, { status: 4 });
     }
-    console.log(user.tasks[0].bids);
     return res.render('dashboard-manage-tasks', { data: { user }, layout: false });
 });
 
@@ -192,6 +193,11 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
+    const bid = await Bid.findById(req.params.bidId);
+    const task = await Task.findById(req.params.taskId);
+    if (!task || !bid || task.status !== 1 || task.employer_id !== req.session._id) {
+        return res.redirect('/404');
+    }
     res.render('dashboard-bid-apply', {
         layout: false,
         bid: await Bid.findById(req.params.bidId).populate('freelancer_id').populate('task_id'),
@@ -201,7 +207,11 @@ router.get('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
 router.post('/:taskId/bids/:bidId/apply', isEmployer, async (req, res) => {
     const bid = await Bid.findById(req.params.bidId);
     const task = await Task.findById(req.params.taskId);
+    if (!task || !bid || task.status !== 1 || task.employer_id !== req.session._id) {
+        return res.redirect('/404');
+    }
     task.status = 2;
+    task.freelancer_id = bid.freelancer_id;
     await task.save();
     res.redirect('/tasks/my_tasks');
 });
