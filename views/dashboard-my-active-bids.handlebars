@@ -315,7 +315,7 @@
 									<!-- Buttons -->
 									<div class="buttons-to-right always-visible" style="text-align: left;" dir="ltr">
 										<a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect ico" title="Edit Bid" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-										<a href="#" class="button red ripple-effect ico" title="Cancel Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+										<a id="delete" href="{{this._id}}" class="button red ripple-effect ico" title="Cancel Bid" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
 									</div>
 								</li>
 
@@ -353,7 +353,7 @@
 															<!-- Quantity Buttons -->
 															<div class="qtyButtons with-border">
 																<div class="qtyDec"></div>
-																<input type="text" name="qtyInput"  id="delivery-time" value="{{this.delivery_time.quantity}}">
+																{{!-- <input type="text" name="qtyInput"  id="delivery-time" value="{{this.delivery_time.quantity}}"> --}}
 																<div class="qtyInc"></div>
 															</div>
 														</div>
@@ -499,6 +499,18 @@ $('#snackbar-user-status label').click(function() {
 			}
 		});
 	});
+	
+	$('#delete').on('click', () => {
+	console.log($('#delete').attr('href'));
+	$.ajax({
+		url: '/tasks/my_bids/' + $('#delete').attr('href'),
+		method: 'DELETE',
+		success: (data, status, xhr) => {
+			window.location.href = '/tasks/my_bids';
+		}
+	});
+	});
+	
 </script>
 
 </body>

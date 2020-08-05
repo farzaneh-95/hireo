@@ -50,6 +50,11 @@ router.get('/my_bids', isFreelancer, async (req, res) => {
     });
 });
 
+router.delete('/my_bids/:id', async (req, res) => {
+    await Bid.deleteOne({ _id: req.params.id });
+    return res.redirect('/tasks/my_bids');
+});
+
 router.get('/my_tasks', async (req, res) => {
     const user = { ...req.app.get('user') };
     if (req.session.role === 'employer') {
