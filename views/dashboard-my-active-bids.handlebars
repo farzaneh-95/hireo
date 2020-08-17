@@ -307,7 +307,7 @@
 									</div>
 									
 									<!-- Task Details -->
-									<ul class="dashboard-task-info">
+									<ul class="dashboard-task-info" dir="ltr">
 										<li><strong>{{this.minimal_rate}} تومان</strong><span>{{this.task_id.budget_type}} </span></li>
 										<li><strong>{{this.delivery_time.quantity}} {{this.delivery_time.type}}</strong><span>مدت زمان تحویل</span></li>
 									</ul>
@@ -321,7 +321,7 @@
 
 								<!-- Edit Bid Popup
 								================================================== -->
-								<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+								<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs" dir="ltr" style="text-align: left;">
 
 									<!--Tabs -->
 									<div class="sign-in-form">
@@ -353,7 +353,7 @@
 															<!-- Quantity Buttons -->
 															<div class="qtyButtons with-border">
 																<div class="qtyDec"></div>
-																{{!-- <input type="text" name="qtyInput"  id="delivery-time" value="{{this.delivery_time.quantity}}"> --}}
+																<input type="text" name="qtyInput"  id="delivery-time" value="{{this.delivery_time.quantity}}">
 																<div class="qtyInc"></div>
 															</div>
 														</div>

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const fs = require('fs');
 const multer  = require('multer');
 
 const Category = require('../models/category');
@@ -206,6 +207,18 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     await Job.deleteOne({ _id: req.params.id });
     res.json({ message: 'deleted' });
+});
+
+router.get('/:jobId/candidates/:id/download', async (req, res) => {
+    const applies = (await Job.findById(req.params.jobId)).applies;
+    if (applies.length === 0) {
+        return res.render('404');
+    }
+    applies.forEach(apply => {
+        if (apply.freelancer_id.toString() === req.params.id && apply.cv_path) {
+            return res.download('./uploads/' + apply.cv_path);
+        }
+    });
 });
 
 module.exports = router;

@@ -15741,13 +15741,6 @@ ul.dashboard-box-list>li:hover {
 }
 
 .dashboard-task-info li {
-	
-	margin-right: 0;
-	padding-right: 0;
-	border: none;
-}
-
-.dashboard-task-info li:last-child {
 	display: inline-block;
 	border-right: 1px solid #d0d0d0;
 	padding-right: 22px;
@@ -15756,6 +15749,12 @@ ul.dashboard-box-list>li:hover {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center
+}
+
+.dashboard-task-info li:last-child {
+	margin-right: 0;
+	padding-right: 0;
+	border: none;
 }
 
 .dashboard-task-info li strong {
